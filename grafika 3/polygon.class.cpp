@@ -53,7 +53,7 @@ void polygon::setMultiplication(int m) {
 
 void polygon::draw(frameBuffer *f) {
 	int i = 0;
-	while (i + 1 < lines) {
+	while (i < lines) {
 		int a, b, c, d;
 		a = (*(polyline + (i * 2))) * multiplication + x;
 		b = (*(polyline + ((i * 2)+1))) * multiplication + y;
