@@ -147,7 +147,7 @@ void frameBuffer::solidBackground() {
     }
 }
 
-void frameBuffer::bresenham(int x1, int y1, int x2, int y2 , int red, int green, int blue) {
+void frameBuffer::bresenham(int x1, int y1, int x2, int y2, int pixel, int red, int green, int blue) {
   int Fx[] = { 1,  0, -1,  0};
   int Fy[] = { 0,  1,  0, -1};
 
@@ -179,7 +179,7 @@ void frameBuffer::bresenham(int x1, int y1, int x2, int y2 , int red, int green,
 
   int D = 2*db - da;
   
-  blockBuilder(x1, y1, 5, red, green, blue);
+  blockBuilder(x1, y1, pixel, red, green, blue);
 
   int x = x1;
   int y = y1;
@@ -197,6 +197,6 @@ void frameBuffer::bresenham(int x1, int y1, int x2, int y2 , int red, int green,
       y += m1y;
     }
 
-    blockBuilder(x, y, 5, red, green, blue);
+    blockBuilder(x, y, pixel, red, green, blue);
   }
 }

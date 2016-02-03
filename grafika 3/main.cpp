@@ -11,10 +11,29 @@
 #include <time.h>
 
 #include "frameBuffer.class.h"
+#include "polygon.class.h"
 
 int main() {
 	frameBuffer f;
 	f.solidBackground();
-	f.bresenham(50, 50, 250, 250, 0, 0, 0);
+
+	polygon p;
+	int c[] = { 00, 00,
+				10, 00,
+				10, 05,
+				07, 05,
+				07, 25,
+				10, 25,
+				10, 30,
+				00, 30,
+				00, 25,
+				03, 25,
+				03, 05,
+				00, 05,
+				00, 00 };
+	p.setPolyline(c, 12);
+	p.setPosition(0,0);
+	p.setMultiplication(1);
+	p.draw(&f);
 	f.render_buffer();
 }
