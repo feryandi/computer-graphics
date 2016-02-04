@@ -39,12 +39,12 @@ void polygon::setHeight(int h) {
 void polygon::setPolyline(int* p, int size) {
 /*	int size = (int)(sizeof(&p)/sizeof(*p)) + 1;
     printf("%d", sizeof(&p));*/
-    polyline = new int[size*2];
+    polyline = new int[(size*4)+1];
 
-    for (int i = 0; i <= size*2; i++) {
+    for (int i = 0; i < size*4; i++) {
     	*(polyline + i) = p[i];   	
     }
-    lines = size;
+    lines = size * 4;
 }
 
 void polygon::setMultiplication(int m) {
@@ -54,25 +54,32 @@ void polygon::setMultiplication(int m) {
 void polygon::draw(frameBuffer *f) {
 	int i = 0;
 	while (i < lines) {
-		int a, b, c, d;
+/*		int a, b, c, d;
 		a = (*(polyline + (i * 2))) * multiplication + x;
 		b = (*(polyline + ((i * 2)+1))) * multiplication + y;
 		c = (*(polyline + ((i+1) * 2))) * multiplication + x;
 		d = (*(polyline + (((i+1) * 2)+1))) * multiplication + y;
 
-/*		printf("%d-", (i * 2));
+		printf("%d-", (i * 2));
 		printf("%d-", (i * 2)+1);
 		printf("%d-", ((i+1) * 2));
 		printf("%d\n", ((i+1) * 2)+1);*/
 
+
+		int a, b, c, d;
+		a = *(polyline + (++i) - 1) * multiplication + x;
+		b = *(polyline + (++i) - 1) * multiplication + y;
+		c = *(polyline + (++i) - 1) * multiplication + x;
+		d = *(polyline + (++i) - 1) * multiplication + y;
+
 		(*f).bresenham(a, b, c, d, 1, 0, 0, 0);
 
-		++i;
-		/*printf("%d[%d]", i, *(polyline + i - 1));
+		//++i;
+		/*printf("%d[%d]", i, *(polyline + (++i) - 1));
 		printf("%d[%d]", i, *(polyline + (++i) - 1));
 		printf("%d[%d]", i, *(polyline + (++i) - 1));
 		printf("%d[%d]\n", i, *(polyline + (++i) - 1));*/
 	}
 
-	(*f).floodFill(5*multiplication + x, 5*multiplication + y);
+	//(*f).floodFill(2*multiplication + x, 2*multiplication + y);
 }
