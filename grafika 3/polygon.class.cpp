@@ -73,4 +73,6 @@ void polygon::draw(frameBuffer *f) {
 		printf("%d[%d]", i, *(polyline + (++i) - 1));
 		printf("%d[%d]\n", i, *(polyline + (++i) - 1));*/
 	}
+
+	(*f).floodFill(5*multiplication + x, 5*multiplication + y);
 }

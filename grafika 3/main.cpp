@@ -33,7 +33,8 @@ int main() {
 				00, 00 };
 	p.setPolyline(c, 12);
 	p.setPosition(0,0);
-	p.setMultiplication(1);
+	p.setMultiplication(3);
 	p.draw(&f);
+	// f.floodFill(100,100);
 	f.render_buffer();
 }
