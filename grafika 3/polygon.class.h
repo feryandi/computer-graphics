@@ -17,6 +17,8 @@ class polygon {
 	public:
 		polygon();
 		~polygon();
+		int getPositionX();
+		int getPositionY();
 		void setPosition(int, int);
 		void setFloodPosition(int, int);
 		void setWidth(int);

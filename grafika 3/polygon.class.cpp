@@ -25,6 +25,14 @@ polygon::~polygon() {
 	delete [] polyline;	
 }
 
+int polygon::getPositionX() {
+	return x;
+}
+
+int polygon::getPositionY() {
+	return y;
+}
+
 void polygon::setPosition(int x, int y) {
 	this->x = x;
 	this->y = y;

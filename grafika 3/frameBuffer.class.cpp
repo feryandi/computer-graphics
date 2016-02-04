@@ -91,6 +91,10 @@ void frameBuffer::render_buffer() {
     memcpy(fbp, buffer, screensize);
 }
 
+int frameBuffer::getVInfoY() {
+    return vinfo.yres;
+}
+
 void frameBuffer::blockBuilder(int x, int y, int block_size, int blue, int green, int red) {
     int i, j;
     // Figure out where in memory to put the pixel
@@ -121,33 +125,39 @@ void frameBuffer::blockBuilder(int x, int y, int block_size, int blue, int green
 }
 
 int frameBuffer::checkColor(int x, int y) {
-  location = (x+vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
-             (y+vinfo.yoffset) * finfo.line_length;
+  if (( x > 0 && y > 0 && x < vinfo.xres - 60 && y < vinfo.yres - 60 )) {
+    location = (x+vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
+               (y+vinfo.yoffset) * finfo.line_length;
 
- if (vinfo.bits_per_pixel == 32) {
-  if ((*(buffer + location) == 0 && *(buffer + location + 1) == 0 && *(buffer + location + 2) == 0 && *(buffer + location + 3) == 0)){
-    return 0;
-  }  else {
-    return 1;
-  }
-  }
-  else {
-    if (*((unsigned short int*)(buffer + location)) == 0){
-     return 0;
-    } else{
-      return 1;
+    if (vinfo.bits_per_pixel == 32) {
+      if ((*(buffer + location) == 0 && *(buffer + location + 1) == 0 && *(buffer + location + 2) == 0 && *(buffer + location + 3) == 0)){
+        return 0;
+      } else {
+        return 1;
+      }
+    } else {
+        if (*((unsigned short int*)(buffer + location)) == 0){
+         return 0;
+        } else {
+          return 1;
+        }
     }
+  } else {
+    return 1;
   }
   
 }
 
 void frameBuffer::floodFill(int x, int y){
- // if (checkColor(x,y) || !( x > 0 && y > 0 && x < vinfo.xres - 500 && y < vinfo.yres - 600 )){}
-   if (checkColor(x,y)){}
+  if (checkColor(x,y)){}
+   //if (checkColor(x,y)){}
     else {
       // printf("%d\n", x);
       // printf("%d\n", y);
-      blockBuilder(x,y,1,0,0,0);
+      if (( x > 0 && y > 0 && x < vinfo.xres - 60 && y < vinfo.yres - 60 )) {
+        blockBuilder(x,y,1,0,0,0);
+      }
+
       floodFill(x+1,y);
       floodFill(x-1,y);
       floodFill(x,y+1);
