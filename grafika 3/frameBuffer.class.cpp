@@ -142,7 +142,8 @@ int frameBuffer::checkColor(int x, int y) {
 }
 
 void frameBuffer::floodFill(int x, int y){
-  if (checkColor(x,y) || !( x > 0 && y > 0 && x < vinfo.xres - 500 && y < vinfo.yres - 600 )){}
+ // if (checkColor(x,y) || !( x > 0 && y > 0 && x < vinfo.xres - 500 && y < vinfo.yres - 600 )){}
+   if (checkColor(x,y)){}
     else {
       // printf("%d\n", x);
       // printf("%d\n", y);

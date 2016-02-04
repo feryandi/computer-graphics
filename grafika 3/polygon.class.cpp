@@ -37,8 +37,8 @@ void polygon::setHeight(int h) {
 }
 
 void polygon::setPolyline(int* p, int size) {
-/*	int size = (int)(sizeof(&p)/sizeof(*p)) + 1;
-    printf("%d", sizeof(&p));*/
+/* printf("%d", (int)(sizeof(*p)));
+   printf("%d", sizeof(&p));*/
     polyline = new int[(size*4)+1];
 
     for (int i = 0; i < size*4; i++) {
@@ -81,5 +81,6 @@ void polygon::draw(frameBuffer *f) {
 		printf("%d[%d]\n", i, *(polyline + (++i) - 1));*/
 	}
 
-	//(*f).floodFill(2*multiplication + x, 2*multiplication + y);
+	//(*f).floodFill(6*multiplication + x, 6*multiplication + y);
+	//(*f).floodFill(5, 5);
 }
