@@ -14,6 +14,8 @@
 polygon::polygon() {
 	x = 0;
 	y = 0;
+	fx = 0;
+	fy = 0;
 	width = 0;
 	height = 0;
 	multiplication = 1;
@@ -26,6 +28,11 @@ polygon::~polygon() {
 void polygon::setPosition(int x, int y) {
 	this->x = x;
 	this->y = y;
+}
+
+void polygon::setFloodPosition(int x, int y) {
+	this->fx = x;
+	this->fy = y;
 }
 
 void polygon::setWidth(int w) {
@@ -81,6 +88,6 @@ void polygon::draw(frameBuffer *f) {
 		printf("%d[%d]\n", i, *(polyline + (++i) - 1));*/
 	}
 
-	//(*f).floodFill(6*multiplication + x, 6*multiplication + y);
+	(*f).floodFill(fx*multiplication + x, fy*multiplication + y);
 	//(*f).floodFill(5, 5);
 }

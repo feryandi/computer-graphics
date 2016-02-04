@@ -6,6 +6,8 @@ class polygon {
 	private:
 		int x;
 		int y;
+		int fx;
+		int fy;
 		int width;
 		int height;
 		int multiplication;
@@ -16,6 +18,7 @@ class polygon {
 		polygon();
 		~polygon();
 		void setPosition(int, int);
+		void setFloodPosition(int, int);
 		void setWidth(int);
 		void setHeight(int);
 		void setPolyline(int*, int);
