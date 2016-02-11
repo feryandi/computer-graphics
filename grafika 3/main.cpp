@@ -288,11 +288,32 @@ int main() {
 					6, 20, 6, 12,
 					6, 12, 0, 0};
 
-	p.setMultiplication(3);
 
-	p.setPolyline(fontR, 20);
+	
+	p.setMultiplication(5);
+	p.setPolyline(fontY, 9);
 	p.setPosition(0,0);
 	p.draw(&f);
+
+	polygon p2;
+	p2.setMultiplication(5);
+	p2.setPolyline(fontY, 9);
+	p2.setPosition(100,0);				
+	p2.draw(&f);
+
+	polygon p3;
+	p3.setMultiplication(5);
+	p3.setPolyline(fontY, 9);
+	p3.setPosition(200,0);				
+	p3.draw(&f);
+
+	polygon p4;
+	p4.setMultiplication(5);
+	p4.setPolyline(fontY, 9);
+	p4.setPosition(300,0);				
+	p4.draw(&f);
+
+
 	// f.floodFill(100,100);
 	f.render_buffer();
 }
