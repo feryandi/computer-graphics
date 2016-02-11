@@ -47,9 +47,3 @@ void scaleList(int scale, int centerX, int centerY, int list[], int length){
 		printf("Odd list");
 	}
 }
-
-int main(){
-	int positionList[] = {1,2,3,4,5,6};
-	rotateList(180, 0, 0, positionList, 6);//contoh pemakaian saja
-	return 0;
-}
