@@ -19,6 +19,8 @@ polygon::polygon() {
 	width = 0;
 	height = 0;
 	multiplication = 1;
+	centerX = 0;
+	centerY = 0;
 }
 
 polygon::~polygon() {
@@ -62,8 +64,16 @@ void polygon::setPolyline(int* p, int size) {
     lines = size * 4;
 }
 
-void polygon::setMultiplication(int m) {
+void polygon::setMultiplication(float m) {
 	multiplication = m;
+}
+
+void polygon::setCenterX(int x){
+	centerX = x;
+}
+
+void polygon::setCenterY(int y){
+	centerY = y;
 }
 
 void polygon::draw(frameBuffer *f) {
@@ -82,10 +92,10 @@ void polygon::draw(frameBuffer *f) {
 
 
 		int a, b, c, d;
-		a = *(polyline + (++i) - 1) * multiplication + x;
-		b = *(polyline + (++i) - 1) * multiplication + y;
-		c = *(polyline + (++i) - 1) * multiplication + x;
-		d = *(polyline + (++i) - 1) * multiplication + y;
+		a = (int) ((*(polyline + (++i) - 1)-centerX) * (multiplication) + x);
+		b = (int) ((*(polyline + (++i) - 1)-centerY) * (multiplication) + y);
+		c = (int) ((*(polyline + (++i) - 1)-centerX) * (multiplication) + x);
+		d = (int) ((*(polyline + (++i) - 1)-centerY) * (multiplication) + y);
 
 		(*f).bresenham(a, b, c, d, 1, 0, 0, 0);
 

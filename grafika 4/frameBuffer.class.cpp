@@ -94,6 +94,9 @@ void frameBuffer::render_buffer() {
 int frameBuffer::getVInfoY() {
     return vinfo.yres;
 }
+int frameBuffer::getVInfoX() {
+    return vinfo.xres;
+}
 
 void frameBuffer::blockBuilder(int x, int y, int block_size, int blue, int green, int red) {
     int i, j;

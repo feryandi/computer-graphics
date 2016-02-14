@@ -20,6 +20,7 @@ class frameBuffer {
 		frameBuffer();
 		~frameBuffer();
 		int getVInfoY();
+		int getVInfoX();
 		void create_buffer();
 		void render_buffer();
 		void blockBuilder(int x, int y, int block_size, int blue, int green, int red);
