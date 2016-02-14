@@ -306,185 +306,163 @@ int leftWing[] = {
 				4, 28, 1, 26, 
 				1, 26, 0, 24};
 
-void makeWawan(int positionX, int positionY, int multiply, frameBuffer *f) {
-	polygon p1,p2,p3,p4,p5;
-	p1.setMultiplication(multiply);
-	p1.setPolyline(fontW, 13);
-	p1.setPosition(positionX,positionY);
-	p1.setFloodPosition(5, 2);
-	p1.draw(f);
-
-	p2.setMultiplication(multiply);
-	p2.setPolyline(fontA, 11);
-	p2.setPosition((positionX+29)*multiply, positionY);
-	p2.setFloodPosition(8, 2);
-	p2.draw(f);
-	
-	p3.setMultiplication(multiply);
-	p3.setPolyline(fontW, 13);
-	p3.setPosition((positionX+29+17)*multiply,positionY);
-	p3.setFloodPosition(5, 2);
-	p3.draw(f);
-	
-	p4.setMultiplication(multiply);
-	p4.setPolyline(fontA, 11);
-	p4.setPosition((positionX+29+17+29)*multiply,positionY);
-	p4.setFloodPosition(8, 2);
-	p4.draw(f);
-	
-	p5.setMultiplication(multiply);
-	p5.setPolyline(fontN, 10);
-	p5.setPosition((positionX+29+17+29+19)*multiply,positionY);
-	p5.setFloodPosition(2, 2);
-	p5.draw(f);
+int rightWing[] = {
+				45, 18, 48, 17, 
+				48, 17, 52, 17, 
+				52, 17, 60, 18,
+				60, 18, 68, 20, 
+				68, 20, 71, 22, 
+				71, 22, 72, 24, 
+				72, 24, 71, 26, 
+				71, 26, 68, 28, 
+				68, 28, 60, 30, 
+				60, 30, 52, 31, 
+				52, 31, 48, 31, 
+				48, 31, 45, 30, 
+				45, 30, 46, 24, 
+				46, 24, 45, 18
 };
 
-void makeJulio(int positionX, int positionY, int multiply, frameBuffer *f) {
-	polygon p1,p2,p3,p4,p5;
-	p1.setMultiplication(multiply);
-	p1.setPolyline(fontJ, 16);
-	p1.setPosition(positionX,positionY);
-	p1.setFloodPosition(15, 2);
-	p1.draw(f);
-
-	p2.setMultiplication(multiply);
-	p2.setPolyline(fontU, 16);
-	p2.setPosition((positionX+18)*multiply, positionY);
-	p2.setFloodPosition(2, 2);
-	p2.draw(f);
-
-	p3.setMultiplication(multiply);
-	p3.setPolyline(fontL, 9);
-	p3.setPosition((positionX+18+18)*multiply,positionY);
-	p3.setFloodPosition(2, 2);
-	p3.draw(f);
-
-	p4.setMultiplication(multiply);
-	p4.setPolyline(fontI, 4);
-	p4.setPosition((positionX+18+18+18)*multiply,positionY);
-	p4.setFloodPosition(8, 2);
-	p4.draw(f);
-
-	p5.setMultiplication(multiply);
-	p5.setPolyline(fontO, 30);
-	p5.setPosition((positionX+18+18+18+18)*multiply,positionY);
-	p5.setFloodPosition(8, 2);
-	p5.draw(f);
+//harus digambar terakhir
+int frontBody[] = {
+				38, 18, 42, 20, 
+				42, 20, 44, 24,
+				44, 24, 42, 28, 
+				42, 28, 38, 30, 
+				38, 30, 34, 28, 
+				34, 28, 32, 24, 
+				32, 24, 34, 20, 
+				34, 20, 38, 18  
 };
 
-void makeChaer(int positionX, int positionY, int multiply, frameBuffer *f) {
-	polygon p1,p2,p3,p4,p5;
-	p1.setMultiplication(multiply);
-	p1.setPolyline(fontC, 30);
-	p1.setPosition(positionX,positionY);
-	p1.setFloodPosition(8, 2);
-	p1.draw(f);
-
-	p2.setMultiplication(multiply);
-	p2.setPolyline(fontH, 12);
-	p2.setPosition((positionX+18)*multiply, positionY);
-	p2.setFloodPosition(2, 2);
-	p2.draw(f);
-
-	p3.setMultiplication(multiply);
-	p3.setPolyline(fontA, 11);
-	p3.setPosition((positionX+18+18)*multiply,positionY);
-	p3.setFloodPosition(8, 2);
-	p3.draw(f);
-
-	p4.setMultiplication(multiply);
-	p4.setPolyline(fontE, 12);
-	p4.setPosition((positionX+18+18+18)*multiply,positionY);
-	p4.setFloodPosition(2, 2);
-	p4.draw(f);
-
-	p5.setMultiplication(multiply);
-	p5.setPolyline(leftWing, 14);
-	p5.setPosition((positionX+18+18+18+18)*multiply,positionY);
-	p5.setFloodPosition(2, 2);
-	p5.draw(f);
+//harus digambar sebelum frontBody
+int secondFrontBody[] = {
+				38, 18, 42, 17, 
+				42, 17, 45, 20,
+				45, 20, 46, 24, 
+				46, 24, 45, 28, 
+				45, 28, 42, 31, 
+				42, 31, 38, 32, 
+				38, 32, 34, 31, 
+				34, 31, 31, 28, 
+				31, 28, 30, 34, 
+				30, 34, 31, 20, 
+				31, 20, 34, 17, 
+				34, 17, 38, 18
 };
 
-void makeFery(int positionX, int positionY, int multiply, frameBuffer *f) {
-	polygon p1,p2,p3,p4;
-	p1.setMultiplication(multiply);
-	p1.setPolyline(fontF, 10);
-	p1.setPosition(positionX,positionY);
-	p1.setFloodPosition(2, 2);
-	p1.draw(f);
-
-	p2.setMultiplication(multiply);
-	p2.setPolyline(fontE, 12);
-	p2.setPosition((positionX+18)*multiply, positionY);
-	p2.setFloodPosition(2, 2);
-	p2.draw(f);
-
-	p3.setMultiplication(multiply);
-	p3.setPolyline(fontR, 20);
-	p3.setPosition((positionX+18+18)*multiply,positionY);
-	p3.setFloodPosition(2, 2);
-	p3.draw(f);
-
-	p4.setMultiplication(multiply);
-	p4.setPolyline(fontY, 9);
-	p4.setPosition((positionX+18+18+18)*multiply,positionY);
-	p4.setFloodPosition(2, 2);
-	p4.draw(f);
+//harus digambar sebelum second front body
+int body[] = {
+				30, 24, 31, 18, 
+				31, 18, 32, 16, 
+				32, 16, 34, 13, 
+				34, 13, 36, 12, 
+				36, 12, 40, 12, 
+				40, 12, 42, 13, 
+				42, 13, 44, 16, 
+				44, 16, 45, 18, 
+				45, 18, 46, 24, 
+				46, 24, 45, 30, 
+				45, 30, 44, 34, 
+				44, 34, 46, 38,
+				46, 38, 44, 39, 
+				44, 39, 42, 35, 
+				42, 35, 34, 35, 
+				34, 35, 32, 39, 
+				32, 39, 30, 38, 
+				30, 38, 32, 34,
+				32, 34, 31, 30, 
+				31, 30, 30, 24  
 };
 
-void makeAdin(int positionX, int positionY, int multiply, frameBuffer *f) {
-	polygon p1,p2,p3,p4;
-	p1.setMultiplication(multiply);
-	p1.setPolyline(fontA, 11);
-	p1.setPosition(positionX,positionY);
-	p1.setFloodPosition(8, 2);
-	p1.draw(f);
-
-	p2.setMultiplication(multiply);
-	p2.setPolyline(fontD, 18);
-	p2.setPosition((positionX+18)*multiply, positionY);
-	p2.setFloodPosition(2, 2);
-	p2.draw(f);
-
-	p3.setMultiplication(multiply);
-	p3.setPolyline(fontI, 4);
-	p3.setPosition((positionX+18+18)*multiply,positionY);
-	p3.setFloodPosition(8, 2);
-	p3.draw(f);
-	
-	p4.setMultiplication(multiply);
-	p4.setPolyline(fontN, 10);
-	p4.setPosition((positionX+18+18+18)*multiply,positionY);
-	p4.setFloodPosition(2, 2);
-	p4.draw(f);
+int leftTyre[] = {
+				30, 38, 32, 39, 
+				32, 39, 32, 41, 
+				32, 41, 30, 45, 
+				30, 45, 28, 46, 
+				28, 46, 26, 45, 
+				26, 45, 26, 43, 
+				26, 43, 28, 39, 
+				28, 39, 30, 38
 };
 
-void makeBoim(int positionX, int positionY, int multiply, frameBuffer *f) {
-	polygon p1,p2,p3,p4;
+int rightTyre[] = {
+				46, 38, 48, 39, 
+				48, 39, 50, 43, 
+				50, 43, 50, 45, 
+				50, 45, 48, 46, 
+				48, 46, 46, 45, 
+				46, 45, 44, 41, 
+				44, 41, 44, 39,
+				44, 39, 46, 38
+};
+
+int tail[] = {
+				26, 14, 36, 14, 
+				36, 14, 37, 2, 
+				37, 2, 38, 1, 
+				38, 1, 39, 2, 
+				39, 2, 40, 14, 
+				40, 14, 50, 14, 
+				50, 14, 48, 16, 
+				48, 16, 28, 16, 
+				28, 16, 26,  14
+};
+
+void drawPlane(int positionX, int positionY, int multiply, frameBuffer *f) {
+	polygon p1,p2,p3,p4,p5,p6,p7,p8;
+
 	p1.setMultiplication(multiply);
-	p1.setPolyline(fontB, 25);
+	p1.setPolyline(leftWing, 14);
 	p1.setPosition(positionX,positionY);
 	p1.setFloodPosition(2, 2);
 	p1.draw(f);
 
 	p2.setMultiplication(multiply);
-	p2.setPolyline(fontO, 30);
-	p2.setPosition((positionX+18)*multiply, positionY);
-	p2.setFloodPosition(8, 2);
+	p2.setPolyline(rightWing, 14);
+	p2.setPosition(positionX, positionY);
+	p2.setFloodPosition(2, 2);
 	p2.draw(f);
 
 	p3.setMultiplication(multiply);
-	p3.setPolyline(fontI, 4);
-	p3.setPosition((positionX+18+18)*multiply,positionY);
-	p3.setFloodPosition(8, 2);
+	p3.setPolyline(leftTyre, 8);
+	p3.setPosition(positionX,positionY);
+	p3.setFloodPosition(2, 2);
 	p3.draw(f);
 
 	p4.setMultiplication(multiply);
-	p4.setPolyline(fontM, 12);
-	p4.setPosition((positionX+18+18+18)*multiply,positionY);
+	p4.setPolyline(rightTyre, 8);
+	p4.setPosition(positionX,positionY);
 	p4.setFloodPosition(2, 2);
 	p4.draw(f);
-};
+
+	p5.setMultiplication(multiply);
+	p5.setPolyline(tail, 9);
+	p5.setPosition(positionX,positionY);
+	p5.setFloodPosition(2, 2);
+	p5.draw(f);
+
+	p6.setMultiplication(multiply);
+	p6.setPolyline(body, 20);
+	p6.setPosition(positionX,positionY);
+	p6.setFloodPosition(2, 2);
+	p6.draw(f);
+
+	p7.setMultiplication(multiply);
+	p7.setPolyline(secondFrontBody, 12);
+	p7.setPosition(positionX,positionY);
+	p7.setFloodPosition(2, 2);
+	p7.draw(f);
+
+	p8.setMultiplication(multiply);
+	p8.setPolyline(frontBody, 8);
+	p8.setPosition(positionX,positionY);
+	p8.setFloodPosition(2, 2);
+	p8.draw(f);
+
+
+
+}
 
 int abs(int n) {
 	if (n < 0) {
@@ -500,68 +478,13 @@ int main() {
 	int reductor = 0;
 	int i = 1;
 	int isPlus = 0;
-	while (reductor < f.getVInfoY() + 20*5 ) {
-		makeWawan(0,f.getVInfoY()-reductor,4-abs(4-((f.getVInfoY()-(f.getVInfoY()-reductor))/100)),&f);
-		f.render_buffer();
-
-		++reductor;
-		//usleep(10000);
-		f.solidBackground();
-		if(reductor>=500){
-			translateList(0, 0, fontW, 52);
-			translateList(0, 0, fontA, 44);
-			translateList(1, 1, fontN, 40);
-		}
-	}
-
-	reductor = 0;
-	while (reductor < f.getVInfoY() + 20*5 ) {
-		makeJulio(0,f.getVInfoY()-reductor,4-abs(4-((f.getVInfoY()-(f.getVInfoY()-reductor))/100)),&f);
-		f.render_buffer();
-
-		++reductor;
-		//usleep(10000);
-		f.solidBackground();
-	}
-
-	reductor = 0;
-	while (reductor < f.getVInfoY() + 20*5 ) {
-		makeChaer(0,f.getVInfoY()-reductor,4-abs(4-((f.getVInfoY()-(f.getVInfoY()-reductor))/100)),&f);
-		f.render_buffer();
-
-		++reductor;
-		//usleep(10000);
-		f.solidBackground();
-	}
 	
-	reductor = 0;
 	while (reductor < f.getVInfoY() + 20*5 ) {
-		makeFery(0,f.getVInfoY()-reductor,4-abs(4-((f.getVInfoY()-(f.getVInfoY()-reductor))/100)),&f);
+		drawPlane(0,f.getVInfoY()-reductor,5,&f);
 		f.render_buffer();
 
 		++reductor;
 		//usleep(10000);
 		f.solidBackground();
 	}
-	
-	reductor = 0;
-	while (reductor < f.getVInfoY() + 20*5 ) {
-		makeAdin(0,f.getVInfoY()-reductor,4-abs(4-((f.getVInfoY()-(f.getVInfoY()-reductor))/100)),&f);
-		f.render_buffer();
-
-		++reductor;
-		//usleep(10000);
-		f.solidBackground();
-	}
-	
-	reductor = 0;
-	while (reductor < f.getVInfoY() + 20*5 ) {
-		makeBoim(0,f.getVInfoY()-reductor,4-abs(4-((f.getVInfoY()-(f.getVInfoY()-reductor))/100)),&f);
-		f.render_buffer();
-
-		++reductor;
-		//usleep(10000);
-		f.solidBackground();
-	}
-
 }
