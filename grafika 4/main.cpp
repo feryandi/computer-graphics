@@ -327,10 +327,21 @@ int leftPropeller[] = {
 	24, 28, 38, 24
 };
 
+int bullet[] = {
+	10, 10, 20, 0
+};
 
 
 int degree = 0;
-polygon p1,p2,p3,p4,p5,p6,p7,p8,p9, p10, p11, p12, p13, p14, p15, p16, p17, p18;
+polygon p1,p2,p3,p4,p5,p6,p7,p8,p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19;
+
+void drawBullet(int positionX, int positionY, frameBuffer *f) {
+	p19.setMultiplication(1);
+	p19.setPolyline(bullet, 1);
+	p19.setPosition(positionX,positionY);
+	p19.setFloodPosition(2, 2);
+	p19.draw(f);
+}
 
 void drawPlane(int positionX, int positionY, float multiply, frameBuffer *f) {
 
@@ -400,13 +411,14 @@ void drawPlane(int positionX, int positionY, float multiply, frameBuffer *f) {
 
 }
 
-void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f) {
+void drawParachute(int degree, int positionX, int positionY, float multiply, frameBuffer *f) {
 	polygon p1, p2, p3, p4, p5, p6, p7, p8, p9, p10;
 
 	p1.setMultiplication(multiply);
 	p1.setCenterX(26);
 	p1.setCenterY(20);
-	p1.setPolyline(parachute1, 22);
+	int * newParachute1 = rotateList(degree, 26, 120, parachute1, 22*4);
+	p1.setPolyline(newParachute1, 22);
 	p1.setPosition(positionX,positionY);
 	p1.setFloodPosition(2, 2);
 	p1.draw(f);
@@ -414,7 +426,8 @@ void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f)
 	p2.setMultiplication(multiply);
 	p2.setCenterX(26);
 	p2.setCenterY(20);
-	p2.setPolyline(parachute2, 17);
+	int * newParachute2 = rotateList(degree, 26, 120, parachute2, 17*4);
+	p2.setPolyline(newParachute2, 17);
 	p2.setPosition(positionX,positionY);
 	p2.setFloodPosition(2, 2);
 	p2.draw(f);
@@ -422,7 +435,8 @@ void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f)
 	p3.setMultiplication(multiply);
 	p3.setCenterX(26);
 	p3.setCenterY(20);
-	p3.setPolyline(parachute3, 17);
+	int * newParachute3 = rotateList(degree, 26, 120, parachute3, 17*4);
+	p3.setPolyline(newParachute3, 17);
 	p3.setPosition(positionX,positionY);
 	p3.setFloodPosition(2, 2);
 	p3.draw(f);
@@ -430,7 +444,8 @@ void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f)
 	p4.setMultiplication(multiply);
 	p4.setCenterX(26);
 	p4.setCenterY(20);
-	p4.setPolyline(parachute4, 17);
+	int * newParachute4 = rotateList(degree, 26, 120, parachute4, 17*4);
+	p4.setPolyline(newParachute4, 17);
 	p4.setPosition(positionX,positionY);
 	p4.setFloodPosition(2, 2);
 	p4.draw(f);
@@ -438,7 +453,8 @@ void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f)
 	p5.setMultiplication(multiply);
 	p5.setCenterX(26);
 	p5.setCenterY(20);
-	p5.setPolyline(parachute5, 22);
+	int * newParachute5 = rotateList(degree, 26, 120, parachute5, 22*4);
+	p5.setPolyline(newParachute5, 22);
 	p5.setPosition(positionX,positionY);
 	p5.setFloodPosition(2, 2);
 	p5.draw(f);
@@ -446,7 +462,8 @@ void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f)
 	p6.setMultiplication(multiply);
 	p6.setCenterX(26);
 	p6.setCenterY(20);
-	p6.setPolyline(parachuteString1, 5);
+	int * newParachuteString1 = rotateList(degree, 26, 120, parachuteString1, 5*4);
+	p6.setPolyline(newParachuteString1, 5);
 	p6.setPosition(positionX,positionY);
 	p6.setFloodPosition(2, 2);
 	p6.draw(f);
@@ -454,7 +471,8 @@ void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f)
 	p7.setMultiplication(multiply);
 	p7.setCenterX(26);
 	p7.setCenterY(20);
-	p7.setPolyline(parachuteString2, 5);
+	int * newParachuteString2 = rotateList(degree, 26, 120, parachuteString2, 5*4);
+	p7.setPolyline(newParachuteString2, 5);
 	p7.setPosition(positionX,positionY);
 	p7.setFloodPosition(2, 2);
 	p7.draw(f);
@@ -462,7 +480,8 @@ void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f)
 	p8.setMultiplication(multiply);
 	p8.setCenterX(26);
 	p8.setCenterY(20);
-	p8.setPolyline(parachuteString3, 5);
+	int * newParachuteString3 = rotateList(degree, 26, 120, parachuteString3, 5*4);
+	p8.setPolyline(newParachuteString3, 5);
 	p8.setPosition(positionX,positionY);
 	p8.setFloodPosition(2, 2);
 	p8.draw(f);
@@ -470,7 +489,8 @@ void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f)
 	p9.setMultiplication(multiply);
 	p9.setCenterX(26);
 	p9.setCenterY(20);
-	p9.setPolyline(parachuteString4, 5);
+	int * newParachuteString4 = rotateList(degree, 26, 120, parachuteString4, 5*4);
+	p9.setPolyline(newParachuteString4, 5);
 	p9.setPosition(positionX,positionY);
 	p9.setFloodPosition(2, 2);
 	p9.draw(f);
@@ -478,7 +498,8 @@ void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f)
 	p10.setMultiplication(multiply);
 	p10.setCenterX(26);
 	p10.setCenterY(20);
-	p10.setPolyline(parachuteString5, 5);
+	int * newParachuteString5 = rotateList(degree, 26, 120, parachuteString5, 5*4);
+	p10.setPolyline(newParachuteString5, 5);
 	p10.setPosition(positionX,positionY);
 	p10.setFloodPosition(2, 2);
 	p10.draw(f);
@@ -765,7 +786,7 @@ void destroy(frameBuffer *f){
 		reductor = (reductor+8)/2;
 	
 		drawPropeller(degree,500,100+reductorFall,p8.getMultiplication(),f);
-		drawParachute(500,200+reductorParachute,1.5,f);
+		drawParachute((reductorParachute%15), 500,200+reductorParachute,1.5,f);
 		drawHuman(518,350+reductorParachute,1.5,f);
 
 		// ship
@@ -813,6 +834,12 @@ int main() {
 		drawPlane(f.getVInfoX()-(reductor*2),f.getVInfoY()-400-reductor/2,(float)reductor/(float)50.0,&f);
 		drawPropeller(degree,f.getVInfoX()-(reductor*2),f.getVInfoY()-400-reductor/2,(float)reductor/(float)50,&f);
 		drawShip(0, f.getVInfoY()-300, 10, &f); 
+
+		if ( reductor >= 420 ) {
+			int vpeluru = reductor - 420;
+			drawBullet(170+(vpeluru*5), f.getVInfoY()-300-(vpeluru*5), &f);
+		}
+
 		f.render_buffer();
 		degree = (degree + 5) % 360;
 		scale = scale + 0.005;
