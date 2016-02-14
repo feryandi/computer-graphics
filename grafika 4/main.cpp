@@ -577,92 +577,6 @@ void printArray(int array[], int len){
 
 }
 
-// void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f) {
-// 	polygon p1, p2, p3, p4, p5, p6, p7, p8, p9. p10;
-//
-// 	p1.setMultiplication(multiply);
-// 	p1.setCenterX(26);
-// 	p1.setCenterY(20);
-// 	p1.setPolyline(parachute1, 22);
-// 	p1.setPosition(positionX,positionY);
-// 	p1.setFloodPosition(2, 2);
-// 	p1.draw(f);
-//
-// 	p2.setMultiplication(multiply);
-// 	p2.setCenterX(26);
-// 	p2.setCenterY(20);
-// 	p2.setPolyline(parachute2, ?);
-// 	p2.setPosition(positionX,positionY);
-// 	p2.setFloodPosition(2, 2);
-// 	p2.draw(f);
-//
-// 	p3.setMultiplication(multiply);
-// 	p3.setCenterX(26);
-// 	p3.setCenterY(20);
-// 	p3.setPolyline(parachute3, ?);
-// 	p3.setPosition(positionX,positionY);
-// 	p3.setFloodPosition(2, 2);
-// 	p3.draw(f);
-//
-// 	p4.setMultiplication(multiply);
-// 	p4.setCenterX(26);
-// 	p4.setCenterY(20);
-// 	p4.setPolyline(parachute4, ?);
-// 	p4.setPosition(positionX,positionY);
-// 	p4.setFloodPosition(2, 2);
-// 	p4.draw(f);
-//
-// 	p5.setMultiplication(multiply);
-// 	p5.setCenterX(26);
-// 	p5.setCenterY(20);
-// 	p5.setPolyline(parachute5, ?);
-// 	p5.setPosition(positionX,positionY);
-// 	p5.setFloodPosition(2, 2);
-// 	p5.draw(f);
-//
-// 	p6.setMultiplication(multiply);
-// 	p6.setCenterX(26);
-// 	p6.setCenterY(20);
-// 	p6.setPolyline(parachuteString1, ?);
-// 	p6.setPosition(positionX,positionY);
-// 	p6.setFloodPosition(2, 2);
-// 	p6.draw(f);
-//
-// 	p7.setMultiplication(multiply);
-// 	p7.setCenterX(26);
-// 	p7.setCenterY(20);
-// 	p7.setPolyline(parachuteString2, ?);
-// 	p7.setPosition(positionX,positionY);
-// 	p7.setFloodPosition(2, 2);
-// 	p7.draw(f);
-//
-// 	p8.setMultiplication(multiply);
-// 	p8.setCenterX(26);
-// 	p8.setCenterY(20);
-// 	p8.setPolyline(parachuteString3, ?);
-// 	p8.setPosition(positionX,positionY);
-// 	p8.setFloodPosition(2, 2);
-// 	p8.draw(f);
-//
-// 	p9.setMultiplication(multiply);
-// 	p9.setCenterX(26);
-// 	p9.setCenterY(20);
-// 	p9.setPolyline(parachuteString4, ?);
-// 	p9.setPosition(positionX,positionY);
-// 	p9.setFloodPosition(2, 2);
-// 	p9.draw(f);
-//
-// 	p10.setMultiplication(multiply);
-// 	p10.setCenterX(26);
-// 	p10.setCenterY(20);
-// 	p10.setPolyline(parachuteString5, ?);
-// 	p10.setPosition(positionX,positionY);
-// 	p10.setFloodPosition(2, 2);
-// 	p10.draw(f);
-//
-//
-// }
-
 void drawPropeller(int degree, int positionX, int positionY, float multiply, frameBuffer *f){
 	polygon p1, p2;
 
@@ -708,36 +622,42 @@ void drawShip(int positionX, int positionY, float multiply, frameBuffer *f){
 
 void drawHuman(int positionX, int positionY, float multiply, frameBuffer *f){
 	p13.setMultiplication(multiply);
+	p13.setCenterX(24);
 	p13.setPolyline(head, 10);
 	p13.setPosition(positionX,positionY);
 	p13.setFloodPosition(2, 2);
 	p13.draw(f);
 
 	p14.setMultiplication(multiply);
+	p14.setCenterX(24);
 	p14.setPolyline(humanBody, 4);
 	p14.setPosition(positionX,positionY);
 	p14.setFloodPosition(2, 2);
 	p14.draw(f);
 
 	p15.setMultiplication(multiply);
+	p15.setCenterX(24);
 	p15.setPolyline(leftHand, 3);
 	p15.setPosition(positionX,positionY);
 	p15.setFloodPosition(2, 2);
 	p15.draw(f);
 
 	p16.setMultiplication(multiply);
+	p16.setCenterX(24);
 	p16.setPolyline(rightHand, 3);
 	p16.setPosition(positionX,positionY);
 	p16.setFloodPosition(2, 2);
 	p16.draw(f);
 
 	p17.setMultiplication(multiply);
+	p17.setCenterX(24);
 	p17.setPolyline(leftFoot, 3);
 	p17.setPosition(positionX,positionY);
 	p17.setFloodPosition(2, 2);
 	p17.draw(f);
 
 	p18.setMultiplication(multiply);
+	p18.setCenterX(24);
 	p18.setPolyline(rightFoot, 3);
 	p18.setPosition(positionX,positionY);
 	p18.setFloodPosition(2, 2);
@@ -846,7 +766,7 @@ void destroy(frameBuffer *f){
 	
 		drawPropeller(degree,500,100+reductorFall,p8.getMultiplication(),f);
 		drawParachute(500,200+reductorParachute,1.5,f);
-		drawHuman(500,400+reductorParachute,1.5,f);
+		drawHuman(518,350+reductorParachute,1.5,f);
 
 		// ship
 		p10.setMultiplication(p10.getMultiplication());
