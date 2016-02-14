@@ -9,287 +9,12 @@
 #include <pthread.h>
 #include <termios.h>
 #include <time.h>
+#include "polygon.class.h"
 #include "transformation.h"
 #include "frameBuffer.class.h"
-#include "polygon.class.h"
 #include <iostream>
 using namespace std;
 
-// 11
-int fontA[] = { 6, 0, 10, 0,
-				10, 0, 16, 20,
-				16, 20, 12, 20,
-				12, 20, 10, 14,
-				10, 14, 6, 14,
-				6, 14, 4, 20,
-				4, 20, 0, 20,
-				0, 20, 6, 0,
-				8, 7, 9, 10,
-				9, 10, 7, 10,
-				7, 10, 8, 7};
-// 25
-int fontB[] = { 0, 0, 12, 0,
-				12, 0, 14, 1,
-				14, 1, 15, 2,
-				15, 2, 16, 5,
-				16, 5, 15, 8,
-				15, 8, 13, 10,
-				13, 10, 15, 12,
-				15, 12, 16, 15,
-				16, 15, 15, 18,
-				15, 18, 14, 19,
-				14, 19, 12, 20,
-				12, 20, 0, 20,
-				0, 20, 0, 0,
-				4, 4, 10, 4,
-				10, 4, 11, 5,
-				11, 5, 11, 7,
-				11, 7, 9, 8,
-				9, 8, 4, 8,
-				4, 8, 4, 4,
-				4, 12, 9, 12,
-				9, 12, 11, 13,
-				11, 13, 11, 15,
-				11, 15, 10, 16,
-				10, 16, 4, 16,
-				4, 16, 4, 12 };
-// 30
-int fontC[] = { 6, 0, 10, 0,
-				10, 0, 13, 1,
-				13, 1, 15, 3,
-				15, 3, 16, 6,
-				16, 6, 16, 8,
-				16, 8, 12, 8,
-				12, 8, 11, 5,
-				11, 5, 10, 4,
-				10, 4, 6, 4,
-				6, 4, 5, 5,
-				5, 5, 4, 8,
-				4, 8, 4, 12,
-				4, 12, 5, 15,
-				5, 15, 6, 16,
-				6, 16, 10, 16,
-				10, 16, 11, 15,
-				11, 15, 12, 12,
-				12, 12, 16, 12,
-				16, 12, 16, 14,
-				16, 14, 15, 17,
-				15, 17, 13, 19,
-				13, 19, 10, 20,
-				10, 20, 6, 20,
-				6, 20, 3, 19,
-				3, 19, 1, 17,
-				1, 17, 0, 14,
-				0, 14, 0, 6,
-				0, 6, 1, 3,
-				1, 3, 3, 1,
-				3, 1, 6, 0};
-// 18
-int fontD[] = { 0, 0, 8, 0,
-				8, 0, 12, 1,
-				12, 1, 15, 3,
-				15, 3, 16, 6,
-				16, 6, 16, 14,
-				16, 14, 15, 17,
-				15, 17, 12, 19,
-				12, 19, 8, 20,
-				8, 20, 0, 20,
-				0, 20, 0, 0,
-				4, 4, 8, 4,
-				8, 4, 11, 5,
-				11, 5, 12, 8,
-				12, 8, 12, 12,
-				12, 12, 11, 15,
-				11, 15, 8, 16,
-				8, 16, 4, 16,
-				4, 16, 4, 4 };
-// 12
-int fontE[] = { 0, 0, 16, 0,
-				16, 0, 16, 4,
-				16, 4, 4, 4,
-				4, 4, 4, 8,
-				4, 8, 12, 8,
-				12, 8, 12, 12,
-				12, 12, 4, 12,
-				4, 12, 4, 16,
-				4, 16, 16, 16,
-				16, 16, 16, 20,
-				16, 20, 0, 20,
-				0, 20, 0, 0 };
-// 10
-int fontF[] = { 0, 0, 16, 0,
-				16, 0, 16, 4,
-				16, 4, 4, 4,
-				4, 4, 4, 8,
-				4, 8, 12, 8,
-				12, 8, 12, 12,
-				12, 12, 4, 12,
-				4, 12, 4, 20,
-				4, 20, 0, 20,
-				0, 20, 0, 0};
-// 12
-int fontM[] = { 0, 0, 4, 0,
-				4, 0, 12, 12,
-				12, 12, 20, 0,
-				20, 0, 24, 0,
-				24, 0, 24, 20,
-				24, 20, 20, 20,
-				20, 20, 20, 8,
-				20, 8, 12, 20,
-				12, 20, 4, 8,
-				4, 8, 4, 20,
-				4, 20, 0, 20,
-				0, 20, 0, 0 };
-// 10
-int fontN[] = { 0, 0, 4, 0,
-				4, 0, 12, 12,
-				12, 12, 12, 0,
-				12, 0, 16, 0,
-				16, 0, 16, 20,
-				16, 20, 12, 20,
-				12, 20, 4, 8,
-				4, 8, 4, 20,
-				4, 20, 0, 20,
-				0, 20, 0, 0 };
-// 12
-int fontH[] = {	0, 0, 4, 0,
-				4, 0, 4, 8,
-				4, 8, 12, 8,
-				12, 8, 12, 0,
-				12, 0, 16, 0,
-				16, 0, 16, 20,
-				16, 20, 12, 20,
-				12, 20, 12, 12,
-				12, 12, 4, 12,
-				4, 12, 4, 20,
-				4, 20, 0, 20,
-				0, 20, 0, 0};
-// 4
-int fontI[] = { 6, 0, 10, 0,
-				10, 0, 10, 20,
-				10, 20, 6, 20,
-				6, 20, 6, 0};
-// 9
-int fontL[] = { 0, 0, 4, 0,
-				4, 0, 4, 4,
-				4, 4, 4, 8,
-				4, 8, 4, 12,
-				4, 12, 4, 16,
-				4, 16, 16, 16,
-				16, 16, 16, 20,
-				16, 20, 0, 20,
-				0, 20, 0, 0 };
-// 16
-int fontJ[] = { 0, 12, 4, 12,
-				4, 12, 4, 15,
-				4, 15, 5, 16,
-				5, 16, 11, 16,
-				11, 16, 12, 15,
-				12, 15, 12, 0,
-				12, 0, 16, 0,
-				16, 0, 16, 16,
-				16, 16, 15, 18,
-				15, 18, 14, 19,
-				14, 19, 12, 20,
-				12, 20, 4, 20,
-				4, 20, 2, 19,
-				2, 19, 1, 18,
-				1, 18, 0, 16,
-				0, 16, 0, 12 };
-// 30
-int fontO[] = { 6, 0, 10, 0,
-				10, 0, 13, 1,
-				13, 1, 15, 3,
-				15, 3, 16, 6,
-				16, 6, 16, 8,
-				16, 8, 16, 12,
-				12, 8, 11, 5,
-				11, 5, 10, 4,
-				10, 4, 6, 4,
-				6, 4, 5, 5,
-				5, 5, 4, 8,
-				4, 8, 4, 12,
-				4, 12, 5, 15,
-				5, 15, 6, 16,
-				6, 16, 10, 16,
-				10, 16, 11, 15,
-				11, 15, 12, 12,
-				12, 12, 12, 8,
-				16, 12, 16, 14,
-				16, 14, 15, 17,
-				15, 17, 13, 19,
-				13, 19, 10, 20,
-				10, 20, 6, 20,
-				6, 20, 3, 19,
-				3, 19, 1, 17,
-				1, 17, 0, 14,
-				0, 14, 0, 6,
-				0, 6, 1, 3,
-				1, 3, 3, 1,
-				3, 1, 6, 0};
-// 20
-int fontR[] = { 0, 0, 12, 0,
-				12, 0, 14, 1,
-				14, 1, 15, 2,
-				15, 2, 16, 5,
-				16, 5, 15, 8,
-				15, 8, 13, 10,
-				13, 10, 12, 11,
-				12, 11, 17, 20,
-				17, 20, 12, 20,
-				12, 20, 8, 12,
-				8, 12, 4, 12,
-				4, 12, 4, 20,
-				4, 20, 0, 20,
-				0, 20, 0, 0,
-				4, 4, 10, 4,
-				10, 4, 11, 5,
-				11, 5, 11, 7,
-				11, 7, 9, 8,
-				9, 8, 4, 8,
-				4, 8, 4, 4 };
-// 16
-int fontU[] = { 0, 0, 4, 0,
-				4, 0, 4, 15,
-				4, 15, 5, 16,
-				5, 16, 11, 16,
-				11, 16, 12, 15,
-				12, 15, 12, 0,
-				12, 0, 16, 0,
-				16, 0, 16, 16,
-				16, 16, 15, 18,
-				15, 18, 14, 19,
-				14, 19, 12, 20,
-				12, 20, 4, 20,
-				4, 20, 2, 19,
-				2, 19, 1, 18,
-				1, 18, 0, 16,
-				0, 16, 0, 0 };
-// 13
-int fontW[] = { 0, 0, 5, 0,
-				5, 0, 8, 10,
-				8, 10, 11, 0,
-				11, 0, 17, 0,
-				17, 0, 20, 10,
-				20, 10, 23, 0,
-				23, 0, 28, 0,
-				28, 0, 22, 20,
-				22, 20, 18, 20,
-				18, 20, 14, 7,
-				14, 7, 10, 20,
-				10, 20, 6, 20,
-				6, 20, 0, 0 };
-// 9
-int fontY[] = { 0, 0, 4, 0,
-				4, 0, 8, 8,
-				8, 8, 12, 0,
-				12, 0, 16, 0,
-				16, 0, 10, 12,
-				10, 12, 10, 20,
-				10, 20, 6, 20,
-				6, 20, 6, 12,
-				6, 12, 0, 0};
-// 14
 int leftWing[] = {
 				0, 24, 1, 22,
 				1, 22, 4, 20,
@@ -421,27 +146,166 @@ int propeller[] = {
 				37, 25, 12, 0
 };
 
+int parachute1[] = {
+	0, 46, 1, 36,
+	1, 36, 3, 28,
+	3, 28, 5, 22,
+	5, 22, 7,  18,
+	7, 18, 10, 14,
+	10, 14, 14, 10,
+	14, 10, 18, 6,
+	18, 6, 22, 4,
+	22, 4, 28, 2,
+	28, 2, 35, 1,
+	35, 1, 36, 1,
+	36, 1, 34, 2,
+	34, 2, 30, 5,
+	30, 5, 24, 10,
+	24, 10, 20, 16,
+	20, 16, 16, 24,
+	16, 24, 14, 30,
+	14, 30, 12, 38,
+	12, 38, 11, 50,
+	11, 50, 6, 45,
+	6, 45, 2, 46,
+	2, 46, 0, 46
+};
+
+int parachute2[] = {
+	36, 1, 34, 2,
+	34, 2, 30, 5,
+	30, 5, 24, 10,
+	24, 10, 20, 16,
+	20, 16, 16, 24,
+	16, 24, 14, 30,
+	14, 30, 12, 38,
+	12, 38, 11, 50,
+	11, 50, 14, 50,
+	14, 50, 20, 52,
+	20, 52, 26, 56,
+	26, 56, 26, 42,
+	26, 42, 27, 34,
+	27, 34, 28, 26,
+	28, 26, 30, 18,
+	30, 18, 32, 12,
+	32, 12, 36, 1
+
+
+};
+
+int parachute3[] = {
+	26, 56, 26, 42,
+	26, 42, 27, 34,
+	27, 34, 28, 26,
+	28, 26, 30, 18,
+	30, 18, 32, 12,
+	32, 12, 36, 1,
+	36, 1, 40, 12,
+	40, 12, 42, 18,
+	42, 18, 44, 26,
+	44, 26, 45, 34,
+	45, 34, 46, 42,
+	46, 42, 46, 56,
+	46, 56, 42, 55,
+	42, 55, 37, 54,
+	37, 54, 35, 54,
+	35, 54, 30, 55,
+	30, 55, 26, 56
+};
+
+int parachute4[] = {
+	36, 1, 40, 12,
+	40, 12, 42, 18,
+	42, 18, 44, 26,
+	44, 26, 45, 34,
+	45, 34, 46, 42,
+	46, 42, 46, 56,
+	46, 56, 52, 52,
+	52, 52, 58, 50,
+	58, 50, 61, 50,
+	61, 50, 60, 38,
+	60, 38, 58, 30,
+	58, 30, 56, 24,
+	56, 24, 52, 16,
+	52, 16, 48, 10,
+	48, 10, 42, 5,
+	42, 5, 38, 2,
+	38, 2, 36, 1
+
+};
+
+int parachute5[] = {
+	61, 50, 60, 38,
+	60, 38, 58, 30,
+	58, 30, 56, 24,
+	56, 24, 52, 16,
+	52, 16, 48, 10,
+	48, 10, 42, 5,
+	42, 5, 38, 2,
+	38, 2, 36, 1,
+	36, 1, 37, 1,
+	37, 1, 44, 2,
+	44, 2, 49, 4,
+	49, 4, 53, 6,
+	53, 6, 58, 10,
+	58, 10, 62, 14,
+	62, 14, 65, 18,
+	65, 18, 67, 22,
+	67, 22, 69, 28,
+	69, 28, 71, 36,
+	71, 36, 72, 46,
+	72, 46, 70, 46,
+	70, 46, 66, 47,
+	66, 47, 61, 50
+};
+
+int parachuteString1[] = {
+	11, 50, 6, 45,
+	6, 45, 2, 46,
+	2, 46, 0, 46,
+	0, 46, 36, 120,
+	36, 120, 11, 50
+};
+
+int parachuteString2[] = {
+
+	61, 50, 36, 120,
+	11, 50, 14, 50,
+	14, 50, 20, 52,
+	20, 52, 26, 56,
+	26, 56, 36, 120
+};
+
+int parachuteString3[] = {
+	46, 56, 42, 55,
+	42, 55, 37, 54,
+	37, 54, 35, 54,
+	35, 54, 30, 55,
+	30, 55, 26, 56,
+	26, 56, 36, 120,
+	36, 120, 46, 56
+};
+
+int parachuteString4[] = {
+	61, 50, 36, 120,
+	36, 120, 46, 56,
+	46, 56, 52, 52,
+	52, 52, 58, 50,
+	58, 50, 61, 50
+};
+
+int parachuteString5[] = {
+	72, 46, 70, 46,
+	70, 46, 66, 47,
+	66, 47, 61, 50,
+	61, 50, 36, 120,
+	36, 120, 72, 46
+};
+
 int degree = 0;
 polygon p1,p2,p3,p4,p5,p6,p7,p8,p9;
 
-void drawPlane(int positionX, int positionY, int multiply, frameBuffer *f) {
-
-
-// int rightPropeller[] = {
-// 	38, 24, 52, 20,
-// 	52, 20, 52, 24,
-// 	52, 24, 38, 24
-// };
-//
-// int leftPropeller[] = {
-// 	38, 24, 24, 24,
-// 	24, 24, 24, 28,
-// 	24, 28, 38, 24
-// };
-//
-//
-// void drawPlane(int positionX, int positionY, int multiply, frameBuffer *f) {
-// 	polygon p1, p2, p3, p4, p5, p6, p7, p8;
+void drawPlane(int positionX, int positionY, float multiply, frameBuffer *f) {
 
 	p1.setMultiplication(multiply);
 	p1.setCenterX(38);
@@ -518,54 +382,90 @@ void drawPlane(int positionX, int positionY, int multiply, frameBuffer *f) {
 	p9.draw(f);
 }
 
-
-// =======
-// int *intdup(int const * src, size_t len)
-// {
-//    int * p = (int*)malloc(len * sizeof(int));
-//    memcpy(p, src, len * sizeof(int));
-//    return p;
-// }
-// >>>>>>> fc67277d907511164acab1761f488e4b82213328
-//
-// void printArray(int array[], int len){
-// 	for (int i =0; i < len; i++){
-// 		printf("%d, ", array[i]);
-// 	}
-// 	printf("\n");
-// }
-//
-// void drawPropeller(int degree, int positionX, int positionY, int multiply, frameBuffer *f){
-// 	polygon p1, p2;
+// void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f) {
+// 	polygon p1, p2, p3, p4, p5, p6, p7, p8, p9. p10;
 //
 // 	p1.setMultiplication(multiply);
-// 	p1.setCenterX(38);
-// 	p1.setCenterY(24);
-// 	int * newRightPropeller = rotateList(degree, 38, 24, rightPropeller, 12);
-// 	//printf("old ");
-// 	//printArray(rightPropeller,12);
-// 	//printf("new ");
-// 	//printArray(newRightPropeller,12);
-// 	p1.setPolyline(newRightPropeller, 3);
+// 	p1.setCenterX(26);
+// 	p1.setCenterY(20);
+// 	p1.setPolyline(parachute1, 22);
 // 	p1.setPosition(positionX,positionY);
 // 	p1.setFloodPosition(2, 2);
 // 	p1.draw(f);
 //
 // 	p2.setMultiplication(multiply);
-// 	p2.setCenterX(38);
-// 	p2.setCenterY(24);
-// 	int* newLeftPropeller = rotateList(degree, 38, 24, leftPropeller, 12);
-// 	p2.setPolyline(newLeftPropeller, 3);
+// 	p2.setCenterX(26);
+// 	p2.setCenterY(20);
+// 	p2.setPolyline(parachute2, ?);
 // 	p2.setPosition(positionX,positionY);
 // 	p2.setFloodPosition(2, 2);
 // 	p2.draw(f);
-// }
 //
-// int abs(int n) {
-// 	if (n < 0) {
-// 		n *= -1;
-// 	}
-// 	return n;
+// 	p3.setMultiplication(multiply);
+// 	p3.setCenterX(26);
+// 	p3.setCenterY(20);
+// 	p3.setPolyline(parachute3, ?);
+// 	p3.setPosition(positionX,positionY);
+// 	p3.setFloodPosition(2, 2);
+// 	p3.draw(f);
+//
+// 	p4.setMultiplication(multiply);
+// 	p4.setCenterX(26);
+// 	p4.setCenterY(20);
+// 	p4.setPolyline(parachute4, ?);
+// 	p4.setPosition(positionX,positionY);
+// 	p4.setFloodPosition(2, 2);
+// 	p4.draw(f);
+//
+// 	p5.setMultiplication(multiply);
+// 	p5.setCenterX(26);
+// 	p5.setCenterY(20);
+// 	p5.setPolyline(parachute5, ?);
+// 	p5.setPosition(positionX,positionY);
+// 	p5.setFloodPosition(2, 2);
+// 	p5.draw(f);
+//
+// 	p6.setMultiplication(multiply);
+// 	p6.setCenterX(26);
+// 	p6.setCenterY(20);
+// 	p6.setPolyline(parachuteString1, ?);
+// 	p6.setPosition(positionX,positionY);
+// 	p6.setFloodPosition(2, 2);
+// 	p6.draw(f);
+//
+// 	p7.setMultiplication(multiply);
+// 	p7.setCenterX(26);
+// 	p7.setCenterY(20);
+// 	p7.setPolyline(parachuteString2, ?);
+// 	p7.setPosition(positionX,positionY);
+// 	p7.setFloodPosition(2, 2);
+// 	p7.draw(f);
+//
+// 	p8.setMultiplication(multiply);
+// 	p8.setCenterX(26);
+// 	p8.setCenterY(20);
+// 	p8.setPolyline(parachuteString3, ?);
+// 	p8.setPosition(positionX,positionY);
+// 	p8.setFloodPosition(2, 2);
+// 	p8.draw(f);
+//
+// 	p9.setMultiplication(multiply);
+// 	p9.setCenterX(26);
+// 	p9.setCenterY(20);
+// 	p9.setPolyline(parachuteString4, ?);
+// 	p9.setPosition(positionX,positionY);
+// 	p9.setFloodPosition(2, 2);
+// 	p9.draw(f);
+//
+// 	p10.setMultiplication(multiply);
+// 	p10.setCenterX(26);
+// 	p10.setCenterY(20);
+// 	p10.setPolyline(parachuteString5, ?);
+// 	p10.setPosition(positionX,positionY);
+// 	p10.setFloodPosition(2, 2);
+// 	p10.draw(f);
+//
+//
 // }
 
 void destroy(frameBuffer *f){
@@ -659,39 +559,16 @@ int main() {
 	f.solidBackground();
 
 	int reductor = 0;
-	int reductorFall = 0;
-	int i = 1;
-	int isPlus = 0;
 
 	while (reductor < 500) {
-		// drawPlane(0,f.getVInfoY()-reductor,5,&f);
-			drawPlane(f.getVInfoX()-(reductor*2),f.getVInfoY()-400-reductor/2,reductor/50,&f);
+		drawPlane(f.getVInfoX()-(reductor*2),f.getVInfoY()-400-reductor/2,reductor/50,&f);
 
-
-
-		// if (reductor > f.getVInfoY() + 300){
-		// =======
-// 	int degree = 0;
-// 	float scale = 1;
-// 	int penambah = 1;
-// 	while (reductor < f.getVInfoX() + 20*5 - 100) {
-// 		drawPlane(f.getVInfoX()-reductor,100,scale,&f);
-// 		if(reductor<f.getVInfoX()/2){
-// 			drawPropeller(degree,f.getVInfoX()-reductor,100,scale,&f);
-// 		}else{
-// 			drawPropeller(degree,f.getVInfoX()/2,100+reductorFall,scale,&f);
-// 			reductorFall++;
-// 		}
-// >>>>>>> fc67277d907511164acab1761f488e4b82213328
 		f.render_buffer();
 		degree = (degree + 5) % 360;
 		++reductor;
-		// degree++;
-		// degree = degree%360;
-		// penambah++;
-		//if(reductor>100)
-		// scale = scale + 0.00005;
+
 		f.solidBackground();
 	}
 	destroy(&f);
+	// drawParachute();
 }
