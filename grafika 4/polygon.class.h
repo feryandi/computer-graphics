@@ -15,7 +15,7 @@ class polygon {
 		int lines;
 		int centerX;
 		int centerY;
-	
+
 	public:
 		polygon();
 		~polygon();
@@ -27,6 +27,7 @@ class polygon {
 		void setHeight(int);
 		void setPolyline(int*, int);
 		void setMultiplication(float);
+		float getMultiplication();
 		void setCenterX(int);
 		void setCenterY(int);
 		void draw(frameBuffer*);

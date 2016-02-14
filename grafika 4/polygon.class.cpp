@@ -24,7 +24,7 @@ polygon::polygon() {
 }
 
 polygon::~polygon() {
-	delete [] polyline;	
+	delete [] polyline;
 }
 
 int polygon::getPositionX() {
@@ -59,13 +59,17 @@ void polygon::setPolyline(int* p, int size) {
     polyline = new int[(size*4)+1];
 
     for (int i = 0; i < size*4; i++) {
-    	*(polyline + i) = p[i];   	
+    	*(polyline + i) = p[i];
     }
     lines = size * 4;
 }
 
 void polygon::setMultiplication(float m) {
 	multiplication = m;
+}
+
+float polygon::getMultiplication(){
+	return multiplication;
 }
 
 void polygon::setCenterX(int x){
