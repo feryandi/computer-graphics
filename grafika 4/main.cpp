@@ -422,9 +422,10 @@ int propeller[] = {
 };
 
 int degree = 0;
+polygon p1,p2,p3,p4,p5,p6,p7,p8,p9;
 
 void drawPlane(int positionX, int positionY, int multiply, frameBuffer *f) {
-	polygon p1,p2,p3,p4,p5,p6,p7,p8,p9;
+
 
 // int rightPropeller[] = {
 // 	38, 24, 52, 20,
@@ -567,6 +568,92 @@ void drawPlane(int positionX, int positionY, int multiply, frameBuffer *f) {
 // 	return n;
 // }
 
+void destroy(frameBuffer *f){
+
+	int reductor = 0;
+	while (reductor < 1000) {
+
+		p1.setMultiplication(p1.getMultiplication());
+		p1.setCenterX(38);
+		p1.setCenterY(24);
+		p1.setPolyline(leftWing, 14);
+		p1.setPosition(p1.getPositionX()-reductor, p1.getPositionY());
+		p1.setFloodPosition(2, 2);
+		p1.draw(f);
+
+		p2.setMultiplication(p2.getMultiplication());
+		p2.setCenterX(38);
+		p2.setCenterY(24);
+		p2.setPolyline(rightWing, 14);
+		p2.setPosition(p2.getPositionX()+reductor, p2.getPositionY());
+		p2.setFloodPosition(2, 2);
+		p2.draw(f);
+
+		p3.setMultiplication(p3.getMultiplication());
+		p3.setCenterX(38);
+		p3.setCenterY(24);
+		p3.setPolyline(leftTyre, 8);
+		p3.setPosition(p3.getPositionX(),p3.getPositionY()+reductor);
+		p3.setFloodPosition(2, 2);
+		p3.draw(f);
+
+		p4.setMultiplication(p4.getMultiplication());
+		p4.setCenterX(38);
+		p4.setCenterY(24);
+		p4.setPolyline(rightTyre, 8);
+		p4.setPosition(p4.getPositionX(),p4.getPositionY()+reductor);
+		p4.setFloodPosition(2, 2);
+		p4.draw(f);
+
+		p5.setMultiplication(p5.getMultiplication());
+		p5.setCenterX(38);
+		p5.setCenterY(24);
+		p5.setPolyline(tail, 9);
+		p5.setPosition(p5.getPositionX()+reductor,p5.getPositionY()+reductor);
+		p5.setFloodPosition(2, 2);
+		p5.draw(f);
+
+		p6.setMultiplication(p6.getMultiplication());
+		p6.setCenterX(38);
+		p6.setCenterY(24);
+		p6.setPolyline(body, 20);
+		p6.setPosition(p6.getPositionX()-reductor,p6.getPositionY()-reductor);
+		p6.setFloodPosition(2, 2);
+		p6.draw(f);
+
+		p7.setMultiplication(p7.getMultiplication());
+		p7.setCenterX(38);
+		p7.setCenterY(24);
+		p7.setPolyline(secondFrontBody, 12);
+		p7.setPosition(p7.getPositionX()+reductor,p7.getPositionY()-reductor);
+		p7.setFloodPosition(2, 2);
+		p7.draw(f);
+
+		p8.setMultiplication(p8.getMultiplication());
+		p8.setCenterX(38);
+		p8.setCenterY(24);
+		p8.setPolyline(frontBody, 8);
+		p8.setPosition(p8.getPositionX()-reductor,p8.getPositionY()-reductor);
+		p8.setFloodPosition(2, 2);
+		p8.draw(f);
+
+		p9.setMultiplication(p9.getMultiplication());
+		int * newPropeller = rotateList(degree, 37, 25, propeller, 28);
+		p9.setPolyline(newPropeller, 7);
+		p9.setCenterX(38);
+		p9.setCenterY(25);
+		// printf("%d\n", propeller[1]);
+		p9.setPosition(p9.getPositionX(),p9.getPositionY()+reductor);
+		p9.setFloodPosition(2, 2);
+		p9.draw(f);
+
+		f->render_buffer();
+		degree = (degree + 5) % 360;
+		f->solidBackground();
+		reductor = (reductor+8)/2;
+	}
+}
+
 int main() {
 	frameBuffer f;
 	f.solidBackground();
@@ -576,14 +663,14 @@ int main() {
 	int i = 1;
 	int isPlus = 0;
 
-	while (1) {
+	while (reductor < 500) {
 		// drawPlane(0,f.getVInfoY()-reductor,5,&f);
-		drawPlane(f.getVInfoX()-(reductor*2),f.getVInfoY()-400-reductor/2,reductor/50,&f);
+			drawPlane(f.getVInfoX()-(reductor*2),f.getVInfoY()-400-reductor/2,reductor/50,&f);
 
-		if (reductor > f.getVInfoY() + 300){
-				reductor = 0;
-		}
-// =======
+
+
+		// if (reductor > f.getVInfoY() + 300){
+		// =======
 // 	int degree = 0;
 // 	float scale = 1;
 // 	int penambah = 1;
@@ -606,5 +693,5 @@ int main() {
 		// scale = scale + 0.00005;
 		f.solidBackground();
 	}
-
+	destroy(&f);
 }
