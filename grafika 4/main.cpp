@@ -330,7 +330,7 @@ int leftPropeller[] = {
 
 
 int degree = 0;
-polygon p1,p2,p3,p4,p5,p6,p7,p8,p9;
+polygon p1,p2,p3,p4,p5,p6,p7,p8,p9, p10, p11, p12, p13, p14, p15, p16, p17, p18;
 
 void drawPlane(int positionX, int positionY, float multiply, frameBuffer *f) {
 
@@ -486,6 +486,82 @@ void drawParachute(int positionX, int positionY, float multiply, frameBuffer *f)
 
 }
 
+//4
+int shipCannon[]{
+	15, 1, 18, 2,
+	18, 2, 16, 6,
+	16, 6, 12, 6,
+	12, 6, 15, 1	
+};
+
+//4
+int shipCabin[]{
+	8, 6, 20, 6,
+	20, 6, 20, 10,
+	20, 10, 8, 10,
+	8, 10, 8, 6
+};
+
+
+//4
+int shipDeck[]{
+	0, 10, 28, 10,
+	28, 10, 24, 18,
+	24, 18, 4, 18,
+	4, 18, 0, 10
+};
+
+
+//8
+int head[]{
+	18, 0, 30, 0,
+	30, 0, 32, 4,
+	32, 4, 32, 8,
+	32, 8, 29, 15,
+	29, 15, 26, 16, 
+	26, 16, 22, 16, 
+	22, 16, 19, 15,
+	19, 15, 16, 8,
+	16, 8, 16, 4,
+	16, 4, 18, 0
+};
+
+//4
+int humanBody[]{
+	14, 14, 34, 14,
+	34, 14, 34, 34,
+	34, 34, 14, 34,
+	14, 34, 14, 14	
+};
+
+//3
+int leftHand[]{
+	0, 18, 14, 18,
+	14, 18, 14, 14,
+	14, 14, 0, 18
+};
+
+//3
+int rightHand[]{
+	34, 14, 34, 18,
+	34, 18, 48, 18,
+	48, 18, 34, 14
+};
+
+//3
+int leftFoot[]{
+	14, 34, 24, 34,
+	24, 34, 14, 60,
+	14, 60, 14, 34
+};
+
+//3
+int rightFoot[]{
+	24, 34, 34, 34,
+	34, 34, 34, 60,
+	34, 60, 24, 34
+};
+
 int *intdup(int const * src, size_t len)
 {
    int * p = (int*)malloc(len * sizeof(int));
@@ -594,10 +670,6 @@ void drawPropeller(int degree, int positionX, int positionY, float multiply, fra
 	p1.setCenterX(38);
 	p1.setCenterY(24);
 	int * newRightPropeller = rotateList(degree, 38, 24, rightPropeller, 12);
-	//printf("old ");
-	//printArray(rightPropeller,12);
-	//printf("new ");
-	//printArray(newRightPropeller,12);
 	p1.setPolyline(newRightPropeller, 3);
 	p1.setPosition(positionX,positionY);
 	p1.setFloodPosition(2, 2);
@@ -613,13 +685,79 @@ void drawPropeller(int degree, int positionX, int positionY, float multiply, fra
 	p2.draw(f);	
 }
 
+void drawShip(int positionX, int positionY, float multiply, frameBuffer *f){
+	p10.setMultiplication(multiply);
+	p10.setPolyline(shipCannon, 4);
+	p10.setPosition(positionX,positionY);
+	p10.setFloodPosition(2, 2);
+	p10.draw(f);
+
+	p11.setMultiplication(multiply);
+	p11.setPolyline(shipCabin, 4);
+	p11.setPosition(positionX,positionY);
+	p11.setFloodPosition(2, 2);
+	p11.draw(f);
+
+	p12.setMultiplication(multiply);
+	p12.setPolyline(shipDeck, 4);
+	p12.setPosition(positionX,positionY);
+	p12.setFloodPosition(2, 2);
+	p12.draw(f);
+}
+
+
+void drawHuman(int positionX, int positionY, float multiply, frameBuffer *f){
+	p13.setMultiplication(multiply);
+	p13.setPolyline(head, 10);
+	p13.setPosition(positionX,positionY);
+	p13.setFloodPosition(2, 2);
+	p13.draw(f);
+
+	p14.setMultiplication(multiply);
+	p14.setPolyline(humanBody, 4);
+	p14.setPosition(positionX,positionY);
+	p14.setFloodPosition(2, 2);
+	p14.draw(f);
+
+	p15.setMultiplication(multiply);
+	p15.setPolyline(leftHand, 3);
+	p15.setPosition(positionX,positionY);
+	p15.setFloodPosition(2, 2);
+	p15.draw(f);
+
+	p16.setMultiplication(multiply);
+	p16.setPolyline(rightHand, 3);
+	p16.setPosition(positionX,positionY);
+	p16.setFloodPosition(2, 2);
+	p16.draw(f);
+
+	p17.setMultiplication(multiply);
+	p17.setPolyline(leftFoot, 3);
+	p17.setPosition(positionX,positionY);
+	p17.setFloodPosition(2, 2);
+	p17.draw(f);
+
+	p18.setMultiplication(multiply);
+	p18.setPolyline(rightFoot, 3);
+	p18.setPosition(positionX,positionY);
+	p18.setFloodPosition(2, 2);
+	p18.draw(f);
+}
+
 void destroy(frameBuffer *f){
 	
-	float gravity = 0.025;
+	float gravity = 0.5;
 	int reductor = 0;
 
 	int reductorFall = 1;
+	int reductorParachute = 1;
 	float vY = 1;
+
+	int XtireLeft  = p3.getPositionX();
+	int XtireRight = p4.getPositionX();
+	int Ytire      = p3.getPositionY();
+	float vXTire = -2;
+	float vYTire = 10;
 
 	while (reductor < 1000) {
 
@@ -639,11 +777,25 @@ void destroy(frameBuffer *f){
 		p2.setFloodPosition(2, 2);
 		p2.draw(f);
 
+		XtireLeft  += vXTire;
+		XtireRight += vXTire;
+
+		//printf("%d %d\n", Ytire, vYTire);
+
+		if (Ytire > 400) {
+			Ytire = 350;
+			vYTire = -0.7*vYTire;
+		} else {
+			vYTire += gravity;
+		}
+		
+		Ytire += vYTire;
+
 		p3.setMultiplication(p3.getMultiplication());
 		p3.setCenterX(38);
 		p3.setCenterY(24);
 		p3.setPolyline(leftTyre, 8);
-		p3.setPosition(p3.getPositionX(),p3.getPositionY()+reductor);
+		p3.setPosition(XtireLeft,Ytire);
 		p3.setFloodPosition(2, 2);
 		p3.draw(f);
 
@@ -651,7 +803,7 @@ void destroy(frameBuffer *f){
 		p4.setCenterX(38);
 		p4.setCenterY(24);
 		p4.setPolyline(rightTyre, 8);
-		p4.setPosition(p4.getPositionX(),p4.getPositionY()+reductor);
+		p4.setPosition(XtireRight,Ytire);
 		p4.setFloodPosition(2, 2);
 		p4.draw(f);
 
@@ -687,16 +839,37 @@ void destroy(frameBuffer *f){
 		p8.setFloodPosition(2, 2);
 		p8.draw(f);
 
-		
-
 		f->render_buffer();
 		degree = (degree + 5) % 360;
 		f->solidBackground();
 		reductor = (reductor+8)/2;
 	
 		drawPropeller(degree,500,100+reductorFall,p8.getMultiplication(),f);
-		drawParachute(500,200+reductorFall,1.5,f);
+		drawParachute(500,200+reductorParachute,1.5,f);
+		drawHuman(500,400+reductorParachute,1.5,f);
+
+		// ship
+		p10.setMultiplication(p10.getMultiplication());
+		p10.setPolyline(shipCannon, 4);
+		p10.setPosition(p10.getPositionX() + 0.2 * reductor ,p10.getPositionY());
+		p10.setFloodPosition(2, 2);
+		p10.draw(f);
+
+		p11.setMultiplication(p11.getMultiplication());
+		p11.setPolyline(shipCabin, 4);
+		p11.setPosition(p11.getPositionX() + 0.2 * reductor,p11.getPositionY());
+		p11.setFloodPosition(2, 2);
+		p11.draw(f);
+
+		p12.setMultiplication(p12.getMultiplication());
+		p12.setPolyline(shipDeck, 4);
+		p12.setPosition(p12.getPositionX() + 0.2 * reductor,p12.getPositionY());
+		p12.setFloodPosition(2, 2);
+		p12.draw(f);
+		// ship end
+
 		reductorFall += vY;
+		reductorParachute += 0.1*vY;
 		vY += gravity;
 	}
 }
@@ -719,7 +892,7 @@ int main() {
 	while (reductor < 500) {
 		drawPlane(f.getVInfoX()-(reductor*2),f.getVInfoY()-400-reductor/2,(float)reductor/(float)50.0,&f);
 		drawPropeller(degree,f.getVInfoX()-(reductor*2),f.getVInfoY()-400-reductor/2,(float)reductor/(float)50,&f);
-		
+		drawShip(0, f.getVInfoY()-300, 10, &f); 
 		f.render_buffer();
 		degree = (degree + 5) % 360;
 		scale = scale + 0.005;
