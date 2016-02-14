@@ -10,9 +10,11 @@ class polygon {
 		int fy;
 		int width;
 		int height;
-		int multiplication;
+		float multiplication;
 		int *polyline;
 		int lines;
+		int centerX;
+		int centerY;
 	
 	public:
 		polygon();
@@ -24,7 +26,9 @@ class polygon {
 		void setWidth(int);
 		void setHeight(int);
 		void setPolyline(int*, int);
-		void setMultiplication(int);
+		void setMultiplication(float);
+		void setCenterX(int);
+		void setCenterY(int);
 		void draw(frameBuffer*);
 };
 
