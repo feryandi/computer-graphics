@@ -9,7 +9,7 @@
 #include <pthread.h>
 #include <termios.h>
 #include <time.h>
-#include "transformation.c"
+#include "transformation.h"
 #include "frameBuffer.class.h"
 #include "polygon.class.h"
 #include <iostream>
@@ -420,6 +420,8 @@ int propeller[] = {
 				37, 25, 12, 0
 };
 
+int degree = 0;
+
 void drawPlane(int positionX, int positionY, int multiply, frameBuffer *f) {
 	polygon p1,p2,p3,p4,p5,p6,p7,p8,p9;
 
@@ -473,6 +475,8 @@ void drawPlane(int positionX, int positionY, int multiply, frameBuffer *f) {
 
 	p9.setMultiplication(multiply);
 	p9.setPolyline(propeller, 7);
+	rotateList(degree, 37, 25, propeller, 14);
+	// printf("%d\n", propeller[1]);
 	p9.setPosition(positionX,positionY);
 	p9.setFloodPosition(2, 2);
 	p9.draw(f);
@@ -499,7 +503,7 @@ int main() {
 	while (reductor < f.getVInfoY() + 20*5 ) {
 		drawPlane(0,f.getVInfoY()-reductor,5,&f);
 		f.render_buffer();
-
+		degree = (degree + 1) % 360;
 		++reductor;
 		//usleep(10000);
 		f.solidBackground();

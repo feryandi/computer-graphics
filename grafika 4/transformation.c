@@ -19,7 +19,7 @@ void translateList(int distanceX, int distanceY, int list[], int length){
 
 
 
-void rotateList(int degree, int centerX, int centerY, int list[], int length){
+void rotateList(int degree, int centerX, int centerY, int *list, int length){
 	if(length%2==0){
 		int val = PI/180.0;
 		for (int i=0; i<length; i++){
