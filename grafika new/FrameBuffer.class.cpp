@@ -52,7 +52,7 @@ int FrameBuffer::getVInfoX() {
     return vinfo.xres;
 }
 
-void FrameBuffer::addPolygon(Polygon *P) {
+/*void FrameBuffer::addPolygon(Polygon *P) {
 	int i, j;
 	int blue = 0;
 	int green = 0;
@@ -92,6 +92,37 @@ void FrameBuffer::addPolygon(Polygon *P) {
 	        }
 
         }
+
+    }
+}*/
+
+void FrameBuffer::plot(int x, int y) {
+	int i, j;
+	int blue = 0;
+	int green = 0;
+	int red = 0;
+
+	if ( ( x >= 0 ) && 
+		 ( y >= 0 ) && 
+		 ( x < vinfo.xres - 1 ) && 
+		 ( y < vinfo.yres - 5 ) ) {
+
+            location = ((x + vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
+                       ((y + vinfo.yoffset) * finfo.line_length));
+
+            if (vinfo.bits_per_pixel == 32) {
+                *(buffer + location) = 255 - blue;		// Blue
+                *(buffer + location + 1) = 255 - green;	// Green
+                *(buffer + location + 2) = 255 - red;	// Red
+                *(buffer + location + 3) = 0;			// Alpha
+            } else  { 
+            	// Assuming 16bpp
+                int b = 255 - blue;		// Blue
+                int g = 255 - green;	// Green
+                int r = 255 - red;		// Red
+                unsigned short int t = r<<11 | g << 5 | b;
+                *((unsigned short int*)(buffer + location)) = t;
+            }
 
     }
 }

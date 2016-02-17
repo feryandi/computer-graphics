@@ -40,58 +40,43 @@ void Polygon::setCenter(int cx, int cy) {
 	this->cy = cy;
 }
 
-int Polygon::getWidth() {
-	return width;
-}
-
-int Polygon::getHeight() {
-	return height;
-}
-
 void Polygon::setWireframe(int* w, int len) {
     wireframe = new int[len];
 	wireframe = intdup(w, len);
 
 	this->len = len;
 
-	// Get Width and Height (maximum thingy) for bitmap
-	int maxH = 0;
-	int maxW = 0;
+	yMax = 0;
+	yMin = wireframe[1];
 
-	int minH = ((wireframe[1] - cx) * k + x);
-	int minW = ((wireframe[0] - cx) * k + x);
+	for (int i = 0; i < len; i++) {
+		if ( i % 2 != 0 ) {
+			if ( wireframe[i] > yMax ) yMax = wireframe[i];
+			if ( wireframe[i] < yMin ) yMin = wireframe[i];
+		}
+	}
+}
 
-    for (int i = 0; i < len; i++) {
-    	if ( i % 2 == 0 ) {
-    		if ( maxW < ((wireframe[i] - cx) * k + x) ) maxW = ((wireframe[i] - cx) * k + x);
-    		if ( minW > ((wireframe[i] - cx) * k + x) ) minW = ((wireframe[i] - cx) * k + x);
-    	} else {
-    		if ( maxH < ((wireframe[i] - cx) * k + x) ) maxH = ((wireframe[i] - cx) * k + x);
-    		if ( minH > ((wireframe[i] - cx) * k + x) ) minH = ((wireframe[i] - cx) * k + x);
-    	}
-    }
+void Polygon::draw(FrameBuffer *fb) {
+	int i = 0;
+	while (i < len) {
 
-    if (minH > 0) { 
-    	minH = 0; 
-   	} else {
-   		--minH;
-   	}
+		int a, b, c, d;
+		a = (int) ((wireframe[(++i) - 1] - cx) * k + x);
+		b = (int) ((wireframe[(++i) - 1] - cx) * k + y);
+		c = (int) ((wireframe[(++i) - 1] - cx) * k + x);
+		d = (int) ((wireframe[(++i) - 1] - cx) * k + y);
 
-    if (minW > 0) { 
-    	minW = 0; 
-   	} else {
-   		--minW;
-   	}
+		bresenham(a, b, c, d, fb);
 
-    cout << "minh: " << minH << " | maxh: " << maxH << endl;
-    cout << "minw: " << minW << " | maxw: " << maxW << endl;
+	}
 
-    this->height = (maxH - minH) + 1;
-    this->width = (maxW - minW) + 1; 
-
-    cout << "h: " << this->height << " | w: " << this->width << endl;
-
-    generateBitmap(minW, minH);
+	for (i = (yMin - cx) * k + y; i <= (yMax - cx) * k + y; i++) {
+		cout << i << " > ";
+		for (vector<int>::const_iterator c = (dots[i]).begin(); c != (dots[i]).end(); ++c)
+    		cout << *c << " | ";
+    	cout << "." << endl;
+	}
 }
 
 void Polygon::setMultiplication(float k) {
@@ -102,63 +87,8 @@ float Polygon::getMultiplication() {
 	return k;
 }
 
-int* Polygon::getBitmap() {
-	return bitmap;
-}
-
-void Polygon::setDegree(float degree){
-    int *temp = (int*) malloc(len * sizeof(int));
-	if(len%2==0){
-		double val = PI/180.0;
-
-		cout << endl;
-
-		for (int i=0; i<len; i++){
-			if (i%2==0){
-				temp[i] = (int) ( cos(degree * val) * (wireframe[i] - cx) - ( sin(degree * val) * (wireframe[i+1] - cy) ) + cx );
-				cout << "(" << wireframe[i] << ") -> " << temp[i] << ",";
-			} else {
-				temp[i] = (int) ( sin(degree * val) * (wireframe[i-1] - cx) + cos(degree * val) * (wireframe[i] - cy) + cy );
-				cout << "(" << wireframe[i] << ") -> " << temp[i] << endl;
-			}
-		}
-
-	} else {
-		printf("Odd list");
-	}
-
-	setWireframe(temp, len);
-}
-
 
 // Private Methods
-
-void Polygon::generateBitmap(int minW, int minH) {
-	bitmap = new int[(height) * (width)];
-
-	int i = 0;
-	while (i < len) {
-
-		int a, b, c, d;
-		a = (int) ((wireframe[(++i) - 1] - cx) * k + x) - minW;
-		b = (int) ((wireframe[(++i) - 1] - cx) * k + y) - minH;
-		c = (int) ((wireframe[(++i) - 1] - cx) * k + x) - minW;
-		d = (int) ((wireframe[(++i) - 1] - cx) * k + y) - minH;
-
-		bresenham(a, b, c, d, bitmap);
-
-	}
-
-	// DRIVER
-	
-	for (int n = 0; n < ((height) * (width)); n++) {
-    	if ( n % (width) == 0 ) {
-    		cout << endl;
-    	}
-    	cout << bitmap[n] << " ";
-    }
-    
-}
 
 int* Polygon::intdup(int const * src, size_t len) {
 	int* p = (int*) malloc(len * sizeof(int));
@@ -195,7 +125,7 @@ int Polygon::G(int X, int Y) {
   }
 }
 
-void Polygon::bresenham(int x1, int y1, int x2, int y2, int *bitmap) {
+void Polygon::bresenham(int x1, int y1, int x2, int y2, FrameBuffer *fb) {
   int Fx[] = { 1,  0, -1,  0};
   int Fy[] = { 0,  1,  0, -1};
 
@@ -227,7 +157,9 @@ void Polygon::bresenham(int x1, int y1, int x2, int y2, int *bitmap) {
 
   int D = 2*db - da;
 
-  *(bitmap + (y1*width) + x1) = 1;
+/*  (dots[y1]).push_back(x1);
+  sort((dots[y1]).begin(), (dots[y1]).end());
+  fb->plot(x1, y1);*/
 
   int x = x1;
   int y = y1;
@@ -244,7 +176,13 @@ void Polygon::bresenham(int x1, int y1, int x2, int y2, int *bitmap) {
       x += m1x;
       y += m1y;
     }
+  
+  	//if ( ((x != x1) && (y != y1)) && ((x != x2) && (y != y2)) ) {
+    (dots[y]).push_back(x);
+    // (dots[y]).push_back(x);
+    sort((dots[y]).begin(), (dots[y]).end());
+    fb->plot(x, y);
+	//}
 
-  	*(bitmap + (y*width) + x) = 1;
   }
 }

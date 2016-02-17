@@ -12,7 +12,6 @@
 #include <pthread.h>
 #include <termios.h>
 #include <time.h>
-#include "Polygon.class.h"
 
 class FrameBuffer {
 	private:
@@ -37,10 +36,11 @@ class FrameBuffer {
 		int getVInfoY();
 		int getVInfoX();
 
-		void addPolygon(Polygon*);
+		//void addPolygon(Polygon*);
 		void addObject(); // To Be Implemented
 
 		void canvas();
+		void plot(int x, int y);
 		void render();
 };
 

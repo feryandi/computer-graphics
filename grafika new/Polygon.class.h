@@ -14,6 +14,13 @@
 #include <time.h>
 #include <math.h>
 
+#include <map>
+#include <utility>
+#include <vector>
+#include <algorithm>
+
+#include "FrameBuffer.class.h"
+
 #define PI 3.14159265
 
 
@@ -32,11 +39,10 @@ class Polygon {
 		// Wireframe
 		int *wireframe;
 		int len;
-
-		// Bitmap
-		int width;
-		int height;
-		int *bitmap;
+		// Dot List
+		std::map<int, std::vector<int>> dots;
+		int yMax;
+		int yMin;
 
 		// Private Methods
 		int *intdup(int const * src, size_t len);
@@ -44,9 +50,8 @@ class Polygon {
 		int iabs(int n);
 		int F(int X, int Y, int Z);
 		int G(int X, int Y);
-		void bresenham(int, int, int, int, int*);
+		void bresenham(int, int, int, int, FrameBuffer*);
 
-		void generateBitmap(int, int);
 
 	public:
 		Polygon(int cx, int cy, int*, int len);
@@ -60,8 +65,6 @@ class Polygon {
 		int getCY();
 		void setCenter(int, int);
 
-		int getWidth();
-		int getHeight();
 		void setWireframe(int*, int);
 
 		int* getBitmap();
@@ -69,7 +72,8 @@ class Polygon {
 		void setMultiplication(float);		
 		float getMultiplication();
 
-		void setDegree(float);
+		void draw(FrameBuffer *fb);
+
 };
 
 #endif

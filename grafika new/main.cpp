@@ -29,27 +29,40 @@ int main() {
 		1, 6, 1, 1
 	};
 
+	int s[] = {
+		1, 1, 2, 2,
+		2, 2, 3, 1,
+		3, 1, 3, 4,
+		3, 4, 1, 4,
+		1, 4, 1, 1
+	};
 
 	int *a = (int*) malloc(56 * sizeof(int));
 	*a = *leftWing;
 
 	/*Polygon test(0, 0, leftWing, 56);*/
-	Polygon test(0, 0, box, 16);
+	Polygon test(0, 0, s, 20);
+	//Polygon test(0, 0, box, 16);
 	test.setPosition(0,0);
 	test.setMultiplication(1);
 
 	float d = 0;
 	int i = 0;
-	while ( i < 4 ) {
-		test.setDegree(90);
+	//while ( 1 ) {
+		//test.setDegree(90);
 		FB.canvas();
-		FB.addPolygon(&test);
+		//FB.addPolygon(&test);
+		test.draw(&FB);
 		FB.render();
 		++d;
 		++i;
-		cout << endl << endl;
+/*
+		if ( d > 360 ) {
+			d = 0;
+		}
+*/
 		//sleep(1);
-	}
+	//}
 
 	return 0;
 }
