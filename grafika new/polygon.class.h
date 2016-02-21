@@ -13,7 +13,7 @@ class polygon {
 		int isFill;
 		int width;
 		int height;
-		int multiplication;
+		float multiplication;
 		int *polyline;
 		int lines;
 		
@@ -26,7 +26,7 @@ class polygon {
 		~polygon();
 		int getPositionX();
 		int getPositionY();
-		int getMultiplication();
+		float getMultiplication();
 		int getCenterX();
 		int getCenterY();
 		void setIsFill(int i);
@@ -36,7 +36,7 @@ class polygon {
 		void setWidth(int);
 		void setHeight(int);
 		void setPolyline(int*, int);
-		void setMultiplication(int);
+		void setMultiplication(float);
 		void solidFill(int xs, int ys, int xe, int ye, frameBuffer *f);
 		void draw(frameBuffer*);
 };

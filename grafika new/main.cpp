@@ -438,9 +438,10 @@ int main()
 		        p3.setMultiplication(p3.getMultiplication() - 1);
 		        p4.setMultiplication(p4.getMultiplication() - 1);
 		        p5.setMultiplication(p5.getMultiplication() - 1);
-				minimap_zoom.setMultiplication(minimap_zoom.getMultiplication() + (multi_align%3));
+				minimap_zoom.setMultiplication(75 / p1.getMultiplication());
 	        	++multi_align;
 		    } else {
+		    	// Biar kalo pas zoom out mentok, balik ke posisi awal
 		    	tX = f.getVInfoX()/2;
 		    	tY = f.getVInfoY()/2;
 		    	tCX = 62;
@@ -458,7 +459,7 @@ int main()
 		        p3.setMultiplication(p3.getMultiplication() + 1);
 		        p4.setMultiplication(p4.getMultiplication() + 1);
 		        p5.setMultiplication(p5.getMultiplication() + 1);
-				minimap_zoom.setMultiplication(minimap_zoom.getMultiplication() - (multi_align%3));
+				minimap_zoom.setMultiplication(75 / p1.getMultiplication());
 		        ++multi_align;
 
 		        sisaAtas += 62;

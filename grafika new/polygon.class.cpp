@@ -36,7 +36,7 @@ int polygon::getPositionY() {
 	return y;
 }
 
-int polygon::getMultiplication(){
+float polygon::getMultiplication(){
 	return multiplication;
 }
 
@@ -86,7 +86,7 @@ void polygon::setPolyline(int* p, int size) {
     lines = size * 4;
 }
 
-void polygon::setMultiplication(int m) {
+void polygon::setMultiplication(float m) {
 	multiplication = m;
 }
 
