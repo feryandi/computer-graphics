@@ -1,2 +1,2 @@
 default:
-	g++ -o main main.cpp Polygon.class.cpp FrameBuffer.class.cpp -std=c++11
+	g++ -o main main.cpp frameBuffer.class.cpp polygon.class.cpp
