@@ -10,6 +10,7 @@ class polygon {
 		int cy;
 		int fx;
 		int fy;
+		int isFill;
 		int width;
 		int height;
 		int multiplication;
@@ -24,6 +25,7 @@ class polygon {
 		int getMultiplication();
 		int getCenterX();
 		int getCenterY();
+		void setIsFill(int i);
 		void setPosition(int, int);
 		void setCenter(int, int);
 		void setFloodPosition(int, int);

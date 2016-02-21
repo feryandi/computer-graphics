@@ -152,20 +152,20 @@ int frameBuffer::checkColor(int x, int y) {
   
 }
 
-void frameBuffer::floodFill(int x, int y){
+void frameBuffer::floodFill(int x, int y, int r, int g, int b){
   if (checkColor(x,y)){}
    //if (checkColor(x,y)){}
     else {
       // printf("%d\n", x);
       // printf("%d\n", y);
       if (( x > 0 && y > 0 && x < vinfo.xres - 60 && y < vinfo.yres - 60 )) {
-        blockBuilder(x,y,1,0,0,0);
+        blockBuilder(x,y,1,r,g,b);
       }
 
-      floodFill(x+1,y);
-      floodFill(x-1,y);
-      floodFill(x,y+1);
-      floodFill(x,y-1);
+      floodFill(x+1,y,r,g,b);
+      floodFill(x-1,y,r,g,b);
+      floodFill(x,y+1,r,g,b);
+      floodFill(x,y-1,r,g,b);
     }
 }
 

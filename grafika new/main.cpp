@@ -290,7 +290,8 @@ int main()
 	minimap_border.setPolyline(persegiPanjang, 4);
 	minimap_border.setMultiplication(20);
 	minimap_border.setCenter(6, 3);
-	minimap_border.setFloodPosition(6, 3);
+	minimap_border.setIsFill(1);
+	minimap_border.setFloodPosition(1, 1);
 	minimap_border.setPosition(200,f.getVInfoY()-150);
 	minimap_border.draw(&f);
 	
@@ -382,12 +383,12 @@ int main()
         p5.setCenter(tCX,tCY);
 
         if (on_click) {
+			minimap_border.draw(&f);
 		    p1.draw(&f);
 		    p2.draw(&f);
 		    p3.draw(&f);
 		    p4.draw(&f);
 		    p5.draw(&f);
-			minimap_border.draw(&f);
 
 		    f.render_buffer();
 		}

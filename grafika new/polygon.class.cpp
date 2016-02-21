@@ -18,6 +18,7 @@ polygon::polygon() {
 	cy = 0;
 	fx = 0;
 	fy = 0;
+	isFill = 0;
 	width = 0;
 	height = 0;
 	multiplication = 1;
@@ -45,6 +46,10 @@ int polygon::getCenterX() {
 
 int polygon::getCenterY() {
 	return cy;
+}
+
+void polygon::setIsFill(int i) {
+	this->isFill = i;
 }
 
 void polygon::setPosition(int x, int y) {
@@ -88,18 +93,6 @@ void polygon::setMultiplication(int m) {
 void polygon::draw(frameBuffer *f) {
 	int i = 0;
 	while (i < lines) {
-/*		int a, b, c, d;
-		a = (*(polyline + (i * 2))) * multiplication + x;
-		b = (*(polyline + ((i * 2)+1))) * multiplication + y;
-		c = (*(polyline + ((i+1) * 2))) * multiplication + x;
-		d = (*(polyline + (((i+1) * 2)+1))) * multiplication + y;
-
-		printf("%d-", (i * 2));
-		printf("%d-", (i * 2)+1);
-		printf("%d-", ((i+1) * 2));
-		printf("%d\n", ((i+1) * 2)+1);*/
-
-
 		int a, b, c, d;
 		a = (*(polyline + (++i) - 1)-cx) * multiplication + x;
 		b = (*(polyline + (++i) - 1)-cy) * multiplication + y;
@@ -107,14 +100,9 @@ void polygon::draw(frameBuffer *f) {
 		d = (*(polyline + (++i) - 1)-cy) * multiplication + y;
 
 		(*f).bresenham(a, b, c, d, 1, 0, 0, 0);
-
-		//++i;
-		/*printf("%d[%d]", i, *(polyline + (++i) - 1));
-		printf("%d[%d]", i, *(polyline + (++i) - 1));
-		printf("%d[%d]", i, *(polyline + (++i) - 1));
-		printf("%d[%d]\n", i, *(polyline + (++i) - 1));*/
 	}
 
-	//(*f).floodFill(fx*multiplication + x, fy*multiplication + y);
-	//(*f).floodFill(5, 5);
+	if (isFill == 1) {
+		(*f).floodFill(fx*multiplication + x, fy*multiplication + y, 10, 255, 255);
+	}
 }

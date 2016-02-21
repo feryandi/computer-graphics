@@ -27,7 +27,7 @@ class frameBuffer {
 		void solidBackground();
 		void bresenham(int x1, int y1, int x2, int y2, int pixel, int red, int green, int blue);
 		int checkColor(int x, int y);
-		void floodFill(int x, int y);
+		void floodFill(int x, int y, int r, int g, int b);
 };
 
 #endif
