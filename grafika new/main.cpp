@@ -294,8 +294,6 @@ int main()
 	polygon minimap_border, minimap_zoom;
 	polygon mp1, mp2, mp3, mp4, mp5;
 
-	polygon test;
-
 	minimap_border.setPolyline(persegiPanjang, 4);
 	minimap_border.setMultiplication(15);
 	minimap_border.setCenter(9, 5);
@@ -345,23 +343,13 @@ int main()
 	minimap_zoom.draw(&f);
 
 	f.render_buffer();
-
-	int multi_align = 0;
-
-	int up_align = 0;
-	int down_align = 0;
-	int right_align = 0;
-	int left_align = 0;
-
+	float minimapX = 0;
+	float minimapY = 0;
 	int key = 0;
-
-	int sisaAtas = 0;
-	int sisaY = 0;
-
 	while (key != 0x20) {
 		key = getkey();
 
-	    int translate = (10/p1.getMultiplication() > 0) ? (10/p1.getMultiplication()) : 1;
+	    int translate = (10/p1.getMultiplication() > 1) ? (10/p1.getMultiplication()) : 1;
 
 		int tX = p1.getPositionX();
 		int tY = p1.getPositionY();
@@ -376,12 +364,13 @@ int main()
 	        tCX = p1.getCenterX();
 	        tCY = p1.getCenterY() + translate;
 
-	        ++up_align;
-			if (up_align >= 4 + (int)10/p1.getMultiplication()) {
-		        minimap_zoom.setPosition(minimap_zoom.getPositionX(), minimap_zoom.getPositionY() + 1);
-		        minimap_zoom.setCenter(minimap_zoom.getCenterX(), minimap_zoom.getCenterY() - 1);
-				up_align = 0;
-			}
+	        //bawah
+	        //if(minimapY < 0){
+	        	minimapY = 0;
+	        //}
+	        minimapY += 1 * (float) translate;
+	        minimap_zoom.setPosition(minimap_zoom.getPositionX(), minimap_zoom.getPositionY() + (int)minimapY);
+
 	        on_click = 1;
 	    } else if (key == 0x44) {
 	        f.solidBackground();
@@ -390,32 +379,29 @@ int main()
 	        tCX = p1.getCenterX() + translate;
 	        tCY = p1.getCenterY();
 
-	        ++left_align;
-			if (left_align >= 4 + (int)18/p1.getMultiplication()) {
-		        minimap_zoom.setPosition(minimap_zoom.getPositionX() + 1, minimap_zoom.getPositionY());
-		        minimap_zoom.setCenter(minimap_zoom.getCenterX() - 1, minimap_zoom.getCenterY());
-				left_align = 0;
-			}
+	        //kanan
+	        //if(minimapX > 0){
+	        	minimapX = 0;
+	        //}
+	        minimapX += 1 * (float) translate;
+	        minimap_zoom.setPosition(minimap_zoom.getPositionX() + (int)minimapX, minimap_zoom.getPositionY());
+
 	        on_click = 1;
 	    } else if (key == 0x57) {
-	    	// Ke Atas
-	    	if ( sisaAtas > 0 ) {
-		        f.solidBackground();
-		        tX = p1.getPositionX();
-		        tY = p1.getPositionY() + translate;
-		        tCX = p1.getCenterX();
-		        tCY = p1.getCenterY() - translate;
+	        f.solidBackground();
+	        tX = p1.getPositionX();
+	        tY = p1.getPositionY() + translate;
+	        tCX = p1.getCenterX();
+	        tCY = p1.getCenterY() - translate;
 
-		        ++down_align;
-				if (down_align >= 4 + (int)10/p1.getMultiplication()) {
-			        minimap_zoom.setPosition(minimap_zoom.getPositionX(), minimap_zoom.getPositionY() - 1);
-			        minimap_zoom.setCenter(minimap_zoom.getCenterX(), minimap_zoom.getCenterY() + 1);
-					down_align = 0;
-				}
-		        on_click = 1;
+	        //atas
+	        //if(minimapY > 0){
+	        	minimapY = 0;
+	        //}
+	        minimapY -= 1 * (float) translate;
+	        minimap_zoom.setPosition(minimap_zoom.getPositionX(), minimap_zoom.getPositionY() + (int)minimapY);
 
-		        --sisaAtas; 
-		    }
+	        on_click = 1;
 	    } else if (key == 0x41) {
 	        f.solidBackground();
 	        tX = p1.getPositionX() + translate;
@@ -423,12 +409,13 @@ int main()
 	        tCX = p1.getCenterX() - translate;
 	        tCY = p1.getCenterY();
 
-	        ++right_align;
-			if (right_align >= 4 + (int)18/p1.getMultiplication()) {
-		        minimap_zoom.setPosition(minimap_zoom.getPositionX() - 1, minimap_zoom.getPositionY());
-		        minimap_zoom.setCenter(minimap_zoom.getCenterX() + 1, minimap_zoom.getCenterY());
-				right_align = 0;
-			}
+	        //kiri
+	        //if(minimapX < 0){
+	        	minimapX = 0;
+	        //}
+	        minimapX -= 1 * (float) translate;
+	        minimap_zoom.setPosition(minimap_zoom.getPositionX() + (int)minimapX, minimap_zoom.getPositionY());
+
 	        on_click = 1;
 	    } else if (key == 0x49){
 	    	f.solidBackground();
@@ -439,18 +426,8 @@ int main()
 		        p4.setMultiplication(p4.getMultiplication() - 1);
 		        p5.setMultiplication(p5.getMultiplication() - 1);
 				minimap_zoom.setMultiplication(75 / p1.getMultiplication());
-	        	++multi_align;
-		    } else {
-		    	// Biar kalo pas zoom out mentok, balik ke posisi awal
-		    	tX = f.getVInfoX()/2;
-		    	tY = f.getVInfoY()/2;
-		    	tCX = 62;
-		    	tCY = 60;
-				minimap_zoom.setMultiplication(15);
-				minimap_zoom.setCenter(9, 5);
-				minimap_zoom.setPosition(200,f.getVInfoY()-150);
-		    }
 	        	on_click = 1;
+		    }
 	    } else if (key == 0x4F){
 	    	f.solidBackground();
 	    	if(p1.getMultiplication() < 18){
@@ -460,10 +437,6 @@ int main()
 		        p4.setMultiplication(p4.getMultiplication() + 1);
 		        p5.setMultiplication(p5.getMultiplication() + 1);
 				minimap_zoom.setMultiplication(75 / p1.getMultiplication());
-		        ++multi_align;
-
-		        sisaAtas += 62;
-		        sisaY += 60;
 		    }
 		    on_click = 1;
 	    }
