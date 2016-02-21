@@ -101,7 +101,7 @@ void frameBuffer::blockBuilder(int x, int y, int block_size, int blue, int green
     for (j = y; j < y + block_size ; j++) {
         for (i = x; i < x + block_size; i++) {
 
-            if ( i >= 0 && j >= 0 && i < vinfo.xres - 50 && j < vinfo.yres - 50 ) {
+            if ( i >= 0 && j >= 0 && i < vinfo.xres - 1 && j < vinfo.yres - 1 ) {
                 location = (i+vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
                            (j+vinfo.yoffset) * finfo.line_length;
 
@@ -125,7 +125,7 @@ void frameBuffer::blockBuilder(int x, int y, int block_size, int blue, int green
 }
 
 int frameBuffer::checkColor(int x, int y) {
-  if (( x > 0 && y > 0 && x < vinfo.xres - 60 && y < vinfo.yres - 60 )) {
+  if (( x > 0 && y > 0 && x < vinfo.xres - 1 && y < vinfo.yres - 1 )) {
     location = (x+vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
                (y+vinfo.yoffset) * finfo.line_length;
 
@@ -168,8 +168,8 @@ void frameBuffer::floodFill(int x, int y){
 void frameBuffer::solidBackground() {
     int i, j;
     // Figure out where in memory to put the pixel
-    for (j = 0; j < vinfo.yres - 50; j++) {
-        for (i = 0; i < vinfo.xres - 50; i++) {
+    for (j = 0; j < vinfo.yres - 1; j++) {
+        for (i = 0; i < vinfo.xres - 1; i++) {
 
             location = (i+vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
                        (j+vinfo.yoffset) * finfo.line_length;
