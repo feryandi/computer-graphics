@@ -52,50 +52,6 @@ int FrameBuffer::getVInfoX() {
     return vinfo.xres;
 }
 
-/*void FrameBuffer::addPolygon(Polygon *P) {
-	int i, j;
-	int blue = 0;
-	int green = 0;
-	int red = 0;
-
-    // Figure out where in buffer to put the pixel from bitmap
-    for (j = 0; j < P->getHeight(); j++) {
-
-        for (i = 0; i < P->getWidth(); i++) {
-
-        	if ( (P->getBitmap())[(j * P->getWidth()) + i] != 0 ) {
-
-        		if ( ( (i + P->getX()) >= 0 ) && 
-        			 ( (j + P->getY()) >= 0 ) && 
-        			 ( (i + P->getX()) < vinfo.xres - 1 ) && 
-        			 ( (j + P->getY()) < vinfo.yres - 5 ) ) {
-
-		                location = ((i + P->getX()) + vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
-		                           ((j + P->getY()) + vinfo.yoffset) * finfo.line_length;
-
-		                if (vinfo.bits_per_pixel == 32) {
-		                    *(buffer + location) = 255 - blue;		// Blue
-		                    *(buffer + location + 1) = 255 - green;	// Green
-		                    *(buffer + location + 2) = 255 - red;	// Red
-		                    *(buffer + location + 3) = 0;			// Alpha
-		                } else  { 
-		                	// Assuming 16bpp
-		                    int b = 255 - blue;		// Blue
-		                    int g = 255 - green;	// Green
-		                    int r = 255 - red;		// Red
-		                    unsigned short int t = r<<11 | g << 5 | b;
-		                    *((unsigned short int*)(buffer + location)) = t;
-		                }
-
-		        }
-
-	        }
-
-        }
-
-    }
-}*/
-
 void FrameBuffer::plot(int x, int y) {
 	int i, j;
 	int blue = 0;

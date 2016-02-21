@@ -90,6 +90,10 @@ void polygon::setMultiplication(int m) {
 	multiplication = m;
 }
 
+void polygon::solidFill(int xs, int ys, int xe, int ye, frameBuffer *f) {
+	(*f).solidFill((xs-cx) * multiplication + x, (ys-cy)* multiplication + y, (xe-cx) * multiplication + x, (ye-cy) * multiplication + y, 0, 0, 0);
+}
+
 void polygon::draw(frameBuffer *f) {
 	int i = 0;
 	while (i < lines) {
@@ -103,6 +107,6 @@ void polygon::draw(frameBuffer *f) {
 	}
 
 	if (isFill == 1) {
-		(*f).floodFill(fx*multiplication + x, fy*multiplication + y, 10, 255, 255);
+		//(*f).floodFill(fx*multiplication + x, fy*multiplication + y, 10, 255, 255);
 	}
 }

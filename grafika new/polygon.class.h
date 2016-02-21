@@ -16,6 +16,10 @@ class polygon {
 		int multiplication;
 		int *polyline;
 		int lines;
+		
+		// Dot List
+		int yMax;
+		int yMin;
 	
 	public:
 		polygon();
@@ -33,6 +37,7 @@ class polygon {
 		void setHeight(int);
 		void setPolyline(int*, int);
 		void setMultiplication(int);
+		void solidFill(int xs, int ys, int xe, int ye, frameBuffer *f);
 		void draw(frameBuffer*);
 };
 

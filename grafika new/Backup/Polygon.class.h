@@ -40,7 +40,7 @@ class Polygon {
 		int *wireframe;
 		int len;
 		// Dot List
-		std::map<int, std::vector<int>> dots;
+		std::map< int, std::vector<int> > dots;
 		int yMax;
 		int yMin;
 

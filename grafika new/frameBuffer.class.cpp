@@ -196,6 +196,30 @@ void frameBuffer::solidBackground() {
     }
 }
 
+void frameBuffer::solidFill(int xs, int ys, int xe, int ye, int r, int g, int b) {
+    int i, j;
+    // Figure out where in memory to put the pixel
+    for (j = ys; j < ye; j++) {
+        for (i = xs; i < xe; i++) {
+
+            location = (i+vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
+                       (j+vinfo.yoffset) * finfo.line_length;
+
+            if (vinfo.bits_per_pixel == 32) {
+                *(buffer + location) = b;        // Blue
+                *(buffer + location + 1) = g;    // Green
+                *(buffer + location + 2) = r;    // Red
+                *(buffer + location + 3) = 0;      // Alpha
+        //location += 4;
+            } else  { //assume 16bpp
+                unsigned short int t = r<<11 | g << 5 | b;
+                *((unsigned short int*)(buffer + location)) = t;
+            }
+
+        }
+    }
+}
+
 void frameBuffer::bresenham(int x1, int y1, int x2, int y2, int pixel, int red, int green, int blue) {
   int Fx[] = { 1,  0, -1,  0};
   int Fy[] = { 0,  1,  0, -1};

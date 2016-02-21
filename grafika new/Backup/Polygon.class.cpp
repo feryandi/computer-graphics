@@ -71,12 +71,12 @@ void Polygon::draw(FrameBuffer *fb) {
 
 	}
 
-	for (i = (yMin - cx) * k + y; i <= (yMax - cx) * k + y; i++) {
+/*	for (i = (yMin - cx) * k + y; i <= (yMax - cx) * k + y; i++) {
 		cout << i << " > ";
 		for (vector<int>::const_iterator c = (dots[i]).begin(); c != (dots[i]).end(); ++c)
     		cout << *c << " | ";
     	cout << "." << endl;
-	}
+	}*/
 }
 
 void Polygon::setMultiplication(float k) {
@@ -180,7 +180,7 @@ void Polygon::bresenham(int x1, int y1, int x2, int y2, FrameBuffer *fb) {
   	//if ( ((x != x1) && (y != y1)) && ((x != x2) && (y != y2)) ) {
     (dots[y]).push_back(x);
     // (dots[y]).push_back(x);
-    sort((dots[y]).begin(), (dots[y]).end());
+    //sort((dots[y]).begin(), (dots[y]).end());
     fb->plot(x, y);
 	//}
 
