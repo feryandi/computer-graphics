@@ -300,6 +300,13 @@ int main()
 	        p3.setPosition(p3.getPositionX() + 0,p3.getPositionY() - 10);
 	        p4.setPosition(p4.getPositionX() + 0,p4.getPositionY() - 10);
 	        p5.setPosition(p5.getPositionX() + 0,p5.getPositionY() - 10);
+
+	        p1.setCenter(p1.getCenterX() - 0,p1.getCenterY() + 10);
+	        p2.setCenter(p2.getCenterX() - 0,p2.getCenterY() + 10);
+	        p3.setCenter(p3.getCenterX() - 0,p3.getCenterY() + 10);
+	        p4.setCenter(p4.getCenterX() - 0,p4.getCenterY() + 10);
+	        p5.setCenter(p5.getCenterX() - 0,p5.getCenterY() + 10);
+
 	        p1.draw(&f);
 	        p2.draw(&f);
 	        p3.draw(&f);
@@ -313,6 +320,13 @@ int main()
 	        p3.setPosition(p3.getPositionX() - 10,p3.getPositionY() + 0);
 	        p4.setPosition(p4.getPositionX() - 10,p4.getPositionY() + 0);
 	        p5.setPosition(p5.getPositionX() - 10,p5.getPositionY() + 0);
+
+	        p1.setCenter(p1.getCenterX() + 10,p1.getCenterY() - 0);
+	        p2.setCenter(p2.getCenterX() + 10,p2.getCenterY() - 0);
+	        p3.setCenter(p3.getCenterX() + 10,p3.getCenterY() - 0);
+	        p4.setCenter(p4.getCenterX() + 10,p4.getCenterY() - 0);
+	        p5.setCenter(p5.getCenterX() + 10,p5.getCenterY() - 0);
+
 	        p1.draw(&f);
 	        p2.draw(&f);
 	        p3.draw(&f);
@@ -326,6 +340,13 @@ int main()
 	        p3.setPosition(p3.getPositionX() + 0,p3.getPositionY() + 10);
 	        p4.setPosition(p4.getPositionX() + 0,p4.getPositionY() + 10);
 	        p5.setPosition(p5.getPositionX() + 0,p5.getPositionY() + 10);
+
+	        p1.setCenter(p1.getCenterX() + 0,p1.getCenterY() - 10);
+	        p2.setCenter(p2.getCenterX() + 0,p2.getCenterY() - 10);
+	        p3.setCenter(p3.getCenterX() + 0,p3.getCenterY() - 10);
+	        p4.setCenter(p4.getCenterX() + 0,p4.getCenterY() - 10);
+	        p5.setCenter(p5.getCenterX() + 0,p5.getCenterY() - 10);
+
 	        p1.draw(&f);
 	        p2.draw(&f);
 	        p3.draw(&f);
@@ -339,6 +360,13 @@ int main()
 	        p3.setPosition(p3.getPositionX() + 10,p3.getPositionY() + 0);
 	        p4.setPosition(p4.getPositionX() + 10,p4.getPositionY() + 0);
 	        p5.setPosition(p5.getPositionX() + 10,p5.getPositionY() + 0);
+
+	        p1.setCenter(p1.getCenterX() - 10,p1.getCenterY() - 0);
+	        p2.setCenter(p2.getCenterX() - 10,p2.getCenterY() - 0);
+	        p3.setCenter(p3.getCenterX() - 10,p3.getCenterY() - 0);
+	        p4.setCenter(p4.getCenterX() - 10,p4.getCenterY() - 0);
+	        p5.setCenter(p5.getCenterX() - 10,p5.getCenterY() - 0);
+
 	        p1.draw(&f);
 	        p2.draw(&f);
 	        p3.draw(&f);
