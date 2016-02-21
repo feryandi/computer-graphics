@@ -253,6 +253,33 @@ int getkey() {
     return character;
 }
 
+void createJakarta(polygon *p1, polygon *p2, polygon *p3, polygon *p4, polygon *p5) {
+	(*p1).setMultiplication(5);
+	(*p1).setCenter(62, 60);
+	(*p1).setPolyline(jakartaUtara, 40);
+	(*p1).setFloodPosition(30, 20);
+	
+	(*p2).setMultiplication(5);
+	(*p2).setCenter(62, 60);
+	(*p2).setPolyline(jakartaBarat, 40);
+	(*p2).setFloodPosition(30, 20);
+
+	(*p3).setMultiplication(5);
+	(*p3).setCenter(62, 60);
+	(*p3).setPolyline(jakartaSelatan, 41);
+	(*p3).setFloodPosition(30, 20);
+
+	(*p4).setMultiplication(5);
+	(*p4).setCenter(62, 60);
+	(*p4).setPolyline(jakartaTimur, 49);
+	(*p4).setFloodPosition(30, 20);
+
+	(*p5).setMultiplication(5);
+	(*p5).setCenter(62, 60);
+	(*p5).setPolyline(jakartaPusat, 17);
+	(*p5).setFloodPosition(30, 20);
+}
+
 int main()
 {
 	frameBuffer f;
@@ -267,40 +294,19 @@ int main()
 	minimap_border.setPosition(200,f.getVInfoY()-150);
 	minimap_border.draw(&f);
 	
-	p1.setMultiplication(5);
-	p1.setCenter(62, 60);
-	p1.setPolyline(jakartaUtara, 40);
+	createJakarta(&p1, &p2, &p3, &p4, &p5);
 	p1.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
-	p1.setFloodPosition(30, 20);
-	p1.draw(&f);
-	
-	p2.setMultiplication(5);
-	p2.setCenter(62, 60);
-	p2.setPolyline(jakartaBarat, 40);
 	p2.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
-	p2.setFloodPosition(30, 20);
-	p2.draw(&f);
-
-	p3.setMultiplication(5);
-	p3.setCenter(62, 60);
-	p3.setPolyline(jakartaSelatan, 41);
 	p3.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
-	p3.setFloodPosition(30, 20);
-	p3.draw(&f);
-
-	p4.setMultiplication(5);
-	p4.setCenter(62, 60);
-	p4.setPolyline(jakartaTimur, 49);
 	p4.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
-	p4.setFloodPosition(30, 20);
-	p4.draw(&f);
-
-	p5.setMultiplication(5);
-	p5.setCenter(62, 60);
-	p5.setPolyline(jakartaPusat, 17);
 	p5.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
-	p5.setFloodPosition(30, 20);
+
+	p1.draw(&f);
+	p2.draw(&f);
+	p3.draw(&f);
+	p4.draw(&f);
 	p5.draw(&f);
+
 
 	f.render_buffer();
 	int key = 0;
