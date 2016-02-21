@@ -61,7 +61,7 @@ frameBuffer::frameBuffer() {
         exit(3);
     }
 
-    printf("%dx%d, %dbpp\n", vinfo.xres, vinfo.yres, vinfo.bits_per_pixel);
+    //printf("%dx%d, %dbpp\n", vinfo.xres, vinfo.yres, vinfo.bits_per_pixel);
 
     // Figure out the size of the screen in bytes
     screensize = vinfo.xres * vinfo.yres * vinfo.bits_per_pixel / 8;
@@ -250,7 +250,7 @@ void frameBuffer::bresenham(int x1, int y1, int x2, int y2, int pixel, int red, 
     }
 
     // mapping line y to x
-    printf("y:%d x:%d [%d]\n",y,x, iabs(y - y1));
+    //printf("y:%d x:%d [%d]\n",y,x, iabs(y - y1));
     (*oosElement)[iabs(y - y1)] = x;
 
     blockBuilder(x, y, pixel, red, green, blue);

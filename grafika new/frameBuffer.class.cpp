@@ -61,7 +61,7 @@ frameBuffer::frameBuffer() {
         exit(3);
     }
 
-    printf("%dx%d, %dbpp\n", vinfo.xres, vinfo.yres, vinfo.bits_per_pixel);
+    //printf("%dx%d, %dbpp\n", vinfo.xres, vinfo.yres, vinfo.bits_per_pixel);
 
     // Figure out the size of the screen in bytes
     screensize = vinfo.xres * vinfo.yres * vinfo.bits_per_pixel / 8;
@@ -220,7 +220,74 @@ void frameBuffer::solidFill(int xs, int ys, int xe, int ye, int r, int g, int b)
     }
 }
 
-void frameBuffer::bresenham(int x1, int y1, int x2, int y2, int pixel, int red, int green, int blue) {
+void frameBuffer::bresenham(int x1, int y1, int x2, int y2, int pixel, int red, int green, int blue, int** oosElement) {
+  int Fx[] = { 1,  0, -1,  0};
+  int Fy[] = { 0,  1,  0, -1};
+
+  int Gx[] = { 1, -1, -1,  1};
+  int Gy[] = { 1,  1, -1, -1};
+
+  int dx = x2 - x1;
+  int dy = y2 - y1;
+
+  int X = dx > 0;
+  int Y = dy > 0;
+  int Z = (iabs(dx) - iabs(dy)) > 0;
+
+  int f = F(X, Y, Z);
+  int g = G(X, Y);
+
+  int m1x = Fx[f];
+  int m1y = Fy[f];
+  int m2x = Gx[g];
+  int m2y = Gy[g];
+
+  int da, db;
+
+  if (Z) {
+    da = iabs(dx); db = iabs(dy);
+  } else {
+    da = iabs(dy); db = iabs(dx);
+  }
+
+  int D = 2*db - da;
+  
+  blockBuilder(x1, y1, pixel, red, green, blue);
+
+  int x = x1;
+  int y = y1;
+
+  // allocate oos map
+  *oosElement = (int*) malloc((iabs(y2-y1)+2)*sizeof(int));
+  //printf("(%d,%d) ->  (%d,%d) allocate %d\n", x1,y1,x2,y2, (iabs(y2-y1)+2));
+
+  // mapping line y to x
+  (*oosElement)[0] = x1;
+
+  while ((Z && (x != x2)) || (!Z && (y != y2))) {
+
+    D = D + 2*db;
+
+    if (D >= 0) {
+      x += m2x;
+      y += m2y;
+      D = D - 2*da;
+    } else {
+      x += m1x;
+      y += m1y;
+    }
+
+    // mapping line y to x
+    //printf("y:%d x:%d [%d]\n",y,x, iabs(y - y1));
+    (*oosElement)[iabs(y - y1)] = x;
+
+    blockBuilder(x, y, pixel, red, green, blue);
+  }
+
+  //free(*oosElement);
+}
+
+/*void frameBuffer::bresenham(int x1, int y1, int x2, int y2, int pixel, int red, int green, int blue) {
   int Fx[] = { 1,  0, -1,  0};
   int Fy[] = { 0,  1,  0, -1};
 
@@ -272,4 +339,4 @@ void frameBuffer::bresenham(int x1, int y1, int x2, int y2, int pixel, int red, 
 
     blockBuilder(x, y, pixel, red, green, blue);
   }
-}
+}*/

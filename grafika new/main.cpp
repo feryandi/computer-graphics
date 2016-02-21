@@ -260,31 +260,42 @@ int getkey() {
 }
 
 void createJakarta(polygon *p1, polygon *p2, polygon *p3, polygon *p4, polygon *p5) {
-	(*p1).setMultiplication(5);
-	(*p1).setCenter(62, 60);
+	(*p1).setMultiplication(10);
 	(*p1).setPolyline(jakartaUtara, 40);
+	(*p1).setPosition(0,0);
+	(*p1).setCenter(62, 60);
+	(*p1).setFillColor(100,0,50);
 	(*p1).setFloodPosition(30, 20);
 	
-	(*p2).setMultiplication(5);
-	(*p2).setCenter(62, 60);
+	(*p2).setMultiplication(10);
+	(*p2).setPosition(0,0);
 	(*p2).setPolyline(jakartaBarat, 40);
+	(*p2).setCenter(62, 60);
+	(*p2).setFillColor(50,100,50);
 	(*p2).setFloodPosition(30, 20);
 
-	(*p3).setMultiplication(5);
-	(*p3).setCenter(62, 60);
+	(*p3).setMultiplication(10);
 	(*p3).setPolyline(jakartaSelatan, 41);
+	(*p3).setPosition(0,0);
+	(*p3).setCenter(62, 60);
+	(*p3).setFillColor(50,100,100);
 	(*p3).setFloodPosition(30, 20);
 
-	(*p4).setMultiplication(5);
-	(*p4).setCenter(62, 60);
+	(*p4).setMultiplication(10);
 	(*p4).setPolyline(jakartaTimur, 49);
+	(*p4).setPosition(0,0);
+	(*p4).setCenter(62, 60);
+	(*p4).setFillColor(30,40,100);
 	(*p4).setFloodPosition(30, 20);
 
-	(*p5).setMultiplication(5);
-	(*p5).setCenter(62, 60);
+	(*p5).setMultiplication(10);
 	(*p5).setPolyline(jakartaPusat, 17);
+	(*p5).setPosition(0,0);
+	(*p5).setCenter(62, 60);
+	(*p2).setFillColor(50,50,50);
 	(*p5).setFloodPosition(30, 20);
 }
+
 
 int main()
 {
@@ -298,20 +309,22 @@ int main()
 	minimap_border.setMultiplication(15);
 	minimap_border.setCenter(9, 5);
 	minimap_border.setFloodPosition(1, 1);
+	minimap_border.setFillColor(255,255,255);
 	minimap_border.setPosition(200,f.getVInfoY()-150);
 
 	minimap_zoom.setPolyline(persegiPanjang, 4);
 	minimap_zoom.setMultiplication(15);
 	minimap_zoom.setCenter(9, 5);
 	minimap_zoom.setFloodPosition(1, 1);
+	minimap_zoom.setFillColor(255,255,255);
 	minimap_zoom.setPosition(200,f.getVInfoY()-150);
 	
 	createJakarta(&p1, &p2, &p3, &p4, &p5);
-	p1.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
+	/*p1.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
 	p2.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
 	p3.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
 	p4.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
-	p5.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
+	p5.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);*/
 
 	p1.draw(&f);
 	p2.draw(&f);
@@ -320,11 +333,11 @@ int main()
 	p5.draw(&f);
 
 	createJakarta(&mp1, &mp2, &mp3, &mp4, &mp5);
-	mp1.setMultiplication(1);
-	mp2.setMultiplication(1);
-	mp3.setMultiplication(1);
-	mp4.setMultiplication(1);
-	mp5.setMultiplication(1);
+	mp1.setMultiplication(2);
+	mp2.setMultiplication(2);
+	mp3.setMultiplication(2);
+	mp4.setMultiplication(2);
+	mp5.setMultiplication(2);
 	mp1.setPosition(200, (f.getVInfoY()-150));
 	mp2.setPosition(200, (f.getVInfoY()-150));
 	mp3.setPosition(200, (f.getVInfoY()-150));
@@ -333,6 +346,7 @@ int main()
 
 	minimap_border.solidFill(0, 0, 18, 10, &f);
 	minimap_border.draw(&f);
+	
 
 	mp1.draw(&f);
 	mp2.draw(&f);
@@ -340,7 +354,7 @@ int main()
 	mp4.draw(&f);
 	mp5.draw(&f);
 
-	minimap_zoom.draw(&f);
+	minimap_zoom.drawNoFill(&f);
 
 	f.render_buffer();
 	float minimapX = 0;
@@ -349,7 +363,7 @@ int main()
 	while (key != 0x20) {
 		key = getkey();
 
-	    int translate = (10/p1.getMultiplication() > 1) ? (10/p1.getMultiplication()) : 1;
+	    int translate = (20/p1.getMultiplication() > 2) ? (20/p1.getMultiplication()) : 2;
 
 		int tX = p1.getPositionX();
 		int tY = p1.getPositionY();
@@ -360,39 +374,41 @@ int main()
 	    if (key == 0x53) {
 	        f.solidBackground();
 	        tX = p1.getPositionX();
-	        tY = p1.getPositionY() - translate;
+	        tY = p1.getPositionY() - translate* 5;
 	        tCX = p1.getCenterX();
-	        tCY = p1.getCenterY() + translate;
+	        tCY = p1.getCenterY() + translate* 5;
 
 	        //bawah
 	        //if(minimapY < 0){
 	        	minimapY = 0;
 	        //}
-	        minimapY += 1 * (float) translate;
+	        
+minimapY += 1 * (float) translate;
 	        minimap_zoom.setPosition(minimap_zoom.getPositionX(), minimap_zoom.getPositionY() + (int)minimapY);
 
 	        on_click = 1;
 	    } else if (key == 0x44) {
 	        f.solidBackground();
-	        tX = p1.getPositionX() - translate;
+	        tX = p1.getPositionX() - translate * 5;
 	        tY = p1.getPositionY();
-	        tCX = p1.getCenterX() + translate;
+	        tCX = p1.getCenterX() + translate * 5;
 	        tCY = p1.getCenterY();
 
 	        //kanan
 	        //if(minimapX > 0){
 	        	minimapX = 0;
 	        //}
-	        minimapX += 1 * (float) translate;
+	        
+minimapX += 1 * (float) translate;
 	        minimap_zoom.setPosition(minimap_zoom.getPositionX() + (int)minimapX, minimap_zoom.getPositionY());
 
 	        on_click = 1;
 	    } else if (key == 0x57) {
 	        f.solidBackground();
 	        tX = p1.getPositionX();
-	        tY = p1.getPositionY() + translate;
+	        tY = p1.getPositionY() + translate * 5;
 	        tCX = p1.getCenterX();
-	        tCY = p1.getCenterY() - translate;
+	        tCY = p1.getCenterY() - translate * 5;
 
 	        //atas
 	        //if(minimapY > 0){
@@ -404,9 +420,9 @@ int main()
 	        on_click = 1;
 	    } else if (key == 0x41) {
 	        f.solidBackground();
-	        tX = p1.getPositionX() + translate;
+	        tX = p1.getPositionX() + translate * 5;
 	        tY = p1.getPositionY();
-	        tCX = p1.getCenterX() - translate;
+	        tCX = p1.getCenterX() - translate * 5;
 	        tCY = p1.getCenterY();
 
 	        //kiri
@@ -425,7 +441,7 @@ int main()
 		        p3.setMultiplication(p3.getMultiplication() - 1);
 		        p4.setMultiplication(p4.getMultiplication() - 1);
 		        p5.setMultiplication(p5.getMultiplication() - 1);
-				minimap_zoom.setMultiplication(75 / p1.getMultiplication());
+				minimap_zoom.setMultiplication(150 / p1.getMultiplication());
 	        	on_click = 1;
 		    }
 	    } else if (key == 0x4F){
@@ -436,7 +452,7 @@ int main()
 		        p3.setMultiplication(p3.getMultiplication() + 1);
 		        p4.setMultiplication(p4.getMultiplication() + 1);
 		        p5.setMultiplication(p5.getMultiplication() + 1);
-				minimap_zoom.setMultiplication(75 / p1.getMultiplication());
+				minimap_zoom.setMultiplication(150 / p1.getMultiplication());
 		    }
 		    on_click = 1;
 	    }
@@ -461,13 +477,15 @@ int main()
 		    p5.draw(&f);
 			minimap_border.solidFill(0, 0, 18, 10, &f);
 			minimap_border.draw(&f);
+			
 
 			mp1.draw(&f);
 			mp2.draw(&f);
 			mp3.draw(&f);
 			mp4.draw(&f);
 			mp5.draw(&f);
-			minimap_zoom.draw(&f);
+
+			minimap_zoom.drawNoFill(&f);
 
 		    f.render_buffer();
 		}
