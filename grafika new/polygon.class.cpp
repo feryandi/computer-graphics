@@ -14,6 +14,8 @@
 polygon::polygon() {
 	x = 0;
 	y = 0;
+	cx = 0;
+	cy = 0;
 	fx = 0;
 	fy = 0;
 	width = 0;
@@ -33,9 +35,26 @@ int polygon::getPositionY() {
 	return y;
 }
 
+int polygon::getMultiplication(){
+	return multiplication;
+}
+
+int polygon::getCenterX() {
+	return cx;
+}
+
+int polygon::getCenterY() {
+	return cy;
+}
+
 void polygon::setPosition(int x, int y) {
 	this->x = x;
 	this->y = y;
+}
+
+void polygon::setCenter(int cx, int cy) {
+	this->cx = cx;
+	this->cy = cy;
 }
 
 void polygon::setFloodPosition(int x, int y) {
@@ -82,10 +101,10 @@ void polygon::draw(frameBuffer *f) {
 
 
 		int a, b, c, d;
-		a = *(polyline + (++i) - 1) * multiplication + x;
-		b = *(polyline + (++i) - 1) * multiplication + y;
-		c = *(polyline + (++i) - 1) * multiplication + x;
-		d = *(polyline + (++i) - 1) * multiplication + y;
+		a = (*(polyline + (++i) - 1)-cx) * multiplication + x;
+		b = (*(polyline + (++i) - 1)-cy) * multiplication + y;
+		c = (*(polyline + (++i) - 1)-cx) * multiplication + x;
+		d = (*(polyline + (++i) - 1)-cy) * multiplication + y;
 
 		(*f).bresenham(a, b, c, d, 1, 0, 0, 0);
 

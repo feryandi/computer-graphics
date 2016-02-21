@@ -56,7 +56,7 @@ int jakartaUtara[] = {
 	38, 22, 28, 18,
 	28, 18, 20, 12,
 	20, 12, 16, 6,
-	16,	6, 16, 3,
+	16,	6, 16, 3
 };
 
 // 40
@@ -100,7 +100,7 @@ int jakartaBarat[] = {
 	38, 22, 28, 18,
 	28, 18, 20, 12,
 	20, 12, 16, 6,
-	16, 6, 16, 3,
+	16, 6, 16, 3
 };
 
 // 41
@@ -145,7 +145,7 @@ int jakartaSelatan[] = {
 	30, 70, 26, 70,
 	26, 70, 25, 66,
 	25, 66, 22, 65,
-	22, 65, 21, 59,
+	22, 65, 21, 59
 };
 
 // 49
@@ -198,7 +198,7 @@ int jakartaTimur[] = {
 	108, 70, 110, 58,
 	110, 58, 120, 52,
 	120, 52, 124, 46,
-	124, 46, 124, 30,
+	124, 46, 124, 30
 };
 
 // 17
@@ -219,7 +219,7 @@ int jakartaPusat[] = {
 	70, 50, 58, 50,
 	58, 50, 57, 54,
 	57, 54, 46, 61,
-	46, 61, 46, 52,
+	46, 61, 46, 52
 };
 
 int getkey() {
@@ -245,6 +245,8 @@ int getkey() {
     return character;
 }
 
+void drawJakarta();
+
 int main()
 {
 	frameBuffer f;
@@ -252,32 +254,37 @@ int main()
 	polygon p1, p2, p3, p4, p5;
 	
 	p1.setMultiplication(5);
+	p1.setCenter(62, 60);
 	p1.setPolyline(jakartaUtara, 40);
-	p1.setPosition(0,0);
+	p1.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
 	p1.setFloodPosition(30, 20);
 	p1.draw(&f);
 	
 	p2.setMultiplication(5);
+	p2.setCenter(62, 60);
 	p2.setPolyline(jakartaBarat, 40);
-	p2.setPosition(0,0);
+	p2.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
 	p2.setFloodPosition(30, 20);
 	p2.draw(&f);
 
 	p3.setMultiplication(5);
+	p3.setCenter(62, 60);
 	p3.setPolyline(jakartaSelatan, 41);
-	p3.setPosition(0,0);
+	p3.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
 	p3.setFloodPosition(30, 20);
 	p3.draw(&f);
 
 	p4.setMultiplication(5);
+	p4.setCenter(62, 60);
 	p4.setPolyline(jakartaTimur, 49);
-	p4.setPosition(0,0);
+	p4.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
 	p4.setFloodPosition(30, 20);
 	p4.draw(&f);
 
 	p5.setMultiplication(5);
+	p5.setCenter(62, 60);
 	p5.setPolyline(jakartaPusat, 17);
-	p5.setPosition(0,0);
+	p5.setPosition(f.getVInfoX()/2,f.getVInfoY()/2);
 	p5.setFloodPosition(30, 20);
 	p5.draw(&f);
 
@@ -332,6 +339,34 @@ int main()
 	        p3.setPosition(p3.getPositionX() + 10,p3.getPositionY() + 0);
 	        p4.setPosition(p4.getPositionX() + 10,p4.getPositionY() + 0);
 	        p5.setPosition(p5.getPositionX() + 10,p5.getPositionY() + 0);
+	        p1.draw(&f);
+	        p2.draw(&f);
+	        p3.draw(&f);
+	        p4.draw(&f);
+	        p5.draw(&f);
+	        f.render_buffer();
+	    } else if (key == 0x49){
+	    	f.solidBackground();
+	    	if(p1.getMultiplication() > 1){
+		        p1.setMultiplication(p1.getMultiplication() - 1);
+		        p2.setMultiplication(p2.getMultiplication() - 1);
+		        p3.setMultiplication(p3.getMultiplication() - 1);
+		        p4.setMultiplication(p4.getMultiplication() - 1);
+		        p5.setMultiplication(p5.getMultiplication() - 1);
+		    }
+		    p1.draw(&f);
+	        p2.draw(&f);
+	        p3.draw(&f);
+	        p4.draw(&f);
+	        p5.draw(&f);
+	        f.render_buffer();
+	    } else if (key == 0x4F){
+	    	f.solidBackground();
+	        p1.setMultiplication(p1.getMultiplication() + 1);
+	        p2.setMultiplication(p2.getMultiplication() + 1);
+	        p3.setMultiplication(p3.getMultiplication() + 1);
+	        p4.setMultiplication(p4.getMultiplication() + 1);
+	        p5.setMultiplication(p5.getMultiplication() + 1);
 	        p1.draw(&f);
 	        p2.draw(&f);
 	        p3.draw(&f);

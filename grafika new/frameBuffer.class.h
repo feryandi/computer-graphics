@@ -19,6 +19,7 @@ class frameBuffer {
 	public:
 		frameBuffer();
 		~frameBuffer();
+		int getVInfoX();
 		int getVInfoY();
 		void create_buffer();
 		void render_buffer();

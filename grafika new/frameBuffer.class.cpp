@@ -91,6 +91,10 @@ void frameBuffer::render_buffer() {
     memcpy(fbp, buffer, screensize);
 }
 
+int frameBuffer::getVInfoX() {
+    return vinfo.xres;
+}
+
 int frameBuffer::getVInfoY() {
     return vinfo.yres;
 }
