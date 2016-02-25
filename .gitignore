@@ -1,4 +1,3 @@
-grafika\ new/main
-grafika\ 4/main
-grafika\ 3/main
-grafika\ 2/main
+main
+*
+!*.*

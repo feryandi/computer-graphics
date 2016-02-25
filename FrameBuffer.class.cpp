@@ -22,7 +22,7 @@ FrameBuffer::FrameBuffer() {
         exit(3);
     }
 
-    //printf("%dx%d, %dbpp\n", vinfo.xres, vinfo.yres, vinfo.bits_per_pixel);
+    printf("%dx%d, %dbpp\n", vinfo.xres, vinfo.yres, vinfo.bits_per_pixel);
 
     // Figure out the size of the screen in bytes
     screensize = vinfo.xres * vinfo.yres * vinfo.bits_per_pixel / 8;
@@ -52,74 +52,27 @@ int FrameBuffer::getVInfoX() {
     return vinfo.xres;
 }
 
-/*void FrameBuffer::addPolygon(Polygon *P) {
+void FrameBuffer::plot(int x, int y, int red, int green, int blue) {
 	int i, j;
-	int blue = 0;
-	int green = 0;
-	int red = 0;
-
-    // Figure out where in buffer to put the pixel from bitmap
-    for (j = 0; j < P->getHeight(); j++) {
-
-        for (i = 0; i < P->getWidth(); i++) {
-
-        	if ( (P->getBitmap())[(j * P->getWidth()) + i] != 0 ) {
-
-        		if ( ( (i + P->getX()) >= 0 ) && 
-        			 ( (j + P->getY()) >= 0 ) && 
-        			 ( (i + P->getX()) < vinfo.xres - 1 ) && 
-        			 ( (j + P->getY()) < vinfo.yres - 5 ) ) {
-
-		                location = ((i + P->getX()) + vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
-		                           ((j + P->getY()) + vinfo.yoffset) * finfo.line_length;
-
-		                if (vinfo.bits_per_pixel == 32) {
-		                    *(buffer + location) = 255 - blue;		// Blue
-		                    *(buffer + location + 1) = 255 - green;	// Green
-		                    *(buffer + location + 2) = 255 - red;	// Red
-		                    *(buffer + location + 3) = 0;			// Alpha
-		                } else  { 
-		                	// Assuming 16bpp
-		                    int b = 255 - blue;		// Blue
-		                    int g = 255 - green;	// Green
-		                    int r = 255 - red;		// Red
-		                    unsigned short int t = r<<11 | g << 5 | b;
-		                    *((unsigned short int*)(buffer + location)) = t;
-		                }
-
-		        }
-
-	        }
-
-        }
-
-    }
-}*/
-
-void FrameBuffer::plot(int x, int y) {
-	int i, j;
-	int blue = 0;
-	int green = 0;
-	int red = 0;
 
 	if ( ( x >= 0 ) && 
 		 ( y >= 0 ) && 
 		 ( x < vinfo.xres - 1 ) && 
-		 ( y < vinfo.yres - 5 ) ) {
+		 ( y < vinfo.yres - 1 ) ) {
 
             location = ((x + vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
                        ((y + vinfo.yoffset) * finfo.line_length));
 
             if (vinfo.bits_per_pixel == 32) {
-                *(buffer + location) = 255 - blue;		// Blue
-                *(buffer + location + 1) = 255 - green;	// Green
-                *(buffer + location + 2) = 255 - red;	// Red
+                *(buffer + location) = blue;		// Blue
+                *(buffer + location + 1) = green;	// Green
+                *(buffer + location + 2) = red;	// Red
                 *(buffer + location + 3) = 0;			// Alpha
             } else  { 
             	// Assuming 16bpp
-                int b = 255 - blue;		// Blue
-                int g = 255 - green;	// Green
-                int r = 255 - red;		// Red
+                int b = blue;		// Blue
+                int g = green;	// Green
+                int r = red;		// Red
                 unsigned short int t = r<<11 | g << 5 | b;
                 *((unsigned short int*)(buffer + location)) = t;
             }
@@ -134,8 +87,8 @@ void FrameBuffer::render() {
 void FrameBuffer::canvas() {
     int i, j;
     // Figure out where in memory to put the pixel
-    for (j = 0; j < vinfo.yres - 5; j++) {
-        for (i = 0; i < vinfo.xres - 1; i++) {
+    for (j = 0; j < vinfo.yres; j++) {
+        for (i = 0; i < vinfo.xres; i++) {
 
             location = (i+vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
                        (j+vinfo.yoffset) * finfo.line_length;

@@ -40,7 +40,7 @@ class FrameBuffer {
 		void addObject(); // To Be Implemented
 
 		void canvas();
-		void plot(int x, int y);
+		void plot(int x, int y, int, int, int);
 		void render();
 };
 
