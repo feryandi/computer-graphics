@@ -1,17 +1,16 @@
-# Grafika1
-Tugas 1 Grafika, membuat animasi sederhana dengan direct access ke frame buffer.
+# Computer Graphics Weekly Assignment
 
-1. compile --> 
-gcc -o grafika1 grafika1.c
+Repository for weekly assignment of computer graphics (IF3260) 
+Institut Teknologi Bandung 2013
 
-2. pindah layar dulu --> 
-control-alt-F2
+Members:
+* Chairuni Aulia Nusapati
+* Ibrohim Khoilul Islam
+* Feryandi Nurdiantoro
+* Julio Savigny
+* Ahmad Darmawan
 
-3. login --> 
-login: username (bisa dicek dengan echo $USER)
-password: akucantik (gadeng, password lu apa)
+Using framebuffer to create images and manipulating pixels.
 
-4. run program --> 
-sudo ./grafika1
-
-5. senyum bahagia
+## How to compile
+Use `makefile` or `g++ -o main main.cpp FrameBuffer.class.cpp Polygon.class.cpp`
