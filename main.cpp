@@ -218,7 +218,7 @@ int main() {
 	jakpus.setMultiplication(5);
 	jakpus.setWireColor(255,0,0);
 	jakpus.setFillColor(0, 0, 255);
-	//jakpus.setDegree(45);
+	jakpus.setDegree(45);
 
 	Polygon jaktim(62, 60,jakartaTimur, 196);
 	jaktim.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2);
@@ -241,8 +241,8 @@ int main() {
 	jaksel.draw(&FB);
 	jakut.draw(&FB);
 	jakbar.draw(&FB);
-	jakpus.draw(&FB);
 	jaktim.draw(&FB);
+	jakpus.draw(&FB);
 
 	FB.render();
 		
