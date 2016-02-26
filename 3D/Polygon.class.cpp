@@ -17,10 +17,12 @@ Polygon::Polygon(int cx, int cy, int cz, int* w, int len) {
   fillBlue = 255;
 
 	setCenter(cx, cy, cz);
-	setWireframe(w, len);
+	original = intdup(w, len);
+	setWireframe(original, len);
 }
 
 Polygon::~Polygon() {
+	delete [] original;
 	delete [] wireframe;
 }
 
@@ -71,15 +73,27 @@ float Polygon::getMultiplication() {
 void Polygon::setDegree(float degree) {
   this->d = degree; 
 
-  int *temp = (int*)malloc(len * sizeof(int));
+  //int *temp = (int*)malloc(len * sizeof(int));
   if(len % 3 == 0){
     double val = PI/180.0;
     for (int i = 0; i < len; i++){
-      if(i % 3 == 0){
-        temp[i] = (int) ( cos(d * val) * (wireframe[i] - cx) - ( sin(d*val) * ((wireframe)[i+1] - cy) ) + cx );
+      /*if(i % 3 == 0){
+        wireframe[i] = (int) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+1] - cy) ) + cx );
+        printf("x[%d]: %d, ", i, wireframe[i]);
       } else if ( i % 3 == 1){ 
-        temp[i] = (int) ( sin(d * val) * (wireframe[i-1] - cx) + cos(d * val) * (wireframe[i] - cy) + cy ) ;
+        wireframe[i] = (int) ( sin(d * val) * (original[i-1] - cx) + cos(d * val) * (original[i] - cy) + cy ) ;
+        printf("y[%d]: %d, ", i, wireframe[i]);
       } else{
+      	wireframe[i] = wireframe[i];
+      	printf("z[%d]: %d\n", i, wireframe[i]);
+      	//do nothing yet, this is for z
+      }*/
+      if(i % 3 == 0){
+        wireframe[i] = (int) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+2] - cz) ) + cx );
+      } else if ( i % 3 == 1){ 
+        wireframe[i] = wireframe[i];
+      } else{
+      	wireframe[i] = (int) ( sin(d * val) * (original[i-2] - cx) + cos(d * val) * (original[i] - cz) + cz ) ;
       	//do nothing yet, this is for z
       }
     }
@@ -87,7 +101,6 @@ void Polygon::setDegree(float degree) {
     printf("Error: NOT A 3D POLYGON");
   }
 
-  wireframe = intdup(temp, len);
 }
 
 float Polygon::getDegree() {
@@ -101,11 +114,11 @@ void Polygon::setWireframe(int* w, int len) {
 	this->len = len;
   nLine = len / 6; // 2D = 4, 3D = 6
 
-  printf("print wireframe:\n");
-  for (int i = 0; i < this->len; i++){
-  	printf("%d, ", wireframe[i]);
-  }  
-  printf("\n");
+  //printf("print wireframe:\n");
+  //for (int i = 0; i < this->len; i++){
+  	//printf("%d, ", wireframe[i]);
+  //}  
+  //printf("\n");
   oosMap = (int**) malloc(nLine*sizeof(int*));
 }
 
@@ -128,16 +141,16 @@ void Polygon::draw(FrameBuffer *fb) {
   int yMin = *(wireframe + 1);
 
   while (line < nLine) {
-  	printf("line ke: %d\n",line);
+  	//printf("line ke: %d\n",line);
 
     int x1, y1, x2, y2;
     int dummyz1, dummyz2;
-		x1 = (int) ((wireframe[(line*6 + 0)] - cx) * k + x); printf("x1: %d\n",x1);
-		y1= (int) ((wireframe[(line*6 + 1)] - cy) * k + y); printf("y1: %d\n",y1);
-		//dummyz1= (int) ((wireframe[(line*6 + 2)] - cz) * k + z); printf("dummyz1: %d\n",dummyz1);
-		x2 = (int) ((wireframe[(line*6 + 3)] - cx) * k + x); printf("x2: %d\n",x2);
-		y2 = (int) ((wireframe[(line*6 + 4)] - cy) * k + y); printf("y2: %d\n",y2);
-		//dummyz2= (int) ((wireframe[(line*6 + 5)] - cz) * k + z); printf("dummyz2: %d\n",dummyz2);
+		x1 = (int) ((wireframe[(line*6 + 0)] - cx) * k + x); //printf("x1: %d\n",x1);
+		y1= (int) ((wireframe[(line*6 + 1)] - cy) * k + y); //printf("y1: %d\n",y1);
+		//z1= (int) ((wireframe[(line*6 + 2)] - cz) * k + z); printf("dummyz1: %d\n",dummyz1);
+		x2 = (int) ((wireframe[(line*6 + 3)] - cx) * k + x); //printf("x2: %d\n",x2);
+		y2 = (int) ((wireframe[(line*6 + 4)] - cy) * k + y); //printf("y2: %d\n",y2);
+		//z2= (int) ((wireframe[(line*6 + 5)] - cz) * k + z); printf("dummyz2: %d\n",dummyz2);
 
     if (yMax < std::max(y1,y2)) yMax = std::max(y1,y2);
     if (yMin > std::min(y1,y2)) yMin = std::min(y1,y2);
@@ -147,7 +160,7 @@ void Polygon::draw(FrameBuffer *fb) {
     line++;
 	}
 
-  //fill(yMin, yMax, fb); ini jadi wireframe kalo dicomment gini
+  //fill(yMin, yMax, fb); //ini jadi wireframe kalo dicomment gini
   clearMap();
 
 }
@@ -252,6 +265,30 @@ void Polygon::bresenham(int x1, int y1, int x2, int y2, int red, int green, int 
   }
 }
 
+int Polygon::getLineX1(int e) {
+  return (*(wireframe + (e*6) + 0) - cx) * k + x;
+}
+
+int Polygon::getLineY1(int e) {
+  return (*(wireframe + (e*6) + 1) - cy) * k + y;
+}
+
+//int Polygon::getLineZ1(int e) {
+//  return (*(wireframe + (e*6) + 2) - cy) * k - z;
+//}
+
+int Polygon::getLineX2(int e) {
+  return (*(wireframe + (e*6) + 3) - cx) * k + x;
+}
+
+int Polygon::getLineY2(int e) {
+  return (*(wireframe + (e*6) + 4) - cy) * k + y;
+}
+
+//int Polygon::getLineZ2(int e) {
+//  return (*(wireframe + (e*6) + 5) - cz) * k + z;
+//}
+
 // // Scanline
 void Polygon::clearMap(){
   for (int i = 0; i < nLine; ++i)
@@ -259,31 +296,31 @@ void Polygon::clearMap(){
 }
 
 int Polygon::isIntersect(int e, int yScanline){
-  int y1E = (*(wireframe + (e<<2) + 1) - cy) * k + y;
-  int y2E = (*(wireframe + (e<<2) + 3) - cy) * k + y;
+  int y1E = getLineY1(e);
+  int y2E = getLineY2(e);
 
-  return ((y1E - yScanline)*(y2E -yScanline)) <= 0;
+  return ((y1E - yScanline)*(y2E - yScanline)) <= 0;
 }
 
 int Polygon::isHorizontalLine(int e){
-  int y1E = (*(wireframe + (e<<2) + 1) - cy);
-  int y2E = (*(wireframe + (e<<2) + 3) - cy);
+  int y1E = getLineY1(e);
+  int y2E = getLineY2(e);
 
   return (y1E == y2E);
 }
 
 int Polygon::getMiddleX(int e){
-  int x1E = (*(wireframe + (e<<2) + 0) - cx) * k + x;
-  int x2E = (*(wireframe + (e<<2) + 2) - cx) * k + x;
+  int x1E = getLineX1(e);
+  int x2E = getLineX2(e);
 
   return (x1E + x2E) >> 1;
 }
 
 int Polygon::isCriticalPoint(int e1, int e2, int yScanline){
-  int y1E1 = (*(wireframe + (e1<<2) + 1) - cy) * k + y;
-  int y2E1 = (*(wireframe + (e1<<2) + 3) - cy) * k + y;
-  int y1E2 = (*(wireframe + (e2<<2) + 1) - cy) * k + y;
-  int y2E2 = (*(wireframe + (e2<<2) + 3) - cy) * k + y;
+  int y1E1 = getLineY1(e1);
+  int y2E1 = getLineY2(e1);
+  int y1E2 = getLineY1(e2);
+  int y2E2 = getLineY2(e2);
 
   int yOuterE1 = y1E1 + y2E1 - yScanline;
   int yOuterE2 = y1E2 + y2E2 - yScanline;
@@ -292,7 +329,7 @@ int Polygon::isCriticalPoint(int e1, int e2, int yScanline){
 }
 
 int Polygon::xIntersect(int e, int yScanline){
-  int y1E = (*(wireframe + (e<<2) + 1) - cy) * k + y;
+  int y1E = getLineY1(e);
 
   return oosMap[e][iabs(yScanline - y1E)];
 }

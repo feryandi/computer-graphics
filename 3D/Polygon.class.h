@@ -38,6 +38,7 @@ class Polygon {
 		float d;
 
 		// Wireframe
+		int *original;
 		int *wireframe;
 		int len;
 
@@ -97,6 +98,13 @@ class Polygon {
 		void setFillColor(int, int, int);
 
 		void draw(FrameBuffer *fb);
+
+                int getLineX1(int);
+                int getLineY1(int);
+                int getLineZ1(int);
+                int getLineX2(int);
+                int getLineY2(int);
+                int getLineZ2(int);
 
 		class intersection {
 		public:
