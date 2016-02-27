@@ -70,7 +70,7 @@ float Polygon::getMultiplication() {
   return k;
 }
 
-void Polygon::setDegree(float degree) {
+void Polygon::setDegree(float degree, int axis) {
   this->d = degree; 
 
   //int *temp = (int*)malloc(len * sizeof(int));
@@ -88,15 +88,36 @@ void Polygon::setDegree(float degree) {
       	printf("z[%d]: %d\n", i, wireframe[i]);
       	//do nothing yet, this is for z
       }*/
-      if(i % 3 == 0){
-        wireframe[i] = (int) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+2] - cz) ) + cx );
-      } else if ( i % 3 == 1){ 
-        wireframe[i] = wireframe[i];
-      } else{
-      	wireframe[i] = (int) ( sin(d * val) * (original[i-2] - cx) + cos(d * val) * (original[i] - cz) + cz ) ;
-      	//do nothing yet, this is for z
+      /* do based on axis (x=0, y=1, z=2) */
+      if (axis == 0)
+      {
+        if(i % 3 == 0){
+          // do nothing
+        } else if ( i % 3 == 1){ 
+          wireframe[i] = (int) ( cos(d * val) * (original[i] - cy) - ( sin(d*val) * ((original)[i+1] - cz) ) + cy );
+        } else {
+          wireframe[i] = (int) ( sin(d * val) * (original[i-1] - cy) + cos(d * val) * (original[i] - cz) + cz );
+        }
       }
-    }
+      else if (axis == 1) {
+        if(i % 3 == 0){
+          wireframe[i] = (int) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+2] - cz) ) + cx );
+        } else if ( i % 3 == 1){ 
+          // do nothing
+        } else {
+          wireframe[i] = (int) ( sin(d * val) * (original[i-2] - cx) + cos(d * val) * (original[i] - cz) + cz );
+        } 
+      }
+      else { // axis == 2
+        if(i % 3 == 0){
+          wireframe[i] = (int) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+1] - cy) ) + cx );
+        } else if ( i % 3 == 1){ 
+          wireframe[i] = (int) ( sin(d * val) * (original[i-1] - cx) + cos(d * val) * (original[i] - cy) + cy );
+        } else {
+          // do nothing
+        } 
+      }
+    }   
   } else {
     printf("Error: NOT A 3D POLYGON");
   }

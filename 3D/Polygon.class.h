@@ -89,7 +89,7 @@ class Polygon {
 		void setMultiplication(float);		
 		float getMultiplication();
 
-		void setDegree(float);
+		void setDegree(float, int);
 		float getDegree();
 
 		void setWireframe(int*, int);
