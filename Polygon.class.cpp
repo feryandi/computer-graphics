@@ -123,10 +123,10 @@ void Polygon::draw(FrameBuffer *fb) {
 
 		bresenham(x1, y1, x2, y2, wireRed, wireGreen, wireBlue, line, fb);
 
-    line++;
+    line++;asdasdad
 	}
 
-  fill(yMin, yMax, fb);
+  //fill(yMin, yMax, fb);
   clearMap();
 
 }
