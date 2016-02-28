@@ -71,7 +71,7 @@ float Polygon::getMultiplication() {
 }
 
 void Polygon::setDegree(float degree, int axis) {
-  this->d = degree; 
+  this->d = degree;
 
   //int *temp = (int*)malloc(len * sizeof(int));
   if(len % 3 == 0){
@@ -80,7 +80,7 @@ void Polygon::setDegree(float degree, int axis) {
       /*if(i % 3 == 0){
         wireframe[i] = (int) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+1] - cy) ) + cx );
         printf("x[%d]: %d, ", i, wireframe[i]);
-      } else if ( i % 3 == 1){ 
+      } else if ( i % 3 == 1){
         wireframe[i] = (int) ( sin(d * val) * (original[i-1] - cx) + cos(d * val) * (original[i] - cy) + cy ) ;
         printf("y[%d]: %d, ", i, wireframe[i]);
       } else{
@@ -93,7 +93,7 @@ void Polygon::setDegree(float degree, int axis) {
       {
         if(i % 3 == 0){
           // do nothing
-        } else if ( i % 3 == 1){ 
+        } else if ( i % 3 == 1){
           wireframe[i] = (float) ( cos(d * val) * (original[i] - cy) - ( sin(d*val) * ((original)[i+1] - cz) ) + cy );
         } else {
           wireframe[i] = (float) ( sin(d * val) * (original[i-1] - cy) + cos(d * val) * (original[i] - cz) + cz );
@@ -102,20 +102,20 @@ void Polygon::setDegree(float degree, int axis) {
       else if (axis == 1){
         if(i % 3 == 0){
           wireframe[i] = (float) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+2] - cz) ) + cx );
-        } else if ( i % 3 == 1){ 
+        } else if ( i % 3 == 1){
           // do nothing
         } else {
           wireframe[i] = (float) ( sin(d * val) * (original[i-2] - cx) + cos(d * val) * (original[i] - cz) + cz );
-        } 
+        }
       }
       else { // axis == 2
         if(i % 3 == 0){
           wireframe[i] = (float) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+1] - cy) ) + cx );
-        } else if ( i % 3 == 1){ 
+        } else if ( i % 3 == 1){
           wireframe[i] = (float) ( sin(d * val) * (original[i-1] - cx) + cos(d * val) * (original[i] - cy) + cy );
         } else {
           // do nothing
-        } 
+        }
       }
     }
 
@@ -160,7 +160,7 @@ void Polygon::setWireframe(int* w, int len) {
   for (int i=0; i<len; i++)
     wireframe[i] = w[i];
 
-  
+
 
 	this->len = len;
   nLine = len / 6; // 2D = 4, 3D = 6
@@ -169,7 +169,7 @@ void Polygon::setWireframe(int* w, int len) {
   //printf("print wireframe:\n");
   //for (int i = 0; i < this->len; i++){
   	//printf("%d, ", wireframe[i]);
-  //}  
+  //}
   //printf("\n");
   //oosMap = (int**) malloc(nLine*sizeof(int*));
 }

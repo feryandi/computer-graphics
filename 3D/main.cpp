@@ -1,199 +1,200 @@
 #include <iostream>
 #include "Polygon.class.h"
 #include "FrameBuffer.class.h"
+#include "Input.class.h"
 using namespace std;
 
 // 3
 int triangle[] = {
 	0, 0, 0,	6, 0, 0,
-	6, 0, 0,	3, 6, 0, 
+	6, 0, 0,	3, 6, 0,
 	3, 6, 0, 	0, 0, 0
 };
 
 
 int backBody1[] = {
-	16, 19, 0,  	20, 12, 0, 
-	20, 12, 0,  	12, 12, 0, 
+	16, 19, 0,  	20, 12, 0,
+	20, 12, 0,  	12, 12, 0,
 	12, 12, 0,  	16, 19, 0
 };
 
 int backBody2[] = {
-	20, 12, 0, 		16, 19, 0, 
-	16, 19, 0, 		23, 21, 0, 
+	20, 12, 0, 		16, 19, 0,
+	16, 19, 0, 		23, 21, 0,
 	23, 21, 0, 		20, 12, 0
 };
 
 int backBody3[] = {
-	23, 21, 0, 		16, 19, 0, 
-	16, 19, 0, 		16, 27, 0, 
+	23, 21, 0, 		16, 19, 0,
+	16, 19, 0, 		16, 27, 0,
 	16, 27, 0, 		23, 21, 0
 };
 
 int backBody4[] = {
-	16, 27, 0, 		16, 19, 0, 
-	16, 19, 0, 		9, 21, 0, 
+	16, 27, 0, 		16, 19, 0,
+	16, 19, 0, 		9, 21, 0,
 	9, 21, 0, 		16, 27, 0
 };
 
 int backBody5[] = {
-	9, 21, 0, 		16, 19, 0, 
-	16, 19, 0, 		12, 12, 0, 
-	12, 12, 0, 		9, 21, 0		
+	9, 21, 0, 		16, 19, 0,
+	16, 19, 0, 		12, 12, 0,
+	12, 12, 0, 		9, 21, 0
 };
 
 
 
 int backArm1[] = {
-	16, 0, 2,  		20, 12, 0, 
-	20, 12, 0,  	12, 12, 0, 
+	16, 0, 2,  		20, 12, 0,
+	20, 12, 0,  	12, 12, 0,
 	12, 12, 0,  	16, 0, 2
 };
 
 int backArm2[] = {
-	20, 12, 0, 		32, 12, 2, 
-	32, 12, 2, 		23, 21, 0, 
+	20, 12, 0, 		32, 12, 2,
+	32, 12, 2, 		23, 21, 0,
 	23, 21, 0, 		20, 12, 0
 };
 
 int backArm3[] = {
-	23, 21, 0, 		28, 35, 2, 
-	28, 35, 2, 		16, 27, 0, 
+	23, 21, 0, 		28, 35, 2,
+	28, 35, 2, 		16, 27, 0,
 	16, 27, 0, 		23, 21, 0
 };
 
 int backArm4[] = {
-	16, 27, 0, 		4, 35, 2, 
-	4, 35, 2, 		9, 21, 0, 
+	16, 27, 0, 		4, 35, 2,
+	4, 35, 2, 		9, 21, 0,
 	9, 21, 0, 		16, 27, 0
 };
 
 int backArm5[] = {
-	9, 21, 0, 		0, 12, 2, 
-	0, 12, 2, 		12, 12, 0, 
-	12, 12, 0, 		9, 21, 0		
+	9, 21, 0, 		0, 12, 2,
+	0, 12, 2, 		12, 12, 0,
+	12, 12, 0, 		9, 21, 0
 };
 
 
 int frontBody1[] = {
-	16, 19, 4,  	20, 12, 4, 
-	20, 12, 4,  	12, 12, 4, 
+	16, 19, 4,  	20, 12, 4,
+	20, 12, 4,  	12, 12, 4,
 	12, 12, 4,  	16, 19, 4
 };
 
 int frontBody2[] = {
-	20, 12, 4, 		16, 19, 4, 
-	16, 19, 4, 		23, 21, 4, 
+	20, 12, 4, 		16, 19, 4,
+	16, 19, 4, 		23, 21, 4,
 	23, 21, 4, 		20, 12, 4
 };
 
 int frontBody3[] = {
-	23, 21, 4, 		16, 19, 4, 
-	16, 19, 4, 		16, 27, 4, 
+	23, 21, 4, 		16, 19, 4,
+	16, 19, 4, 		16, 27, 4,
 	16, 27, 4, 		23, 21, 4
 };
 
 int frontBody4[] = {
-	16, 27, 4, 		16, 19, 4, 
-	16, 19, 4, 		9, 21, 4, 
+	16, 27, 4, 		16, 19, 4,
+	16, 19, 4, 		9, 21, 4,
 	9, 21, 4, 		16, 27, 4
 };
 
 int frontBody5[] = {
-	9, 21, 4, 		16, 19, 4, 
-	16, 19, 4, 		12, 12, 4, 
-	12, 12, 4, 		9, 21, 4		
+	9, 21, 4, 		16, 19, 4,
+	16, 19, 4, 		12, 12, 4,
+	12, 12, 4, 		9, 21, 4
 };
 
 
 int frontArm1[] = {
-	16, 0, 2,  		20, 12, 4, 
-	20, 12, 4,  	12, 12, 4, 
+	16, 0, 2,  		20, 12, 4,
+	20, 12, 4,  	12, 12, 4,
 	12, 12, 4,  	16, 0, 2
 };
 
 int frontArm2[] = {
-	20, 12, 4, 		32, 12, 2, 
-	32, 12, 2, 		23, 21, 4, 
+	20, 12, 4, 		32, 12, 2,
+	32, 12, 2, 		23, 21, 4,
 	23, 21, 4, 		20, 12, 4
 };
 
 int frontArm3[] = {
-	23, 21, 4, 		28, 35, 2, 
-	28, 35, 2, 		16, 27, 4, 
+	23, 21, 4, 		28, 35, 2,
+	28, 35, 2, 		16, 27, 4,
 	16, 27, 4, 		23, 21, 4
 };
 
 int frontArm4[] = {
-	16, 27, 4, 		4, 35, 2, 
-	4, 35, 2, 		9, 21, 4, 
+	16, 27, 4, 		4, 35, 2,
+	4, 35, 2, 		9, 21, 4,
 	9, 21, 4, 		16, 27, 4
 };
 
 int frontArm5[] = {
-	9, 21, 4, 		0, 12, 2, 
-	0, 12, 2, 		12, 12, 4, 
-	12, 12, 4, 		9, 21, 4		
+	9, 21, 4, 		0, 12, 2,
+	0, 12, 2, 		12, 12, 4,
+	12, 12, 4, 		9, 21, 4
 };
 
 
 int side1a[] = {
-	16, 0, 2,  		20, 12, 0, 
-	20, 12, 0,  	20, 12, 4, 
+	16, 0, 2,  		20, 12, 0,
+	20, 12, 0,  	20, 12, 4,
 	20, 12, 4,  	16, 0, 2
 };
 
 int side2a[] = {
-	23, 21, 4, 		32, 12, 2, 
-	32, 12, 2, 		23, 21, 0, 
+	23, 21, 4, 		32, 12, 2,
+	32, 12, 2, 		23, 21, 0,
 	23, 21, 0, 		23, 21, 4
 };
 
 int side3a[] = {
-	16, 27, 4, 		28, 35, 2, 
-	28, 35, 2, 		16, 27, 0, 
+	16, 27, 4, 		28, 35, 2,
+	28, 35, 2, 		16, 27, 0,
 	16, 27, 0, 		16, 27, 4
 };
 
 int side4a[] = {
-	9, 21, 4, 		4, 35, 2, 
-	4, 35, 2, 		9, 21, 0, 
+	9, 21, 4, 		4, 35, 2,
+	4, 35, 2, 		9, 21, 0,
 	9, 21, 0, 		9, 21, 4
 };
 
 int side5a[] = {
-	12, 12, 4, 		0, 12, 2, 
-	0, 12, 2, 		12, 12, 0, 
-	12, 12, 0, 		12, 12, 4		
+	12, 12, 4, 		0, 12, 2,
+	0, 12, 2, 		12, 12, 0,
+	12, 12, 0, 		12, 12, 4
 };
 
 
 int side1b[] = {
-	12, 12, 4, 		16, 0, 2, 
-	16, 0, 2, 		12, 12, 0, 
-	12, 12, 0, 		12, 12, 4		
+	12, 12, 4, 		16, 0, 2,
+	16, 0, 2, 		12, 12, 0,
+	12, 12, 0, 		12, 12, 4
 };
 
 int side2b[] = {
-	32, 12, 2,  	20, 12, 0, 
-	20, 12, 0,  	20, 12, 4, 
+	32, 12, 2,  	20, 12, 0,
+	20, 12, 0,  	20, 12, 4,
 	20, 12, 4,  	32, 12, 2
 };
 
 int side3b[] = {
-	23, 21, 4, 		28, 35, 2, 
-	28, 35, 2, 		23, 21, 0, 
+	23, 21, 4, 		28, 35, 2,
+	28, 35, 2, 		23, 21, 0,
 	23, 21, 0, 		23, 21, 4
 };
 
 int side4b[] = {
-	16, 27, 4, 		4, 35, 2, 
-	4, 35, 2, 		16, 27, 0, 
+	16, 27, 4, 		4, 35, 2,
+	4, 35, 2, 		16, 27, 0,
 	16, 27, 0, 		16, 27, 4
 };
 
 int side5b[] = {
-	9, 21, 4, 		0, 12, 2, 
-	0, 12, 2, 		9, 21, 0, 
+	9, 21, 4, 		0, 12, 2,
+	0, 12, 2, 		9, 21, 0,
 	9, 21, 0, 		9, 21, 4
 };
 
@@ -335,7 +336,7 @@ int main() {
 	Polygon s5a(0, 0, 0, side5a, 18);
 	s5a.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s5a.setMultiplication(10);
-	s5a.setFillColor(0,255,0);	
+	s5a.setFillColor(0,255,0);
 
 
 	Polygon s1b(0, 0, 0, side1b, 18);
@@ -361,14 +362,14 @@ int main() {
 	Polygon s5b(0, 0, 0, side5b, 18);
 	s5b.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s5b.setMultiplication(10);
-	s5b.setFillColor(0,255,0);	
+	s5b.setFillColor(0,255,0);
 
 	static Polygon* arrStar[] = {
-			&bb1, &bb2, &bb3, &bb4, &bb5, 
-			&ba1, &ba2, &ba3, &ba4, &ba5, 
-			&fb1, &fb2, &fb3, &fb4, &fb5, 
-			&fa1, &fa2, &fa3, &fa4, &fa5, 
-			&s1a, &s2a, &s3a, &s4a, &s5a, 
+			&bb1, &bb2, &bb3, &bb4, &bb5,
+			&ba1, &ba2, &ba3, &ba4, &ba5,
+			&fb1, &fb2, &fb3, &fb4, &fb5,
+			&fa1, &fa2, &fa3, &fa4, &fa5,
+			&s1a, &s2a, &s3a, &s4a, &s5a,
 			&s1b, &s2b, &s3b, &s4b, &s5b
 		};
 	vector<Polygon*> star(arrStar, arrStar + sizeof(arrStar) / sizeof(arrStar[0]) );
@@ -379,152 +380,252 @@ int main() {
 
 	FB.render();
 
-	//the real deal
-	for (int i = 0; i <= 360; i++){
-		float n = 1;
-		tri.setDegree(n*1, 1);
+	// Manual Control
+	char input;
+	float rotation = 0;
+	float rotX = 0;
+	float rotY = 0;
+	float rotZ = 0;
+	int axis = 0;
+	int n = 1;
+	Input::initTermios();
+	while (1) {
+		if (Input::kbhit()){
+			input = Input::getch();
+			switch (input) {
+				case 'w':{
+					axis = 0;
+					rotX++;
+					rotation = rotX;
+					break;
+				}
+				case 's':{
+					axis = 0;
+					rotX--;
+					rotation = rotX;
+					break;
+				}
+				case 'a':{
+					axis = 1;
+					rotY--;
+					rotation = rotY;
+					break;
+				}
+				case 'd':{
+					axis = 1;
+					rotY++;
+					rotation = rotY;
+					break;
+				}
+				case 'q':{
+					axis = 2;
+					rotZ++;
+					rotation = rotZ;
+					break;
+				}
+				case 'e':{
+					axis = 2;
+					rotZ--;
+					rotation = rotZ;
+					break;
+				}
+				case ' ':{
+					Input::resetTermios();
+					printf("End of program\n");
+					exit(0);
+					break;
+				}
+				default:{
+					//the real deal
+					for (int i = 0; i <= 360; i++){
+						float n = 1;
+						tri.setDegree(n*1, 1);
 
-		bb1.setDegree(n*i, 1);
-		bb2.setDegree(n*i, 1);
-		bb3.setDegree(n*i, 1);
-		bb4.setDegree(n*i, 1);
-		bb5.setDegree(n*i, 1);
+						bb1.setDegree(n*i, 1);
+						bb2.setDegree(n*i, 1);
+						bb3.setDegree(n*i, 1);
+						bb4.setDegree(n*i, 1);
+						bb5.setDegree(n*i, 1);
 
-		ba1.setDegree(n*i, 1);
-		ba2.setDegree(n*i, 1);
-		ba3.setDegree(n*i, 1);
-		ba4.setDegree(n*i, 1);
-		ba5.setDegree(n*i, 1);
+						ba1.setDegree(n*i, 1);
+						ba2.setDegree(n*i, 1);
+						ba3.setDegree(n*i, 1);
+						ba4.setDegree(n*i, 1);
+						ba5.setDegree(n*i, 1);
 
-		fb1.setDegree(n*i, 1);
-		fb2.setDegree(n*i, 1);
-		fb3.setDegree(n*i, 1);
-		fb4.setDegree(n*i, 1);
-		fb5.setDegree(n*i, 1);
+						fb1.setDegree(n*i, 1);
+						fb2.setDegree(n*i, 1);
+						fb3.setDegree(n*i, 1);
+						fb4.setDegree(n*i, 1);
+						fb5.setDegree(n*i, 1);
 
-		fa1.setDegree(n*i, 1);
-		fa2.setDegree(n*i, 1);
-		fa3.setDegree(n*i, 1);
-		fa4.setDegree(n*i, 1);
-		fa5.setDegree(n*i, 1);
+						fa1.setDegree(n*i, 1);
+						fa2.setDegree(n*i, 1);
+						fa3.setDegree(n*i, 1);
+						fa4.setDegree(n*i, 1);
+						fa5.setDegree(n*i, 1);
 
-		s1a.setDegree(n*i, 1);
-		s2a.setDegree(n*i, 1);
-		s3a.setDegree(n*i, 1);
-		s4a.setDegree(n*i, 1);
-		s5a.setDegree(n*i, 1);
+						s1a.setDegree(n*i, 1);
+						s2a.setDegree(n*i, 1);
+						s3a.setDegree(n*i, 1);
+						s4a.setDegree(n*i, 1);
+						s5a.setDegree(n*i, 1);
 
-		s1b.setDegree(n*i, 1);
-		s2b.setDegree(n*i, 1);
-		s3b.setDegree(n*i, 1);
-		s4b.setDegree(n*i, 1);
-		s5b.setDegree(n*i, 1);
+						s1b.setDegree(n*i, 1);
+						s2b.setDegree(n*i, 1);
+						s3b.setDegree(n*i, 1);
+						s4b.setDegree(n*i, 1);
+						s5b.setDegree(n*i, 1);
 
-		FB.canvas();
+						FB.canvas();
 
-		FB.draw(star);
+						FB.draw(star);
 
-		FB.render();
-		usleep(100);
+						FB.render();
+						usleep(100);
+					}
+
+					for (int i = 0; i <= 360; i++){
+						int n = 1;
+						tri.setDegree(i*n, 0);
+
+						bb1.setDegree(i*n, 0);
+						bb2.setDegree(i*n, 0);
+						bb3.setDegree(i*n, 0);
+						bb4.setDegree(i*n, 0);
+						bb5.setDegree(i*n, 0);
+
+						ba1.setDegree(i*n, 0);
+						ba2.setDegree(i*n, 0);
+						ba3.setDegree(i*n, 0);
+						ba4.setDegree(i*n, 0);
+						ba5.setDegree(i*n, 0);
+
+						fb1.setDegree(i*n, 0);
+						fb2.setDegree(i*n, 0);
+						fb3.setDegree(i*n, 0);
+						fb4.setDegree(i*n, 0);
+						fb5.setDegree(i*n, 0);
+
+						fa1.setDegree(i*n, 0);
+						fa2.setDegree(i*n, 0);
+						fa3.setDegree(i*n, 0);
+						fa4.setDegree(i*n, 0);
+						fa5.setDegree(i*n, 0);
+
+						s1a.setDegree(i*n, 0);
+						s2a.setDegree(i*n, 0);
+						s3a.setDegree(i*n, 0);
+						s4a.setDegree(i*n, 0);
+						s5a.setDegree(i*n, 0);
+
+						s1b.setDegree(i*n, 0);
+						s2b.setDegree(i*n, 0);
+						s3b.setDegree(i*n, 0);
+						s4b.setDegree(i*n, 0);
+						s5b.setDegree(i*n, 0);
+
+						FB.canvas();
+
+						FB.draw(star);
+
+						FB.render();
+						usleep(100);
+					}
+
+					for (int i = 0; i <= 360; i++){
+						tri.setDegree(i*1, 2);
+
+						bb1.setDegree(i*1, 2);
+						bb2.setDegree(i*1, 2);
+						bb3.setDegree(i*1, 2);
+						bb4.setDegree(i*1, 2);
+						bb5.setDegree(i*1, 2);
+
+						ba1.setDegree(i*1, 2);
+						ba2.setDegree(i*1, 2);
+						ba3.setDegree(i*1, 2);
+						ba4.setDegree(i*1, 2);
+						ba5.setDegree(i*1, 2);
+
+						fb1.setDegree(i*1, 2);
+						fb2.setDegree(i*1, 2);
+						fb3.setDegree(i*1, 2);
+						fb4.setDegree(i*1, 2);
+						fb5.setDegree(i*1, 2);
+
+						fa1.setDegree(i*1, 2);
+						fa2.setDegree(i*1, 2);
+						fa3.setDegree(i*1, 2);
+						fa4.setDegree(i*1, 2);
+						fa5.setDegree(i*1, 2);
+
+						s1a.setDegree(i*1, 2);
+						s2a.setDegree(i*1, 2);
+						s3a.setDegree(i*1, 2);
+						s4a.setDegree(i*1, 2);
+						s5a.setDegree(i*1, 2);
+
+						s1b.setDegree(i*1, 2);
+						s2b.setDegree(i*1, 2);
+						s3b.setDegree(i*1, 2);
+						s4b.setDegree(i*1, 2);
+						s5b.setDegree(i*1, 2);
+
+						FB.canvas();
+
+						FB.draw(star);
+
+						FB.render();
+						usleep(100);
+					}
+
+					printf("End of program\n");
+					exit(0);
+				}
+			}
+
+			bb1.setDegree(n*rotation, axis);
+			bb2.setDegree(n*rotation, axis);
+			bb3.setDegree(n*rotation, axis);
+			bb4.setDegree(n*rotation, axis);
+			bb5.setDegree(n*rotation, axis);
+
+			ba1.setDegree(n*rotation, axis);
+			ba2.setDegree(n*rotation, axis);
+			ba3.setDegree(n*rotation, axis);
+			ba4.setDegree(n*rotation, axis);
+			ba5.setDegree(n*rotation, axis);
+
+			fb1.setDegree(n*rotation, axis);
+			fb2.setDegree(n*rotation, axis);
+			fb3.setDegree(n*rotation, axis);
+			fb4.setDegree(n*rotation, axis);
+			fb5.setDegree(n*rotation, axis);
+
+			fa1.setDegree(n*rotation, axis);
+			fa2.setDegree(n*rotation, axis);
+			fa3.setDegree(n*rotation, axis);
+			fa4.setDegree(n*rotation, axis);
+			fa5.setDegree(n*rotation, axis);
+
+			s1a.setDegree(n*rotation, axis);
+			s2a.setDegree(n*rotation, axis);
+			s3a.setDegree(n*rotation, axis);
+			s4a.setDegree(n*rotation, axis);
+			s5a.setDegree(n*rotation, axis);
+
+			s1b.setDegree(n*rotation, axis);
+			s2b.setDegree(n*rotation, axis);
+			s3b.setDegree(n*rotation, axis);
+			s4b.setDegree(n*rotation, axis);
+			s5b.setDegree(n*rotation, axis);
+
+			FB.canvas();
+			FB.draw(star);
+			FB.render();
+		}
 	}
-
-	for (int i = 0; i <= 360; i++){
-		int n = 1;
-		tri.setDegree(i*n, 0);
-
-		bb1.setDegree(i*n, 0);
-		bb2.setDegree(i*n, 0);
-		bb3.setDegree(i*n, 0);
-		bb4.setDegree(i*n, 0);
-		bb5.setDegree(i*n, 0);
-
-		ba1.setDegree(i*n, 0);
-		ba2.setDegree(i*n, 0);
-		ba3.setDegree(i*n, 0);
-		ba4.setDegree(i*n, 0);
-		ba5.setDegree(i*n, 0);
-
-		fb1.setDegree(i*n, 0);
-		fb2.setDegree(i*n, 0);
-		fb3.setDegree(i*n, 0);
-		fb4.setDegree(i*n, 0);
-		fb5.setDegree(i*n, 0);
-
-		fa1.setDegree(i*n, 0);
-		fa2.setDegree(i*n, 0);
-		fa3.setDegree(i*n, 0);
-		fa4.setDegree(i*n, 0);
-		fa5.setDegree(i*n, 0);
-
-		s1a.setDegree(i*n, 0);
-		s2a.setDegree(i*n, 0);
-		s3a.setDegree(i*n, 0);
-		s4a.setDegree(i*n, 0);
-		s5a.setDegree(i*n, 0);
-
-		s1b.setDegree(i*n, 0);
-		s2b.setDegree(i*n, 0);
-		s3b.setDegree(i*n, 0);
-		s4b.setDegree(i*n, 0);
-		s5b.setDegree(i*n, 0);
-
-		FB.canvas();
-
-		FB.draw(star);
-
-		FB.render();
-		usleep(100);
-	}
-
-	for (int i = 0; i <= 360; i++){
-		tri.setDegree(i*1, 2);
-
-		bb1.setDegree(i*1, 2);
-		bb2.setDegree(i*1, 2);
-		bb3.setDegree(i*1, 2);
-		bb4.setDegree(i*1, 2);
-		bb5.setDegree(i*1, 2);
-
-		ba1.setDegree(i*1, 2);
-		ba2.setDegree(i*1, 2);
-		ba3.setDegree(i*1, 2);
-		ba4.setDegree(i*1, 2);
-		ba5.setDegree(i*1, 2);
-		
-		fb1.setDegree(i*1, 2);
-		fb2.setDegree(i*1, 2);
-		fb3.setDegree(i*1, 2);
-		fb4.setDegree(i*1, 2);
-		fb5.setDegree(i*1, 2);
-
-		fa1.setDegree(i*1, 2);
-		fa2.setDegree(i*1, 2);
-		fa3.setDegree(i*1, 2);
-		fa4.setDegree(i*1, 2);
-		fa5.setDegree(i*1, 2);
-
-		s1a.setDegree(i*1, 2);
-		s2a.setDegree(i*1, 2);
-		s3a.setDegree(i*1, 2);
-		s4a.setDegree(i*1, 2);
-		s5a.setDegree(i*1, 2);
-
-		s1b.setDegree(i*1, 2);
-		s2b.setDegree(i*1, 2);
-		s3b.setDegree(i*1, 2);
-		s4b.setDegree(i*1, 2);
-		s5b.setDegree(i*1, 2);
-
-		FB.canvas();
-
-		FB.draw(star);
-
-		FB.render();
-		usleep(100);
-	}
-
-	
-	printf("end of program\n");
 
 	return 0;
 }
