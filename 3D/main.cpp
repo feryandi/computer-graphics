@@ -253,22 +253,27 @@ int main() {
 	Polygon fb1(0, 0, 0, frontBody1, 18);
 	fb1.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fb1.setMultiplication(10);
+	fb1.setFillColor(255, 0, 0);
 
 	Polygon fb2(0, 0, 0, frontBody2, 18);
 	fb2.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fb2.setMultiplication(10);
+	fb2.setFillColor(255, 0, 0);
 
 	Polygon fb3(0, 0, 0, frontBody3, 18);
 	fb3.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fb3.setMultiplication(10);
+	fb3.setFillColor(255, 0, 0);
 
 	Polygon fb4(0, 0, 0, frontBody4, 18);
 	fb4.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fb4.setMultiplication(10);
+	fb4.setFillColor(255, 0, 0);
 
 	Polygon fb5(0, 0, 0, frontBody5, 18);
 	fb5.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fb5.setMultiplication(10);
+	fb5.setFillColor(255, 0, 0);
 
 
 	Polygon fa1(0, 0, 0, frontArm1, 18);
@@ -377,44 +382,45 @@ int main() {
 
 
 	//the real deal
-	for (int i = 0; i <= 360; i++){
-		tri.setDegree(i*1, 1);
+	for (int i = 0; i <= 3600; i++){
+		float n = i / 10;
+		tri.setDegree(n*1, 1);
 
-		bb1.setDegree(i*1, 1);
-		bb2.setDegree(i*1, 1);
-		bb3.setDegree(i*1, 1);
-		bb4.setDegree(i*1, 1);
-		bb5.setDegree(i*1, 1);
+		bb1.setDegree(n*1, 1);
+		bb2.setDegree(n*1, 1);
+		bb3.setDegree(n*1, 1);
+		bb4.setDegree(n*1, 1);
+		bb5.setDegree(n*1, 1);
 
-		ba1.setDegree(i*1, 1);
-		ba2.setDegree(i*1, 1);
-		ba3.setDegree(i*1, 1);
-		ba4.setDegree(i*1, 1);
-		ba5.setDegree(i*1, 1);
+		ba1.setDegree(n*1, 1);
+		ba2.setDegree(n*1, 1);
+		ba3.setDegree(n*1, 1);
+		ba4.setDegree(n*1, 1);
+		ba5.setDegree(n*1, 1);
 
-		fb1.setDegree(i*1, 1);
-		fb2.setDegree(i*1, 1);
-		fb3.setDegree(i*1, 1);
-		fb4.setDegree(i*1, 1);
-		fb5.setDegree(i*1, 1);
+		fb1.setDegree(n*1, 1);
+		fb2.setDegree(n*1, 1);
+		fb3.setDegree(n*1, 1);
+		fb4.setDegree(n*1, 1);
+		fb5.setDegree(n*1, 1);
 
-		fa1.setDegree(i*1, 1);
-		fa2.setDegree(i*1, 1);
-		fa3.setDegree(i*1, 1);
-		fa4.setDegree(i*1, 1);
-		fa5.setDegree(i*1, 1);
+		fa1.setDegree(n*1, 1);
+		fa2.setDegree(n*1, 1);
+		fa3.setDegree(n*1, 1);
+		fa4.setDegree(n*1, 1);
+		fa5.setDegree(n*1, 1);
 
-		s1a.setDegree(i*1, 1);
-		s2a.setDegree(i*1, 1);
-		s3a.setDegree(i*1, 1);
-		s4a.setDegree(i*1, 1);
-		s5a.setDegree(i*1, 1);
+		s1a.setDegree(n*1, 1);
+		s2a.setDegree(n*1, 1);
+		s3a.setDegree(n*1, 1);
+		s4a.setDegree(n*1, 1);
+		s5a.setDegree(n*1, 1);
 
-		s1b.setDegree(i*1, 1);
-		s2b.setDegree(i*1, 1);
-		s3b.setDegree(i*1, 1);
-		s4b.setDegree(i*1, 1);
-		s5b.setDegree(i*1, 1);
+		s1b.setDegree(n*1, 1);
+		s2b.setDegree(n*1, 1);
+		s3b.setDegree(n*1, 1);
+		s4b.setDegree(n*1, 1);
+		s5b.setDegree(n*1, 1);
 
 		FB.canvas();
 
@@ -457,47 +463,47 @@ int main() {
 		s5b.draw(&FB);
 
 		FB.render();
-		usleep(10000);
+		//usleep(100);
 	}
 
-	for (int i = 0; i <= 360; i++){
-		tri.setDegree(i*1, 0);
+	for (int i = 0; i <= 36000; i++){
+		tri.setDegree((i/100)*1, 0);
 
-		bb1.setDegree(i*1, 0);
-		bb2.setDegree(i*1, 0);
-		bb3.setDegree(i*1, 0);
-		bb4.setDegree(i*1, 0);
-		bb5.setDegree(i*1, 0);
+		bb1.setDegree((i/100)*1, 0);
+		bb2.setDegree((i/100)*1, 0);
+		bb3.setDegree((i/100)*1, 0);
+		bb4.setDegree((i/100)*1, 0);
+		bb5.setDegree((i/100)*1, 0);
 
-		ba1.setDegree(i*1, 0);
-		ba2.setDegree(i*1, 0);
-		ba3.setDegree(i*1, 0);
-		ba4.setDegree(i*1, 0);
-		ba5.setDegree(i*1, 0);
+		ba1.setDegree((i/100)*1, 0);
+		ba2.setDegree((i/100)*1, 0);
+		ba3.setDegree((i/100)*1, 0);
+		ba4.setDegree((i/100)*1, 0);
+		ba5.setDegree((i/100)*1, 0);
 
-		fb1.setDegree(i*1, 0);
-		fb2.setDegree(i*1, 0);
-		fb3.setDegree(i*1, 0);
-		fb4.setDegree(i*1, 0);
-		fb5.setDegree(i*1, 0);
+		fb1.setDegree((i/100)*1, 0);
+		fb2.setDegree((i/100)*1, 0);
+		fb3.setDegree((i/100)*1, 0);
+		fb4.setDegree((i/100)*1, 0);
+		fb5.setDegree((i/100)*1, 0);
 
-		fa1.setDegree(i*1, 0);
-		fa2.setDegree(i*1, 0);
-		fa3.setDegree(i*1, 0);
-		fa4.setDegree(i*1, 0);
-		fa5.setDegree(i*1, 0);
+		fa1.setDegree((i/100)*1, 0);
+		fa2.setDegree((i/100)*1, 0);
+		fa3.setDegree((i/100)*1, 0);
+		fa4.setDegree((i/100)*1, 0);
+		fa5.setDegree((i/100)*1, 0);
 
-		s1a.setDegree(i*1, 0);
-		s2a.setDegree(i*1, 0);
-		s3a.setDegree(i*1, 0);
-		s4a.setDegree(i*1, 0);
-		s5a.setDegree(i*1, 0);
+		s1a.setDegree((i/100)*1, 0);
+		s2a.setDegree((i/100)*1, 0);
+		s3a.setDegree((i/100)*1, 0);
+		s4a.setDegree((i/100)*1, 0);
+		s5a.setDegree((i/100)*1, 0);
 
-		s1b.setDegree(i*1, 0);
-		s2b.setDegree(i*1, 0);
-		s3b.setDegree(i*1, 0);
-		s4b.setDegree(i*1, 0);
-		s5b.setDegree(i*1, 0);
+		s1b.setDegree((i/100)*1, 0);
+		s2b.setDegree((i/100)*1, 0);
+		s3b.setDegree((i/100)*1, 0);
+		s4b.setDegree((i/100)*1, 0);
+		s5b.setDegree((i/100)*1, 0);
 
 		FB.canvas();
 

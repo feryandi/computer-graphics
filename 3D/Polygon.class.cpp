@@ -99,7 +99,7 @@ void Polygon::setDegree(float degree, int axis) {
           wireframe[i] = (int) ( sin(d * val) * (original[i-1] - cy) + cos(d * val) * (original[i] - cz) + cz );
         }
       }
-      else if (axis == 1) {
+      else if (axis == 1){
         if(i % 3 == 0){
           wireframe[i] = (int) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+2] - cz) ) + cx );
         } else if ( i % 3 == 1){ 
@@ -181,7 +181,7 @@ void Polygon::draw(FrameBuffer *fb) {
     line++;
 	}
 
-  //fill(yMin, yMax, fb); //ini jadi wireframe kalo dicomment gini
+  fill(yMin, yMax, fb); //ini jadi wireframe kalo dicomment gini
   clearMap();
 
 }
@@ -358,7 +358,10 @@ int Polygon::xIntersect(int e, int yScanline){
 void Polygon::fill(int yMin, int yMax, FrameBuffer *fb){
   
   for (int yScanline = yMin; yScanline <= yMax; ++yScanline) {
-    
+
+    // printf("y: %d\n", yScanline);    
+    // fflush(stdout);
+
     std::vector<intersection> intersectEdge; 
     for (int e = 0; e < nLine; ++e) {
       if (isIntersect(e, yScanline)) {
@@ -378,7 +381,7 @@ void Polygon::fill(int yMin, int yMax, FrameBuffer *fb){
     std::vector<intersection>::iterator i = intersectEdge.begin(), j;
 
     if (i!=intersectEdge.end()) {
-      while ( (i+1) != intersectEdge.end()) {
+      while ((i+1) != intersectEdge.end()) {
         if ((((i+1)->x - i->x) < 5) &&
           (!isCriticalPoint((*i).edge,(*(i+1)).edge, yScanline))) {
           
@@ -386,14 +389,21 @@ void Polygon::fill(int yMin, int yMax, FrameBuffer *fb){
 
         } else {
           if ((i+1)->type == 1) {
-            if (isCriticalPoint((*i).edge,(*(i+2)).edge, yScanline)) {
-              i++;
-              i = intersectEdge.erase(i);
+
+            // warning: this conditional maybe cause a bug
+            if ((i+2) != intersectEdge.end()) {
+              if (isCriticalPoint((*i).edge,(*(i+2)).edge, yScanline)) {
+                i++;
+                i = intersectEdge.erase(i);
+              } else {
+                i++;
+                i->x = (i+1)->x;
+                i++;
+              }
             } else {
               i++;
-              i->x = (i+1)->x;
-              i++;
             }
+
           } else {
             i++;
           }
