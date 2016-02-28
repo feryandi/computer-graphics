@@ -1,6 +1,6 @@
 # Computer Graphics Weekly Assignment
 
-Repository for weekly assignment of computer graphics (IF3260) 
+Repository for weekly assignment of computer graphics (IF3260)
 Institut Teknologi Bandung 2013
 
 Members:
@@ -9,6 +9,7 @@ Members:
 * Feryandi Nurdiantoro
 * Julio Savigny
 * Ahmad Darmawan
+* Adin Baskoro Pratomo
 
 Using framebuffer to create images and manipulating pixels.
 
