@@ -1,7 +1,5 @@
 #pragma once
 
-#ifndef Polygon_Class_H
-#define Polygon_Class_H
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
@@ -20,8 +18,6 @@
 #include <algorithm>
 #include <vector>
 
-#include "FrameBuffer.class.h"
-
 #define PI 3.14159265
 
 
@@ -29,7 +25,8 @@ class Polygon {
 	private:
 		// Posisi
 		int x, y, z;	// Kiri Atas
-		int cx, cy, cz;	// Titik Tengah
+		int cx, cy, cz;	// Titik Tengah untuk rotasi
+		float mx, my, mz;
 
 		// Multiplication
 		float k;
@@ -39,7 +36,7 @@ class Polygon {
 
 		// Wireframe
 		int *original;
-		int *wireframe;
+		float *wireframe;
 		int len;
 
 		int wireRed;
@@ -48,7 +45,6 @@ class Polygon {
 
 		// Scanline		
 		int nLine;
-		int **oosMap;
 
 		int fillRed;
 		int fillGreen;
@@ -61,16 +57,6 @@ class Polygon {
 		int iabs(int n);
 		int F(int X, int Y, int Z);// Z bukan untuk 3D
 		int G(int X, int Y);
-		void bresenham(int, int, int, int, int, int, int, int, FrameBuffer*);
-
-		// OOS Scanline algorithm
-		void clearMap();
-		int isCriticalPoint(int, int, int);
-		int isIntersect(int, int);
-		int isHorizontalLine(int);
-		int xIntersect(int, int);
-		int getMiddleX(int e);
-		void fill(int, int, FrameBuffer*);
 
 	public:
 		Polygon(int cx, int cy, int cz, int*, int len);
@@ -92,41 +78,27 @@ class Polygon {
 		void setDegree(float, int);
 		float getDegree();
 
+		void computeMiddle();
+
 		void setWireframe(int*, int);
 
 		void setWireColor(int r, int g, int b);
 		void setFillColor(int, int, int);
 
-		void draw(FrameBuffer *fb);
+        int getLineX1(int);
+        int getLineY1(int);
+        int getLineZ1(int);
+        int getLineX2(int);
+        int getLineY2(int);
+        int getLineZ2(int);
 
-                int getLineX1(int);
-                int getLineY1(int);
-                int getLineZ1(int);
-                int getLineX2(int);
-                int getLineY2(int);
-                int getLineZ2(int);
+		int getFillRed();
+		int getFillGreen();
+		int getFillBlue();
 
-		class intersection {
-		public:
-			int edge;
-			int x;
-			int type;
+        
+        int getNLine();
 
-			intersection(int _e, int _x, int _type): edge(_e), x(_x), type(_type) {
-			}
-
-			friend bool operator> (intersection&, intersection&); 
-			friend bool operator< (intersection&, intersection&); 
-        };
-
+        static bool isBehind(Polygon* a, Polygon* b);
+        static bool isFront(Polygon* a, Polygon* b);
 };
-
-inline bool operator> (Polygon::intersection &i1, Polygon::intersection &i2) {
-    return i1.x > i2.x;
-}
-
-inline bool operator< (Polygon::intersection &i1, Polygon::intersection &i2) {
-    return i1.x < i2.x;
-}
-
-#endif
