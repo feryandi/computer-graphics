@@ -7,6 +7,9 @@ Polygon::Polygon(int cx, int cy, int cz, int* w, int len) {
 	y = 0;
 	z = 0;
 	k = 1;
+  degreeX = 0;
+  degreeY = 0;
+  degreeZ = 0;
 
   wireRed = 255;
   wireGreen = 255;
@@ -71,52 +74,44 @@ float Polygon::getMultiplication() {
 }
 
 void Polygon::setDegree(float degree, int axis) {
-  this->d = degree;
+  if (axis == 0) {
+    degreeX = degreeX + degree;
+  }else if (axis == 1){
+    degreeY = degreeY + degree;
+  }
+  else if (axis == 2){
+   degreeZ = degreeZ + degree;
+  }
 
-  //int *temp = (int*)malloc(len * sizeof(int));
   if(len % 3 == 0){
     double val = PI/180.0;
-    for (int i = 0; i < len; i++){
-      /*if(i % 3 == 0){
-        wireframe[i] = (int) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+1] - cy) ) + cx );
-        printf("x[%d]: %d, ", i, wireframe[i]);
-      } else if ( i % 3 == 1){
-        wireframe[i] = (int) ( sin(d * val) * (original[i-1] - cx) + cos(d * val) * (original[i] - cy) + cy ) ;
-        printf("y[%d]: %d, ", i, wireframe[i]);
-      } else{
-      	wireframe[i] = wireframe[i];
-      	printf("z[%d]: %d\n", i, wireframe[i]);
-      	//do nothing yet, this is for z
-      }*/
-      /* do based on axis (x=0, y=1, z=2) */
-      if (axis == 0)
-      {
-        if(i % 3 == 0){
-          // do nothing
-        } else if ( i % 3 == 1){
-          wireframe[i] = (float) ( cos(d * val) * (original[i] - cy) - ( sin(d*val) * ((original)[i+1] - cz) ) + cy );
-        } else {
-          wireframe[i] = (float) ( sin(d * val) * (original[i-1] - cy) + cos(d * val) * (original[i] - cz) + cz );
-        }
+
+    for (int i = 0; i < len; i=i+3){
+      float ox = original[i], oy = original[i+1], oz = original[i+2];
+      
+      /*if (axis == 0) {
+        degreeX = degreeX + degree;
+        printf("degreeX: %f\n", degreeX);
+      }else if (axis == 1){
+        degreeY = degreeY + degree;
+        printf("degreeY: %f\n", degreeY);
       }
-      else if (axis == 1){
-        if(i % 3 == 0){
-          wireframe[i] = (float) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+2] - cz) ) + cx );
-        } else if ( i % 3 == 1){
-          // do nothing
-        } else {
-          wireframe[i] = (float) ( sin(d * val) * (original[i-2] - cx) + cos(d * val) * (original[i] - cz) + cz );
-        }
-      }
-      else { // axis == 2
-        if(i % 3 == 0){
-          wireframe[i] = (float) ( cos(d * val) * (original[i] - cx) - ( sin(d*val) * ((original)[i+1] - cy) ) + cx );
-        } else if ( i % 3 == 1){
-          wireframe[i] = (float) ( sin(d * val) * (original[i-1] - cx) + cos(d * val) * (original[i] - cy) + cy );
-        } else {
-          // do nothing
-        }
-      }
+      else if (axis == 2){
+        degreeZ = degreeZ + degree;
+        printf("degreeZ: %f\n", degreeZ);
+      }*/      
+
+      wireframe[i+1] = (float) ( cos(degreeX * val) * (oy-cy) - sin(degreeX*val) * (oz-cz) + cy );
+      wireframe[i+2] = (float) ( sin(degreeX * val) * (oy-cy) + cos(degreeX * val) * (oz-cz) + cz );
+      oy = wireframe[i+1]; oz = wireframe[i+2];
+
+      wireframe[i] = (float) ( cos(degreeY * val) * (ox-cx) - sin(degreeY*val) * (oz-cz) + cx );
+      wireframe[i+2] = (float) ( sin(degreeY * val) * (ox-cx) + cos(degreeY * val) * (oz-cz) + cz );
+      ox = wireframe[i]; oz = wireframe[i+2];
+
+      wireframe[i] = (float) ( cos(degreeZ * val) * (ox-cx) - sin(degreeZ*val) * (oy-cy) + cx );
+      wireframe[i+1] = (float) ( sin(degreeZ * val) * (ox-cx) + cos(degreeZ * val) * (oy-cy) + cy );
+      //ox = wireframe[i]; oy = wireframe[i+1];
     }
 
     computeMiddle();
@@ -127,8 +122,16 @@ void Polygon::setDegree(float degree, int axis) {
 
 }
 
-float Polygon::getDegree() {
-  return d;
+float Polygon::getDegreeX() {
+  return degreeX;
+}
+
+float Polygon::getDegreeY() {
+  return degreeY;
+}
+
+float Polygon::getDegreeZ() {
+  return degreeZ;
 }
 
 void Polygon::computeMiddle() {

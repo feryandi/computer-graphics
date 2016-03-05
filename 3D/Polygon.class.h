@@ -32,7 +32,7 @@ class Polygon {
 		float k;
 
 		// Rotation
-		float d;
+		float degreeX, degreeY, degreeZ;
 
 		// Wireframe
 		int *original;
@@ -76,7 +76,9 @@ class Polygon {
 		float getMultiplication();
 
 		void setDegree(float, int);
-		float getDegree();
+		float getDegreeX();
+		float getDegreeY();
+		float getDegreeZ();
 
 		void computeMiddle();
 

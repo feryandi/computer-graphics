@@ -13,32 +13,32 @@ int triangle[] = {
 
 
 int backBody1[] = {
-	16, 19, 0,  	20, 12, 0,
+	16, 19, -1,  	20, 12, 0,
 	20, 12, 0,  	12, 12, 0,
-	12, 12, 0,  	16, 19, 0
+	12, 12, 0,  	16, 19, -1
 };
 
 int backBody2[] = {
-	20, 12, 0, 		16, 19, 0,
-	16, 19, 0, 		23, 21, 0,
+	20, 12, 0, 		16, 19, -1,
+	16, 19, -1, 	23, 21, 0,
 	23, 21, 0, 		20, 12, 0
 };
 
 int backBody3[] = {
-	23, 21, 0, 		16, 19, 0,
-	16, 19, 0, 		16, 27, 0,
+	23, 21, 0, 		16, 19, -1,
+	16, 19, -1, 	16, 27, 0,
 	16, 27, 0, 		23, 21, 0
 };
 
 int backBody4[] = {
-	16, 27, 0, 		16, 19, 0,
-	16, 19, 0, 		9, 21, 0,
+	16, 27, 0, 		16, 19, -1,
+	16, 19, -1, 	9, 21, 0,
 	9, 21, 0, 		16, 27, 0
 };
 
 int backBody5[] = {
-	9, 21, 0, 		16, 19, 0,
-	16, 19, 0, 		12, 12, 0,
+	9, 21, 0, 		16, 19, -1,
+	16, 19, -1, 	12, 12, 0,
 	12, 12, 0, 		9, 21, 0
 };
 
@@ -76,32 +76,32 @@ int backArm5[] = {
 
 
 int frontBody1[] = {
-	16, 19, 4,  	20, 12, 4,
+	16, 19, 5,  	20, 12, 4,
 	20, 12, 4,  	12, 12, 4,
-	12, 12, 4,  	16, 19, 4
+	12, 12, 4,  	16, 19, 5
 };
 
 int frontBody2[] = {
-	20, 12, 4, 		16, 19, 4,
-	16, 19, 4, 		23, 21, 4,
+	20, 12, 4, 		16, 19, 5,
+	16, 19, 5, 		23, 21, 4,
 	23, 21, 4, 		20, 12, 4
 };
 
 int frontBody3[] = {
-	23, 21, 4, 		16, 19, 4,
-	16, 19, 4, 		16, 27, 4,
+	23, 21, 4, 		16, 19, 5,
+	16, 19, 5, 		16, 27, 4,
 	16, 27, 4, 		23, 21, 4
 };
 
 int frontBody4[] = {
-	16, 27, 4, 		16, 19, 4,
-	16, 19, 4, 		9, 21, 4,
+	16, 27, 4, 		16, 19, 5,
+	16, 19, 5, 		9, 21, 4,
 	9, 21, 4, 		16, 27, 4
 };
 
 int frontBody5[] = {
-	9, 21, 4, 		16, 19, 4,
-	16, 19, 4, 		12, 12, 4,
+	9, 21, 4, 		16, 19, 5,
+	16, 19, 5, 		12, 12, 4,
 	12, 12, 4, 		9, 21, 4
 };
 
@@ -206,165 +206,190 @@ int main() {
 	FB.initAvailable();
 
 
-	Polygon tri(0, 0, 0, triangle, 18);
-	tri.setPosition(100,100, 0);
-	tri.setMultiplication(10);
-
-
 	Polygon bb1(0, 0, 0, backBody1, 18);
 	bb1.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	bb1.setMultiplication(10);
-	bb1.setFillColor(0, 0, 255);
+	bb1.setCenter(16, 16, 2);
+	bb1.setFillColor(135, 206, 250);
 
 	Polygon bb2(0, 0, 0, backBody2, 18);
 	bb2.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	bb2.setMultiplication(10);
-	bb2.setFillColor(0, 0, 255);
+	bb2.setCenter(16, 16, 2);
+	bb2.setFillColor(135, 206, 250);
 
 	Polygon bb3(0, 0, 0, backBody3, 18);
 	bb3.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	bb3.setMultiplication(10);
-	bb3.setFillColor(0, 0, 255);
+	bb3.setCenter(16, 16, 2);
+	bb3.setFillColor(135, 206, 250);
 
 	Polygon bb4(0, 0, 0, backBody4, 18);
 	bb4.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	bb4.setMultiplication(10);
-	bb4.setFillColor(0, 0, 255);
+	bb4.setCenter(16, 16, 2);
+	bb4.setFillColor(135, 206, 250);
 
 	Polygon bb5(0, 0, 0, backBody5, 18);
 	bb5.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	bb5.setMultiplication(10);
-	bb5.setFillColor(0, 0, 255);
+	bb5.setCenter(16, 16, 2);
+	bb5.setFillColor(135, 206, 250);
 
 
 	Polygon ba1(0, 0, 0, backArm1, 18);
 	ba1.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	ba1.setMultiplication(10);
-	ba1.setFillColor(0, 0, 255);
+	ba1.setCenter(16, 16, 2);
+	ba1.setFillColor(135, 206, 250);
 
 	Polygon ba2(0, 0, 0, backArm2, 18);
 	ba2.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	ba2.setMultiplication(10);
-	ba2.setFillColor(0, 0, 255);
+	ba2.setCenter(16, 16, 2);
+	ba2.setFillColor(135, 206, 250);
 
 	Polygon ba3(0, 0, 0, backArm3, 18);
 	ba3.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	ba3.setMultiplication(10);
-	ba3.setFillColor(0, 0, 255);
+	ba3.setCenter(16, 16, 2);
+	ba3.setFillColor(135, 206, 250);
 
 	Polygon ba4(0, 0, 0, backArm4, 18);
 	ba4.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	ba4.setMultiplication(10);
-	ba4.setFillColor(0, 0, 255);
+	ba4.setCenter(16, 16, 2);
+	ba4.setFillColor(135, 206, 250);
 
 	Polygon ba5(0, 0, 0, backArm5, 18);
 	ba5.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	ba5.setMultiplication(10);
-	ba5.setFillColor(0, 0, 255);
+	ba5.setCenter(16, 16, 2);
+	ba5.setFillColor(135, 206, 250);
 
 	//front body
 	Polygon fb1(0, 0, 0, frontBody1, 18);
 	fb1.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fb1.setMultiplication(10);
-	fb1.setFillColor(255, 0, 0);
+	fb1.setCenter(16, 16, 2);
+	fb1.setFillColor(255, 215, 0);
 
 	Polygon fb2(0, 0, 0, frontBody2, 18);
 	fb2.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fb2.setMultiplication(10);
-	fb2.setFillColor(255, 0, 0);
+	fb2.setCenter(16, 16, 2);
+	fb2.setFillColor(255, 215, 0);
 
 	Polygon fb3(0, 0, 0, frontBody3, 18);
 	fb3.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fb3.setMultiplication(10);
-	fb3.setFillColor(255, 0, 0);
+	fb3.setCenter(16, 16, 2);
+	fb3.setFillColor(255, 215, 0);
 
 	Polygon fb4(0, 0, 0, frontBody4, 18);
 	fb4.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fb4.setMultiplication(10);
-	fb4.setFillColor(255, 0, 0);
+	fb4.setCenter(16, 16, 2);
+	fb4.setFillColor(255, 215, 0);
 
 	Polygon fb5(0, 0, 0, frontBody5, 18);
 	fb5.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fb5.setMultiplication(10);
-	fb5.setFillColor(255, 0, 0);
+	fb5.setCenter(16, 16, 2);
+	fb5.setFillColor(255, 215, 0);
 
 
 	Polygon fa1(0, 0, 0, frontArm1, 18);
 	fa1.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fa1.setMultiplication(10);
-	fa1.setFillColor(255,0,0);
+	fa1.setCenter(16, 16, 2);
+	fa1.setFillColor(255, 215, 0);
 
 	Polygon fa2(0, 0, 0, frontArm2, 18);
 	fa2.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fa2.setMultiplication(10);
-	fa2.setFillColor(255,0,0);
+	fa2.setCenter(16, 16, 2);
+	fa2.setFillColor(255, 215, 0);
 
 	Polygon fa3(0, 0, 0, frontArm3, 18);
 	fa3.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fa3.setMultiplication(10);
-	fa3.setFillColor(255,0,0);
+	fa3.setCenter(16, 16, 2);
+	fa3.setFillColor(255, 215, 0);
 
 	Polygon fa4(0, 0, 0, frontArm4, 18);
 	fa4.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fa4.setMultiplication(10);
-	fa4.setFillColor(255,0,0);
+	fa4.setCenter(16, 16, 2);
+	fa4.setFillColor(255, 215, 0);
 
 	Polygon fa5(0, 0, 0, frontArm5, 18);
 	fa5.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	fa5.setMultiplication(10);
-	fa5.setFillColor(255,0,0);
+	fa5.setCenter(16, 16, 2);
+	fa5.setFillColor(255, 215, 0);
 
 
 	Polygon s1a(0, 0, 0, side1a, 18);
 	s1a.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s1a.setMultiplication(10);
-	s1a.setFillColor(0,255,0);
+	s1a.setCenter(16, 16, 2);
+	s1a.setFillColor(192,192,192);
 
 	Polygon s2a(0, 0, 0, side2a, 18);
 	s2a.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s2a.setMultiplication(10);
-	s2a.setFillColor(0,255,0);
+	s2a.setCenter(16, 16, 2);
+	s2a.setFillColor(192,192,192);
 
 	Polygon s3a(0, 0, 0, side3a, 18);
 	s3a.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s3a.setMultiplication(10);
-	s3a.setFillColor(0,255,0);
+	s3a.setCenter(16, 16, 2);
+	s3a.setFillColor(192,192,192);
 
 	Polygon s4a(0, 0, 0, side4a, 18);
 	s4a.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s4a.setMultiplication(10);
-	s4a.setFillColor(0,255,0);
+	s4a.setCenter(16, 16, 2);
+	s4a.setFillColor(192,192,192);
 
 	Polygon s5a(0, 0, 0, side5a, 18);
 	s5a.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s5a.setMultiplication(10);
-	s5a.setFillColor(0,255,0);
+	s5a.setCenter(16, 16, 2);
+	s5a.setFillColor(192,192,192);
 
 
 	Polygon s1b(0, 0, 0, side1b, 18);
 	s1b.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s1b.setMultiplication(10);
-	s1b.setFillColor(0,255,0);
+	s1b.setCenter(16, 16, 2);
+	s1b.setFillColor(192,192,192);
 
 	Polygon s2b(0, 0, 0, side2b, 18);
 	s2b.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s2b.setMultiplication(10);
-	s2b.setFillColor(0,255,0);
+	s2b.setCenter(16, 16, 2);
+	s2b.setFillColor(192,192,192);
 
 	Polygon s3b(0, 0, 0, side3b, 18);
 	s3b.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s3b.setMultiplication(10);
-	s3b.setFillColor(0,255,0);
+	s3b.setCenter(16, 16, 2);
+	s3b.setFillColor(192,192,192);
 
 	Polygon s4b(0, 0, 0, side4b, 18);
 	s4b.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s4b.setMultiplication(10);
-	s4b.setFillColor(0,255,0);
+	s4b.setCenter(16, 16, 2);
+	s4b.setFillColor(192,192,192);
 
 	Polygon s5b(0, 0, 0, side5b, 18);
 	s5b.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s5b.setMultiplication(10);
-	s5b.setFillColor(0,255,0);
+	s5b.setCenter(16, 16, 2);
+	s5b.setFillColor(192,192,192);
 
 	static Polygon* arrStar[] = {
 			&bb1, &bb2, &bb3, &bb4, &bb5,
@@ -385,9 +410,6 @@ int main() {
 	// Manual Control
 	char input;
 	float rotation = 0;
-	float rotX = 0;
-	float rotY = 0;
-	float rotZ = 0;
 	int axis = 0;
 	int n = 1;
 	Input::initTermios();
@@ -398,38 +420,38 @@ int main() {
 			switch (input) {
 				case 'w':{
 					axis = 0;
-					rotX++;
-					rotation = rotX;
+					//rotX++;
+					rotation = 1;
 					break;
 				}
 				case 's':{
 					axis = 0;
-					rotX--;
-					rotation = rotX;
+					//rotX--;
+					rotation = -1;
 					break;
 				}
 				case 'a':{
 					axis = 1;
-					rotY--;
-					rotation = rotY;
+					//rotY--;
+					rotation = -1;
 					break;
 				}
 				case 'd':{
 					axis = 1;
-					rotY++;
-					rotation = rotY;
+					//rotY++;
+					rotation = 1;
 					break;
 				}
 				case 'q':{
 					axis = 2;
-					rotZ++;
-					rotation = rotZ;
+					//rotZ++;
+					rotation = 1;
 					break;
 				}
 				case 'e':{
 					axis = 2;
-					rotZ--;
-					rotation = rotZ;
+					//rotZ--;
+					rotation = -1;
 					break;
 				}
 				case ' ':{
@@ -439,8 +461,9 @@ int main() {
 					break;
 				}
 				default:{
+					break;
 					//the real deal
-					for (int i = 0; i <= 360; i++){
+					/*for (int i = 0; i <= 360; i++){
 						float n = 1;
 						tri.setDegree(n*1, 1);
 
@@ -584,7 +607,7 @@ int main() {
 					}
 
 					printf("End of program\n");
-					exit(0);
+					exit(0);*/
 				}
 			}
 
