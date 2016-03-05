@@ -33,10 +33,12 @@ class FrameBuffer {
 
 		// Private Methods
 		void drawPolygon(Polygon*);
+		void drawPolygonBezier(Polygon *polygon);
 
 		// bresenham
 		int iabs(int n);
 		void bresenham(int x1, int y1, int x2, int y2, int red, int green, int blue, int line);
+		void naiveBresenham(int x1, int y1, int x2, int y2, int red, int green, int blue, int line);
 		int F(int X, int Y, int Z);
 		int G(int X, int Y);
 
@@ -72,8 +74,7 @@ class FrameBuffer {
 		void render();
 
 		void draw(std::vector<Polygon*>&);
-
-		void drawPolygonBezier(Polygon *polygon);
+		void drawBeizer(std::vector<Polygon*> &polygons);
 
 		class intersection {
 		public:

@@ -181,11 +181,22 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
 
 }
 
+void FrameBuffer::drawBeizer(std::vector<Polygon*> &polygons){
+    std::vector<Polygon*>::iterator it;
+    std::sort(polygons.begin(), polygons.end(), Polygon::isFront);
+
+    for (it = polygons.begin(); it != polygons.end(); it++) {
+        //oosMap = (int**) malloc(((*it)->getNLine())*sizeof(int*));
+        drawPolygonBezier(*it);
+        //clearMap(*it);
+    }
+}
+
 void FrameBuffer::drawPolygonBezier(Polygon *polygon) {
 
   int line = 0;
   int nLine = polygon->getNLine();
-  float to = 0.5;
+  float to = 0.001;
   float t = 0;
   Point lastPoint = Point(polygon->getLineX1(0), polygon->getLineY1(0), 0);
 
@@ -200,7 +211,6 @@ void FrameBuffer::drawPolygonBezier(Polygon *polygon) {
   }
   
   while ( t <= 1) {
-    //printf("t = %f\n", t);
     for ( int j = 1; j < nLine; j++ ) {
       for ( int i = 1; i < nLine; i++ ) {
         if ( j < i + 1 ) {
@@ -208,18 +218,15 @@ void FrameBuffer::drawPolygonBezier(Polygon *polygon) {
           float y = (((float)(1 - t) * bezierArray[i-1][j-1].getY()) + (float)(t * bezierArray[i][j-1].getY()));
 
           bezierArray[i][j] = Point(x, y, 0);
-          //printf("(%d, %d) %f, %f\n", i, j, bezierArray[i][j].getX(), bezierArray[i][j].getY());
           
           if ( ( i == nLine-1 ) && ( j == nLine-1 ) ) {
-            bresenham(lastPoint.getX(), lastPoint.getY(), bezierArray[i][j].getX(), bezierArray[i][j].getY(), 255, 255, 255, line);
-            //lastPoint = Point(bezierArray[i][j].getX(), bezierArray[i][j].getY(), 0);
+            naiveBresenham(lastPoint.getX(), lastPoint.getY(), bezierArray[i][j].getX(), bezierArray[i][j].getY(), 255, 255, 255, 1);
+            lastPoint = Point(bezierArray[i][j].getX(), bezierArray[i][j].getY(), 0);
           }
-
         }
       } 
     }
     t += to;
-    ++line;
   }
 
 
@@ -251,6 +258,61 @@ int FrameBuffer::G(int X, int Y) {
     return 2;
   } else if (X & (! Y)) {
     return 3;
+  }
+}
+
+void FrameBuffer::naiveBresenham(int x1, int y1, int x2, int y2, int red, int green, int blue, int line) {
+  int Fx[] = { 1,  0, -1,  0};
+  int Fy[] = { 0,  1,  0, -1};
+
+  int Gx[] = { 1, -1, -1,  1};
+  int Gy[] = { 1,  1, -1, -1};
+
+  int dx = x2 - x1;
+  int dy = y2 - y1;
+
+  int X = dx > 0;
+  int Y = dy > 0;
+  int Z = (iabs(dx) - iabs(dy)) > 0;
+
+  int f = F(X, Y, Z);
+  int g = G(X, Y);
+
+  int m1x = Fx[f];
+  int m1y = Fy[f];
+  int m2x = Gx[g];
+  int m2y = Gy[g];
+
+  int da, db;
+
+  if (Z) {
+    da = iabs(dx); db = iabs(dy);
+  } else {
+    da = iabs(dy); db = iabs(dx);
+  }
+
+  int D = 2 * db - da;
+
+  plot(x1, y1, red, green, blue);
+
+  int x = x1;
+  int y = y1;
+
+  while ((Z && (x != x2)) || (!Z && (y != y2))) {
+
+    D = D + 2*db;
+
+    if (D >= 0) {
+      x += m2x;
+      y += m2y;
+      D = D - 2*da;
+    } else {
+      x += m1x;
+      y += m1y;
+    }
+
+    plot(x, y, red, green, blue);
+
   }
 }
 
