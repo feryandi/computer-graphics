@@ -54,10 +54,40 @@ int FrameBuffer::getVInfoX() {
 
 void FrameBuffer::plot(int x, int y, int red, int green, int blue) {
 	int i, j;
+	if ( ( x >= 0 ) &&
+		 ( y >= 0 ) &&
+		 ( x < vinfo.xres - 1 ) &&
+		 ( y < vinfo.yres - 1 ) &&
+     (this->available[y][x] == 0))
+     {
+          this->available[y][x] = 1;
+          //printf("X: %d, Y: %d, available: %d\n", x,y,this->available[y][x]);
+          location = ((x + vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
+                     ((y + vinfo.yoffset) * finfo.line_length));
 
-	if ( ( x >= 0 ) && 
-		 ( y >= 0 ) && 
-		 ( x < vinfo.xres - 1 ) && 
+          if (vinfo.bits_per_pixel == 32) {
+              *(buffer + location) = blue;		// Blue
+              *(buffer + location + 1) = green;	// Green
+              *(buffer + location + 2) = red;	// Red
+              *(buffer + location + 3) = 0;			// Alpha
+          } else  {
+          	// Assuming 16bpp
+              int b = blue;		// Blue
+              int g = green;	// Green
+              int r = red;		// Red
+              unsigned short int t = r<<11 | g << 5 | b;
+              *((unsigned short int*)(buffer + location)) = t;
+          }
+
+    }
+}
+
+/*void FrameBuffer::plot(int x, int y, int red, int green, int blue) {
+	int i, j;
+
+	if ( ( x >= 0 ) &&
+		 ( y >= 0 ) &&
+		 ( x < vinfo.xres - 1 ) &&
 		 ( y < vinfo.yres - 1 ) ) {
 
             location = ((x + vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
@@ -68,7 +98,7 @@ void FrameBuffer::plot(int x, int y, int red, int green, int blue) {
                 *(buffer + location + 1) = green;	// Green
                 *(buffer + location + 2) = red;	// Red
                 *(buffer + location + 3) = 0;			// Alpha
-            } else  { 
+            } else  {
             	// Assuming 16bpp
                 int b = blue;		// Blue
                 int g = green;	// Green
@@ -78,7 +108,7 @@ void FrameBuffer::plot(int x, int y, int red, int green, int blue) {
             }
 
     }
-}
+}*/
 
 void FrameBuffer::render() {
     memcpy(fbp, buffer, screensize);
@@ -124,20 +154,20 @@ void FrameBuffer::draw(std::vector<Polygon*> &polygons){
 }
 
 void FrameBuffer::drawPolygon(Polygon *polygon) {
-    
+
     int line = 0;
     int yMax = polygon->getLineY1(0);
     int yMin = polygon->getLineY1(0);
     int nLine = polygon->getNLine();
 
     while (line < nLine) {
-        
+
         int x1, y1, x2, y2;
         x1 = polygon->getLineX1(line);
         y1 = polygon->getLineY1(line);
         x2 = polygon->getLineX2(line);
         y2 = polygon->getLineY2(line);
-        
+
         if (yMax < std::max(y1,y2)) yMax = std::max(y1,y2);
         if (yMin > std::min(y1,y2)) yMin = std::min(y1,y2);
 
@@ -216,7 +246,7 @@ void FrameBuffer::bresenham(int x1, int y1, int x2, int y2, int red, int green, 
 
   int x = x1;
   int y = y1;
-  
+
   int** oosElement = &oosMap[line];
   *oosElement = (int*) malloc((iabs(y2-y1)+2)*sizeof(int));
   (*oosElement)[0] = x1;
@@ -233,9 +263,9 @@ void FrameBuffer::bresenham(int x1, int y1, int x2, int y2, int red, int green, 
       x += m1x;
       y += m1y;
     }
-  
+
     (*oosElement)[iabs(y - y1)] = x;
-    plot(x, y, red, green, blue); 
+    plot(x, y, red, green, blue);
 
   }
 }
@@ -286,15 +316,43 @@ int FrameBuffer::xIntersect(Polygon* polygon, int e, int yScanline){
     return oosMap[e][iabs(yScanline - y1E)];
 }
 
+void FrameBuffer::initAvailable(){
+  // Inisialisasi available space
+  for (int i=0;i<768;i++){
+    for (int j=0;j<1366;j++){
+      available[i][j] = 0;
+    }
+  }
+  // available = (int**) malloc (768*sizeof(int*));
+  // for (int i=0;i<768;i++){
+  //   available[i] = (int*)malloc(1366*sizeof(int));
+  // }
+}
+
+void FrameBuffer::resetAvailable(){
+  // Reset available buffer
+    // for (int i=0;i<768;i++){
+    //   memset(&available[i],0,1366*sizeof(int));
+    // }
+
+    for (int i=0;i<768;i++){
+      for (int j=0;j<1366;j++){
+        available[i][j] = 0;
+      }
+    }
+
+
+}
+
 void FrameBuffer::fillPolygon(Polygon* polygon, int yMin, int yMax){
-  
+
   int nLine = polygon->getNLine();
   for (int yScanline = yMin; yScanline <= yMax; ++yScanline) {
 
-    // printf("y: %d\n", yScanline);    
+    // printf("y: %d\n", yScanline);
     // fflush(stdout);
 
-    std::vector<intersection> intersectEdge; 
+    std::vector<intersection> intersectEdge;
     for (int e = 0; e < nLine; ++e) {
       if (isIntersect(polygon, e, yScanline)) {
         int type = isHorizontalLine(polygon, e);
@@ -316,7 +374,7 @@ void FrameBuffer::fillPolygon(Polygon* polygon, int yMin, int yMax){
       while ((i+1) != intersectEdge.end()) {
         if ((((i+1)->x - i->x) < 5) &&
           (!isCriticalPoint(polygon, (*i).edge,(*(i+1)).edge, yScanline))) {
-          
+
           i = intersectEdge.erase(i);
 
         } else {

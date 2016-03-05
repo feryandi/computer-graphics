@@ -36,7 +36,7 @@ class FrameBuffer {
 		// bresenham
 		int iabs(int n);
 		void bresenham(int x1, int y1, int x2, int y2, int red, int green, int blue, int line);
-		int F(int X, int Y, int Z); 
+		int F(int X, int Y, int Z);
 		int G(int X, int Y);
 
 		// OOS Scanline algorithm
@@ -49,7 +49,11 @@ class FrameBuffer {
 		int xIntersect(Polygon*, int, int);
 
 		void fillPolygon(Polygon* polygon, int yMin, int yMax);
-	
+
+
+		// Available Space
+		int available[768][1366];
+
 	public:
 		FrameBuffer();
 		~FrameBuffer();
@@ -60,7 +64,8 @@ class FrameBuffer {
 		//void addPolygon(Polygon*);
 		void addObject(); // To Be Implemented
 
-
+		void initAvailable();
+		void resetAvailable();
 		void canvas();
 		void plot(int x, int y, int, int, int);
 		void render();
@@ -76,8 +81,8 @@ class FrameBuffer {
 			intersection(int _e, int _x, int _type): edge(_e), x(_x), type(_type) {
 			}
 
-			friend bool operator> (intersection&, intersection&); 
-			friend bool operator< (intersection&, intersection&); 
+			friend bool operator> (intersection&, intersection&);
+			friend bool operator< (intersection&, intersection&);
   		};
 };
 

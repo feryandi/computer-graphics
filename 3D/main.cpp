@@ -203,6 +203,8 @@ int main() {
 	printf("start of program\n");
 
 	FrameBuffer FB;
+	FB.initAvailable();
+
 
 	Polygon tri(0, 0, 0, triangle, 18);
 	tri.setPosition(100,100, 0);
@@ -392,6 +394,7 @@ int main() {
 	while (1) {
 		if (Input::kbhit()){
 			input = Input::getch();
+			FB.resetAvailable();
 			switch (input) {
 				case 'w':{
 					axis = 0;
