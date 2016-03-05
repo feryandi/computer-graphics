@@ -181,6 +181,50 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
 
 }
 
+void FrameBuffer::drawPolygonBezier(Polygon *polygon) {
+
+  int line = 0;
+  int nLine = polygon->getNLine();
+  float to = 0.5;
+  float t = 0;
+  Point lastPoint = Point(polygon->getLineX1(0), polygon->getLineY1(0), 0);
+
+  Point** bezierArray = (Point **) malloc(sizeof(Point) * nLine);
+
+  for ( int i = 0; i < nLine; i++ ) {
+    if ( (bezierArray[i] = (Point *) malloc((i + 1) * sizeof(Point))) == NULL ) {
+      /* Error */
+    } else {
+      bezierArray[i][0] = Point(polygon->getLineX1(i), polygon->getLineY1(i), 0);
+    }
+  }
+  
+  while ( t <= 1) {
+    //printf("t = %f\n", t);
+    for ( int j = 1; j < nLine; j++ ) {
+      for ( int i = 1; i < nLine; i++ ) {
+        if ( j < i + 1 ) {
+          float x = (((float)(1 - t) * bezierArray[i-1][j-1].getX()) + (float)(t * bezierArray[i][j-1].getX()));
+          float y = (((float)(1 - t) * bezierArray[i-1][j-1].getY()) + (float)(t * bezierArray[i][j-1].getY()));
+
+          bezierArray[i][j] = Point(x, y, 0);
+          //printf("(%d, %d) %f, %f\n", i, j, bezierArray[i][j].getX(), bezierArray[i][j].getY());
+          
+          if ( ( i == nLine-1 ) && ( j == nLine-1 ) ) {
+            bresenham(lastPoint.getX(), lastPoint.getY(), bezierArray[i][j].getX(), bezierArray[i][j].getY(), 255, 255, 255, line);
+            //lastPoint = Point(bezierArray[i][j].getX(), bezierArray[i][j].getY(), 0);
+          }
+
+        }
+      } 
+    }
+    t += to;
+    ++line;
+  }
+
+
+}
+
 int FrameBuffer::iabs(int n){
   int const mask = n >> (sizeof(int) * 8 - 1);
   return ((n + mask) ^ mask);

@@ -15,6 +15,7 @@
 #include <time.h>
 
 #include "Polygon.class.h"
+#include "Point.class.hpp"
 
 class FrameBuffer {
 	private:
@@ -71,6 +72,8 @@ class FrameBuffer {
 		void render();
 
 		void draw(std::vector<Polygon*>&);
+
+		void drawPolygonBezier(Polygon *polygon);
 
 		class intersection {
 		public:

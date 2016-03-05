@@ -88,200 +88,6 @@ float CPMouthGaspDown[] = {
 	5, 10, 0,
 	8, 8, 0
 };
-/*
-// 3
-int triangle[] = {
-	0, 0, 0,	6, 0, 0,
-	6, 0, 0,	3, 6, 0,
-	3, 6, 0, 	0, 0, 0
-};
-
-
-int backBody1[] = {
-	16, 19, -1,  	20, 12, 0,
-	20, 12, 0,  	12, 12, 0,
-	12, 12, 0,  	16, 19, -1
-};
-
-int backBody2[] = {
-	20, 12, 0, 		16, 19, -1,
-	16, 19, -1, 	23, 21, 0,
-	23, 21, 0, 		20, 12, 0
-};
-
-int backBody3[] = {
-	23, 21, 0, 		16, 19, -1,
-	16, 19, -1, 	16, 27, 0,
-	16, 27, 0, 		23, 21, 0
-};
-
-int backBody4[] = {
-	16, 27, 0, 		16, 19, -1,
-	16, 19, -1, 	9, 21, 0,
-	9, 21, 0, 		16, 27, 0
-};
-
-int backBody5[] = {
-	9, 21, 0, 		16, 19, -1,
-	16, 19, -1, 	12, 12, 0,
-	12, 12, 0, 		9, 21, 0
-};
-
-
-
-int backArm1[] = {
-	16, 0, 2,  		20, 12, 0,
-	20, 12, 0,  	12, 12, 0,
-	12, 12, 0,  	16, 0, 2
-};
-
-int backArm2[] = {
-	20, 12, 0, 		32, 12, 2,
-	32, 12, 2, 		23, 21, 0,
-	23, 21, 0, 		20, 12, 0
-};
-
-int backArm3[] = {
-	23, 21, 0, 		28, 35, 2,
-	28, 35, 2, 		16, 27, 0,
-	16, 27, 0, 		23, 21, 0
-};
-
-int backArm4[] = {
-	16, 27, 0, 		4, 35, 2,
-	4, 35, 2, 		9, 21, 0,
-	9, 21, 0, 		16, 27, 0
-};
-
-int backArm5[] = {
-	9, 21, 0, 		0, 12, 2,
-	0, 12, 2, 		12, 12, 0,
-	12, 12, 0, 		9, 21, 0
-};
-
-
-int frontBody1[] = {
-	16, 19, 5,  	20, 12, 4,
-	20, 12, 4,  	12, 12, 4,
-	12, 12, 4,  	16, 19, 5
-};
-
-int frontBody2[] = {
-	20, 12, 4, 		16, 19, 5,
-	16, 19, 5, 		23, 21, 4,
-	23, 21, 4, 		20, 12, 4
-};
-
-int frontBody3[] = {
-	23, 21, 4, 		16, 19, 5,
-	16, 19, 5, 		16, 27, 4,
-	16, 27, 4, 		23, 21, 4
-};
-
-int frontBody4[] = {
-	16, 27, 4, 		16, 19, 5,
-	16, 19, 5, 		9, 21, 4,
-	9, 21, 4, 		16, 27, 4
-};
-
-int frontBody5[] = {
-	9, 21, 4, 		16, 19, 5,
-	16, 19, 5, 		12, 12, 4,
-	12, 12, 4, 		9, 21, 4
-};
-
-
-int frontArm1[] = {
-	16, 0, 2,  		20, 12, 4,
-	20, 12, 4,  	12, 12, 4,
-	12, 12, 4,  	16, 0, 2
-};
-
-int frontArm2[] = {
-	20, 12, 4, 		32, 12, 2,
-	32, 12, 2, 		23, 21, 4,
-	23, 21, 4, 		20, 12, 4
-};
-
-int frontArm3[] = {
-	23, 21, 4, 		28, 35, 2,
-	28, 35, 2, 		16, 27, 4,
-	16, 27, 4, 		23, 21, 4
-};
-
-int frontArm4[] = {
-	16, 27, 4, 		4, 35, 2,
-	4, 35, 2, 		9, 21, 4,
-	9, 21, 4, 		16, 27, 4
-};
-
-int frontArm5[] = {
-	9, 21, 4, 		0, 12, 2,
-	0, 12, 2, 		12, 12, 4,
-	12, 12, 4, 		9, 21, 4
-};
-
-
-int side1a[] = {
-	16, 0, 2,  		20, 12, 0,
-	20, 12, 0,  	20, 12, 4,
-	20, 12, 4,  	16, 0, 2
-};
-
-int side2a[] = {
-	23, 21, 4, 		32, 12, 2,
-	32, 12, 2, 		23, 21, 0,
-	23, 21, 0, 		23, 21, 4
-};
-
-int side3a[] = {
-	16, 27, 4, 		28, 35, 2,
-	28, 35, 2, 		16, 27, 0,
-	16, 27, 0, 		16, 27, 4
-};
-
-int side4a[] = {
-	9, 21, 4, 		4, 35, 2,
-	4, 35, 2, 		9, 21, 0,
-	9, 21, 0, 		9, 21, 4
-};
-
-int side5a[] = {
-	12, 12, 4, 		0, 12, 2,
-	0, 12, 2, 		12, 12, 0,
-	12, 12, 0, 		12, 12, 4
-};
-
-
-int side1b[] = {
-	12, 12, 4, 		16, 0, 2,
-	16, 0, 2, 		12, 12, 0,
-	12, 12, 0, 		12, 12, 4
-};
-
-int side2b[] = {
-	32, 12, 2,  	20, 12, 0,
-	20, 12, 0,  	20, 12, 4,
-	20, 12, 4,  	32, 12, 2
-};
-
-int side3b[] = {
-	23, 21, 4, 		28, 35, 2,
-	28, 35, 2, 		23, 21, 0,
-	23, 21, 0, 		23, 21, 4
-};
-
-int side4b[] = {
-	16, 27, 4, 		4, 35, 2,
-	4, 35, 2, 		16, 27, 0,
-	16, 27, 0, 		16, 27, 4
-};
-
-int side5b[] = {
-	9, 21, 4, 		0, 12, 2,
-	0, 12, 2, 		9, 21, 0,
-	9, 21, 0, 		9, 21, 4
-};*/
 
 float three_points[] = {
 	10, 10, 10,
@@ -315,13 +121,13 @@ void drawCurveRecursive(float *points, int points_length,  float t, float **pict
 void drawCurve(float *points, int points_length, float nt, float **picture){
 	float * simpler_picture = (float*)malloc((nt + 1) * 3 * sizeof(float));
 	int simpler_picture_length = (nt + 1) * 3;
-	simpler_picture[0] = points[0]; //printf("simpler_picture[%d]: %f\n", 0, simpler_picture[0]);
-	simpler_picture[1] = points[1]; //printf("simpler_picture[%d]: %f\n", 1, simpler_picture[1]);
-	simpler_picture[2] = points[2]; //printf("simpler_picture[%d]: %f\n", 2, simpler_picture[2]);
+	simpler_picture[0] = points[0]; 
+	simpler_picture[1] = points[1]; 
+	simpler_picture[2] = points[2]; 
 
-	simpler_picture[simpler_picture_length-3] = points[points_length-3]; //printf("simpler_picture[%d]: %f\n", simpler_picture_length-3, simpler_picture[simpler_picture_length-3]);
-	simpler_picture[simpler_picture_length-2] = points[points_length-2]; //printf("simpler_picture[%d]: %f\n", simpler_picture_length-2, simpler_picture[simpler_picture_length-2]);
-	simpler_picture[simpler_picture_length-1] = points[points_length-1]; //printf("simpler_picture[%d]: %f\n", simpler_picture_length-1, simpler_picture[simpler_picture_length-1]);
+	simpler_picture[simpler_picture_length-3] = points[points_length-3]; 
+	simpler_picture[simpler_picture_length-2] = points[points_length-2]; 
+	simpler_picture[simpler_picture_length-1] = points[points_length-1]; 
 	for(int i = 1; i < nt; i++){
 		drawCurveRecursive(points, points_length, (1/nt)*i, &simpler_picture, simpler_picture_length, i);	
 	}
@@ -332,39 +138,26 @@ void drawCurve(float *points, int points_length, float nt, float **picture){
 	printf("picture_length: %d", picture_length);
 
 	// titik pertama di awal
-	(*picture)[0] = simpler_picture[0]; //printf("(*picture)[%d]: %f\n", 0, simpler_picture[0]);
-	(*picture)[1] = simpler_picture[1]; //printf("(*picture)[%d]: %f\n", 1, simpler_picture[1]);
-	(*picture)[2] = simpler_picture[2]; //printf("(*picture)[%d]: %f\n", 2, simpler_picture[2]);
-	// titik pertama di akhir --> jadinya ga ada
-	/*(*picture)[picture_length - 3] = simpler_picture[0]; //printf("(*picture)[%d]: %f\n", picture_length - 3, simpler_picture[0]);
-	(*picture)[picture_length - 2] = simpler_picture[1]; //printf("(*picture)[%d]: %f\n", picture_length - 2, simpler_picture[1]);
-	(*picture)[picture_length - 1] = simpler_picture[2]; //printf("(*picture)[%d]: %f\n", picture_length - 1, simpler_picture[2]);*/
+	(*picture)[0] = simpler_picture[0];
+	(*picture)[1] = simpler_picture[1];
+	(*picture)[2] = simpler_picture[2];
+
 	//titik di antaranya kalo ada
 	if(picture_length > 6){
 		int j=3;
 		for(int i = 3; i < simpler_picture_length-3; i+=3){
-			(*picture)[j] = simpler_picture[i]; //printf("(*picture)[%d]: %f\n", j, simpler_picture[i]);
-			(*picture)[j+1] = simpler_picture[i+1]; //printf("(*picture)[%d]: %f\n", j+1, simpler_picture[i+1]);
-			(*picture)[j+2] = simpler_picture[i+2]; //printf("(*picture)[%d]: %f\n", j+2, simpler_picture[i+2]);
-			(*picture)[j+3] = simpler_picture[i]; //printf("(*picture)[%d]: %f\n", j+3, simpler_picture[i]);
-			(*picture)[j+4] = simpler_picture[i+1]; //printf("(*picture)[%d]: %f\n", j+4, simpler_picture[i+1]);
-			(*picture)[j+5] = simpler_picture[i+2]; //printf("(*picture)[%d]: %f\n", j+5, simpler_picture[i+2]);
+			(*picture)[j] = simpler_picture[i]; 
+			(*picture)[j+1] = simpler_picture[i+1];
+			(*picture)[j+2] = simpler_picture[i+2];
+			(*picture)[j+3] = simpler_picture[i];
+			(*picture)[j+4] = simpler_picture[i+1];
+			(*picture)[j+5] = simpler_picture[i+2];
 			j+=6;
 		}
 	}
-	(*picture)[picture_length - 3] = simpler_picture[simpler_picture_length - 3]; //printf("(*picture)[%d]: %f\n", picture_length - 3, simpler_picture[0]);
-	(*picture)[picture_length - 2] = simpler_picture[simpler_picture_length - 2]; //printf("(*picture)[%d]: %f\n", picture_length - 2, simpler_picture[1]);
-	(*picture)[picture_length - 1] = simpler_picture[simpler_picture_length - 1]; //printf("(*picture)[%d]: %f\n", picture_length - 1, simpler_picture[2]);
-
-
-	printf("simpler_picture\n");
-	for (int i = 0; i < 33; i+=3){
-		printf("%f ", simpler_picture[i]);
-		printf("%f ", simpler_picture[i+1]);
-		printf("%f ", simpler_picture[i+2]);
-		printf("\n");
-	}
-	printf("\n");
+	(*picture)[picture_length - 3] = simpler_picture[simpler_picture_length - 3];
+	(*picture)[picture_length - 2] = simpler_picture[simpler_picture_length - 2];
+	(*picture)[picture_length - 1] = simpler_picture[simpler_picture_length - 1];
 
 }
 

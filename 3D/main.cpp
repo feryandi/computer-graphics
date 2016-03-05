@@ -205,8 +205,16 @@ int main() {
 	FrameBuffer FB;
 	FB.initAvailable();
 
-
 	Polygon bb1(0, 0, 0, backBody1, 18);
+	bb1.setPosition(0, 0, 0);
+	bb1.setMultiplication(1);
+	bb1.setCenter(0, 0, 0);
+	bb1.setFillColor(135, 206, 250);
+
+	FB.drawPolygonBezier(&bb1);
+
+
+	/*Polygon bb1(0, 0, 0, backBody1, 18);
 	bb1.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	bb1.setMultiplication(10);
 	bb1.setCenter(16, 16, 2);
@@ -389,9 +397,9 @@ int main() {
 	s5b.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
 	s5b.setMultiplication(10);
 	s5b.setCenter(16, 16, 2);
-	s5b.setFillColor(192,192,192);
+	s5b.setFillColor(192,192,192);*/
 
-	static Polygon* arrStar[] = {
+	/*static Polygon* arrStar[] = {
 			&bb1, &bb2, &bb3, &bb4, &bb5,
 			&ba1, &ba2, &ba3, &ba4, &ba5,
 			&fb1, &fb2, &fb3, &fb4, &fb5,
@@ -400,15 +408,15 @@ int main() {
 			&s1b, &s2b, &s3b, &s4b, &s5b
 		};
 	vector<Polygon*> star(arrStar, arrStar + sizeof(arrStar) / sizeof(arrStar[0]) );
-
+*/
 	FB.canvas();
 
-	FB.draw(star);
+	//FB.draw(star);
 
 	FB.render();
 
 	// Manual Control
-	char input;
+	/*char input;
 	float rotation = 0;
 	int axis = 0;
 	int n = 1;
@@ -463,7 +471,7 @@ int main() {
 				default:{
 					break;
 					//the real deal
-					/*for (int i = 0; i <= 360; i++){
+					for (int i = 0; i <= 360; i++){
 						float n = 1;
 						tri.setDegree(n*1, 1);
 
@@ -607,7 +615,7 @@ int main() {
 					}
 
 					printf("End of program\n");
-					exit(0);*/
+					exit(0);
 				}
 			}
 
@@ -651,7 +659,7 @@ int main() {
 			FB.draw(star);
 			FB.render();
 		}
-	}
+	}*/
 
 	return 0;
 }
