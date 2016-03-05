@@ -231,45 +231,54 @@ void drawCurveRecursive(float *points, int points_length,  float t, float **pict
 void drawCurve(float *points, int points_length, float nt, float **picture){
 	float * simpler_picture = (float*)malloc((nt + 1) * 3 * sizeof(float));
 	int simpler_picture_length = (nt + 1) * 3;
-	simpler_picture[0] = points[0]; printf("simpler_picture[%d]: %f\n", 0, simpler_picture[0]);
-	simpler_picture[1] = points[1]; printf("simpler_picture[%d]: %f\n", 1, simpler_picture[1]);
-	simpler_picture[2] = points[2]; printf("simpler_picture[%d]: %f\n", 2, simpler_picture[2]);
+	simpler_picture[0] = points[0]; //printf("simpler_picture[%d]: %f\n", 0, simpler_picture[0]);
+	simpler_picture[1] = points[1]; //printf("simpler_picture[%d]: %f\n", 1, simpler_picture[1]);
+	simpler_picture[2] = points[2]; //printf("simpler_picture[%d]: %f\n", 2, simpler_picture[2]);
 
-	simpler_picture[simpler_picture_length-3] = points[points_length-3]; printf("simpler_picture[%d]: %f\n", simpler_picture_length-3, simpler_picture[simpler_picture_length-3]);
-	simpler_picture[simpler_picture_length-2] = points[points_length-2]; printf("simpler_picture[%d]: %f\n", simpler_picture_length-2, simpler_picture[simpler_picture_length-2]);
-	simpler_picture[simpler_picture_length-1] = points[points_length-1]; printf("simpler_picture[%d]: %f\n", simpler_picture_length-1, simpler_picture[simpler_picture_length-1]);
+	simpler_picture[simpler_picture_length-3] = points[points_length-3]; //printf("simpler_picture[%d]: %f\n", simpler_picture_length-3, simpler_picture[simpler_picture_length-3]);
+	simpler_picture[simpler_picture_length-2] = points[points_length-2]; //printf("simpler_picture[%d]: %f\n", simpler_picture_length-2, simpler_picture[simpler_picture_length-2]);
+	simpler_picture[simpler_picture_length-1] = points[points_length-1]; //printf("simpler_picture[%d]: %f\n", simpler_picture_length-1, simpler_picture[simpler_picture_length-1]);
 	for(int i = 1; i < nt; i++){
 		drawCurveRecursive(points, points_length, (1/nt)*i, &simpler_picture, simpler_picture_length, i);	
 	}
 	
-	(* picture) = (float*)malloc((simpler_picture_length * 2)*sizeof(float)); 
+	(* picture) = (float*)malloc(((simpler_picture_length-3) * 2)*sizeof(float)); 
 
-	int picture_length = simpler_picture_length * 2;
+	int picture_length = (simpler_picture_length-3) * 2;
+	printf("picture_length: %d", picture_length);
+
 	// titik pertama di awal
-	(*picture)[0] = simpler_picture[0]; printf("(*picture)[%d]: %f\n", 0, simpler_picture[0]);
-	(*picture)[1] = simpler_picture[1]; printf("(*picture)[%d]: %f\n", 1, simpler_picture[1]);
-	(*picture)[2] = simpler_picture[2]; printf("(*picture)[%d]: %f\n", 2, simpler_picture[2]);
-	// titik pertama di akhir
-	(*picture)[picture_length - 3] = simpler_picture[0]; printf("(*picture)[%d]: %f\n", picture_length - 3, simpler_picture[0]);
-	(*picture)[picture_length - 2] = simpler_picture[1]; printf("(*picture)[%d]: %f\n", picture_length - 2, simpler_picture[1]);
-	(*picture)[picture_length - 1] = simpler_picture[2]; printf("(*picture)[%d]: %f\n", picture_length - 1, simpler_picture[2]);
+	(*picture)[0] = simpler_picture[0]; //printf("(*picture)[%d]: %f\n", 0, simpler_picture[0]);
+	(*picture)[1] = simpler_picture[1]; //printf("(*picture)[%d]: %f\n", 1, simpler_picture[1]);
+	(*picture)[2] = simpler_picture[2]; //printf("(*picture)[%d]: %f\n", 2, simpler_picture[2]);
+	// titik pertama di akhir --> jadinya ga ada
+	/*(*picture)[picture_length - 3] = simpler_picture[0]; //printf("(*picture)[%d]: %f\n", picture_length - 3, simpler_picture[0]);
+	(*picture)[picture_length - 2] = simpler_picture[1]; //printf("(*picture)[%d]: %f\n", picture_length - 2, simpler_picture[1]);
+	(*picture)[picture_length - 1] = simpler_picture[2]; //printf("(*picture)[%d]: %f\n", picture_length - 1, simpler_picture[2]);*/
 	//titik di antaranya kalo ada
 	if(picture_length > 6){
 		int j=3;
-		for(int i = 3; i < simpler_picture_length - 3; i+=3){
-			(*picture)[j] = simpler_picture[i]; printf("(*picture)[%d]: %f\n", j, simpler_picture[i]);
-			(*picture)[j+1] = simpler_picture[i+1]; printf("(*picture)[%d]: %f\n", j+1, simpler_picture[i+1]);
-			(*picture)[j+2] = simpler_picture[i+2]; printf("(*picture)[%d]: %f\n", j+2, simpler_picture[i+2]);
-			(*picture)[j+3] = simpler_picture[i]; printf("(*picture)[%d]: %f\n", j+3, simpler_picture[i]);
-			(*picture)[j+4] = simpler_picture[i+1]; printf("(*picture)[%d]: %f\n", j+4, simpler_picture[i+1]);
-			(*picture)[j+5] = simpler_picture[i+2]; printf("(*picture)[%d]: %f\n", j+5, simpler_picture[i+2]);
+		for(int i = 3; i < simpler_picture_length-3; i+=3){
+			(*picture)[j] = simpler_picture[i]; //printf("(*picture)[%d]: %f\n", j, simpler_picture[i]);
+			(*picture)[j+1] = simpler_picture[i+1]; //printf("(*picture)[%d]: %f\n", j+1, simpler_picture[i+1]);
+			(*picture)[j+2] = simpler_picture[i+2]; //printf("(*picture)[%d]: %f\n", j+2, simpler_picture[i+2]);
+			(*picture)[j+3] = simpler_picture[i]; //printf("(*picture)[%d]: %f\n", j+3, simpler_picture[i]);
+			(*picture)[j+4] = simpler_picture[i+1]; //printf("(*picture)[%d]: %f\n", j+4, simpler_picture[i+1]);
+			(*picture)[j+5] = simpler_picture[i+2]; //printf("(*picture)[%d]: %f\n", j+5, simpler_picture[i+2]);
 			j+=6;
 		}
 	}
+	(*picture)[picture_length - 3] = simpler_picture[simpler_picture_length - 3]; //printf("(*picture)[%d]: %f\n", picture_length - 3, simpler_picture[0]);
+	(*picture)[picture_length - 2] = simpler_picture[simpler_picture_length - 2]; //printf("(*picture)[%d]: %f\n", picture_length - 2, simpler_picture[1]);
+	(*picture)[picture_length - 1] = simpler_picture[simpler_picture_length - 1]; //printf("(*picture)[%d]: %f\n", picture_length - 1, simpler_picture[2]);
+
 
 	printf("simpler_picture\n");
-	for (int i = 0; i < simpler_picture_length; i++){
+	for (int i = 0; i < 33; i+=3){
 		printf("%f ", simpler_picture[i]);
+		printf("%f ", simpler_picture[i+1]);
+		printf("%f ", simpler_picture[i+2]);
+		printf("\n");
 	}
 	printf("\n");
 
@@ -285,20 +294,46 @@ int main() {
 	float t = 10;
 	drawCurve(three_points, 9, t, &picture);
 	printf("three_points\n");
-	for (int i = 0; i < 9; i++){
+	for (int i = 0; i < 9; i+=3){
 		printf("%f ", three_points[i]);
+		printf("%f ", three_points[i+1]);
+		printf("%f ", three_points[i+2]);
+		printf("\n");
 	}
 	printf("\n");
 
 	printf("picture\n");
-	for (int i = 0; i < 66; i++){
+	for (int i = 0; i < 60; i+=6){
 		printf("%f ", picture[i]);
+		printf("%f ", picture[i+1]);
+		printf("%f    ", picture[i+2]);
+		printf("%f ", picture[i+3]);
+		printf("%f ", picture[i+4]);
+		printf("%f ", picture[i+5]);
+		printf("\n");
 	}
 	printf("\n");
 
-	/*Polygon tp(0, 0, 0, picture, 11);
+	//float to int he he he amfun bismillah
+	int * integer_picture = (int*)malloc(60*sizeof(int));
+	for(int i = 0; i < 60; i++){
+		integer_picture[i] = (int) (picture[i]*20);
+	}
+	printf("integer_picture\n");
+	for (int i = 0; i < 60; i+=6){
+		printf("%d ", integer_picture[i]);
+		printf("%d ", integer_picture[i+1]);
+		printf("%d    ", integer_picture[i+2]);
+		printf("%d ", integer_picture[i+3]);
+		printf("%d ", integer_picture[i+4]);
+		printf("%d ", integer_picture[i+5]);
+		printf("\n");	
+	}
+	printf("\n");
+
+	Polygon tp(0, 0, 0, integer_picture, 60);
 	tp.setPosition(FB.getVInfoX()/2,FB.getVInfoY()/2, 0);
-	tp.setMultiplication(10);
+	tp.setMultiplication(1);
 	tp.setCenter(15, 15, 10);
 	tp.setFillColor(135, 206, 250);
 
@@ -311,7 +346,7 @@ int main() {
 
 	FB.draw(star);
 
-	FB.render();*/
+	FB.render();
 
 
 	/*Polygon bb1(0, 0, 0, backBody1, 18);

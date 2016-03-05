@@ -176,7 +176,7 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
         line++;
     }
 
-  fillPolygon(polygon, yMin, yMax); //ini jadi wireframe kalo dicomment gini
+  //fillPolygon(polygon, yMin, yMax); //ini jadi wireframe kalo dicomment gini
   //clearMap(polygon);
 
 }
