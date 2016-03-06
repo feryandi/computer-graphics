@@ -7,10 +7,15 @@ int main () {
 
 	Polygon p;
 	p.addPoint(50, 50, 0, 0);
-	p.addPoint(100, 100, 0, 0);
-	p.addPoint(150, 50, 0, 0);
-	p.addPoint(150, 50, 0, 1);
-	p.addPoint(150, 150, 0, 1);
+	p.addPoint(50, 40, 0, 0);
+	p.addPoint(60, 40, 0, 1);
+	p.addPoint(150, 40, 0, 0);
+	p.addPoint(160, 40, 0, 0);
+	p.addPoint(160, 50, 0, 1);
+	p.addPoint(160, 150, 0, 0);
+	p.addPoint(160, 160, 0, 0);
+	p.addPoint(150, 160, 0, 0);
+
 
 	FB.canvas();
 

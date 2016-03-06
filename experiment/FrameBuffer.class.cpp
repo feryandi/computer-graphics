@@ -125,11 +125,10 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
 
     while (point < nPoint) {
         if (polygon->getPointType(point) == 1) {
-
           int x1, y1, x2, y2;
           x1 = (polygon->getPoint(point))->getX();
           y1 = (polygon->getPoint(point))->getY();
-          x2 = (polygon->getPoint(point+1))->getY();
+          x2 = (polygon->getPoint(point+1))->getX();
           y2 = (polygon->getPoint(point+1))->getY();
 
           bresenham(x1, y1, x2, y2, 255, 255, 255, point);
@@ -137,52 +136,58 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
         } else {
           int startN = point;
           int total = 0;
+          int endN = point;
 
           int stop = 1;
 
           while ( stop && ( point < nPoint ) ) {
-            if ( polygon->getPointType(point) == 0 ) {
-              ++point;
-              ++total;
-            } else {
+            if ( polygon->getPointType(point) != 0 ) {
               stop = 0;
+              --point;
             }
+            ++point;
+            ++total;
           }
+
+          endN = point;
           --point;
-          printf("p: %d", point);
 
-          float to = 0.001;
-          float t = 0;
+          if (total > 1) {
+            float to = 0.001;
+            float t = 0;
 
-          Point lastPoint = Point((polygon->getPoint(startN))->getX(), (polygon->getPoint(startN))->getY(), 0);
+            Point lastPoint = Point((polygon->getPoint(startN))->getX(), (polygon->getPoint(startN))->getY(), 0);
 
-          Point** bezierArray = (Point **) malloc(sizeof(Point) * total);
+            Point** bezierArray = (Point **) malloc(sizeof(Point) * total);
 
-          for ( int i = 0; i < total; i++ ) {
-            if ( (bezierArray[i] = (Point *) malloc((i + 1) * sizeof(Point))) == NULL ) {
-              /* Error */
-            } else {
-              bezierArray[i][0] = Point((polygon->getPoint(i))->getX(), (polygon->getPoint(i))->getY(), 0);
+            for ( int i = 0; i < total; i++ ) {
+              if ( (bezierArray[i] = (Point *) malloc((i + 1) * sizeof(Point))) == NULL ) {
+                /* Error */
+              } else {
+                bezierArray[i][0] = Point((polygon->getPoint(i + startN))->getX(), (polygon->getPoint(i + startN))->getY(), 0);
+              }
             }
-          }
-          
-          while ( t <= 1) {
-            for ( int j = 1; j < total; j++ ) {
-              for ( int i = 1; i < total; i++ ) {
-                if ( j < i + 1 ) {
-                  float x = (((float)(1 - t) * bezierArray[i-1][j-1].getX()) + (float)(t * bezierArray[i][j-1].getX()));
-                  float y = (((float)(1 - t) * bezierArray[i-1][j-1].getY()) + (float)(t * bezierArray[i][j-1].getY()));
+            
+            while ( t <= 1) {
+              for ( int j = 1; j < total; j++ ) {
+                for ( int i = 1; i < total; i++ ) {
+                  if ( j < i + 1 ) {
+                    float x = (((float)(1 - t) * bezierArray[i-1][j-1].getX()) + (float)(t * bezierArray[i][j-1].getX()));
+                    float y = (((float)(1 - t) * bezierArray[i-1][j-1].getY()) + (float)(t * bezierArray[i][j-1].getY()));
 
-                  bezierArray[i][j] = Point(x, y, 0);
-                  
-                  if ( ( i == total-1 ) && ( j == total-1 ) ) {
-                    bresenham((int)lastPoint.getX(), (int)lastPoint.getY(), (int)bezierArray[i][j].getX(), (int)bezierArray[i][j].getY(), 255, 255, 255, 1);
-                    lastPoint = Point(bezierArray[i][j].getX(), bezierArray[i][j].getY(), 0);
+                    bezierArray[i][j] = Point(x, y, 0);
+                    
+                    if ( ( i == total-1 ) && ( j == total-1 ) ) {
+                      bresenham((int)lastPoint.getX(), (int)lastPoint.getY(), (int)bezierArray[i][j].getX(), (int)bezierArray[i][j].getY(), 255, 255, 255, 1);
+                      lastPoint = Point(bezierArray[i][j].getX(), bezierArray[i][j].getY(), 0);
+                    }
                   }
-                }
-              } 
+                } 
+              }
+              t += to;
             }
-            t += to;
+          } else {
+            plot((polygon->getPoint(point))->getX(), (polygon->getPoint(point))->getY(), 255, 255, 255);
           }
 
         }
