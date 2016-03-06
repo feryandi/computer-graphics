@@ -6,6 +6,7 @@ Polygon::Polygon() {
 	x = 0;
 	y = 0;
 	z = 0;
+	k = 1;
 }
 
 Polygon::~Polygon() {
@@ -21,6 +22,10 @@ void Polygon::setPosition(int x, int y, int z) {
 	this->z = z;
 }
 
+void Polygon::setMultiplication(float k) {
+	this->k = k;
+}
+
 void Polygon::addPoint(Point P, int t) {
 	/* t adalah penanda
 	   0 = titik berdiri sendiri 
@@ -34,11 +39,14 @@ void Polygon::addPoint(int x, int y, int z, int t) {
 }
 
 Point* Polygon::getPoint(int n) { return &((points.at(n)).first); }
+int Polygon::getPointX(int n) { return ( getPoint(n)->getX() * k + x ); }
+int Polygon::getPointY(int n) { return ( getPoint(n)->getY() * k + y ); }
+int Polygon::getPointZ(int n) { return ( getPoint(n)->getZ() * k + z ); }
 int Polygon::getPointType(int n) { return (points.at(n)).second; }
 int Polygon::getPointCount() { return points.size(); }
 
 void Polygon::movePoint(int n, int x, int y, int z) {
-	getPoint(n)->moveX(x);
-	getPoint(n)->moveY(y);
-	getPoint(n)->moveZ(z);
+	getPoint(n)->moveX(x/k);
+	getPoint(n)->moveY(y/k);
+	getPoint(n)->moveZ(z/k);
 }

@@ -125,10 +125,10 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
     while (point < nPoint) {
         if (polygon->getPointType(point) == 1) {
           int x1, y1, x2, y2;
-          x1 = (polygon->getPoint(point))->getX();
-          y1 = (polygon->getPoint(point))->getY();
-          x2 = (polygon->getPoint(point+1))->getX();
-          y2 = (polygon->getPoint(point+1))->getY();
+          x1 = (polygon->getPointX(point));
+          y1 = (polygon->getPointY(point));
+          x2 = (polygon->getPointX(point+1));
+          y2 = (polygon->getPointY(point+1));
 
           bresenham(x1, y1, x2, y2, 255, 255, 255, point);
 
@@ -160,7 +160,7 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
             float to = 0.001;
             float t = 0;
 
-            Point lastPoint = Point((polygon->getPoint(startN))->getX(), (polygon->getPoint(startN))->getY(), 0);
+            Point lastPoint = Point((polygon->getPointX(startN)), (polygon->getPointY(startN)), 0);
 
             Point** bezierArray = (Point **) malloc(sizeof(Point) * total);
 
@@ -168,7 +168,7 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
               if ( (bezierArray[i] = (Point *) malloc((i + 1) * sizeof(Point))) == NULL ) {
                 /* Error */
               } else {
-                bezierArray[i][0] = Point((polygon->getPoint(i + startN))->getX(), (polygon->getPoint(i + startN))->getY(), 0);
+                bezierArray[i][0] = Point((polygon->getPointX(i + startN)), (polygon->getPointY(i + startN)), 0);
               }
             }
             
@@ -191,7 +191,7 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
               t += to;
             }
           } else {
-            plot((polygon->getPoint(point))->getX(), (polygon->getPoint(point))->getY(), 255, 255, 255);
+            plot((polygon->getPointX(point)), (polygon->getPointY(point)), 255, 255, 255);
           }
 
         }
