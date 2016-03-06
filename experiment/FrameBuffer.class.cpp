@@ -116,6 +116,7 @@ void FrameBuffer::draw(std::vector<Polygon*> &polygons){
 
     for (it = polygons.begin(); it != polygons.end(); it++) {
         drawPolygon(*it);
+        printf("%x\n", )
     }
 }
 

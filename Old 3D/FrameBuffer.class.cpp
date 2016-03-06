@@ -2,7 +2,7 @@
 #include <vector>
 
 FrameBuffer::FrameBuffer() {
-  // Open the file for reading and writing
+	// Open the file for reading and writing
     fbfd = open("/dev/fb0", O_RDWR);
     if (fbfd == -1) {
         perror("Error: cannot open framebuffer device");
@@ -53,26 +53,26 @@ int FrameBuffer::getVInfoX() {
 }
 
 void FrameBuffer::plot(int x, int y, int red, int green, int blue) {
-  int i, j;
+	int i, j;
 
-  if ( ( x >= 0 ) && 
-     ( y >= 0 ) && 
-     ( x < vinfo.xres - 1 ) && 
-     ( y < vinfo.yres - 1 ) ) {
+	if ( ( x >= 0 ) && 
+		 ( y >= 0 ) && 
+		 ( x < vinfo.xres - 1 ) && 
+		 ( y < vinfo.yres - 1 ) ) {
 
             location = ((x + vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
                        ((y + vinfo.yoffset) * finfo.line_length));
 
             if (vinfo.bits_per_pixel == 32) {
-                *(buffer + location) = blue;    // Blue
-                *(buffer + location + 1) = green; // Green
-                *(buffer + location + 2) = red; // Red
-                *(buffer + location + 3) = 0;     // Alpha
+                *(buffer + location) = blue;		// Blue
+                *(buffer + location + 1) = green;	// Green
+                *(buffer + location + 2) = red;	// Red
+                *(buffer + location + 3) = 0;			// Alpha
             } else  { 
-              // Assuming 16bpp
-                int b = blue;   // Blue
-                int g = green;  // Green
-                int r = red;    // Red
+            	// Assuming 16bpp
+                int b = blue;		// Blue
+                int g = green;	// Green
+                int r = red;		// Red
                 unsigned short int t = r<<11 | g << 5 | b;
                 *((unsigned short int*)(buffer + location)) = t;
             }

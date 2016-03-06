@@ -14,8 +14,11 @@ int main () {
 	p.addPoint(160, 50, 0, 1);
 	p.addPoint(160, 150, 0, 0);
 	p.addPoint(160, 160, 0, 0);
-	p.addPoint(150, 160, 0, 0);
-
+	p.addPoint(150, 160, 0, 1);//8
+	p.addPoint(60, 160, 0, 0);
+	p.addPoint(50, 160, 0, 0);
+	p.addPoint(50, 150, 0, 1);
+	p.addPoint(50, 50, 0, 0);
 
 	FB.canvas();
 
@@ -24,15 +27,28 @@ int main () {
 	};
 	vector<Polygon*> star(arrStar, arrStar + sizeof(arrStar) / sizeof(arrStar[0]) );
 
-	//while (1 == 1) {
+	/*while (1 == 1) {
+		FB.canvas();
+
+		FB.draw(star);
+		FB.render();*/
+
+/*		p.movePoint(6, 1, 1, 0);
+		p.movePoint(7, 1, 1, 0);
+		p.movePoint(8, 1, 1, 0);*/
+
+		//cout << (p.getPoint(0))->getX() << endl;
+
+		/*usleep(60000);
+	}*/
 		FB.canvas();
 
 		FB.draw(star);
 		FB.render();
-/*
-		p.movePoint(0, 0, 1, 0);
-		p.movePoint(2, 0, 1, 0);*/
-	//}
 
+		FB.canvas();
+
+		FB.draw(star);
+		FB.render();
 	return 0;
 }

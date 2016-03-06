@@ -22,13 +22,14 @@ int main() {
 	pmouth.setCenter(0, 0, 0);
 	pmouth.setFillColor(135, 206, 250);
 
-	FB.canvas();
 
 	static Polygon* arrStar[] = {
 		&pmouth
 	};
 	vector<Polygon*> star(arrStar, arrStar + sizeof(arrStar) / sizeof(arrStar[0]) );
 
+
+	FB.canvas();
 	FB.draw(star);
 	//FB.drawBeizer(star);
 
