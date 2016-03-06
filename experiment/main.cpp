@@ -121,6 +121,22 @@ void createRightEye(Polygon *p) {
 	(*p).addPoint(0, 18, 0, 3);
 }
 
+void createNose(Polygon *p) {
+	(*p).addPoint(2, 0, 0, 0);	
+	(*p).addPoint(0, 8, 0, 0);	
+	(*p).addPoint(2, 16, 0, 0);	
+	(*p).addPoint(12, 8, 0, 0);	
+	(*p).addPoint(16, 10, 0, 0);	
+	(*p).addPoint(20, 20, 0, 0);	
+	(*p).addPoint(28, 22, 0, 0);	
+	(*p).addPoint(36, 20, 0, 0);	
+	(*p).addPoint(40, 10, 0, 0);	
+	(*p).addPoint(44, 8, 0, 0);	
+	(*p).addPoint(54, 16, 0, 0);	
+	(*p).addPoint(56, 8, 0, 0);	
+	(*p).addPoint(54, 0, 0, 0);	
+}
+
 void doCemberut(FrameBuffer *FB, vector<Polygon*> *polies, Polygon *mouth , int r) {
 	// Cemberut
 	int f = 0;
@@ -414,46 +430,48 @@ int main () {
 	right_eyebrow.setPosition((FB.getVInfoX()/2)+15, (FB.getVInfoY()/2)-135, 0);
 	right_eyebrow.setMultiplication(3);
 
-	FB.canvas();
+	Polygon nose;
+	createNose(&nose);
+	nose.setPosition((FB.getVInfoX()/2)-90, (FB.getVInfoY()/2)+80, 0);
+	nose.setMultiplication(2.25);
 
 	static Polygon* arrStar[] = {
-		&face, &mouth, &left_eye, &left_eyebrow, &right_eye, &right_eyebrow
+		&face, &mouth, &left_eye, &left_eyebrow, &right_eye, &right_eyebrow, &nose
 	};
 	vector<Polygon*> star(arrStar, arrStar + sizeof(arrStar) / sizeof(arrStar[0]) );
 
-	//while (1) {
-		FB.canvas();
+	FB.canvas();
 
-		FB.draw(star);
-		FB.render();
+	FB.draw(star);
+	FB.render();
 
-		doCemberut(&FB, &star, &mouth, 1);
-		sleep(2);
-		doCemberut(&FB, &star, &mouth, -1);
+	doCemberut(&FB, &star, &mouth, 1);
+	sleep(2);
+	doCemberut(&FB, &star, &mouth, -1);
 
-		doSenyum(&FB, &star, &mouth, 1);
-		sleep(2);
-		doSenyum(&FB, &star, &mouth, -1);
+	doSenyum(&FB, &star, &mouth, 1);
+	sleep(2);
+	doSenyum(&FB, &star, &mouth, -1);
 
-		doTertawa(&FB, &star, &mouth, 1);
-		sleep(2);
-		doTertawa(&FB, &star, &mouth, -1);
+	doTertawa(&FB, &star, &mouth, 1);
+	sleep(2);
+	doTertawa(&FB, &star, &mouth, -1);
 
-		doKaget(&FB, &star, &mouth, &left_eyebrow, 1);
-		sleep(2);
-		doKaget(&FB, &star, &mouth, &left_eyebrow, -1);
+	doKaget(&FB, &star, &mouth, &left_eyebrow, 1);
+	sleep(2);
+	doKaget(&FB, &star, &mouth, &left_eyebrow, -1);
 
-		doImut(&FB, &star, &mouth, &left_eye, &left_eyebrow, 1);
-		sleep(2);
-		doImut(&FB, &star, &mouth, &left_eye, &left_eyebrow, -1);
+	doImut(&FB, &star, &mouth, &left_eye, &left_eyebrow, 1);
+	sleep(2);
+	doImut(&FB, &star, &mouth, &left_eye, &left_eyebrow, -1);
 
-		doMenangis(&FB, &star, &mouth, &left_eye, &left_eyebrow, &right_eye, &right_eyebrow, 1);
-		sleep(2);
-		doMenangis(&FB, &star, &mouth, &left_eye, &left_eyebrow, &right_eye, &right_eyebrow, -1);
+	doMenangis(&FB, &star, &mouth, &left_eye, &left_eyebrow, &right_eye, &right_eyebrow, 1);
+	sleep(2);
+	doMenangis(&FB, &star, &mouth, &left_eye, &left_eyebrow, &right_eye, &right_eyebrow, -1);
 
-		doHah(&FB, &star, &left_eyebrow, &right_eyebrow, 1);
-		sleep(2);
-		doHah(&FB, &star, &left_eyebrow, &right_eyebrow, -1);
+	doHah(&FB, &star, &left_eyebrow, &right_eyebrow, 1);
+	sleep(2);
+	doHah(&FB, &star, &left_eyebrow, &right_eyebrow, -1);
 
 
 	return 0;
