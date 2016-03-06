@@ -137,6 +137,34 @@ void createNose(Polygon *p) {
 	(*p).addPoint(54, 0, 0, 0);	
 }
 
+void createLeftEar(Polygon *p) {	
+	(*p).addPoint(27, 14, 0, 0);
+	(*p).addPoint(17, 0, 0, 0);
+	(*p).addPoint(9, 7, 0, 0);
+	(*p).addPoint(0, 14, 0, 0);
+	(*p).addPoint(5, 42, 0, 0);
+	(*p).addPoint(10, 42, 0, 0);
+	(*p).addPoint(16, 53, 0, 0);
+	(*p).addPoint(12, 55, 0, 0);
+	(*p).addPoint(11, 62, 0, 0);
+	(*p).addPoint(30, 68, 0, 0);
+	(*p).addPoint(34, 64, 0, 0);
+}
+
+void createRightEar(Polygon *p) {	
+	(*p).addPoint(7, 14, 0, 0);
+	(*p).addPoint(17, 0, 0, 0);
+	(*p).addPoint(25, 7, 0, 0);
+	(*p).addPoint(34, 14, 0, 0);
+	(*p).addPoint(29, 42, 0, 0);
+	(*p).addPoint(24, 42, 0, 0);
+	(*p).addPoint(18, 53, 0, 0);
+	(*p).addPoint(22, 55, 0, 0);
+	(*p).addPoint(13, 62, 0, 0);
+	(*p).addPoint(4, 68, 0, 0);
+	(*p).addPoint(0, 64, 0, 0);
+}
+
 void doCemberut(FrameBuffer *FB, vector<Polygon*> *polies, Polygon *mouth , int r) {
 	// Cemberut
 	int f = 0;
@@ -434,9 +462,19 @@ int main () {
 	createNose(&nose);
 	nose.setPosition((FB.getVInfoX()/2)-90, (FB.getVInfoY()/2)+80, 0);
 	nose.setMultiplication(2.25);
+	
+	Polygon right_ear;
+	createRightEar(&right_ear);
+	right_ear.setPosition((FB.getVInfoX()/2)+190, (FB.getVInfoY()/2)-135, 0);
+	right_ear.setMultiplication(3);
+
+	Polygon left_ear;
+	createLeftEar(&left_ear);
+	left_ear.setPosition((FB.getVInfoX()/2)-352, (FB.getVInfoY()/2)-135, 0);
+	left_ear.setMultiplication(3);
 
 	static Polygon* arrStar[] = {
-		&face, &mouth, &left_eye, &left_eyebrow, &right_eye, &right_eyebrow, &nose
+		&face, &mouth, &left_eye, &left_eyebrow, &right_eye, &right_eyebrow, &nose, &right_ear, &left_ear
 	};
 	vector<Polygon*> star(arrStar, arrStar + sizeof(arrStar) / sizeof(arrStar[0]) );
 
