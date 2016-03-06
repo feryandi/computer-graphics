@@ -90,7 +90,21 @@ void createLeftEyebrow(Polygon *p) {
 	(*p).addPoint(0, 18, 0, 3);
 }
 
-void createRightEyebrow(Polygon *p) {	
+void createRightEyebrow(Polygon *p) {
+	(*p).addPoint(48, 18, 0, 0);
+	(*p).addPoint(41, 3, 0, 0);
+	(*p).addPoint(30, 2, 0, 0);
+	(*p).addPoint(19, 1, 0, 0);
+	(*p).addPoint(2, 9, 0, 0);
+	(*p).addPoint(0, 14, 0, 3);
+	(*p).addPoint(0, 14, 0, 0);
+	(*p).addPoint(2, 16, 0, 0);
+	(*p).addPoint(8, 14, 0, 0);
+	(*p).addPoint(14, 12, 0, 0);
+	(*p).addPoint(26, 3, 0, 0);
+	(*p).addPoint(35, 5, 0, 0);
+	(*p).addPoint(41, 7, 0, 0);
+	(*p).addPoint(48, 18, 0, 3);	
 }
 
 void createRightEye(Polygon *p) {
@@ -105,6 +119,266 @@ void createRightEye(Polygon *p) {
 	(*p).addPoint(30, 36, 0, 0);
 	(*p).addPoint(4, 36, 0, 0);
 	(*p).addPoint(0, 18, 0, 3);
+}
+
+void doCemberut(FrameBuffer *FB, vector<Polygon*> *polies, Polygon *mouth , int r) {
+	// Cemberut
+	int f = 0;
+	while ( f < 10 ) {
+		(*FB).canvas();
+
+		(*FB).draw(*polies);
+		(*FB).render();
+
+		(*mouth).movePoint(8, 0, 2*r, 0);
+		(*mouth).movePoint(9, 0, 3*r, 0);
+		(*mouth).movePoint(19, 0, 3*r, 0);
+		(*mouth).movePoint(22, 0, 3*r, 0);
+
+		(*mouth).movePoint(11, 0, 2*r, 0);
+		(*mouth).movePoint(12, 0, -3*r, 0);
+		(*mouth).movePoint(13, 0, 2*r, 0);
+
+		(*mouth).movePoint(15, 0, 3*r, 0);
+		(*mouth).movePoint(17, 0, 3*r, 0);
+		(*mouth).movePoint(20, 0, 3*r, 0);
+		(*mouth).movePoint(16, 0, 2*r, 0);
+		(*mouth).movePoint(0, 0, 2*r, 0);
+
+		(*mouth).movePoint(18, 0, -3*r, 0);
+		(*mouth).movePoint(21, 0, -3*r, 0);
+		++f;
+
+		usleep(10000);
+	}
+}
+
+void doSenyum(FrameBuffer *FB, vector<Polygon*> *polies, Polygon *mouth, int r) {
+	// Senyum
+	int f = 0;
+	while ( f < 5 ) {
+		(*FB).canvas();
+
+		(*FB).draw(*polies);
+		(*FB).render();
+
+		(*mouth).movePoint(8, 0, -2*r, 0);
+		(*mouth).movePoint(9, 0, -3*r, 0);
+		(*mouth).movePoint(19, 0, -3*r, 0);
+		(*mouth).movePoint(22, 0, -3*r, 0);
+
+		(*mouth).movePoint(11, 0, -2*r, 0);
+		(*mouth).movePoint(12, 0, 3*r, 0);
+		(*mouth).movePoint(13, 0, -2*r, 0);
+
+		(*mouth).movePoint(15, 0, -3*r, 0);
+		(*mouth).movePoint(17, 0, -3*r, 0);
+		(*mouth).movePoint(20, 0, -3*r, 0);
+		(*mouth).movePoint(16, 0, -2*r, 0);
+		(*mouth).movePoint(0, 0, -2*r, 0);
+
+		(*mouth).movePoint(18, 0, 3*r, 0);
+		(*mouth).movePoint(21, 0, 3*r, 0);
+		++f;
+
+		usleep(10000);
+	}
+}
+
+void doTertawa(FrameBuffer *FB, vector<Polygon*> *polies, Polygon *mouth, int r) {
+	// Tertawa
+	for (int i = 0; i < 5; i++) {
+		int c = 1;
+		if ( (i % 2) == 0 ) {
+			c = 1;
+		} else {
+			c = -1;
+		}
+
+		int f = 0;
+		while ( f < 10 ) {
+			(*FB).canvas();
+
+			(*FB).draw(*polies);
+			(*FB).render();
+
+			(*mouth).movePoint(11, 0, c*(3-i)*r, 0);
+			(*mouth).movePoint(12, 0, c*(5-i)*r, 0);
+			(*mouth).movePoint(13, 0, c*(3-i)*r, 0);
+
+			(*mouth).movePoint(21, 0, c*(5-i)*r, 0);
+			++f;
+
+			usleep(10000);
+		}
+	}
+}
+
+void doKaget(FrameBuffer *FB, vector<Polygon*> *polies, Polygon *mouth, Polygon *left_eyebrow, int r) {
+	// Kaget
+	int f = 0;
+	while ( f < 10 ) {
+		(*FB).canvas();
+
+		(*FB).draw(*polies);
+		(*FB).render();
+
+		(*mouth).movePoint(11, 0, 8*r, 0);
+		(*mouth).movePoint(12, 0, 14*r, 0);
+		(*mouth).movePoint(13, 0, 8*r, 0);
+
+		(*mouth).movePoint(21, 0, 14*r, 0);
+
+		(*mouth).movePoint(8, 0, 2*r, 0);
+		(*mouth).movePoint(9, -2*r, 2*r, 0);
+		(*mouth).movePoint(19, -2*r, 2*r, 0);
+		(*mouth).movePoint(22, -2*r, 2*r, 0);
+
+		(*mouth).movePoint(15, 2*r, 2*r, 0);
+		(*mouth).movePoint(17, 2*r, 2*r, 0);
+		(*mouth).movePoint(20, 2*r, 2*r, 0);
+		(*mouth).movePoint(16, 0, 2*r, 0);
+		(*mouth).movePoint(0, 0, 2*r, 0);
+
+		(*left_eyebrow).movePosition(0, -5*r, 0);
+
+		++f;
+
+		usleep(10000);
+	}
+}
+
+void doImut(FrameBuffer *FB, vector<Polygon*> *polies, Polygon *mouth, Polygon *left_eye, Polygon *left_eyebrow, int r) {
+	// Imut
+	int f = 0;
+	while ( f < 15 ) {
+		(*FB).canvas();
+
+		(*FB).draw(*polies);
+		(*FB).render();
+
+		(*mouth).movePoint(2, 0, -1*r, 0);
+		(*mouth).movePoint(3, 0, -1*r, 0);
+		(*mouth).movePoint(4, 0, -1*r, 0);
+		(*mouth).movePoint(5, 0, -1*r, 0);
+		(*mouth).movePoint(6, 0, -1*r, 0);
+
+		(*mouth).movePoint(8, -2*r, 0, 0);
+		(*mouth).movePoint(9, -2*r, 0, 0);
+		(*mouth).movePoint(19, -2*r, 0, 0);
+		(*mouth).movePoint(22, -2*r, 0, 0);
+
+		(*mouth).movePoint(10, -3*r, 1*r, 0);
+		(*mouth).movePoint(11, -3*r, 1*r, 0);
+		(*mouth).movePoint(12, 0, 2*r, 0);
+		(*mouth).movePoint(13, 3*r, 1*r, 0);
+		(*mouth).movePoint(14, 3*r, 1*r, 0);
+
+		(*mouth).movePoint(15, 2*r, 0, 0);
+		(*mouth).movePoint(17, 2*r, 0, 0);
+		(*mouth).movePoint(20, 2*r, 0, 0);
+		(*mouth).movePoint(16, 2*r, 0, 0);
+		(*mouth).movePoint(0, 2*r, 0, 0);
+
+		(*mouth).movePoint(18, 0, 1*r, 0);
+		(*mouth).movePoint(21, 0, 1*r, 0);
+		++f;
+
+		usleep(10000);
+	}
+
+	f = 0;
+	while ( f < 5 ) {
+		(*FB).canvas();
+
+		(*FB).draw(*polies);
+		(*FB).render();
+
+		(*left_eye).movePoint(1, 0, 8*r, 0);
+		(*left_eye).movePoint(2, 0, 15*r, 0);
+		(*left_eye).movePoint(3, 0, 8*r, 0);
+
+		(*left_eyebrow).movePosition(0, 2*r, 0);
+
+		++f;
+		usleep(10000);
+	}
+}
+
+void doMenangis(FrameBuffer *FB, vector<Polygon*> *polies, Polygon *mouth, 
+				Polygon *left_eye, Polygon *left_eyebrow, Polygon *right_eye, Polygon *right_eyebrow, int r) {
+	// Menangis
+	int f = 0;
+	while ( f < 10 ) {
+		(*FB).canvas();
+
+		(*FB).draw(*polies);
+		(*FB).render();
+
+		(*mouth).movePoint(8, 0, 2*r, 0);
+		(*mouth).movePoint(9, 0, 3*r, 0);
+		(*mouth).movePoint(19, 0, 3*r, 0);
+		(*mouth).movePoint(22, 0, 3*r, 0);
+
+		(*mouth).movePoint(11, 0, 2*r, 0);
+		(*mouth).movePoint(12, 0, 3*r, 0);
+		(*mouth).movePoint(13, 0, 2*r, 0);
+
+		(*mouth).movePoint(15, 0, 3*r, 0);
+		(*mouth).movePoint(17, 0, 3*r, 0);
+		(*mouth).movePoint(20, 0, 3*r, 0);
+		(*mouth).movePoint(16, 0, 2*r, 0);
+		(*mouth).movePoint(0, 0, 2*r, 0);
+
+		(*mouth).movePoint(18, 0, -3*r, 0);
+		(*mouth).movePoint(21, 0, 7*r, 0);
+
+		(*left_eye).movePoint(1, 0, 4*r, 0);
+		(*left_eye).movePoint(2, 0, 7*r, 0);
+		(*left_eye).movePoint(3, 0, 4*r, 0);
+
+		(*right_eye).movePoint(1, 0, 4*r, 0);
+		(*right_eye).movePoint(2, 0, 7*r, 0);
+		(*right_eye).movePoint(3, 0, 4*r, 0);
+
+		(*left_eyebrow).movePoint(1, 0, 2*r, 0);
+		(*left_eyebrow).movePoint(2, 0, 3*r, 0);
+		(*left_eyebrow).movePoint(3, 0, 3*r, 0);
+		(*left_eyebrow).movePoint(4, 0, 4*r, 0);
+		(*left_eyebrow).movePoint(8, 0, 3*r, 0);
+		(*left_eyebrow).movePoint(9, 0, 4*r, 0);
+		(*left_eyebrow).movePoint(11, 0, 4*r, 0);
+		(*left_eyebrow).movePoint(12, 0, 4*r, 0);
+
+		(*right_eyebrow).movePoint(1, 0, 2*r, 0);
+		(*right_eyebrow).movePoint(2, 0, 3*r, 0);
+		(*right_eyebrow).movePoint(3, 0, 3*r, 0);
+		(*right_eyebrow).movePoint(4, 0, 4*r, 0);
+		(*right_eyebrow).movePoint(8, 0, 3*r, 0);
+		(*right_eyebrow).movePoint(9, 0, 4*r, 0);
+		(*right_eyebrow).movePoint(11, 0, 4*r, 0);
+		(*right_eyebrow).movePoint(12, 0, 4*r, 0);
+		++f;
+
+		usleep(10000);
+	}
+}
+
+void doHah(FrameBuffer *FB, vector<Polygon*> *polies, Polygon *left_eyebrow, Polygon *right_eyebrow, int r)  {
+	int f = 0;
+	while ( f < 5 ) {
+		(*FB).canvas();
+
+		(*FB).draw(*polies);
+		(*FB).render();
+
+
+		(*left_eyebrow).movePosition(0, -6*r, 0);
+		(*right_eyebrow).movePosition(0, -6*r, 0);
+		++f;
+
+		usleep(10000);
+	}
 }
 
 int main () {
@@ -135,10 +409,15 @@ int main () {
 	right_eye.setPosition((FB.getVInfoX()/2)+20, (FB.getVInfoY()/2)-85, 0);
 	right_eye.setMultiplication(1.5);
 
+	Polygon right_eyebrow;
+	createRightEyebrow(&right_eyebrow);
+	right_eyebrow.setPosition((FB.getVInfoX()/2)+15, (FB.getVInfoY()/2)-135, 0);
+	right_eyebrow.setMultiplication(3);
+
 	FB.canvas();
 
 	static Polygon* arrStar[] = {
-		&face, &mouth, &left_eye, &right_eye, &left_eyebrow
+		&face, &mouth, &left_eye, &left_eyebrow, &right_eye, &right_eyebrow
 	};
 	vector<Polygon*> star(arrStar, arrStar + sizeof(arrStar) / sizeof(arrStar[0]) );
 
@@ -148,177 +427,34 @@ int main () {
 		FB.draw(star);
 		FB.render();
 
-		int f;
+		doCemberut(&FB, &star, &mouth, 1);
+		sleep(2);
+		doCemberut(&FB, &star, &mouth, -1);
 
-		// Cemberut
-/*		f = 0;
-		while ( f < 10 ) {
-			FB.canvas();
+		doSenyum(&FB, &star, &mouth, 1);
+		sleep(2);
+		doSenyum(&FB, &star, &mouth, -1);
 
-			FB.draw(star);
-			FB.render();
+		doTertawa(&FB, &star, &mouth, 1);
+		sleep(2);
+		doTertawa(&FB, &star, &mouth, -1);
 
-			mouth.movePoint(8, 0, 2, 0);
-			mouth.movePoint(9, 0, 3, 0);
-			mouth.movePoint(19, 0, 3, 0);
-			mouth.movePoint(22, 0, 3, 0);
+		doKaget(&FB, &star, &mouth, &left_eyebrow, 1);
+		sleep(2);
+		doKaget(&FB, &star, &mouth, &left_eyebrow, -1);
 
-			mouth.movePoint(11, 0, 2, 0);
-			mouth.movePoint(12, 0, -3, 0);
-			mouth.movePoint(13, 0, 2, 0);
+		doImut(&FB, &star, &mouth, &left_eye, &left_eyebrow, 1);
+		sleep(2);
+		doImut(&FB, &star, &mouth, &left_eye, &left_eyebrow, -1);
 
-			mouth.movePoint(15, 0, 3, 0);
-			mouth.movePoint(17, 0, 3, 0);
-			mouth.movePoint(20, 0, 3, 0);
-			mouth.movePoint(16, 0, 2, 0);
-			mouth.movePoint(0, 0, 2, 0);
+		doMenangis(&FB, &star, &mouth, &left_eye, &left_eyebrow, &right_eye, &right_eyebrow, 1);
+		sleep(2);
+		doMenangis(&FB, &star, &mouth, &left_eye, &left_eyebrow, &right_eye, &right_eyebrow, -1);
 
-			mouth.movePoint(18, 0, -3, 0);
-			mouth.movePoint(21, 0, -3, 0);
-			++f;
+		doHah(&FB, &star, &left_eyebrow, &right_eyebrow, 1);
+		sleep(2);
+		doHah(&FB, &star, &left_eyebrow, &right_eyebrow, -1);
 
-			usleep(10000);
-		}*/
 
-		// Senyum
-/*		f = 0;
-		while ( f < 5 ) {
-			FB.canvas();
-
-			FB.draw(star);
-			FB.render();
-
-			mouth.movePoint(8, 0, -2, 0);
-			mouth.movePoint(9, 0, -3, 0);
-			mouth.movePoint(19, 0, -3, 0);
-			mouth.movePoint(22, 0, -3, 0);
-
-			mouth.movePoint(11, 0, -2, 0);
-			mouth.movePoint(12, 0, 3, 0);
-			mouth.movePoint(13, 0, -2, 0);
-
-			mouth.movePoint(15, 0, -3, 0);
-			mouth.movePoint(17, 0, -3, 0);
-			mouth.movePoint(20, 0, -3, 0);
-			mouth.movePoint(16, 0, -2, 0);
-			mouth.movePoint(0, 0, -2, 0);
-
-			mouth.movePoint(18, 0, 3, 0);
-			mouth.movePoint(21, 0, 3, 0);
-			++f;
-
-			usleep(10000);
-		}*/
-
-		// Tertawa
-		/*for (int i = 0; i < 5; i++) {
-			int c = 1;
-			if ( (i % 2) == 0 ) {
-				c = 1;
-			} else {
-				c = -1;
-			}
-
-			f = 0;
-			while ( f < 10 ) {
-				FB.canvas();
-
-				FB.draw(star);
-				FB.render();
-
-				mouth.movePoint(11, 0, c*(3-i), 0);
-				mouth.movePoint(12, 0, c*(5-i), 0);
-				mouth.movePoint(13, 0, c*(3-i), 0);
-
-				mouth.movePoint(21, 0, c*(5-i), 0);
-				++f;
-
-				usleep(10000);
-			}
-		}*/
-
-		// Kaget
-/*		f = 0;
-		while ( f < 20 ) {
-			FB.canvas();
-
-			FB.draw(star);
-			FB.render();
-
-			mouth.movePoint(11, 0, 4, 0);
-			mouth.movePoint(12, 0, 7, 0);
-			mouth.movePoint(13, 0, 4, 0);
-
-			mouth.movePoint(21, 0, 7, 0);
-
-			mouth.movePoint(8, 0, 1, 0);
-			mouth.movePoint(9, -1, 1, 0);
-			mouth.movePoint(19, -1, 1, 0);
-			mouth.movePoint(22, -1, 1, 0);
-
-			mouth.movePoint(15, 1, 1, 0);
-			mouth.movePoint(17, 1, 1, 0);
-			mouth.movePoint(20, 1, 1, 0);
-			mouth.movePoint(16, 0, 1, 0);
-			mouth.movePoint(0, 0, 1, 0);
-			++f;
-
-			usleep(10000);
-		}*/
-
-		// Imut
-		f = 0;
-		while ( f < 15 ) {
-			FB.canvas();
-
-			FB.draw(star);
-			FB.render();
-
-			mouth.movePoint(2, 0, -1, 0);
-			mouth.movePoint(3, 0, -1, 0);
-			mouth.movePoint(4, 0, -1, 0);
-			mouth.movePoint(5, 0, -1, 0);
-			mouth.movePoint(6, 0, -1, 0);
-
-			mouth.movePoint(8, -2, 0, 0);
-			mouth.movePoint(9, -2, 0, 0);
-			mouth.movePoint(19, -2, 0, 0);
-			mouth.movePoint(22, -2, 0, 0);
-
-			mouth.movePoint(10, -3, 1, 0);
-			mouth.movePoint(11, -3, 1, 0);
-			mouth.movePoint(12, 0, 2, 0);
-			mouth.movePoint(13, 3, 1, 0);
-			mouth.movePoint(14, 3, 1, 0);
-
-			mouth.movePoint(15, 2, 0, 0);
-			mouth.movePoint(17, 2, 0, 0);
-			mouth.movePoint(20, 2, 0, 0);
-			mouth.movePoint(16, 2, 0, 0);
-			mouth.movePoint(0, 2, 0, 0);
-
-			mouth.movePoint(18, 0, 1, 0);
-			mouth.movePoint(21, 0, 1, 0);
-			++f;
-
-			usleep(10000);
-		}
-
-		f = 0;
-		while ( f < 5 ) {
-			FB.canvas();
-
-			FB.draw(star);
-			FB.render();
-
-			left_eye.movePoint(1, 0, 8, 0);
-			left_eye.movePoint(2, 0, 10, 0);
-			left_eye.movePoint(3, 0, 8, 0);
-
-			++f;
-			usleep(10000);
-		}
-
-	//}
 	return 0;
 }
