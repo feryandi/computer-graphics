@@ -12,6 +12,7 @@
 #include <pthread.h>
 #include <termios.h>
 #include <vector>
+#include <algorithm>
 #include <time.h>
 
 #include "Polygon.class.hpp"

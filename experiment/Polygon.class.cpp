@@ -7,6 +7,10 @@ Polygon::Polygon() {
 	y = 0;
 	z = 0;
 	k = 1;
+
+	r = 0;
+	g = 0;
+	b = 0;
 }
 
 Polygon::~Polygon() {
@@ -22,9 +26,25 @@ void Polygon::setPosition(int x, int y, int z) {
 	this->z = z;
 }
 
+void Polygon::movePosition(int x, int y, int z) {
+	this->x += x;
+	this->y += y;
+	this->z += z;
+}
+
 void Polygon::setMultiplication(float k) {
 	this->k = k;
 }
+
+void Polygon::setColor(int r, int g, int b) {
+	this->r = r;
+	this->g = g;
+	this->b = b;
+}
+
+int Polygon::getColorRed() { return r; }
+int Polygon::getColorBlue() { return g; }
+int Polygon::getColorGreen() { return b; }
 
 void Polygon::addPoint(Point P, int t) {
 	/* t adalah penanda

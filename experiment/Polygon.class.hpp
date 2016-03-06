@@ -9,6 +9,8 @@ class Polygon {
 		int x, y, z;
 		float k;
 
+		int r, g, b;
+
 		vector< pair<Point, int> > points; 
 
 	public:
@@ -19,8 +21,14 @@ class Polygon {
 		int getY();
 		int getZ();
 		void setPosition(int, int, int);
+		void movePosition(int, int, int);
 
 		void setMultiplication(float);
+
+		void setColor(int, int, int);
+		int getColorRed();
+		int getColorBlue();
+		int getColorGreen();
 
 		void addPoint(Point, int);
 		void addPoint(int, int, int, int);

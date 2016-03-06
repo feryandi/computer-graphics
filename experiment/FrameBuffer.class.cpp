@@ -120,6 +120,8 @@ void FrameBuffer::draw(std::vector<Polygon*> &polygons){
 
 void FrameBuffer::drawPolygon(Polygon *polygon) {
     int point = 0;
+    int yMax = (polygon->getPointY(0));
+    int yMin = (polygon->getPointY(0));
     int nPoint = polygon->getPointCount();
 
     while (point < nPoint) {
@@ -129,6 +131,9 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
           y1 = (polygon->getPointY(point));
           x2 = (polygon->getPointX(point+1));
           y2 = (polygon->getPointY(point+1));
+
+          if (yMax < std::max(y1,y2)) yMax = std::max(y1,y2);
+          if (yMin > std::min(y1,y2)) yMin = std::min(y1,y2);
 
           bresenham(x1, y1, x2, y2, 255, 255, 255, point);
 
@@ -183,7 +188,13 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
                     
                     if ( ( i == total-1 ) && ( j == total-1 ) ) {
                       bresenham((int)lastPoint.getX(), (int)lastPoint.getY(), (int)bezierArray[i][j].getX(), (int)bezierArray[i][j].getY(), 255, 255, 255, 1);
+                      
+                      int y1 = (int)lastPoint.getY();
+                      int y2 = (int)bezierArray[i][j].getY();
                       lastPoint = Point(bezierArray[i][j].getX(), bezierArray[i][j].getY(), 0);
+
+                      if (yMax < std::max(y1,y2)) yMax = std::max(y1,y2);
+                      if (yMin > std::min(y1,y2)) yMin = std::min(y1,y2);
                     }
                   }
                 } 
@@ -198,6 +209,7 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
 
         ++point;
     }
+    //fillPolygon(polygon, yMin, yMax);
 
 }
 
@@ -238,6 +250,10 @@ void FrameBuffer::bresenham(int x1, int y1, int x2, int y2, int red, int green, 
   int x = x1;
   int y = y1;
 
+/*  int** oosElement = &oosMap[line];
+  *oosElement = (int*) malloc((iabs(y2-y1)+2)*sizeof(int));
+  (*oosElement)[0] = x1;*/
+
   while ((Z && (x != x2)) || (!Z && (y != y2))) {
 
     D = D + 2*db;
@@ -251,6 +267,7 @@ void FrameBuffer::bresenham(int x1, int y1, int x2, int y2, int red, int green, 
       y += m1y;
     }
 
+    //(*oosElement)[iabs(y - y1)] = x;
     plot(x, y, red, green, blue);
 
   }
@@ -282,5 +299,123 @@ int FrameBuffer::G(int X, int Y) {
     return 2;
   } else if (X & (! Y)) {
     return 3;
+  }
+}
+
+void FrameBuffer::clearMap(Polygon* polygon) {
+    int nLine = polygon->getPointCount();
+    for (int i = 0; i < nLine; ++i)
+        free(oosMap[i]);
+    free(oosMap);
+}
+
+int FrameBuffer::isIntersect(Polygon* polygon, int e, int yScanline) {
+    int y1E = (polygon->getPointY(e));
+    int y2E = (polygon->getPointY(e+1));
+
+    return ((y1E - yScanline)*(y2E - yScanline)) <= 0;
+}
+
+int FrameBuffer::isHorizontalLine(Polygon* polygon, int e){
+    int y1E = (polygon->getPointY(e));
+    int y2E = (polygon->getPointY(e+1));
+
+    return (y1E == y2E);
+}
+
+int FrameBuffer::getMiddleX(Polygon* polygon, int e){
+    int x1E = (polygon->getPointX(e));
+    int x2E = (polygon->getPointX(e+1));
+
+    return (x1E + x2E) >> 1;
+}
+
+int FrameBuffer::isCriticalPoint(Polygon* polygon, int e1, int e2, int yScanline){
+    int y1E1 = (polygon->getPointY(e1));
+    int y2E1 = (polygon->getPointY(e1+1));
+    int y1E2 = (polygon->getPointY(e2));
+    int y2E2 = (polygon->getPointY(e2+1));
+
+    int yOuterE1 = y1E1 + y2E1 - yScanline;
+    int yOuterE2 = y1E2 + y2E2 - yScanline;
+
+    return ((yOuterE1 - yScanline)*(yOuterE2 - yScanline)) >= 0;
+}
+
+int FrameBuffer::xIntersect(Polygon* polygon, int e, int yScanline){
+    int y1E = (polygon->getPointY(e));
+
+    return oosMap[e][iabs(yScanline - y1E)];
+}
+
+void FrameBuffer::fillPolygon(Polygon* polygon, int yMin, int yMax){
+  
+  int nLine = polygon->getPointCount();
+  for (int yScanline = yMin; yScanline <= yMax; ++yScanline) {
+
+    // printf("y: %d\n", yScanline);    
+    // fflush(stdout);
+
+    std::vector<intersection> intersectEdge; 
+    for (int e = 0; e < nLine; ++e) {
+      if (isIntersect(polygon, e, yScanline)) {
+        int type = isHorizontalLine(polygon, e);
+        int x;
+        if (type) {
+          x = getMiddleX(polygon, e);
+        } else {
+          x = xIntersect(polygon, e, yScanline);
+        }
+        intersectEdge.push_back(intersection(e, x, type));
+      }
+    }
+
+    std::sort(intersectEdge.begin(), intersectEdge.end());
+
+    std::vector<intersection>::iterator i = intersectEdge.begin(), j;
+
+    if (i!=intersectEdge.end()) {
+      while ((i+1) != intersectEdge.end()) {
+        if ((((i+1)->x - i->x) < 5) &&
+          (!isCriticalPoint(polygon, (*i).edge,(*(i+1)).edge, yScanline))) {
+          
+          i = intersectEdge.erase(i);
+
+        } else {
+          if ((i+1)->type == 1) {
+
+            // warning: this conditional maybe cause a bug
+            if ((i+2) != intersectEdge.end()) {
+              if (isCriticalPoint(polygon, (*i).edge,(*(i+2)).edge, yScanline)) {
+                i++;
+                i = intersectEdge.erase(i);
+              } else {
+                i++;
+                i->x = (i+1)->x;
+                i++;
+              }
+            } else {
+              i++;
+            }
+
+          } else {
+            i++;
+          }
+        }
+      }
+    }
+
+
+    int fillRed = polygon->getColorRed();
+    int fillGreen = polygon->getColorGreen();
+    int fillBlue = polygon->getColorBlue();
+
+    for (int i = 0; i+1 < intersectEdge.size(); i+=2) {
+      int e = intersectEdge[i].edge;
+      for (int x = intersectEdge[i].x; x < intersectEdge[i+1].x; x++) {
+        plot(x, yScanline, fillRed, fillGreen, fillBlue);
+      }
+    }
+
   }
 }
