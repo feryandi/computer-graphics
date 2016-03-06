@@ -53,30 +53,29 @@ int FrameBuffer::getVInfoX() {
 }
 
 void FrameBuffer::plot(int x, int y, int red, int green, int blue) {
-	int i, j;
-	if ( ( x >= 0 ) &&
-		 ( y >= 0 ) &&
-		 ( x < vinfo.xres - 1 ) &&
-		 ( y < vinfo.yres - 1 ) &&
-     (this->available[y][x] == 0))
-     {
-          this->available[y][x] = 1;
-          location = ((x + vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
-                     ((y + vinfo.yoffset) * finfo.line_length));
+  int i, j;
 
-          if (vinfo.bits_per_pixel == 32) {
-              *(buffer + location) = blue;		// Blue
-              *(buffer + location + 1) = green;	// Green
-              *(buffer + location + 2) = red;	// Red
-              *(buffer + location + 3) = 0;			// Alpha
-          } else  {
-          	// Assuming 16bpp
-              int b = blue;		// Blue
-              int g = green;	// Green
-              int r = red;		// Red
-              unsigned short int t = r<<11 | g << 5 | b;
-              *((unsigned short int*)(buffer + location)) = t;
-          }
+  if ( ( x >= 0 ) && 
+     ( y >= 0 ) && 
+     ( x < vinfo.xres - 1 ) && 
+     ( y < vinfo.yres - 1 ) ) {
+
+            location = ((x + vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
+                       ((y + vinfo.yoffset) * finfo.line_length));
+
+            if (vinfo.bits_per_pixel == 32) {
+                *(buffer + location) = blue;    // Blue
+                *(buffer + location + 1) = green; // Green
+                *(buffer + location + 2) = red; // Red
+                *(buffer + location + 3) = 0;     // Alpha
+            } else  { 
+              // Assuming 16bpp
+                int b = blue;   // Blue
+                int g = green;  // Green
+                int r = red;    // Red
+                unsigned short int t = r<<11 | g << 5 | b;
+                *((unsigned short int*)(buffer + location)) = t;
+            }
 
     }
 }
@@ -116,7 +115,6 @@ void FrameBuffer::draw(std::vector<Polygon*> &polygons){
 
     for (it = polygons.begin(); it != polygons.end(); it++) {
         drawPolygon(*it);
-        printf("%x\n", )
     }
 }
 
@@ -140,6 +138,11 @@ void FrameBuffer::drawPolygon(Polygon *polygon) {
           int endN = point;
 
           int stop = 1;
+
+          if (polygon->getPointType(point) == 3) {
+            ++point;
+            ++startN;
+          }
 
           while ( stop && ( point < nPoint ) ) {
             if ( polygon->getPointType(point) != 0 ) {
