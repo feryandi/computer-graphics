@@ -24,9 +24,9 @@ public:
   void setZ(double _z);
 
   // methods
-  void moveX(int movement);
-  void moveY(int movement);
-  void moveZ(int movement);
+  void moveX(double movement);
+  void moveY(double movement);
+  void moveZ(double movement);
   void draw(char* buffer);
 
 private:
