@@ -44,7 +44,9 @@ class FrameBuffer {
 		std::vector<std::vector<int> > getPolynomLookupTable();
 
 		//Copy to framebuffer
-		void draw(Layer layer);
 		void clearScreen();
 		void render();
+
+		// static methods
+		static void plot(char* buffer, unsigned int x, unsigned int y, int red, int green, int blue);
 	};

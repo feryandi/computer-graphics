@@ -24,7 +24,8 @@ input.o: input.cpp
 layer.o: layer.cpp
 	$(CC) $(CFLAGS) layer.cpp
 
-
+object.o: object.cpp
+	$(CC) $(CFLAGS) object.cpp
 text.o: text.cpp
 	$(CC) $(CFLAGS) text.cpp
 

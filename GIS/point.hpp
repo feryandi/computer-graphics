@@ -11,6 +11,7 @@ public:
   int getX();
   int getY();
   int getZ();
+
   void setX(int _x);
   void setY(int _x);
   void setZ(int _z);
@@ -19,12 +20,13 @@ public:
   void moveX(int _x);
   void moveY(int _y);
   void moveZ(int _z);
+  void draw(char* buffer);
 
 private:
   // point coordinates
-  int x;
-  int y;
-  int z = 0;
+  double x;
+  double y;
+  double z = 0;
 };
 
 #endif
