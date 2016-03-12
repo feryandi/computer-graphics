@@ -33,7 +33,7 @@ public:
   void moveY(int movement);
   void moveZ(int movement);
   void draw(char* buffer);
-  void drawControlPoint(BezierCurve curve, unsigned int selected);
+  void drawControlPoint(unsigned int selected);
 
 private:
   // vector of control points
