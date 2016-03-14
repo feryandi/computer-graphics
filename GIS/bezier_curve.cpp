@@ -132,5 +132,5 @@ for (int t=0;t<STEP;t++){
   // printf("X: %f\n", x);
   // printf("Y: %f\n", y);
   // printf("____________\n");
-  plot((int)x,(int)y,200,200,200);
+  frame_buffer::plot((int)x,(int)y,200,200,200);
 }
