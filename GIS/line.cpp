@@ -54,8 +54,8 @@
   void Line::moveZ(int movement){
 
   }
-  void Line::draw(FrameBuffer fb){
-    bresenham(fb, points[0].getX(), points[0].getY(), points[1].getX(), points[0].getY(),200,200,200,1);
+  void Line::draw(FrameBuffer &fb){
+    bresenham(fb, points[0].getX(), points[0].getY(), points[1].getX(), points[1].getY(),0,200,0,1);
   }
   int Line::iabs(int n){
     int const mask = n >> (sizeof(int) * 8 - 1);
@@ -87,7 +87,7 @@
     }
     return retval;
   }
-  void Line::bresenham(FrameBuffer fb, int x1, int y1, int x2, int y2, int red, int green, int blue, int line){
+  void Line::bresenham(FrameBuffer &fb, int x1, int y1, int x2, int y2, int red, int green, int blue, int line){
     int Fx[] = { 1,  0, -1,  0};
     int Fy[] = { 0,  1,  0, -1};
 

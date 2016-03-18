@@ -81,7 +81,7 @@ void BezierCurve::moveY(int movement){
 void BezierCurve::moveZ(int movement){
 
 }
-void BezierCurve::draw(FrameBuffer fb){
+void BezierCurve::draw(FrameBuffer &fb){
   float x=0,y=0; // Where to plot
   float a,b;
 

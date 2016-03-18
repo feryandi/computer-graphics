@@ -78,7 +78,7 @@ void FrameBuffer::plot(unsigned int x, unsigned int y, int red, int green, int b
             	// Assuming 16bpp
                 int b = blue;		// Blue
                 int g = green;	// Green
-                int r = red;		// Red  
+                int r = red;		// Red
                 unsigned short int t = r<<11 | g << 5 | b;
                 *((unsigned short int*)(buffer + location)) = t;
             }
