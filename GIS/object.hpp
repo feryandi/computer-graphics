@@ -1,9 +1,9 @@
 #ifndef OBJECT_H
 #define OBJECT_H
-#include "shape.h"
-#include "bezier_curve.h"
-#include "line.h"
-#include "text.h"
+#include "shape.hpp"
+#include "bezier_curve.hpp"
+#include "line.hpp"
+#include "text.hpp"
 #include "frame_buffer.hpp"
 
 class Object{
@@ -13,13 +13,13 @@ public:
   ~Object();
 
   // getter & setter
-  std::vector<BezierCurve> getCurves();
-  std::vector<Line> getLines();
-  std::vector<Text> getTexts();
-  std::vector<Shape> getShapes();
-  double getX();
-  double getY();
-  double getZ();
+  std::vector<BezierCurve> getCurves() const;
+  std::vector<Line> getLines() const;
+  std::vector<Text> getTexts() const;
+  std::vector<Shape> getShapes() const;
+  double getX() const;
+  double getY() const;
+  double getZ() const;
   void setX(double _x);
   void setY(double _y);
   void setZ(double _z);
@@ -29,7 +29,7 @@ public:
   void moveY(double movement);
   void moveZ(double movement);
   void draw(FrameBuffer &fb);
-  
+
 private:
   std::vector<Shape> shapes;
   std::vector<BezierCurve> curves;

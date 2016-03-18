@@ -1,30 +1,36 @@
 #ifndef SHAPE_H
 #define SHAPE_H
-#include "bezier_curve.h"
-#include "line.h"
+
+#include "bezier_curve.hpp"
+#include "line.hpp"
 #include "frame_buffer.hpp"
+
 
 class Shape{
 public:
 
   // ctor & dtor
   Shape();
+  Shape(const std::vector<BezierCurve> &crs, const std::vector<Line> &lns);
   ~Shape();
+  Shape(const Shape &shape);
+
+  Shape& operator=(const Shape &shape);
 
   // getter & setter
-  std::vector<BezierCurve> getCurves();
-  void setCurves(std::vector<BezierCurve> crs);
+  std::vector<BezierCurve> getCurves() const;
+  void setCurves(const std::vector<BezierCurve> &crs);
 
-  std::vector<Line> getLines();
-  void setLines(std::vector<Line> lns);
+  std::vector<Line> getLines() const;
+  void setLines(const std::vector<Line> &lns);
 
-  Point getFirePoint();
+  Point getFirePoint() const;
   void setFirePoint(Point fp);
 
-  Point getCentrePoint();
+  Point getCentrePoint() const;
   void setCentrePoint(Point fp);
 
-  Point getPositionPoint();
+  Point getPositionPoint() const;
   void setPositionPoint(Point fp);
 
   float getMultiplication();
@@ -37,13 +43,13 @@ public:
   void addCurve(BezierCurve bc);
   void addLine(Line l);
   void draw (FrameBuffer &fb);
-  
+
 private:
   std::vector<BezierCurve> curves;
   std::vector<Line> lines;
-  Point firePoint;
-  Point centrePoint;
-  Point positionPoint;
+  Point *firePoint;
+  Point *centrePoint;
+  Point *positionPoint;
   float k;
   float degree;
 };

@@ -8,12 +8,12 @@ public:
   Point(int _x, int _y);
 
   // getter & setter
-  int getX();
-  int getY();
-  int getZ();
+  int getX() const;
+  int getY() const;
+  int getZ() const;
 
   void setX(int _x);
-  void setY(int _x);
+  void setY(int _y);
   void setZ(int _z);
 
   // methods

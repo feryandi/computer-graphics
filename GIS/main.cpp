@@ -1,12 +1,10 @@
-#include "line.hpp"
-#include "bezier_curve.hpp"
-#include "frame_buffer.hpp"
-#include <vector>
+#include "reader.hpp"
 
-int main(){
-
+int main() {
   // Initialization
   FrameBuffer fb;
+  Reader a;
+
   BezierCurve::generateLookupTable();
   fb.clearScreen();
 
@@ -18,11 +16,13 @@ int main(){
   points.push_back(Point(600,200));
   BezierCurve bezier(points);
   //
+  Shape c = a.read("31-45.txt");
+  
   line.draw(fb);
   bezier.draw(fb);
+  c.draw(fb);
 
   // fb.plot(100,100,200,0,0);
   fb.render();
 
-  return 0;
 }

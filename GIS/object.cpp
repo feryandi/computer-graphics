@@ -9,31 +9,31 @@ Object::~Object() {
 }
 
 // getter & setter
-std::vector<BezierCurve> Object::getCurves() {
+std::vector<BezierCurve> Object::getCurves() const {
 	return curves;
 }
 
-std::vector<Line> Object::getLines() {
+std::vector<Line> Object::getLines() const {
 	return lines;
 }
 
-std::vector<Text> Object::getTexts() {
+std::vector<Text> Object::getTexts() const {
 	return texts;
 }
 
-std::vector<Shape> Object::getShapes() {
+std::vector<Shape> Object::getShapes() const {
 	return shapes;
 }
 
-double Object::getX() {
+double Object::getX() const {
 	return x;
 }
 
-double Object::getY() {
+double Object::getY() const {
 	return y;
 }
 
-double Object::getZ() {
+double Object::getZ() const {
 	return z;
 }
 
@@ -62,6 +62,21 @@ void Object::moveZ(double movement) {
 	z += movement;
 }
 
-void Object::draw(char* buffer) {
+void Object::draw(FrameBuffer &fb) {
+  for (int i = 0; i < curves.size(); ++i)
+	{
+		curves[i].draw(fb);
+	}
 
+	for (int i = 0; i < lines.size(); ++i)
+	{
+		lines[i].draw(fb);
+	}
+
+  for (int i = 0; i < shapes.size(); ++i)
+	{
+		shapes[i].draw(fb);
+	}
+
+  // TODO draw text lopp
 }

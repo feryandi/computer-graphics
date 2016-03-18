@@ -2,6 +2,7 @@
 #define TEXT_H
 
 #include <string>
+#include "frame_buffer.hpp"
 
 class Text {
 public:
@@ -10,15 +11,15 @@ public:
   ~Text();
 
   //getter & setter
-  std::string getText();
-  void setText(std::string _text);
-  double getX();
-  double getY();
-  double getZ();
+  std::string getText() const;
+  void setText(std::string &_text);
+  double getX() const;
+  double getY() const;
+  double getZ() const;
   void setX(double _x);
   void setY(double _y);
   void setZ(double _z);
-  
+
   // methods
   void moveX(int movement);
   void moveY(int movement);

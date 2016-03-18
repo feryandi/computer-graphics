@@ -28,7 +28,7 @@ public:
 
 
 private:
-    std::vector<Object> objects
+    std::vector<Object> objects;
     double x,y,z;
 };
 

@@ -3,54 +3,93 @@
 
 Shape::Shape(){
 	k = 1;
-    degree = 0;
-    firePoint = new Point();
-    centrePoint = new Point();
-    positionPoint = new Point();
+  degree = 0;
+  firePoint = new Point();
+  centrePoint = new Point();
+  positionPoint = new Point();
 }
+
+Shape::Shape(const std::vector<BezierCurve> &crs, const std::vector<Line> &lns){
+	k = 1;
+	degree = 0;
+	firePoint = new Point();
+  centrePoint = new Point();
+  positionPoint = new Point();
+	curves = crs;
+	lines = lns;
+
+}
+
 
 Shape::~Shape() {
-
+	delete firePoint;
+	delete centrePoint;
+	delete positionPoint;
 }
 
-std::vector<BezierCurve> Shape::getCurves() {
+Shape& Shape::operator=(const Shape &shape) {
+	delete firePoint;
+	delete centrePoint;
+	delete positionPoint;
+	k = shape.k;
+	degree = shape.degree;
+	firePoint = new Point(shape.getFirePoint().getX(), shape.getFirePoint().getY());
+	centrePoint = new Point(shape.getCentrePoint().getX(), shape.getCentrePoint().getY());
+	positionPoint = new Point(shape.getPositionPoint().getX(), shape.getPositionPoint().getY());
+	curves = shape.curves;
+	lines = shape.lines;
+
+	return *this;
+}
+
+Shape::Shape(const Shape &shape){
+	k = shape.k;
+	degree = shape.degree;
+	firePoint = new Point(shape.getFirePoint().getX(), shape.getFirePoint().getY());
+	centrePoint = new Point(shape.getCentrePoint().getX(), shape.getCentrePoint().getY());
+	positionPoint = new Point(shape.getPositionPoint().getX(), shape.getPositionPoint().getY());
+	curves = shape.curves;
+	lines = shape.lines;
+}
+
+std::vector<BezierCurve> Shape::getCurves() const{
 	return curves;
 }
 
-void Shape::setCurves(std::vector<BezierCurve> crs) {
+void Shape::setCurves(const std::vector<BezierCurve> &crs) {
 	curves = crs;
 }
 
-std::vector<Line> Shape::getLines() {
+std::vector<Line> Shape::getLines() const{
 	return lines;
 }
 
-void Shape::setLines(std::vector<Line> lns) {
+void Shape::setLines(const std::vector<Line> &lns) {
 	lines = lns;
 }
 
-Point Shape::getFirePoint() {
-	return firePoint;
+Point Shape::getFirePoint() const{
+	return *firePoint;
 }
 
 void Shape::setFirePoint(Point fp) {
-	firePoint = fp;
+	*firePoint = fp;
 }
 
-Point Shape::getCentrePoint() {
-	return centrePoint;
+Point Shape::getCentrePoint() const{
+	return *centrePoint;
 }
 
 void Shape::setCentrePoint(Point cp) {
-	centrePoint = cp;
+	*centrePoint = cp;
 }
 
-Point Shape::getPositionPoint() {
-	return positionPoint;
+Point Shape::getPositionPoint() const{
+	return *positionPoint;
 }
 
 void Shape::setPositionPoint(Point pp) {
-	positionPoint = pp;
+	*positionPoint = pp;
 }
 
 float Shape::getMultiplication() {
@@ -78,13 +117,13 @@ void Shape::addLine(Line l) {
 }
 
 void Shape::draw(FrameBuffer &fb) {
-	for (int i = 0; i < curves.size(); ++i)
-	{
-		curves[i].draw(fb);
-	}
+		for (uint i = 0; i < curves.size(); ++i)
+		{
+			curves[i].draw(fb);
+		}
 
-	for (int i = 0; i < lines.size(); ++i)
+	for (uint i = 0; i < lines.size(); ++i)
 	{
-		line[i].draw(fb);
+		lines[i].draw(fb);
 	}
 }
