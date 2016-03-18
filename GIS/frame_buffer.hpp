@@ -11,8 +11,6 @@
 #include <termios.h>
 #include <vector>
 #include <time.h>
-#include "bezier_curve.hpp"
-#include "layer.hpp"
 
 class FrameBuffer {
 	private:
@@ -28,11 +26,6 @@ class FrameBuffer {
 		// Making Render Smoother
 		char *buffer;
 
-		// Pre-generated table for polynoms
-		std::vector<std::vector<int> > lookup_table;
-
-
-
 	public:
 		// ctor & dtor
 		FrameBuffer();
@@ -41,12 +34,10 @@ class FrameBuffer {
 		//getter & setter
 		int getVInfoY();
 		int getVInfoX();
-		std::vector<std::vector<int> > getPolynomLookupTable();
 
 		//Copy to framebuffer
 		void clearScreen();
 		void render();
 
-		// static methods
-		static void plot(char* buffer, unsigned int x, unsigned int y, int red, int green, int blue);
+		void plot(unsigned int x, unsigned int y, int red, int green, int blue);
 	};

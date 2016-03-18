@@ -20,6 +20,7 @@ public:
   void moveX(int _x);
   void moveY(int _y);
   void moveZ(int _z);
+  void rotate(float degree, Point center);
   void draw(char* buffer);
 
 private:

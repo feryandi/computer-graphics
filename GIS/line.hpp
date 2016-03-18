@@ -3,6 +3,7 @@
 
 #include "point.hpp"
 #include <vector>
+#include "frame_buffer.hpp"
 
 class Line {
 public:
@@ -19,7 +20,7 @@ public:
   void setX(double _x);
   void setY(double _y);
   void setZ(double _z);
-  
+
   // methods
   void addPoint(Point p);
   void deletePoint(int i);
@@ -29,7 +30,7 @@ public:
   void moveX(int movement);
   void moveY(int movement);
   void moveZ(int movement);
-  void draw(char* buffer);
+  void draw(FrameBuffer);
   int iabs(int n);
   int F(int X, int Y, int Z);
   int G(int X, int Y);
