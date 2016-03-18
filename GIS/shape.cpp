@@ -77,14 +77,14 @@ void Shape::addLine(Line l) {
 	lines.push_back(l);
 }
 
-void Shape::draw(char* buffer) {
+void Shape::draw(FrameBuffer &fb) {
 	for (int i = 0; i < curves.size(); ++i)
 	{
-		curves[i].draw(buffer);
+		curves[i].draw(fb);
 	}
 
 	for (int i = 0; i < lines.size(); ++i)
 	{
-		line[i].draw(buffer);
+		line[i].draw(fb);
 	}
 }

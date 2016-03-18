@@ -36,7 +36,7 @@ public:
   // Method
   void addCurve(BezierCurve bc);
   void addLine(Line l);
-  void draw (char* buffer);
+  void draw (FrameBuffer &fb);
   
 private:
   std::vector<BezierCurve> curves;
