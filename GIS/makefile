@@ -40,4 +40,4 @@ shape.o: shape.cpp
 	$(CC) $(CFLAGS) shape.cpp
 
 clean:
-	rm -f *.gch *.o bezier_main
+	rm -f *.gch *.o bezier_main gis_itb
