@@ -2,7 +2,11 @@
 #include <vector>
 
 Shape::Shape(){
-
+	k = 1;
+    degree = 0;
+    firePoint = new Point();
+    centrePoint = new Point();
+    positionPoint = new Point();
 }
 
 Shape::~Shape() {
@@ -10,49 +14,69 @@ Shape::~Shape() {
 }
 
 std::vector<BezierCurve> Shape::getCurves() {
-
+	return curves;
 }
 
-std::vector<Polygon> Shape::getPolygons() {
-	
+std::vector<Line> Shape::getLines() {
+	return lines;
 }
 
-std::vector<Text> Shape::getTexts() {
-	
-}
-
-double Shape::getFirePoint() {
+Point Shape::getFirePoint() {
 	return firePoint;
 }
 
-void Shape::setFirePoint(double fp) {
+void Shape::setFirePoint(Point fp) {
 	firePoint = fp;
 }
 
-double Shape::getX() {
-	return x;
+Point Shape::getCentrePoint() {
+	return centrePoint;
 }
 
-double Shape::getY() {
-	return y;
+void Shape::setCentrePoint(Point cp) {
+	centrePoint = cp;
 }
 
-double Shape::getZ() {
-	return z;
+Point Shape::getPositionPoint() {
+	return positionPoint;
 }
 
-void Shape::moveX(int movement) {
-	x += movement;
+void Shape::setPositionPoint(Point pp) {
+	positionPoint = pp;
 }
 
-void Shape::moveY(int movement) {
-	y += movement;
+float Shape::getMultiplication() {
+	return k;
 }
 
-void Shape::moveZ(int movement) {
-	z += movement;	
+void Shape::setMultiplication(float _k) {
+	k = _k;
+}
+
+float Shape::getDegree() {
+	return degree;
+}
+
+void Shape::setDegree(float _degree) {
+	degree = _degree;
+}
+
+void Shape::addCurve(BezierCurve bc) {
+	curves.push_back(bc);
+}
+
+void Shape::addLine(Line l) {
+	lines.push_back(l);
 }
 
 void Shape::draw(char* buffer) {
-	
+	for (int i = 0; i < curves.size(); ++i)
+	{
+		curves[i].draw(buffer);
+	}
+
+	for (int i = 0; i < lines.size(); ++i)
+	{
+		line[i].draw(buffer);
+	}
 }

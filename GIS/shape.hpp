@@ -2,7 +2,6 @@
 #define SHAPE_H
 #include "bezier_curve.h"
 #include "line.h"
-#include "text.h"
 
 
 class Shape{
@@ -14,25 +13,36 @@ public:
 
   // getter & setter
   std::vector<BezierCurve> getCurves();
-  std::vector<Polygon> getPolygons();
-  std::vector<Text> getTexts();
-  double getFirePoint();
-  void setFirePoint(double fp);
-  double getX();
-  double getY();
-  double getZ();
+  std::vector<Line> getLines();
   
-  // methods
-  void moveX(int movement);
-  void moveY(int movement);
-  void moveZ(int movement);
-  void draw(char* buffer);
+  Point getFirePoint();
+  void setFirePoint(Point fp);
 
+  Point getCentrePoint();
+  void setCentrePoint(Point fp);  
+
+  Point getPositionPoint();
+  void setPositionPoint(Point fp);
+
+  float getMultiplication();
+  void setMultiplication(float _k);
+
+  float getDegree();
+  void setDegree(float _degree);
+
+  // Method
+  void addCurve(BezierCurve bc);
+  void addLine(Line l);
+  void draw (char* buffer);
+  
 private:
   std::vector<BezierCurve> curves;
   std::vector<Line> lines;
-  std::vector<Text> texts;
-  double firePoint,x,y,z;
+  Point firePoint;
+  Point centrePoint;
+  Point positionPoint;
+  float k;
+  float degree;
 };
 
 #endif
