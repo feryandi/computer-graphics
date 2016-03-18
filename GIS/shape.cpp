@@ -30,27 +30,29 @@ void Shape::setLines(std::vector<Line> lns) {
 }
 
 Point Shape::getFirePoint() {
-	return firePoint;
+	return *firePoint;
 }
 
 void Shape::setFirePoint(Point fp) {
-	firePoint = fp;
+	*firePoint = fp;
 }
 
 Point Shape::getCentrePoint() {
-	return centrePoint;
+	return *centrePoint;
 }
 
 void Shape::setCentrePoint(Point cp) {
-	centrePoint = cp;
+	delete centrePoint;
+	centrePoint = new Point(cp);
 }
 
 Point Shape::getPositionPoint() {
-	return positionPoint;
+	return *positionPoint;
 }
 
 void Shape::setPositionPoint(Point pp) {
-	positionPoint = pp;
+	delete positionPoint;
+	positionPoint = new Point(pp);
 }
 
 float Shape::getMultiplication() {
@@ -78,13 +80,13 @@ void Shape::addLine(Line l) {
 }
 
 void Shape::draw(FrameBuffer &fb) {
-	for (int i = 0; i < curves.size(); ++i)
+	for (unsigned int i = 0; i < curves.size(); ++i)
 	{
 		curves[i].draw(fb);
 	}
 
-	for (int i = 0; i < lines.size(); ++i)
+	for (unsigned int i = 0; i < lines.size(); ++i)
 	{
-		line[i].draw(fb);
+		lines[i].draw(fb);
 	}
 }

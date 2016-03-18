@@ -1,7 +1,8 @@
 #ifndef SHAPE_H
 #define SHAPE_H
-#include "bezier_curve.h"
-#include "line.h"
+
+#include "bezier_curve.hpp"
+#include "line.hpp"
 
 
 class Shape{
@@ -41,9 +42,9 @@ public:
 private:
   std::vector<BezierCurve> curves;
   std::vector<Line> lines;
-  Point firePoint;
-  Point centrePoint;
-  Point positionPoint;
+  Point *firePoint;
+  Point *centrePoint;
+  Point *positionPoint;
   float k;
   float degree;
 };

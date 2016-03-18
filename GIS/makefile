@@ -3,11 +3,14 @@
 CC=g++
 CFLAGS=-c -Wall
 
-all: main.o bezier_curve.o frame_buffer.o point.o input.o group.o text.o line.o
-	$(CC) main.o bezier_curve.o frame_buffer.o point.o input.o group.o text.o line.o -o gis_itb
+all: main.o bezier_curve.o frame_buffer.o point.o input.o group.o text.o line.o reader.o shape.o
+	$(CC) main.o bezier_curve.o frame_buffer.o point.o input.o group.o text.o line.o reader.o shape.o -o gis_itb
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
+
+reader.o: reader.cpp
+	$(CC) $(CFLAGS) reader.cpp
 
 bezier_curve.o: bezier_curve.cpp
 	$(CC) $(CFLAGS) bezier_curve.cpp
@@ -26,11 +29,15 @@ group.o: group.cpp
 
 object.o: object.cpp
 	$(CC) $(CFLAGS) object.cpp
+
 text.o: text.cpp
 	$(CC) $(CFLAGS) text.cpp
 
 line.o: line.cpp
 	$(CC) $(CFLAGS) line.cpp
+
+shape.o: shape.cpp
+	$(CC) $(CFLAGS) shape.cpp
 
 clean:
 	rm -f *.gch *.o bezier_main
