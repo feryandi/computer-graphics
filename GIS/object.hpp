@@ -4,6 +4,7 @@
 #include "bezier_curve.h"
 #include "line.h"
 #include "text.h"
+#include "frame_buffer.hpp"
 
 class Object{
 public:
@@ -27,7 +28,7 @@ public:
   void moveX(int movement);
   void moveY(int movement);
   void moveZ(int movement);
-  void draw(char* buffer);
+  void draw(FrameBuffer &fb);
 
 private:
   std::vector<Shape> shapes;

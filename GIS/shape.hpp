@@ -2,7 +2,7 @@
 #define SHAPE_H
 #include "bezier_curve.h"
 #include "line.h"
-
+#include "frame_buffer.hpp"
 
 class Shape{
 public:
@@ -17,12 +17,12 @@ public:
 
   std::vector<Line> getLines();
   void setLines(std::vector<Line> lns);
-  
+
   Point getFirePoint();
   void setFirePoint(Point fp);
 
   Point getCentrePoint();
-  void setCentrePoint(Point fp);  
+  void setCentrePoint(Point fp);
 
   Point getPositionPoint();
   void setPositionPoint(Point fp);
@@ -36,8 +36,8 @@ public:
   // Method
   void addCurve(BezierCurve bc);
   void addLine(Line l);
-  void draw (char* buffer);
-  
+  void draw (FrameBuffer &fb);
+
 private:
   std::vector<BezierCurve> curves;
   std::vector<Line> lines;

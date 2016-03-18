@@ -19,12 +19,12 @@ public:
   void setX(double _x);
   void setY(double _y);
   void setZ(double _z);
-  
+
   // methods
   void moveX(int movement);
   void moveY(int movement);
   void moveZ(int movement);
-  void draw(char* buffer);
+  void draw(FrameBuffer &fb);
 
 
 private:
