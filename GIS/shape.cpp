@@ -17,8 +17,16 @@ std::vector<BezierCurve> Shape::getCurves() {
 	return curves;
 }
 
+void Shape::setCurves(std::vector<BezierCurve> crs) {
+	curves = crs;
+}
+
 std::vector<Line> Shape::getLines() {
 	return lines;
+}
+
+void Shape::setLines(std::vector<Line> lns) {
+	lines = lns;
 }
 
 Point Shape::getFirePoint() {

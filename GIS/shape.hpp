@@ -13,7 +13,10 @@ public:
 
   // getter & setter
   std::vector<BezierCurve> getCurves();
+  void setCurves(std::vector<BezierCurve> crs);
+
   std::vector<Line> getLines();
+  void setLines(std::vector<Line> lns);
   
   Point getFirePoint();
   void setFirePoint(Point fp);
