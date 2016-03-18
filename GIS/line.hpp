@@ -30,11 +30,11 @@ public:
   void moveX(int movement);
   void moveY(int movement);
   void moveZ(int movement);
-  void draw(FrameBuffer);
+  void draw(FrameBuffer &fb);
   int iabs(int n);
   int F(int X, int Y, int Z);
   int G(int X, int Y);
-  void bresenham(int x1, int y1, int x2, int y2, int red, int green, int blue, int line);
+  void bresenham(FrameBuffer &fb, int x1, int y1, int x2, int y2, int red, int green, int blue, int line);
 
 
 private:

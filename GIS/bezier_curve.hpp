@@ -33,7 +33,7 @@ public:
   void moveX(int movement);
   void moveY(int movement);
   void moveZ(int movement);
-  void draw(FrameBuffer fb);
+  void draw(FrameBuffer &fb);
   void drawControlPoint(unsigned int selected);
 
   // static method

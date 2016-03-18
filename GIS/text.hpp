@@ -1,6 +1,8 @@
 #ifndef TEXT_H
 #define TEXT_H
 
+#include <string>
+
 class Text {
 public:
   // ctor & dtor
@@ -8,8 +10,8 @@ public:
   ~Text();
 
   //getter & setter
-  char* getText();
-  void setText(char* _text);
+  std::string getText();
+  void setText(std::string _text);
   double getX();
   double getY();
   double getZ();
@@ -21,11 +23,11 @@ public:
   void moveX(int movement);
   void moveY(int movement);
   void moveZ(int movement);
-  void draw(char* buffer);
+  void draw(FrameBuffer& buffer);
 
 private:
   double x,y,z;
-  char* text;
+  std::string text;
 };
 
 #endif

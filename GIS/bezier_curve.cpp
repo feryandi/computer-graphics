@@ -81,7 +81,7 @@ void BezierCurve::moveY(int movement){
 void BezierCurve::moveZ(int movement){
 
 }
-void BezierCurve::draw(){
+void BezierCurve::draw(FrameBuffer &fb){
   float x=0,y=0; // Where to plot
   float a,b;
 
@@ -112,6 +112,8 @@ void BezierCurve::draw(){
       y += tempY;
     }
 
-    FrameBuffer::plot((int)x,(int)y,200,200,200);
+    fb.plot((int)x,(int)y,200,200,200);
   }
 }
+
+std::vector<std::vector<int> > BezierCurve::lookup_table;

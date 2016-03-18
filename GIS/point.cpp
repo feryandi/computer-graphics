@@ -3,11 +3,13 @@
 Point::Point(){
   x = 0;
   y = 0;
+  z = 0;
 }
 
 Point::Point(int _x, int _y){
   x = _x;
   y = _y;
+  z = 0;
 }
 
 int Point::getX(){
@@ -43,5 +45,5 @@ void Point::moveZ(int _z){
 }
 
 void Point::rotate(float degree, Point center){
-  
+
 }
