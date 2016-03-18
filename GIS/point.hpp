@@ -27,7 +27,7 @@ private:
   // point coordinates
   double x;
   double y;
-  double z = 0;
+  double z;
 };
 
 #endif

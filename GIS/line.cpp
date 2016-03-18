@@ -1,8 +1,10 @@
   #include "line.hpp"
 
-  Line::Line();
-  Line::Line(std::vector<Point> _points);
-  Line::~Line();
+  Line::Line(){}
+  Line::Line(std::vector<Point> _points){
+    points = _points;
+  }
+  Line::~Line(){}
 
   // getter & setter
   std::vector<Point> Line::getPoints(){
@@ -52,8 +54,8 @@
   void Line::moveZ(int movement){
 
   }
-  void Line::draw(char* buffer){
-
+  void Line::draw(FrameBuffer fb){
+    bresenham(fb, points[0].getX(), points[0].getY(), points[1].getX(), points[0].getY(),200,200,200,1);
   }
   int Line::iabs(int n){
     int const mask = n >> (sizeof(int) * 8 - 1);
@@ -85,7 +87,7 @@
     }
     return retval;
   }
-  void Line::bresenham(int x1, int y1, int x2, int y2, int red, int green, int blue, int line){
+  void Line::bresenham(FrameBuffer fb, int x1, int y1, int x2, int y2, int red, int green, int blue, int line){
     int Fx[] = { 1,  0, -1,  0};
     int Fy[] = { 0,  1,  0, -1};
 
@@ -117,7 +119,7 @@
 
     int D = 2 * db - da;
 
-    plot(x1, y1, red, green, blue);
+    fb.plot(x1, y1, red, green, blue);
 
     int x = x1;
     int y = y1;
@@ -135,7 +137,7 @@
         y += m1y;
       }
 
-      frame_buffer::plot(x, y, red, green, blue);
+      fb.plot(x, y, red, green, blue);
 
     }
   }

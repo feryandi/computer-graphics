@@ -3,8 +3,8 @@
 CC=g++
 CFLAGS=-c -Wall
 
-all: main.o bezier_curve.o frame_buffer.o point.o input.o text.o polygon.o
-	$(CC) main.o bezier_curve.o frame_buffer.o point.o input.o layer.o text.o polygon.o -o gis_itb
+all: main.o bezier_curve.o frame_buffer.o point.o input.o group.o text.o line.o
+	$(CC) main.o bezier_curve.o frame_buffer.o point.o input.o group.o text.o line.o -o gis_itb
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
@@ -21,16 +21,16 @@ point.o: point.cpp
 input.o: input.cpp
 	$(CC) $(CFLAGS) input.cpp
 
-layer.o: layer.cpp
-	$(CC) $(CFLAGS) layer.cpp
+group.o: group.cpp
+	$(CC) $(CFLAGS) group.cpp
 
 object.o: object.cpp
 	$(CC) $(CFLAGS) object.cpp
 text.o: text.cpp
 	$(CC) $(CFLAGS) text.cpp
 
-polygon.o: polygon.cpp
-	$(CC) $(CFLAGS) polygon.cpp
+line.o: line.cpp
+	$(CC) $(CFLAGS) line.cpp
 
 clean:
 	rm -f *.gch *.o bezier_main

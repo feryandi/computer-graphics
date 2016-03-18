@@ -1,3 +1,6 @@
+#ifndef FRAMEBUFFER_H
+#define FRAMEBUFFER_H
+
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
@@ -41,3 +44,5 @@ class FrameBuffer {
 
 		void plot(unsigned int x, unsigned int y, int red, int green, int blue);
 	};
+
+#endif
