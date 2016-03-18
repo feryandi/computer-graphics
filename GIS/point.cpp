@@ -41,3 +41,7 @@ void Point::moveY(int _y){
 void Point::moveZ(int _z){
   z += _z;
 }
+
+void Point::rotate(float degree, Point center){
+  
+}

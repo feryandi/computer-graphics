@@ -1,4 +1,7 @@
 #include "bezier_curve.hpp"
+#define MAX_ORDER 50
+#define STEP 1000
+
 
 BezierCurve::BezierCurve(){
   order = -1;
@@ -50,34 +53,23 @@ void BezierCurve::moveControlPointZ(int i, int movement){
   points.at(i).moveZ(movement);
 }
 
-void BezierCurve::drawControlPoint(unsigned int selected){
-  for (unsigned int i=0;i<points.size();i++){
-    // Draw selected Point
-    if (i == selected){
-      for (int j=2;j<4;j++){
-        /*plot(curve.getPoints().at(i).getX()+j,curve.getPoints().at(i).getY(),255,0,0);
-        plot(curve.getPoints().at(i).getX()-j,curve.getPoints().at(i).getY(),255,0,0);
-        plot(curve.getPoints().at(i).getX(),curve.getPoints().at(i).getY()+j,255,0,0);
-        plot(curve.getPoints().at(i).getX(),curve.getPoints().at(i).getY()-j,255,0,0);*/
-      }
-    }
-    else{
-      for (int j=2;j<4;j++){
-       /* plot(curve.getPoints().at(i).getX()+j,curve.getPoints().at(i).getY(),0,0,255);
-        plot(curve.getPoints().at(i).getX()-j,curve.getPoints().at(i).getY(),0,0,255);
-        plot(curve.getPoints().at(i).getX(),curve.getPoints().at(i).getY()+j,0,0,255);
-        plot(curve.getPoints().at(i).getX(),curve.getPoints().at(i).getY()-j,0,0,255);*/
-      }
-    }
-    if (i < points.size()-1){
-      /*bresenham(curve.getPoints().at(i).getX(),
-                curve.getPoints().at(i).getY(),
-                curve.getPoints().at(i+1).getX(),
-                curve.getPoints().at(i+1).getY(),
-                0,0,255,1);*/
-    }
-  }
+std::vector<std::vector<int> > BezierCurve::getPolynomLookupTable() {
+  return lookup_table;
+}
 
+void BezierCurve::generateLookupTable(){
+  //Generate Polynom table
+  for (int i=0; i<MAX_ORDER-1; i++){
+    std::vector<int> v;
+    v.push_back(1);
+    for (int j=1;j<=i-1;j++){
+      v.push_back(lookup_table.at(i-1).at(j-1)+lookup_table.at(i-1).at(j));
+    }
+    if (i > 0){
+      v.push_back(1);
+    }
+    lookup_table.push_back(v);
+  }
 }
 
 void BezierCurve::moveX(int movement){
@@ -89,48 +81,37 @@ void BezierCurve::moveY(int movement){
 void BezierCurve::moveZ(int movement){
 
 }
-void BezierCurve::draw(char* buffer){
+void BezierCurve::draw(){
+  float x=0,y=0; // Where to plot
+  float a,b;
 
-float x=0,y=0; // Where to plot
-float a,b;
-// printf("Order: %d\n", order);
+  std::vector<int> polynom = lookup_table.at(order);
+  for (int t=0;t<STEP;t++){
 
-std::vector<int> polynom = lookup_table.at(order);
-for (int t=0;t<STEP;t++){
-  // Step loop
-  a = 1 - ((float)t/STEP);
-  b = (float)t/STEP;
-  x = 0; y = 0;
+    // Step loop
+    a = 1 - ((float)t/STEP);
+    b = (float)t/STEP;
+    x = 0; y = 0;
 
-  // Polynom sum
-  for (int i=0;i<=order;i++){
+    // Polynom sum
+    for (int i=0;i<=order;i++){
+      float tempX = points.at(i).getX() * polynom.at(i);
+      float tempY = points.at(i).getY() * polynom.at(i);
 
-    // printf("Xb: %d\n", curve.getPoints().at(i).getX());
-    // printf("Yb: %d\n", curve.getPoints().at(i).getY());
-    // printf("PolynomAt_i: %d\n", polynom.at(i));
-    // printf("A: %f\n", a);
-    // printf("B: %f\n", b);
+      for (int k=0;k<order-i;k++){
+        tempX = tempX * a;
+        tempY = tempY * a;
+      }
 
-    float tempX = points.at(i).getX() * polynom.at(i);
-    float tempY = points.at(i).getY() * polynom.at(i);
+      for (int k=0;k<i;k++){
+        tempX = tempX * b;
+        tempY = tempY * b;
+      }
 
-    for (int k=0;k<order-i;k++){
-      tempX = tempX * a;
-      tempY = tempY * a;
+      x += tempX;
+      y += tempY;
     }
 
-    for (int k=0;k<i;k++){
-      tempX = tempX * b;
-      tempY = tempY * b;
-    }
-
-    x += tempX;
-    y += tempY;
+    FrameBuffer::plot((int)x,(int)y,200,200,200);
   }
-
-  // printf("t: %d\n", t);
-  // printf("X: %f\n", x);
-  // printf("Y: %f\n", y);
-  // printf("____________\n");
-  frame_buffer::plot((int)x,(int)y,200,200,200);
 }

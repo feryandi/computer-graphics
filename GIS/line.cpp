@@ -26,7 +26,7 @@
   void Line::setZ(double _z){
     z=_z;
   }
-  
+
   // methods
   void Line::addPoint(Point p){
     points.push_back(p);
