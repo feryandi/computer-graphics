@@ -33,7 +33,10 @@ public:
   Point getPositionPoint() const;
   void setPositionPoint(Point fp);
 
-  void setColor(int _r, int _g, int _b);
+  void setR(int _r);
+  void setG(int _g);
+  void setB(int _b);
+
   int getR();
   int getG();
   int getB();

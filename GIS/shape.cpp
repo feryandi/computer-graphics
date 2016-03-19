@@ -92,9 +92,15 @@ void Shape::setPositionPoint(Point pp) {
 	*positionPoint = pp;
 }
 
-void Shape::setColor(int _r, int _g, int _b) {
+void Shape::setR(int _r) {
 	r = _r;
+}
+
+void Shape::setG(int _g) {
 	g = _g;
+}
+
+void Shape::setB(int _b) {
 	b = _b;
 }
   
