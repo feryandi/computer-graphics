@@ -89,7 +89,7 @@ void FrameBuffer::plot(unsigned int x, unsigned int y, int red, int green, int b
 void FrameBuffer::clearScreen(){
   for (unsigned int j = 0; j < vinfo.yres; j++) {
       for (unsigned int i = 0; i < vinfo.xres; i++) {
-        plot(i,j,0,0,0);
+        plot(i,j,186,255,185);
       }
   }
 }

@@ -63,17 +63,17 @@ void Object::moveZ(double movement) {
 }
 
 void Object::draw(FrameBuffer &fb) {
-  for (int i = 0; i < curves.size(); ++i)
+  for (uint i = 0; i < curves.size(); ++i)
 	{
 		curves[i].draw(fb);
 	}
 
-	for (int i = 0; i < lines.size(); ++i)
+	for (uint i = 0; i < lines.size(); ++i)
 	{
 		lines[i].draw(fb);
 	}
 
-  for (int i = 0; i < shapes.size(); ++i)
+  for (uint i = 0; i < shapes.size(); ++i)
 	{
 		shapes[i].draw(fb);
 	}

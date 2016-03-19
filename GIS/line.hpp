@@ -13,13 +13,19 @@ public:
   ~Line();
 
   // getter & setter
-  std::vector<Point> getPoints();
-  double getX();
-  double getY();
-  double getZ();
+  std::vector<Point> getPoints() const;
+  double getX() const;
+  double getY() const;
+  double getZ() const;
+  int getR() const;
+  int getG() const;
+  int getB() const;
   void setX(double _x);
   void setY(double _y);
   void setZ(double _z);
+  void setR(double _r);
+  void setG(double _g);
+  void setB(double _b);
 
   // methods
   void addPoint(Point p);
@@ -40,5 +46,6 @@ public:
 private:
   std::vector<Point> points;
   double x,y,z;
+  int r,g,b;
 };
 #endif
