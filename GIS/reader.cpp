@@ -10,7 +10,7 @@ Shape& Reader::read(const char* filename) {
 
   std::vector<Line> lines;
   std::vector<BezierCurve> curves;
-  int r,g,b;
+  int r,g,b, px, py;
 
   while (!inputFile.eof()){
     char command;
@@ -42,6 +42,10 @@ Shape& Reader::read(const char* filename) {
         std::cout << b << std::endl;
 
 
+      } else if (command == 'p') {
+        data_stream >> px >> py;
+        std::cout << px << std::endl;
+        std::cout << py << std::endl;
       }
 
     }
@@ -66,11 +70,19 @@ Shape& Reader::read(const char* filename) {
 
   s->setCurves(curves);
   s->setLines(lines);
-  
-  // Biar jadi relative
-  //s->moveX(-1* s->positionPoint.getX());
-  //s->moveY(-1* s->positionPoint.getY());
-  //s->moveZ(-1* s->positionPoint.getZ());
+
+  Point _p(px,py);
+  s->setPositionPoint(_p);
+
+  printf("X nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getX());
+  printf("Y nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getY());
+
+  // Pindahin biar relative
+  s->moveX(-1* s->getPositionPoint().getX());
+  s->moveY(-1* s->getPositionPoint().getY());
+
+  printf("X nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getX());
+  printf("Y nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getY());
 
   return *s;
 }
