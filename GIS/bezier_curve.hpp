@@ -10,19 +10,25 @@ class BezierCurve{
 public:
   // ctor
   BezierCurve();
-  BezierCurve(std::vector<Point> _p);
+  BezierCurve(std::vector<Point> &_p);
 
   // dtor
   ~BezierCurve();
 
   // getter & setter
-  std::vector<Point> getPoints();
+  std::vector<Point> getPoints() const;
   void setPoint(std::vector<Point> _p);
-  int getOrder();
+  int getOrder() const;
   void setOrder(int _order);
-  double getX();
-  double getY();
-  double getZ();
+  int getR() const;
+  int getG() const;
+  int getB() const;
+  double getX() const;
+  double getY() const;
+  double getZ() const;
+  void setR(double _r);
+  void setG(double _g);
+  void setB(double _b);
 
   // methods
   void addControlPoint(Point p);
@@ -47,5 +53,6 @@ private:
   std::vector<Point> points;
   int order;
   double x,y,z;
+  int r,g,b;
 };
 #endif

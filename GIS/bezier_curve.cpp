@@ -5,17 +5,23 @@
 
 BezierCurve::BezierCurve(){
   order = -1;
+  r = 255;
+  g = 255;
+  b = 255;
 }
 
-BezierCurve::BezierCurve(std::vector<Point> _p){
+BezierCurve::BezierCurve(std::vector<Point> &_p){
   points = _p;
   order = points.size()-1;
+  r = 255;
+  g = 255;
+  b = 255;
 }
 
 BezierCurve::~BezierCurve(){
 }
 
-std::vector<Point> BezierCurve::getPoints(){
+std::vector<Point> BezierCurve::getPoints() const{
   return points;
 }
 
@@ -23,12 +29,32 @@ void BezierCurve::setPoint(std::vector<Point> _p){
   points = _p;
 }
 
-int BezierCurve::getOrder(){
+int BezierCurve::getR() const{
+  return r;
+}
+int BezierCurve::getG() const{
+  return g;
+}
+int BezierCurve::getB() const{
+  return b;
+}
+
+int BezierCurve::getOrder() const{
   return order;
 }
 
 void BezierCurve::setOrder(int _order){
   order = _order;
+}
+
+void BezierCurve::setR(double _r){
+  r = _r;
+}
+void BezierCurve::setG(double _g){
+  g = _g;
+}
+void BezierCurve::setB(double _b){
+  b = _b;
 }
 
 void BezierCurve::addControlPoint(Point p){
@@ -112,7 +138,7 @@ void BezierCurve::draw(FrameBuffer &fb){
       y += tempY;
     }
 
-    fb.plot((int)x,(int)y,200,200,200);
+    fb.plot((int)x,(int)y,this->r,this->g,this->b);
   }
 }
 

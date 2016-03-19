@@ -8,21 +8,10 @@ int main() {
   BezierCurve::generateLookupTable();
   fb.clearScreen();
 
-  // Test
-  std::vector<Point> points;
-  points.push_back(Point(500,200));
-  points.push_back(Point(100,50));
-  Line line(points);
-  points.push_back(Point(600,200));
-  BezierCurve bezier(points);
-  //
+  // Read File
   Shape c = a.read("31-45.txt");
-  
-  line.draw(fb);
-  bezier.draw(fb);
   c.draw(fb);
 
-  // fb.plot(100,100,200,0,0);
   fb.render();
 
 }

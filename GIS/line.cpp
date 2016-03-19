@@ -1,24 +1,43 @@
   #include "line.hpp"
-
-  Line::Line(){}
+  #include <iostream>
+  Line::Line(){
+    r = 255;
+    g = 255;
+    b = 255;
+  }
   Line::Line(std::vector<Point> _points){
     points = _points;
+    r = 255;
+    g = 255;
+    b = 255;
   }
+
   Line::~Line(){}
 
   // getter & setter
-  std::vector<Point> Line::getPoints(){
+  std::vector<Point> Line::getPoints() const{
     return points;
   }
-  double Line::getX(){
+  double Line::getX() const{
     return x;
   }
-  double Line::getY(){
+  double Line::getY() const{
     return y;
   }
-  double Line::getZ(){
+  double Line::getZ() const{
     return z;
   }
+
+  int Line::getR() const{
+    return r;
+  }
+  int Line::getG() const{
+    return g;
+  }
+  int Line::getB() const{
+    return b;
+  }
+
   void Line::setX(double _x){
     x=_x;
   }
@@ -27,6 +46,16 @@
   }
   void Line::setZ(double _z){
     z=_z;
+  }
+
+  void Line::setR(double _r){
+    r = _r;
+  }
+  void Line::setG(double _g){
+    g = _g;
+  }
+  void Line::setB(double _b){
+    b = _b;
   }
 
   // methods
@@ -55,7 +84,7 @@
 
   }
   void Line::draw(FrameBuffer &fb){
-    bresenham(fb, points[0].getX(), points[0].getY(), points[1].getX(), points[1].getY(),0,200,0,1);
+    bresenham(fb, points[0].getX(), points[0].getY(), points[1].getX(), points[1].getY(),r,g,b,1);
   }
   int Line::iabs(int n){
     int const mask = n >> (sizeof(int) * 8 - 1);
@@ -87,6 +116,7 @@
     }
     return retval;
   }
+
   void Line::bresenham(FrameBuffer &fb, int x1, int y1, int x2, int y2, int red, int green, int blue, int line){
     int Fx[] = { 1,  0, -1,  0};
     int Fy[] = { 0,  1,  0, -1};
@@ -119,6 +149,7 @@
 
     int D = 2 * db - da;
 
+    std::cout << this->r << "," << this->g << "," << this->b << std::endl;
     fb.plot(x1, y1, red, green, blue);
 
     int x = x1;
