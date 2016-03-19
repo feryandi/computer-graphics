@@ -75,19 +75,19 @@
     points.at(i).moveZ(movement);
   }
   void Line::moveX(int movement){
-    for (int i = 0; i < points.size(); ++i)
+    for (int i = 0; i < (int)points.size(); ++i)
     {
       points.at(i).moveX(movement);
     }
   }
   void Line::moveY(int movement){
-    for (int i = 0; i < points.size(); ++i)
+    for (int i = 0; i < (int)points.size(); ++i)
     {
       points.at(i).moveY(movement);
     }
   }
   void Line::moveZ(int movement){
-    for (int i = 0; i < points.size(); ++i)
+    for (int i = 0; i < (int)points.size(); ++i)
     {
       points.at(i).moveZ(movement);
     }
@@ -98,7 +98,7 @@
   }
 
   void Line::rotate(int degree, int cx, int cy){
-    for (int i=0;i<points.size();i++){
+    for (int i=0;i < (int)points.size();i++){
       points[i].rotate(degree,cx,cy);
     }
   }

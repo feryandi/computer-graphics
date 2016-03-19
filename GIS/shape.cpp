@@ -32,6 +32,7 @@ Shape& Shape::operator=(const Shape &shape) {
 	delete firePoint;
 	delete centrePoint;
 	delete positionPoint;
+
 	k = shape.k;
 	degree = shape.degree;
 	firePoint = new Point(shape.getFirePoint().getX(), shape.getFirePoint().getY());
@@ -39,6 +40,10 @@ Shape& Shape::operator=(const Shape &shape) {
 	positionPoint = new Point(shape.getPositionPoint().getX(), shape.getPositionPoint().getY());
 	curves = shape.curves;
 	lines = shape.lines;
+
+	r = shape.r;
+	g = shape.g;
+	b = shape.b;
 
 	return *this;
 }
@@ -51,6 +56,10 @@ Shape::Shape(const Shape &shape){
 	positionPoint = new Point(shape.getPositionPoint().getX(), shape.getPositionPoint().getY());
 	curves = shape.curves;
 	lines = shape.lines;
+
+	r = shape.r;
+	g = shape.g;
+	b = shape.b;
 }
 
 std::vector<BezierCurve> Shape::getCurves() const{
@@ -228,12 +237,17 @@ void Shape::rotate(int degree, int cx, int cy){
 void Shape::fill(FrameBuffer &fb){
 	std::queue <Point> qpoints;
 	qpoints.push(*firePoint);
+	std::cout << getR() << std::endl;
+	std::cout << this->g << std::endl;
+	std::cout << this->b << std::endl;
 	while (qpoints.size() > 0){
 		Point current = qpoints.front();
 		fb.plot(current.getX(), current.getY(),r,g,b);
 		qpoints.pop();
 
-		std::cout <<  fb.zbuffer[current.getY()][current.getX()+1] << std::endl;
+		// TO-DO
+		//std::cout << fb.zbuffer[current.getY()][current.getX()+1] << std::endl;
+
 		if (fb.zbuffer[current.getY()][current.getX()+1] == 0){
 			qpoints.push(Point(current.getX()+1, current.getY()));
 			fb.zbuffer[current.getY()][current.getX()+1] = 1;
