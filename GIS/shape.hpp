@@ -52,13 +52,13 @@ public:
   void addLine(Line l);
   void draw (FrameBuffer &fb);
 
-  void moveLineX(int movement);
-  void moveLineY(int movement);
-  void moveLineZ(int movement);
+  void moveLineX(int i, int movement);
+  void moveLineY(int i, int movement);
+  void moveLineZ(int i, int movement);
 
-  void moveCurveX(int movement);
-  void moveCurveY(int movement);
-  void moveCurveZ(int movement);
+  void moveCurveX(int i, int movement);
+  void moveCurveY(int i, int movement);
+  void moveCurveZ(int i, int movement);
 
   void moveX(int movement);
   void moveY(int movement);
