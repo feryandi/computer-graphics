@@ -92,6 +92,24 @@ void Shape::setPositionPoint(Point pp) {
 	*positionPoint = pp;
 }
 
+void Shape::setColor(int _r, int _g, int _b) {
+	r = _r;
+	g = _g;
+	b = _b;
+}
+  
+int Shape::getR() {
+	return r;
+}
+
+int Shape::getG() {
+	return g;
+}
+
+int Shape::getB() {
+	return b;
+}
+
 float Shape::getMultiplication() {
 	return k;
 }
@@ -117,13 +135,17 @@ void Shape::addLine(Line l) {
 }
 
 void Shape::draw(FrameBuffer &fb) {
-		for (uint i = 0; i < curves.size(); ++i)
-		{
-			curves[i].draw(fb);
-		}
+	for (uint i = 0; i < curves.size(); ++i)
+	{
+		curves[i].draw(fb);
+	}
 
 	for (uint i = 0; i < lines.size(); ++i)
 	{
 		lines[i].draw(fb);
 	}
+}
+
+void Shape::setAbsoluteToRelative(){
+
 }

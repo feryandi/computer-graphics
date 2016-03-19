@@ -33,6 +33,11 @@ public:
   Point getPositionPoint() const;
   void setPositionPoint(Point fp);
 
+  void setColor(int _r, int _g, int _b);
+  int getR();
+  int getG();
+  int getB();
+
   float getMultiplication();
   void setMultiplication(float _k);
 
@@ -43,6 +48,7 @@ public:
   void addCurve(BezierCurve bc);
   void addLine(Line l);
   void draw (FrameBuffer &fb);
+  void setAbsoluteToRelative();
 
 private:
   std::vector<BezierCurve> curves;
@@ -50,6 +56,7 @@ private:
   Point *firePoint;
   Point *centrePoint;
   Point *positionPoint;
+  int r,g,b;
   float k;
   float degree;
 };
