@@ -10,7 +10,7 @@ Shape& Reader::read(const char* filename) {
 
   std::vector<Line> lines;
   std::vector<BezierCurve> curves;
-  int r,g,b, px, py;
+  int r,g,b, px, py, xx, xy;
 
   while (!inputFile.eof()){
     char command;
@@ -44,6 +44,11 @@ Shape& Reader::read(const char* filename) {
 
       } else if (command == 'p') {
         data_stream >> px >> py;
+        std::cout << px << std::endl;
+        std::cout << py << std::endl;
+
+      } else if (command == 'x') {
+        data_stream >> xx >> xy;
         std::cout << px << std::endl;
         std::cout << py << std::endl;
       }
@@ -96,6 +101,7 @@ Shape& Reader::read(const char* filename) {
 
   Point _p(px,py);
   s->setPositionPoint(min);
+  s->setFirePoint(Point(xx,xy));
 
   printf("X nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getX());
   printf("Y nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getY());
