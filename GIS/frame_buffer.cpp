@@ -37,9 +37,14 @@ FrameBuffer::FrameBuffer() {
         exit(4);
     }
 
+    clearZBuffer();
+
     // Making buffer, smoother framerate
     buffer = (char*)malloc(screensize);
     memcpy(buffer, fbp, screensize);
+
+    center_x  = vinfo.xres / 2;
+    center_y  = vinfo.yres / 2;
 }
 
 FrameBuffer::~FrameBuffer() {
@@ -55,11 +60,40 @@ int FrameBuffer::getVInfoX() {
     return vinfo.xres;
 }
 
+int FrameBuffer::getCX(){
+  return center_x;
+}
+
+int FrameBuffer::getCY(){
+  return center_y;
+}
+
+char* FrameBuffer::getBuffer(){
+  return buffer;
+}
+
+void FrameBuffer::clearZBuffer(){
+  for (int i = 0; i < 768; i++){
+    for (int j=0;j<1366;j++){
+      zbuffer[i][j] = 0;
+    }
+  }
+}
+
 void FrameBuffer::render() {
     memcpy(fbp, buffer, screensize);
 }
 
+int FrameBuffer::getLocation(int x, int y){
+  int location = ((x + vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
+             ((y + vinfo.yoffset) * finfo.line_length));
+  return location;
+
+}
+
 void FrameBuffer::plot(unsigned int x, unsigned int y, int red, int green, int blue) {
+
+  zbuffer[y][x] = 1;
 
 	if ( ( x >= 0 ) &&
 		 ( y >= 0 ) &&

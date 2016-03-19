@@ -1,5 +1,6 @@
 #include "shape.hpp"
 #include <vector>
+#include <queue>
 
 Shape::Shape(){
 	k = 1;
@@ -103,7 +104,7 @@ void Shape::setG(int _g) {
 void Shape::setB(int _b) {
 	b = _b;
 }
-  
+
 int Shape::getR() {
 	return r;
 }
@@ -175,39 +176,80 @@ void Shape::moveCurveY(int i, int movement){
 void Shape::moveCurveZ(int i, int movement){
   curves.at(i).moveZ(movement);
 }
-  
+
 void Shape::moveX(int movement){
-  for (int i = 0; i < lines.size(); ++i)
+  for (uint i = 0; i < lines.size(); ++i)
   {
     lines.at(i).moveX(movement);
   }
 
-  for (int i = 0; i < curves.size(); ++i)
+  for (uint i = 0; i < curves.size(); ++i)
   {
     curves.at(i).moveX(movement);
   }
 }
 
 void Shape::moveY(int movement){
-  for (int i = 0; i < lines.size(); ++i)
+  for (uint i = 0; i < lines.size(); ++i)
   {
     lines.at(i).moveY(movement);
   }
 
-  for (int i = 0; i < curves.size(); ++i)
+  for (uint i = 0; i < curves.size(); ++i)
   {
     curves.at(i).moveY(movement);
   }
 }
 
 void Shape::moveZ(int movement){
-  for (int i = 0; i < lines.size(); ++i)
+  for (uint i = 0; i < lines.size(); ++i)
   {
     lines.at(i).moveZ(movement);
   }
 
-  for (int i = 0; i < curves.size(); ++i)
+  for (uint i = 0; i < curves.size(); ++i)
   {
     curves.at(i).moveZ(movement);
   }
+}
+
+void Shape::rotate(int degree, int cx, int cy){
+	for (uint i=0;i<lines.size();i++){
+		lines[i].rotate(degree,cx,cy);
+	}
+
+	for (uint i=0;i<curves.size();i++){
+		curves[i].rotate(degree,cx,cy);
+	}
+
+	positionPoint->rotate(degree,cx,cy);
+}
+
+void Shape::fill(FrameBuffer &fb){
+	std::queue <Point> qpoints;
+	qpoints.push(*firePoint);
+	while (qpoints.size() > 0){
+		Point current = qpoints.front();
+		fb.plot(current.getX(), current.getY(),r,g,b);
+		qpoints.pop();
+
+		std::cout <<  fb.zbuffer[current.getY()][current.getX()+1] << std::endl;
+		if (fb.zbuffer[current.getY()][current.getX()+1] == 0){
+			qpoints.push(Point(current.getX()+1, current.getY()));
+			fb.zbuffer[current.getY()][current.getX()+1] = 1;
+		}
+		if (fb.zbuffer[current.getY()+1][current.getX()] == 0){
+			qpoints.push(Point(current.getX(), current.getY()+1));
+			fb.zbuffer[current.getY()+1][current.getX()] = 1;
+		}
+		if (fb.zbuffer[current.getY()-1][current.getX()] == 0){
+			qpoints.push(Point(current.getX(), current.getY()-1));
+			fb.zbuffer[current.getY()-1][current.getX()] = 1;
+		}
+		if (fb.zbuffer[current.getY()][current.getX()-1] == 0){
+			qpoints.push(Point(current.getX()-1, current.getY()));
+			fb.zbuffer[current.getY()][current.getX()-1] = 1;
+		}
+
+	}
 }

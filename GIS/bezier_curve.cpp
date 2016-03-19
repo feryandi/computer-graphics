@@ -99,23 +99,29 @@ void BezierCurve::generateLookupTable(){
 }
 
 void BezierCurve::moveX(int movement){
-  for (int i = 0; i < points.size(); ++i)
+  for (uint i = 0; i < points.size(); ++i)
   {
     points.at(i).moveX(movement);
   }
 }
 
 void BezierCurve::moveY(int movement){
-  for (int i = 0; i < points.size(); ++i)
+  for (uint i = 0; i < points.size(); ++i)
   {
     points.at(i).moveY(movement);
   }
 }
 
 void BezierCurve::moveZ(int movement){
-  for (int i = 0; i < points.size(); ++i)
+  for (uint i = 0; i < points.size(); ++i)
   {
     points.at(i).moveZ(movement);
+  }
+}
+
+void BezierCurve::rotate(int degree, int cx, int cy){
+  for (uint i=0;i<points.size();i++){
+    points[i].rotate(degree,cx,cy);
   }
 }
 

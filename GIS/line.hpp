@@ -27,7 +27,7 @@ public:
   void setG(double _g);
   void setB(double _b);
 
-  // methods
+  // public methods
   void addPoint(Point p);
   void deletePoint(int i);
   void movePointX(int i, int movement);
@@ -36,16 +36,20 @@ public:
   void moveX(int movement);
   void moveY(int movement);
   void moveZ(int movement);
+  void rotate(int degree, int cx, int cy);
   void draw(FrameBuffer &fb);
-  int iabs(int n);
-  int F(int X, int Y, int Z);
-  int G(int X, int Y);
-  void bresenham(FrameBuffer &fb, int x1, int y1, int x2, int y2, int red, int green, int blue, int line);
+
 
 
 private:
   std::vector<Point> points;
   double x,y,z;
   int r,g,b;
+
+  // private methods
+  int iabs(int n);
+  int F(int X, int Y, int Z);
+  int G(int X, int Y);
+  void bresenham(FrameBuffer &fb, int x1, int y1, int x2, int y2, int red, int green, int blue, int line);
 };
 #endif

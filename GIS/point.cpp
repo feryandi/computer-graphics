@@ -44,6 +44,13 @@ void Point::moveZ(int _z){
   z += _z;
 }
 
-void Point::rotate(float degree, Point center){
-
+void Point::rotate(float degree, int center_x, int center_y){
+      double val = PI/180.0;
+      int newX, newY;
+      // std::cout<<"before: "<<"x= "<<x<<" y= "<<y<<std::endl;
+      newX = ( cos(degree * val) * (x-center_x) - sin(degree * val) * (y-center_y) + center_x );
+      newY = ( sin(degree * val) * (x-center_x) + cos(degree * val) * (y-center_y) + center_y );
+      // std::cout<<"after: "<<"x= "<<x<<" y= "<<y<<std::endl;
+      x = newX;
+      y = newY;
 }

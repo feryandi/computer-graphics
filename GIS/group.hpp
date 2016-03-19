@@ -28,7 +28,7 @@ public:
 
 
 private:
-    std::vector<Object> objects;
+    std::vector<Shape> shapes;
     double x,y,z;
 };
 

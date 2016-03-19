@@ -29,7 +29,12 @@ class FrameBuffer {
 		// Making Render Smoother
 		char *buffer;
 
+		// Center point
+		int center_x;
+		int center_y;
+
 	public:
+		int zbuffer[768][1366];
 		// ctor & dtor
 		FrameBuffer();
 		~FrameBuffer();
@@ -37,9 +42,14 @@ class FrameBuffer {
 		//getter & setter
 		int getVInfoY();
 		int getVInfoX();
+		int getCX();
+		int getCY();
+		char* getBuffer();
 
 		//Copy to framebuffer
+		int getLocation(int x, int y);
 		void clearScreen();
+		void clearZBuffer();
 		void render();
 
 		void plot(unsigned int x, unsigned int y, int red, int green, int blue);
