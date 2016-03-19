@@ -51,7 +51,18 @@ public:
   void addCurve(BezierCurve bc);
   void addLine(Line l);
   void draw (FrameBuffer &fb);
-  void setAbsoluteToRelative();
+
+  void moveLineX(int movement);
+  void moveLineY(int movement);
+  void moveLineZ(int movement);
+
+  void moveCurveX(int movement);
+  void moveCurveY(int movement);
+  void moveCurveZ(int movement);
+
+  void moveX(int movement);
+  void moveY(int movement);
+  void moveZ(int movement);
 
 private:
   std::vector<BezierCurve> curves;

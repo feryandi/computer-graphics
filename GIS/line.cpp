@@ -75,14 +75,24 @@
     points.at(i).moveZ(movement);
   }
   void Line::moveX(int movement){
-
+    for (int i = 0; i < points.size(); ++i)
+    {
+      points.at(i).moveX(movement);
+    }
   }
   void Line::moveY(int movement){
-
+    for (int i = 0; i < points.size(); ++i)
+    {
+      points.at(i).moveY(movement);
+    }
   }
   void Line::moveZ(int movement){
-
+    for (int i = 0; i < points.size(); ++i)
+    {
+      points.at(i).moveZ(movement);
+    }
   }
+  
   void Line::draw(FrameBuffer &fb){
     bresenham(fb, points[0].getX(), points[0].getY(), points[1].getX(), points[1].getY(),r,g,b,1);
   }

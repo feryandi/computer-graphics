@@ -99,14 +99,26 @@ void BezierCurve::generateLookupTable(){
 }
 
 void BezierCurve::moveX(int movement){
-
+  for (int i = 0; i < points.size(); ++i)
+  {
+    points.at(i).moveX(movement);
+  }
 }
+
 void BezierCurve::moveY(int movement){
-
+  for (int i = 0; i < points.size(); ++i)
+  {
+    points.at(i).moveY(movement);
+  }
 }
+
 void BezierCurve::moveZ(int movement){
-
+  for (int i = 0; i < points.size(); ++i)
+  {
+    points.at(i).moveZ(movement);
+  }
 }
+
 void BezierCurve::draw(FrameBuffer &fb){
   float x=0,y=0; // Where to plot
   float a,b;

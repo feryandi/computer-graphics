@@ -152,6 +152,62 @@ void Shape::draw(FrameBuffer &fb) {
 	}
 }
 
-void Shape::setAbsoluteToRelative(){
+void Shape::moveLineX(int i, int movement){
+  lines.at(i).moveX(movement);
+}
 
+void Shape::moveLineY(int i, int movement){
+  lines.at(i).moveY(movement);
+}
+
+void Shape::moveLineZ(int i, int movement){
+  lines.at(i).moveZ(movement);
+}
+
+void Shape::moveCurveX(int i, int movement){
+  curves.at(i).moveX(movement);
+}
+
+void Shape::moveCurveY(int i, int movement){
+  curves.at(i).moveY(movement);
+}
+
+void Shape::moveCurveZ(int i, int movement){
+  curves.at(i).moveZ(movement);
+}
+  
+void Shape::moveX(int movement){
+  for (int i = 0; i < lines.size(); ++i)
+  {
+    lines.at(i).moveX(movement);
+  }
+
+  for (int i = 0; i < curves.size(); ++i)
+  {
+    curves.at(i).moveX(movement);
+  }
+}
+
+void Shape::moveY(int movement){
+  for (int i = 0; i < lines.size(); ++i)
+  {
+    lines.at(i).moveY(movement);
+  }
+
+  for (int i = 0; i < curves.size(); ++i)
+  {
+    curves.at(i).moveY(movement);
+  }
+}
+
+void Shape::moveZ(int movement){
+  for (int i = 0; i < lines.size(); ++i)
+  {
+    lines.at(i).moveZ(movement);
+  }
+
+  for (int i = 0; i < curves.size(); ++i)
+  {
+    curves.at(i).moveZ(movement);
+  }
 }

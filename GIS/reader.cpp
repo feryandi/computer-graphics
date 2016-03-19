@@ -66,7 +66,11 @@ Shape& Reader::read(const char* filename) {
 
   s->setCurves(curves);
   s->setLines(lines);
-
+  
+  // Biar jadi relative
+  //s->moveX(-1* s->positionPoint.getX());
+  //s->moveY(-1* s->positionPoint.getY());
+  //s->moveZ(-1* s->positionPoint.getZ());
 
   return *s;
 }
