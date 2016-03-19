@@ -30,6 +30,7 @@ public:
   void show();
 
   void add(const Shape &s);
+  void addList(const std::vector<Shape> &s);
 
 private:
     std::vector<Shape> shapes;

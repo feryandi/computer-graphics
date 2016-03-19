@@ -237,16 +237,13 @@ void Shape::rotate(int degree, int cx, int cy){
 void Shape::fill(FrameBuffer &fb){
 	std::queue <Point> qpoints;
 	qpoints.push(*firePoint);
-	std::cout << getR() << std::endl;
-	std::cout << this->g << std::endl;
-	std::cout << this->b << std::endl;
 	while (qpoints.size() > 0){
 		Point current = qpoints.front();
 		fb.plot(current.getX(), current.getY(),r,g,b);
 		qpoints.pop();
 
 		// TO-DO
-		//std::cout << fb.zbuffer[current.getY()][current.getX()+1] << std::endl;
+		//std::cout << current.getY() << " " << current.getX() << std::endl;
 
 		if (fb.zbuffer[current.getY()][current.getX()+1] == 0){
 			qpoints.push(Point(current.getX()+1, current.getY()));

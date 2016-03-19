@@ -93,13 +93,11 @@ int FrameBuffer::getLocation(int x, int y){
 
 void FrameBuffer::plot(unsigned int x, unsigned int y, int red, int green, int blue) {
 
-  zbuffer[y][x] = 1;
-
 	if ( ( x >= 0 ) &&
 		 ( y >= 0 ) &&
 		 ( x < vinfo.xres - 1 ) &&
 		 ( y < vinfo.yres - 1 ) ) {
-
+            zbuffer[y][x] = 1;
             location = ((x + vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
                        ((y + vinfo.yoffset) * finfo.line_length));
 

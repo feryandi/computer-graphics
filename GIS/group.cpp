@@ -1,6 +1,9 @@
 #include "group.hpp"
 
-Group::Group(){}
+Group::Group(){
+	visible = 1;
+}
+
 Group::~Group(){}
 
 double Group::getX(){
@@ -75,4 +78,8 @@ void Group::show() {
 
 void Group::add(const Shape &s) {
 	shapes.push_back(s);
+}
+
+void Group::addList(const std::vector<Shape> &s) {
+	shapes = s;
 }

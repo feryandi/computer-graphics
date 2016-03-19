@@ -3,13 +3,15 @@
 #include <fstream>
 #include <sstream>
 
-Shape& Reader::read(const char* filename) {
+std::vector<Shape>& Reader::read(const char* filename) {
 
   std::fstream inputFile;
   inputFile.open(filename);
 
+  std::vector<Shape> *shapes = new std::vector<Shape>();
   std::vector<Line> lines;
   std::vector<BezierCurve> curves;
+  int is_p;
   int r,g,b, px, py, xx, xy;
   int fill_r, fill_g, fill_b;
 
@@ -24,7 +26,23 @@ Shape& Reader::read(const char* filename) {
 
       std::stringstream data_stream(data);
 
-      if (command == 'c') {
+      if (command == '{') {
+
+        r = 0;
+        g = 0;
+        b = 0;
+        
+        px = 0;
+        py = 0;
+        is_p = 0;
+
+        xx = 0;
+        xy = 0;
+        fill_r = 255;
+        fill_g = 0;
+        fill_b = 255;
+
+      } else if (command == 'c') {
 
         BezierCurve s = parseBezierCurve(data_stream);
         curves.push_back(s);
@@ -46,10 +64,15 @@ Shape& Reader::read(const char* filename) {
       } else if (command == 'p') {
 
         data_stream >> px >> py;
+        is_p = 1;
 
       } else if (command == 'x') {
 
         data_stream >> xx >> xy;
+
+      } else if (command == '}') {
+
+        shapes->push_back(createShape(lines, curves, r, g, b, px, py, is_p, xx, xy, fill_r, fill_g, fill_b));
 
       }
 
@@ -59,6 +82,15 @@ Shape& Reader::read(const char* filename) {
 
   inputFile.close();
 
+  return *shapes;
+}
+
+
+Shape& Reader::createShape(std::vector<Line> lines, std::vector<BezierCurve> curves,
+                           int r, int g, int b, 
+                           int px, int py, int is_p, 
+                           int xx, int xy,
+                           int fill_r, int fill_g, int fill_b) {  
   Shape *s = new Shape();
 
   for (int i=0;i < (int)curves.size();i++){
@@ -72,6 +104,7 @@ Shape& Reader::read(const char* filename) {
     lines[i].setG(g);
     lines[i].setB(b);
   }
+
   Point min(10000,10000);
   Point max(-1,-1);
   for (int i=0;i < (int)lines.size();i++){
@@ -99,19 +132,26 @@ Shape& Reader::read(const char* filename) {
   s->setCurves(curves);
   s->setLines(lines);
 
-  Point _p(px,py);
-  s->setPositionPoint(min);
-  s->setFirePoint(Point(xx,xy));
+  if ( !is_p ) {
+      px = min.getX();
+      py = min.getY();
+  }
 
-  printf("X nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getX());
-  printf("Y nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getY());
+  s->setPositionPoint(Point(px, py));  
+
+/*  printf("X nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getX());
+  printf("Y nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getY());*/
 
   // Pindahin biar relative
-  s->moveX(-1* s->getPositionPoint().getX());
-  s->moveY(-1* s->getPositionPoint().getY());
+  s->moveX((-1 * min.getX()) + px);
+  s->moveY((-1 * min.getY()) + py);
 
-  printf("X nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getX());
-  printf("Y nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getY());
+  s->setFirePoint(Point(xx - min.getX() + px, xy - min.getY() + py));
+
+/*  printf("X nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getX());
+  printf("Y nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getY());*/
+
+  printf("Firepoint = %d, %d\n", s->getFirePoint().getX(), s->getFirePoint().getY());
 
   // Color Filling
   s->setR(fill_r);

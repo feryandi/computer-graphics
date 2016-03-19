@@ -166,7 +166,7 @@
 
     int D = 2 * db - da;
 
-    std::cout << this->r << "," << this->g << "," << this->b << std::endl;
+    //std::cout << this->r << "," << this->g << "," << this->b << std::endl;
     fb.plot(x1, y1, red, green, blue);
 
     int x = x1;

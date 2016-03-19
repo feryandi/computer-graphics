@@ -8,10 +8,15 @@ class Reader {
 public:
 	Reader(){};
 
-	Shape& read(const char*);
+	std::vector<Shape>& read(const char*);
 private:
 	BezierCurve& parseBezierCurve(std::stringstream&);
 	Line& parseLine(std::stringstream&);
+	Shape& createShape(std::vector<Line>, std::vector<BezierCurve>,
+                           int, int, int, 
+                           int, int, int,
+                           int, int,
+                           int, int, int);
 };
 
 #endif
