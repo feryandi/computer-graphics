@@ -160,4 +160,39 @@ void BezierCurve::draw(FrameBuffer &fb){
   }
 }
 
+void BezierCurve::drawWM(FrameBuffer &fb, double k, int cx, int cy) {
+  float x=0,y=0; // Where to plot
+  float a,b;
+
+  std::vector<int> polynom = lookup_table.at(order);
+  for (int t=0;t<STEP;t++){
+
+    // Step loop
+    a = 1 - ((float)t/STEP);
+    b = (float)t/STEP;
+    x = 0; y = 0;
+
+    // Polynom sum
+    for (int i=0;i<=order;i++){
+      float tempX = (((points.at(i).getX() * polynom.at(i))-cx)*k)+cx;
+      float tempY = (((points.at(i).getY() * polynom.at(i))-cy)*k)+cy;
+
+      for (int k=0;k<order-i;k++){
+        tempX = tempX * a;
+        tempY = tempY * a;
+      }
+
+      for (int k=0;k<i;k++){
+        tempX = tempX * b;
+        tempY = tempY * b;
+      }
+
+      x += tempX;
+      y += tempY;
+    }
+
+    fb.plot((int)x,(int)y,this->r,this->g,this->b);
+  }
+}
+
 std::vector<std::vector<int> > BezierCurve::lookup_table;

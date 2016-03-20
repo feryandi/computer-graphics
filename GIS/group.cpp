@@ -2,6 +2,7 @@
 
 Group::Group(){
 	visible = 1;
+	positionPoint = new Point(0,0);
 }
 
 Group::~Group(){}
@@ -14,6 +15,18 @@ double Group::getY(){
 }
 double Group::getZ(){
   return z;
+}
+
+
+float Group::getMultiplication() {
+	return k;
+}
+
+void Group::setMultiplication(float _k) {
+	k = _k;
+	for (uint i=0;i<shapes.size();i++){
+		shapes[i].setMultiplication(k);
+	}
 }
 
 /*void Group::setX(double _x){
@@ -37,6 +50,14 @@ void Group::setZ(double _z){
 		shapes[i].setZ(_z);
 	}
 }*/
+
+void Group::rotate(float degree, int cx, int cy) {
+	for (uint i=0;i<shapes.size();i++){
+		shapes[i].rotate(degree,cx,cy);
+	}
+
+	positionPoint->rotate(degree,cx,cy);
+}
 
 void Group::moveX(int movement){
   x += movement;
@@ -65,7 +86,6 @@ void Group::draw(FrameBuffer &fb){
 	  for (uint i = 0; i < shapes.size(); ++i)
 		{
 			shapes[i].draw(fb);
-	  		shapes[i].fill(fb);
 		}
 	}
 }
@@ -76,6 +96,14 @@ void Group::hide() {
 
 void Group::show() {
 	visible = 1;
+}
+
+void Group::toggle() {
+	if ( visible == 1 ) {
+		visible = 0;
+	} else {
+		visible = 1;
+	}
 }
 
 void Group::add(const Shape &s) {

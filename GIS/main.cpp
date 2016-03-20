@@ -1,6 +1,7 @@
 #include "reader.hpp"
 #include "group.hpp"
 #include "input.hpp"
+
 #include <vector>
 
 void draw(FrameBuffer &fb, std::vector<Group> groups){
@@ -8,6 +9,7 @@ void draw(FrameBuffer &fb, std::vector<Group> groups){
     groups[i].draw(fb);
   }
 }
+
 
 int main() {
 
@@ -17,6 +19,7 @@ int main() {
   Reader a; // File Reader
   std::vector<Group> groups; // Group of map objects
 
+
   BezierCurve::generateLookupTable();
 
 
@@ -24,6 +27,10 @@ int main() {
   // std::cout << fb.getCX() << "," << fb.getCY() << std::endl;
   groups.push_back(Group());
   groups[0].addList(a.read("31-45.txt"));
+  groups[0].setMultiplication(1.5);
+  groups.push_back(Group());
+  groups[1].addList(a.read("jalan.txt"));
+  groups[1].setMultiplication(1.5);
 
   // Initialize input
   input.initTermios();
@@ -43,28 +50,28 @@ int main() {
         case 'w':{
 					// Move up
           for (uint i=0;i<groups.size();i++){
-            groups[i].moveY(-1);
+            groups[i].moveY(-5);
           }
           break;
 				}
 				case 's':{
 					// Move down
           for (uint i=0;i<groups.size();i++){
-            groups[i].moveY(1);
+            groups[i].moveY(5);
           }
           break;
 				}
 				case 'a':{
 					// Move left
           for (uint i=0;i<groups.size();i++){
-            groups[i].moveX(-1);
+            groups[i].moveX(-5);
           }
           break;
 				}
 				case 'd':{
 					// Move right
           for (uint i=0;i<groups.size();i++){
-            groups[i].moveX(1);
+            groups[i].moveX(5);
           }
           break;
 				}
@@ -103,4 +110,7 @@ int main() {
 
   // Reset input
   input.resetTermios();
+
+  return 0;
+
 }

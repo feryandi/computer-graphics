@@ -12,7 +12,7 @@ public:
 private:
 	BezierCurve& parseBezierCurve(std::stringstream&);
 	Line& parseLine(std::stringstream&);
-	Shape& createShape(std::vector<Line>, std::vector<BezierCurve>,
+	Shape& createShape(std::vector<Line>, std::vector<BezierCurve>, Text,
                            int, int, int, 
                            int, int, int,
                            int, int,

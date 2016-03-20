@@ -14,6 +14,7 @@ std::vector<Shape>& Reader::read(const char* filename) {
   int is_p;
   int r,g,b, px, py, xx, xy;
   int fill_r, fill_g, fill_b;
+  Text text;
 
   while (!inputFile.eof()){
     char command;
@@ -28,9 +29,9 @@ std::vector<Shape>& Reader::read(const char* filename) {
 
       if (command == '{') {
 
-        r = 0;
-        g = 0;
-        b = 0;
+        r = 219;
+        g = 217;
+        b = 213;
 
         px = 0;
         py = 0;
@@ -38,10 +39,11 @@ std::vector<Shape>& Reader::read(const char* filename) {
 
         xx = 0;
         xy = 0;
-        fill_r = 255;
-        fill_g = 0;
-        fill_b = 255;
+        fill_r = 237;
+        fill_g = 232;
+        fill_b = 223;
 
+        text.setText("");
       } else if (command == 'c') {
 
         BezierCurve s = parseBezierCurve(data_stream);
@@ -70,9 +72,15 @@ std::vector<Shape>& Reader::read(const char* filename) {
 
         data_stream >> xx >> xy;
 
+      } else if (command == 't') {
+
+        std::string stemp;
+        data_stream >> stemp;
+        text.setText(stemp);
+
       } else if (command == '}') {
 
-        shapes->push_back(createShape(lines, curves, r, g, b, px, py, is_p, xx, xy, fill_r, fill_g, fill_b));
+        shapes->push_back(createShape(lines, curves, text, r, g, b, px, py, is_p, xx, xy, fill_r, fill_g, fill_b));
 
       }
 
@@ -86,9 +94,10 @@ std::vector<Shape>& Reader::read(const char* filename) {
 }
 
 
-Shape& Reader::createShape(std::vector<Line> lines, std::vector<BezierCurve> curves,
+
+Shape& Reader::createShape(std::vector<Line> lines, std::vector<BezierCurve> curves, Text text,
                            int r, int g, int b,
-                           int px, int py, int is_p,
+                           int px, int py, int is_p, 
                            int xx, int xy,
                            int fill_r, int fill_g, int fill_b) {
   Shape *s = new Shape();
@@ -155,13 +164,17 @@ Shape& Reader::createShape(std::vector<Line> lines, std::vector<BezierCurve> cur
 /*  printf("X nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getX());
   printf("Y nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getY());*/
 
-  printf("Firepoint = %d, %d\n", s->getFirePoint().getX(), s->getFirePoint().getY());
+  //printf("Firepoint = %d, %d\n", s->getFirePoint().getX(), s->getFirePoint().getY());
 
   // Color Filling
   s->setR(fill_r);
   s->setG(fill_g);
   s->setB(fill_b);
 
+  text.setX(px);
+  text.setY(py);
+  text.setSize(1); // TO-DO: with multiplication
+  s->addText(text);
   return *s;
 }
 

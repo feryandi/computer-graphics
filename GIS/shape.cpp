@@ -40,6 +40,7 @@ Shape& Shape::operator=(const Shape &shape) {
 	positionPoint = new Point(shape.getPositionPoint().getX(), shape.getPositionPoint().getY());
 	curves = shape.curves;
 	lines = shape.lines;
+	text = shape.text;
 
 	r = shape.r;
 	g = shape.g;
@@ -56,6 +57,7 @@ Shape::Shape(const Shape &shape){
 	positionPoint = new Point(shape.getPositionPoint().getX(), shape.getPositionPoint().getY());
 	curves = shape.curves;
 	lines = shape.lines;
+	text = shape.text;
 
 	r = shape.r;
 	g = shape.g;
@@ -150,15 +152,26 @@ void Shape::addLine(Line l) {
 	lines.push_back(l);
 }
 
+void Shape::addText(Text t) {
+	text = t;
+}
+
 void Shape::draw(FrameBuffer &fb) {
 	for (uint i = 0; i < curves.size(); ++i)
 	{
-		curves[i].draw(fb);
+		curves[i].drawWM(fb, k, centrePoint->getX(), centrePoint->getY());
+		//curves[i].draw(fb);
 	}
 
 	for (uint i = 0; i < lines.size(); ++i)
 	{
-		lines[i].draw(fb);
+		lines[i].drawWM(fb, k, centrePoint->getX(), centrePoint->getY());
+	}
+
+	fill(fb);
+
+	if (text.isTextSet()) {
+		text.drawWM(fb, k, centrePoint->getX(), centrePoint->getY());
 	}
 }
 
@@ -236,55 +249,65 @@ void Shape::rotate(int degree, int cx, int cy){
 		curves[i].rotate(degree,cx,cy);
 	}
 
+	firePoint->rotate(degree,cx,cy);
+	centrePoint->rotate(degree,cx,cy);
 	positionPoint->rotate(degree,cx,cy);
+}
+
+int Shape::isPointValid(FrameBuffer &fb, int x, int y) {
+	if ( ( x >= 0 ) &&
+		 ( y >= 0 ) &&
+		 ( x < fb.getVInfoX() - 1 ) &&
+		 ( y < fb.getVInfoY() - 1 ) ) {
+		return 1;
+	} else {
+		return 0;
+	}
 }
 
 void Shape::fill(FrameBuffer &fb){
 	std::queue <Point> qpoints;
 
-	if (firePoint->getX() < 0){
-		firePoint->setX(0);
-	}
-	if (firePoint->getY() < 0){
-		firePoint->setY(0);
-	}
-	if (firePoint->getX() > 1365){
-		firePoint->setX(1365);
-	}
-	if (firePoint->getY() > 767){
-		firePoint->setY(767);
-	}
-if ((fb.zbuffer[firePoint->getY()][firePoint->getX()] == 0) &&
- 	 (firePoint->getX() > 0 && firePoint->getX() < 1365) &&
-	 (firePoint->getY() > 0 && firePoint->getY() < 767)){
-	qpoints.push(*firePoint);
-}
+
+	Point newFP;
+	newFP.setX((firePoint->getX()-centrePoint->getX())*k+centrePoint->getX());
+	newFP.setY((firePoint->getY()-centrePoint->getX())*k+centrePoint->getX());
+
+	qpoints.push(newFP);
 
 	while (qpoints.size() > 0){
 		Point current = qpoints.front();
-		fb.plot(current.getX(), current.getY(),r,g,b);
+		fb.plot(current.getX(), current.getY(), r,g,b);
 		qpoints.pop();
 
-		 if (fb.zbuffer[current.getY()][current.getX()+1] == 0 &&
-	 			current.getX()+1 < 1365){
-			 qpoints.push(Point(current.getX()+1, current.getY()));
-			 fb.zbuffer[current.getY()][current.getX()+1] = 1;
-		 }
-		 if (fb.zbuffer[current.getY()+1][current.getX()] == 0 &&
-	 			current.getY()+1 < 767){
-			 qpoints.push(Point(current.getX(), current.getY()+1));
-			 fb.zbuffer[current.getY()+1][current.getX()] = 1;
-		 }
-		 if (fb.zbuffer[current.getY()-1][current.getX()] == 0 &&
-	 			current.getY()-1 > 0){
-			 qpoints.push(Point(current.getX(), current.getY()-1));
-			 fb.zbuffer[current.getY()-1][current.getX()] = 1;
-		 }
-		 if (fb.zbuffer[current.getY()][current.getX()-1] == 0 &&
-	 			current.getX()-1 > 0){
-			 qpoints.push(Point(current.getX()-1, current.getY()));
-			 fb.zbuffer[current.getY()][current.getX()-1] = 1;
-		 }
+		// TO-DO !!
+		//std::cout << current.getY() << " " << current.getX() << std::endl;
 
+		if (isPointValid(fb, current.getX()+1, current.getY())) {
+			if (fb.zbuffer[current.getY()][current.getX()+1] == 0){
+				qpoints.push(Point(current.getX()+1, current.getY()));
+				fb.zbuffer[current.getY()][current.getX()+1] = 1;
+			}
+		}
+		if (isPointValid(fb, current.getX(), current.getY()+1)) {
+			if (fb.zbuffer[current.getY()+1][current.getX()] == 0){
+				qpoints.push(Point(current.getX(), current.getY()+1));
+				fb.zbuffer[current.getY()+1][current.getX()] = 1;
+			}
+		}
+
+		if (isPointValid(fb, current.getX(), current.getY()-1)) {
+			if (fb.zbuffer[current.getY()-1][current.getX()] == 0){
+				qpoints.push(Point(current.getX(), current.getY()-1));
+				fb.zbuffer[current.getY()-1][current.getX()] = 1;
+			}
+		}
+
+		if (isPointValid(fb, current.getX()-1, current.getY())) {
+			if (fb.zbuffer[current.getY()][current.getX()-1] == 0){
+				qpoints.push(Point(current.getX()-1, current.getY()));
+				fb.zbuffer[current.getY()][current.getX()-1] = 1;
+			}
+		}
 	}
 }

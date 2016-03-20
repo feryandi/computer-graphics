@@ -118,10 +118,45 @@ void FrameBuffer::plot(unsigned int x, unsigned int y, int red, int green, int b
     }
 }
 
+
+void FrameBuffer::plotWS(unsigned int x, unsigned int y, int red, int green, int blue, int size) {
+  uint i, j;
+
+  for (j = y; j < (int)y + size ; j++) {
+      for (i = x; i < (int)x + size; i++) {
+
+        if ( ( i >= 0 ) &&
+           ( j >= 0 ) &&
+           ( i < vinfo.xres - 1 ) &&
+           ( j < vinfo.yres - 1 ) ) {
+                  //zbuffer[y][x] = 1;
+                  location = (i+vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
+                           (j+vinfo.yoffset) * finfo.line_length;
+
+                  if (vinfo.bits_per_pixel == 32) {
+                      *(buffer + location) = blue;    // Blue
+                      *(buffer + location + 1) = green; // Green
+                      *(buffer + location + 2) = red; // Red
+                      *(buffer + location + 3) = 0;     // Alpha
+                  } else  {
+                    // Assuming 16bpp
+                      int b = blue;   // Blue
+                      int g = green;  // Green
+                      int r = red;    // Red
+                      unsigned short int t = r<<11 | g << 5 | b;
+                      *((unsigned short int*)(buffer + location)) = t;
+                  }
+
+          }
+
+    }
+  }
+}
+
 void FrameBuffer::clearScreen(){
   for (unsigned int j = 0; j < vinfo.yres; j++) {
       for (unsigned int i = 0; i < vinfo.xres; i++) {
-        plot(i,j,186,255,185);
+        plot(i,j,212,188,138);
       }
   }
 }

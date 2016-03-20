@@ -17,14 +17,20 @@ public:
   double getY();
   double getZ();
 
+  float getMultiplication();
+  void setMultiplication(float _k);
+
   // methods
   void moveX(int movement);
   void moveY(int movement);
   void moveZ(int movement);
+  void rotate(float degree, int cx, int cy);
+
   void draw(FrameBuffer &fb);
 
   void hide();
   void show();
+  void toggle();
 
   void add(const Shape &s);
   void addList(const std::vector<Shape> &s);
@@ -32,7 +38,9 @@ public:
 private:
     std::vector<Shape> shapes;
     double x,y,z;
+    Point *positionPoint;
     int visible;
+    float k;
 };
 
 #endif
