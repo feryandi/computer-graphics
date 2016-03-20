@@ -6,6 +6,7 @@
 
 void draw(FrameBuffer &fb, std::vector<Group> groups){
   for (uint i=0;i<groups.size();i++){
+    fb.clearZBuffer();
     groups[i].draw(fb);
   }
 }
@@ -26,11 +27,14 @@ int main() {
   // Read File
   // std::cout << fb.getCX() << "," << fb.getCY() << std::endl;
   groups.push_back(Group());
-  groups[0].addList(a.read("31-45.txt"));
+  groups[0].addList(a.read("jalan_angka.txt"));
   groups[0].setMultiplication(1.5);
   groups.push_back(Group());
-  groups[1].addList(a.read("jalan.txt"));
+  groups[1].addList(a.read("jalan_huruf.txt"));
   groups[1].setMultiplication(1.5);
+  groups.push_back(Group());
+  groups[2].addList(a.read("31-45.txt"));
+  groups[2].setMultiplication(1.5);
 
   // Initialize input
   input.initTermios();
@@ -47,6 +51,18 @@ int main() {
     if (input.kbhit()){
       c = input.getch();
       switch (c){
+        case '1' : {
+          groups[2].toggle();
+          break;
+        }
+        case '2' : {
+          groups[1].toggle();
+          break;
+        }
+        case '3' : {
+          groups[0].toggle();
+          break;
+        }
         case 'w':{
 					// Move up
           for (uint i=0;i<groups.size();i++){
@@ -59,8 +75,7 @@ int main() {
           for (uint i=0;i<groups.size();i++){
             groups[i].moveY(5);
           }
-          break;
-				}
+        }
 				case 'a':{
 					// Move left
           for (uint i=0;i<groups.size();i++){
@@ -89,10 +104,18 @@ int main() {
 				}
         case 'i':{
 					// Zoom in
+          for (uint i=0;i<groups.size();i++){
+            groups[i].setMultiplication(groups[i].getMultiplication()+0.1);
+          }
 					break;
 				}
         case 'k':{
 					// Zoom out
+          if (groups[0].getMultiplication() > 1) {
+            for (uint i=0;i<groups.size();i++){
+              groups[i].setMultiplication(groups[i].getMultiplication()-0.1);
+            }
+          }
 					break;
 				}
 				default:{
