@@ -1,5 +1,83 @@
 {
 	p 800 100
-	t INFORMASI_ITB
+	t ITB_BAGIAN_DEPAN
 	u 5
 }
+
+{
+	p 800 245
+	t FAKULTAS
+	u 4
+}
+{
+	p 800 275
+	t FSRD
+	u 3
+}
+{
+	p 800 300
+	t FTSL
+	u 3
+}
+{
+	p 800 325
+	t SAPPK
+	u 3
+}
+
+{
+	p 800 375
+	t PRODI
+	u 4
+}
+{
+	p 800 405
+	t ARSITEKTUR_____SENI_RUPA
+	u 3
+}
+{
+	p 800 430
+	t FISIKA_________T_GEODESI
+	u 3
+}
+{
+	p 800 455
+	t PLANOLOGI______T_LINGKUNGAN
+	u 3
+}
+{
+	p 800 480
+	t TEKNIK_SIPIL
+	u 3
+}
+	
+
+{
+	p 800 530
+	t GEDUNG
+	u 4
+}
+{
+	p 800 560
+	t AULA_BARAT_______LFM
+	u 3
+}
+{
+	p 800 585
+	t AULA_TIMUR_______POS_SATPAM
+	u 3
+}
+{
+	p 800 615
+	t CAMPUS_CENTRE
+	u 3
+}
+	
+	
+
+	
+	
+	
+	
+	
+	

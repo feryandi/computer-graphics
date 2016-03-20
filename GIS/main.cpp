@@ -162,6 +162,7 @@ int main() {
   while (1){
     if (input.kbhit()){
       c = input.getch();
+      selectedgroup = 0;
 /*      for (uint i=0;i<groups[selectedgroup].getShapes()->size();i++){
         groups[selectedgroup].getShapes()->at(i).setR(r);
         groups[selectedgroup].getShapes()->at(i).setG(g);
@@ -313,18 +314,21 @@ int main() {
         groups[selectedgroup].getShapes()->at(i).setB(255);
       }*/
 
+      if (selectedgroup == 0) {
+        infos[0].show();
+      }
+
       for (uint i=2;i<=8;i++) {
-        infos[0].hide();
         if ( (int)i != selectedgroup ) {
           groups[i].setRGB(237, 232, 223);
           infos[i-1].hide();
         } else {
+          infos[0].hide();
           infos[i-1].show();
         }
       }
 
       // Draw to FrameBuffer
-      fb.clearZBuffer();
       fb.clearScreen();
       fb.clearZBuffer();
       draw(fb, groups);

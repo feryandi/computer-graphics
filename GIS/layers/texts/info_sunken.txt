@@ -1,5 +1,62 @@
 {
 	p 800 100
-	t INFORMASI_ITB
+	t ITB_BAGIAN
 	u 5
+}
+{
+	p 800 150
+	t BELAKANG
+	u 5
+}
+
+{
+	p 800 245
+	t PRODI
+	u 4
+}
+{
+	p 800 275
+	t ASTRONOMI________SR_DP
+	u 3
+}
+{
+	p 800 300
+	t SR_DI
+	u 3
+}
+{
+	p 800 325
+	t SR_DKV
+	u 3
+}
+
+{
+	p 800 375
+	t GEDUNG
+	u 4
+}
+{
+	p 800 405
+	t SEKRETARIAT_UNIT_SUNKEN
+	u 3
+}
+{
+	p 800 430
+	t CADL
+	u 3
+}
+{
+	p 800 455
+	t CAS
+	u 3
+}
+{
+	p 800 480
+	t PAU
+	u 3
+}
+{
+	p 800 505
+	t PERPUSATAKAAN
+	u 3
 }

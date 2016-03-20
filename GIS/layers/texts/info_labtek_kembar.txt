@@ -1,5 +1,67 @@
 {
 	p 800 100
-	t INFORMASI_ITB
+	t LABTEK_KEMBAR
 	u 5
+}
+
+{
+	p 800 245
+	t FAKULTAS
+	u 4
+}
+{
+	p 800 275
+	t FTI
+	u 3
+}
+{
+	p 800 300
+	t SF
+	u 3
+}
+{
+	p 800 325
+	t STEI
+	u 3
+}
+
+{
+	p 800 375
+	t PRODI
+	u 4
+}
+{
+	p 800 405
+	t FKK____________INFORMATIKA
+	u 3
+}
+{
+	p 800 430
+	t FISIKA_TEKNIK__T_KELAUTAN
+	u 3
+}
+{
+	p 800 455
+	t STF____________T_TELEKOMUNIKASI
+	u 3
+}
+{
+	p 800 480
+	t STI____________T_POWER
+	u 3
+}
+{
+	p 800 530
+	t LABORATORIUM
+	u 4
+}
+{
+	p 800 560
+	t LABTEK_V_______LABTEK_VII
+	u 3
+}
+{
+	p 800 585
+	t LABTEK_VI______LABTEK_VIII
+	u 3
 }

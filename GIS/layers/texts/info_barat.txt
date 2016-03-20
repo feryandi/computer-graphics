@@ -1,5 +1,71 @@
 {
 	p 800 100
-	t INFORMASI_ITB
+	t ITB_BAGIAN_BARAT
 	u 5
+}
+
+{
+	p 800 245
+	t FAKULTAS
+	u 4
+}
+{
+	p 800 275
+	t FTMD
+	u 3
+}
+{
+	p 800 300
+	t SBM
+	u 3
+}
+{
+	p 800 350
+	t PRODI
+	u 4
+}
+{
+	p 800 380
+	t MATEMATIKA_____T_METALURGI
+	u 3
+}
+{
+	p 800 405
+	t T_INDUSTRI_____T_PENERBANGAN
+	u 3
+}
+{
+	p 800 430
+	t T_MESIN
+	u 3
+}
+{
+	p 800 480
+	t LABORATORIUM
+	u 4
+}
+{
+	p 800 510
+	t LAB_KONVERSI___LABTEK_X
+	u 3
+}
+{
+	p 800 535
+	t LAB_RADAR______LABTEK_XI
+	u 3
+}
+{
+	p 800 585
+	t GEDUNG
+	u 4
+}
+{
+	p 800 615
+	t BSC_A__________GKU_BARAT
+	u 3
+}
+{
+	p 800 635
+	t CIS
+	u 3
 }

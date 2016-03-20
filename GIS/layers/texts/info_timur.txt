@@ -1,5 +1,68 @@
 {
 	p 800 100
-	t INFORMASI_ITB
+	t ITB_BAGIAN_TIMUR
 	u 5
+}
+
+{
+	p 800 245
+	t FAKULTAS
+	u 4
+}
+{
+	p 800 275
+	t FITB
+	u 3
+}
+{
+	p 800 300
+	t FTTM
+	u 3
+}
+{
+	p 800 350
+	t SAPPK
+	u 4
+}
+
+{
+	p 800 380
+	t KIMIA__________T_PERMINYAKAN
+	u 3
+}
+{
+	p 800 405
+	t SENI_MURNI_____T_PERTAMBANGAN
+	u 3
+}
+{
+	p 800 430
+	t TEKNIK_GEOLOGI
+	u 3
+}
+{
+	p 800 480
+	t LABORATORIUM
+	u 4
+}
+{
+	p 800 510
+	t LAB_DOPING_____LAB_KIDAS
+	u 3
+}
+	
+{
+	p 800 535
+	t LAB_HIDROLIKA
+	u 3
+}
+{
+	p 800 585
+	t GEDUNG
+	u 4
+}
+{
+	p 800 615
+	t BSC_B
+	u 3
 }

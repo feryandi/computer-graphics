@@ -1,5 +1,36 @@
 {
 	p 800 100
-	t INFORMASI_ITB
+	t LUAR_KOMPLEK_ITB
 	u 5
+}
+
+{
+	p 800 245
+	t GEDUNG
+	u 4
+}
+{
+	p 800 275
+	t SABUGA
+	u 3
+}
+{
+	p 800 300
+	t SARAGA
+	u 3
+}
+{
+	p 800 325
+	t INTERNATIONAL_RELATION_OFFICE
+	u 3
+}
+{
+	p 800 350
+	t MASJID_SALMAN
+	u 3
+}
+{
+	p 800 375
+	t S2_SBM
+	u 3
 }

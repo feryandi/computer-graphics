@@ -112,7 +112,6 @@
   void Line::rotate(int degree, int cx, int cy, int posX, int posY){
 
     for (uint i=0;i<points.size();i++){
-
       points[i].rotate(degree,cx,cy, posX, posY);
     }
   }

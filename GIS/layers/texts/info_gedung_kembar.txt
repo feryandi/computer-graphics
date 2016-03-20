@@ -1,5 +1,52 @@
 {
 	p 800 100
-	t INFORMASI_ITB
+	t ITB_GEDUNG_KEMBAR
 	u 5
+}
+
+{
+	p 800 245
+	t LABORATORIUM
+	u 4
+}
+{
+	p 800 275
+	t LAB_FISIKA_DASAR
+	u 3
+}
+{
+	p 800 300
+	t LAB_STRUKTUR_BAHAN
+	u 3
+}
+{
+	p 800 325
+	t LABTEK_I_MEKANIKA_TANAH
+	u 3
+}
+
+{
+	p 800 375
+	t GEDUNG
+	u 4
+}
+{
+	p 800 405
+	t COMLABS
+	u 3
+}
+{
+	p 800 430
+	t OCTAGON
+	u 3
+}
+{
+	p 800 455
+	t PLN
+	u 3
+}
+{
+	p 800 480
+	t TVST
+	u 3
 }

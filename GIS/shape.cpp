@@ -276,7 +276,7 @@ int Shape::isPointValid(FrameBuffer &fb, int x, int y) {
 }
 
 void Shape::fill(FrameBuffer &fb){
-	std::queue <Point> qpoints;
+/*	std::queue <Point> qpoints;
 
 
 	Point newFP;
@@ -319,5 +319,5 @@ void Shape::fill(FrameBuffer &fb){
 				fb.zbuffer[current.getY()][current.getX()-1] = 1;
 			}
 		}
-	}
+	}*/
 }
