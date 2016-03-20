@@ -25,3 +25,79 @@
 	t 2__AREA_DEPAN_ITB
 	u 3
 }
+{
+	p 800 325
+	t 3__AREA_BARAT_ITB
+	u 3
+}
+{
+	p 800 350
+	t 4__AREA_TIMUR_ITB
+	u 3
+}
+{
+	p 800 375
+	t 5__AREA_TENGAH_ITB
+	u 3
+}
+{
+	p 800 400
+	t 6__AREA_UTARA_ITB
+	u 3
+}
+{
+	p 800 425
+	t 7__AREA_SUNKEN_ITB
+	u 3
+}
+{
+	p 800 450
+	t 8__AREA_LUAR_ITB
+	u 3
+}
+{
+	p 800 475
+	t 9__NAMA_TEMPAT
+	u 3
+}
+{
+	p 800 500
+	t 0__NAMA_JALAN
+	u 3
+}
+
+{
+	p 800 550
+	t TOMBOL_PETA
+	u 3
+}
+{
+	p 800 575
+	t W__ATAS_______Q__ROTATE_KIRI
+	u 3
+}
+{
+	p 800 600
+	t A__KANAN______E__ROTATE_KANAN
+	u 3
+}
+{
+	p 800 625
+	t S__BAWAH
+	u 3
+}
+{
+	p 800 650
+	t D__KIRI
+	u 3
+}
+{
+	p 800 675
+	t I__ZOOM_IN
+	u 3
+}
+{
+	p 800 700
+	t K__ZOOM_OUT
+	u 3
+}
