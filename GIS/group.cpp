@@ -29,6 +29,9 @@ void Group::setMultiplication(float _k) {
 	}
 }
 
+std::vector<Shape>* Group::getShapes(){
+	return &(shapes);
+}
 /*void Group::setX(double _x){
   x = _x;
   for (uint i = 0; i < shapes.size(); ++i)

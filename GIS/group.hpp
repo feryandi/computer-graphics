@@ -20,6 +20,7 @@ public:
   float getMultiplication();
   void setMultiplication(float _k);
 
+  std::vector<Shape>* getShapes();
   // methods
   void moveX(int movement);
   void moveY(int movement);
