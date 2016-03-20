@@ -33,7 +33,7 @@ int main() {
   groups[1].addList(a.read("layers/models/jalan_huruf.txt"));
   groups[1].setMultiplication(1);
   groups.push_back(Group());
-  groups[2].addList(a.read("layers/texts/nama_jalan.txt"));
+  groups[2].addList(a.read("layers/models/barat.txt"));
   groups[2].setMultiplication(1);
   groups.push_back(Group());
   groups[3].addList(a.read("layers/models/gedung_kembar.txt"));
@@ -50,6 +50,12 @@ int main() {
   groups.push_back(Group());
   groups[7].addList(a.read("layers/models/depan.txt"));
   groups[7].setMultiplication(1);
+  groups.push_back(Group());
+  groups[8].addList(a.read("layers/models/luar.txt"));
+  groups[8].setMultiplication(1);
+  groups.push_back(Group());
+  groups[9].addList(a.read("layers/texts/nama_jalan.txt"));
+  groups[9].setMultiplication(1);
 
   // Initialize input
   input.initTermios();
