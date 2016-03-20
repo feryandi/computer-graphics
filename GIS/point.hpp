@@ -24,7 +24,7 @@ public:
   void moveX(int _x);
   void moveY(int _y);
   void moveZ(int _z);
-  void rotate(float degree, int center_x, int center_y);
+  void rotate(float degree, int center_x, int center_y, int posX, int posY);
   void draw(char* buffer);
 
 private:

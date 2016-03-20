@@ -50,8 +50,8 @@ void Point::rotate(float degree, int center_x, int center_y, int posX, int posY)
       int absX = x + posX;
       int absY = y + posY;
       // std::cout<<"before: "<<"x= "<<x<<" y= "<<y<<std::endl;
-      newX = ( cos(degree * val) * (absX-center_x) - sin(degree * val) * (absY-center_y) + center_x );
-      newY = ( sin(degree * val) * (absX-center_x) + cos(degree * val) * (absY-center_y) + center_y );
+      int newX = ( cos(degree * val) * (absX-center_x) - sin(degree * val) * (absY-center_y) + center_x );
+      int newY = ( sin(degree * val) * (absX-center_x) + cos(degree * val) * (absY-center_y) + center_y );
       // std::cout<<"after: "<<"x= "<<x<<" y= "<<y<<std::endl;
       x = newX - posX;
       y = newY - posY;
