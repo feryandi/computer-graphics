@@ -17,6 +17,13 @@ double Group::getZ(){
   return z;
 }
 
+void Group::setRGB(int r, int g, int b){
+	for (uint i=0;i<shapes.size();i++){
+		shapes[i].setR(r);
+		shapes[i].setG(g);
+		shapes[i].setB(b);
+	}
+}
 
 float Group::getMultiplication() {
 	return k;
@@ -107,6 +114,10 @@ void Group::toggle() {
 	} else {
 		visible = 1;
 	}
+}
+
+int Group::isVisible() {
+	return visible;
 }
 
 void Group::add(const Shape &s) {

@@ -35,22 +35,22 @@ int main() {
   groups[1].addList(a.read("layers/models/jalan_huruf.txt"));
   groups[1].setMultiplication(1);
   groups.push_back(Group());
-  groups[2].addList(a.read("layers/models/barat.txt"));
+  groups[2].addList(a.read("layers/models/depan.txt"));
   groups[2].setMultiplication(1);
   groups.push_back(Group());
-  groups[3].addList(a.read("layers/models/gedung_kembar.txt"));
+  groups[3].addList(a.read("layers/models/barat.txt"));
   groups[3].setMultiplication(1);
   groups.push_back(Group());
-  groups[4].addList(a.read("layers/models/labtek_kembar.txt"));
+  groups[4].addList(a.read("layers/models/timur.txt"));
   groups[4].setMultiplication(1);
   groups.push_back(Group());
-  groups[5].addList(a.read("layers/models/sunken.txt"));
+  groups[5].addList(a.read("layers/models/labtek_kembar.txt"));
   groups[5].setMultiplication(1);
   groups.push_back(Group());
-  groups[6].addList(a.read("layers/models/timur.txt"));
+  groups[6].addList(a.read("layers/models/gedung_kembar.txt"));
   groups[6].setMultiplication(1);
   groups.push_back(Group());
-  groups[7].addList(a.read("layers/models/depan.txt"));
+  groups[7].addList(a.read("layers/models/sunken.txt"));
   groups[7].setMultiplication(1);
   groups.push_back(Group());
   groups[8].addList(a.read("layers/models/luar.txt"));
@@ -67,7 +67,7 @@ int main() {
   input.initTermios();
 
   // Initialize Selection
-  r = groups[selectedgroup].getShapes()->at(0).getR();
+/*  r = groups[selectedgroup].getShapes()->at(0).getR();
   g = groups[selectedgroup].getShapes()->at(0).getG();
   b = groups[selectedgroup].getShapes()->at(0).getB();
 
@@ -75,7 +75,7 @@ int main() {
     groups[selectedgroup].getShapes()->at(i).setR(0);
     groups[selectedgroup].getShapes()->at(i).setG(0);
     groups[selectedgroup].getShapes()->at(i).setB(255);
-  }
+  }*/
 
 
   // Initial screen
@@ -89,66 +89,65 @@ int main() {
   while (1){
     if (input.kbhit()){
       c = input.getch();
-      for (uint i=0;i<groups[selectedgroup].getShapes()->size();i++){
+/*      for (uint i=0;i<groups[selectedgroup].getShapes()->size();i++){
         groups[selectedgroup].getShapes()->at(i).setR(r);
         groups[selectedgroup].getShapes()->at(i).setG(g);
         groups[selectedgroup].getShapes()->at(i).setB(b);
-      }
+      }*/
       switch (c){
         case '1' : {
-          selectedgroup = 1;
-          // groups[1].toggle();
-          // groups[0].toggle();
+          groups[1].toggle();
+          groups[0].toggle();
           break;
         }
         case '2' : {
           selectedgroup = 2;
+          groups[2].setRGB(246, 101, 56);
           // groups[2].toggle();
           break;
         }
         case '3' : {
           selectedgroup = 3;
+          groups[3].setRGB(193, 0, 15);
           // groups[3].toggle();
           break;
         }
         case '4' : {
           selectedgroup = 4;
+          groups[4].setRGB(254, 197, 53);
           // groups[4].toggle();
           break;
         }
         case '5' : {
           selectedgroup = 5;
+          groups[5].setRGB(27, 129, 44);
           // groups[5].toggle();
           break;
         }
         case '6' : {
           selectedgroup = 6;
+          groups[6].setRGB(247, 47, 99);
           // groups[6].toggle();
           break;
         }
         case '7' : {
           selectedgroup = 7;
+          groups[7].setRGB(25, 187, 3);
           // groups[7].toggle();
           break;
         }
         case '8' : {
           selectedgroup = 8;
+          groups[8].setRGB(80, 65, 137);
           // groups[8].toggle();
           break;
         }
         case '9' : {
-          selectedgroup = 9;
-          // groups[10].toggle();
+          groups[10].toggle();
           break;
         }
         case '0' : {
-          selectedgroup = 0;
-          // groups[9].toggle();
-          break;
-        }
-        case '-' : {
-          selectedgroup = 10;
-          // groups[10].toggle();
+          groups[9].toggle();
           break;
         }
         case 'w':{
@@ -208,7 +207,7 @@ int main() {
 					break;
 				}
 
-        case '.':{
+/*        case '.':{
 					// Select next group
           selectedgroup = (selectedgroup + 1) % groups.size();
           break;
@@ -217,20 +216,26 @@ int main() {
 					// Select prev group
           selectedgroup = (selectedgroup - 1) % groups.size();
 					break;
-				}
+				}*/
 				default:{
 					break;
         }
       }
 
       // Change Color
-      r = groups[selectedgroup].getShapes()->at(0).getR();
+/*      r = groups[selectedgroup].getShapes()->at(0).getR();
       g = groups[selectedgroup].getShapes()->at(0).getG();
       b = groups[selectedgroup].getShapes()->at(0).getB();
       for (uint i=0;i<groups[selectedgroup].getShapes()->size();i++){
         groups[selectedgroup].getShapes()->at(i).setR(0);
         groups[selectedgroup].getShapes()->at(i).setG(0);
         groups[selectedgroup].getShapes()->at(i).setB(255);
+      }*/
+
+      for (uint i=2;i<=8;i++) {
+        if ( (int)i != selectedgroup ) {
+          groups[i].setRGB(237, 232, 223);
+        }
       }
 
       // Draw to FrameBuffer

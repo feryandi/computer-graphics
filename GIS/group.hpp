@@ -26,7 +26,8 @@ public:
   void moveY(int movement);
   void moveZ(int movement);
   void rotate(float degree, int cx, int cy);
-
+  void setRGB(int r, int g, int b);
+  
   void draw(FrameBuffer &fb);
 
   void hide();
@@ -35,6 +36,8 @@ public:
 
   void add(const Shape &s);
   void addList(const std::vector<Shape> &s);
+
+  int isVisible();
 
 private:
     std::vector<Shape> shapes;
