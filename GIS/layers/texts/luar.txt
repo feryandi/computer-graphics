@@ -1,0 +1,29 @@
+{
+	p 204 109
+	t SARAGA
+}
+
+{
+	p 62 112
+	t SABUGA
+}
+
+{
+	p 335 811
+	t MASJID SALMAN
+}
+
+{
+	p 96 816
+	t IRO
+}
+
+{
+	p 127 779
+	t LPIK
+}
+
+{
+	p 113 796
+	t SBM_S2
+}

@@ -1,0 +1,44 @@
+{
+	p 55 588
+	t BSC_A
+}
+
+{
+	p 60 500
+	t LAB_RADAR
+}
+
+{
+	p 119 523
+	t LAB_KONVERSI_ENERGI
+}
+
+{
+	p 100 484
+	t GKU_BARAT
+}
+
+{
+	p 68 414
+	t GEDUNG_FTMD
+}
+
+{
+	p 148 404
+	t LABTEK_BIRU
+}
+
+{
+	p 148 365
+	t GEDUNG_METALURGI
+}
+
+{
+	p 91 319
+	t GEDUNG_MATEMATIKA
+}
+
+{
+	p 103 283
+	t SBM
+}

@@ -1,0 +1,24 @@
+{
+	p 252 303
+	t SUNKEN
+}
+
+{
+	p 216 305
+	t PAU
+}
+
+{
+	p 291 298
+	t PERPUSTAKAAN_PUSAT
+}
+
+{
+	p 341 301
+	t CAS
+}
+
+{
+	p 180 308
+	t CADL
+}
