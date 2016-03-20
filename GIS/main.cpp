@@ -111,6 +111,7 @@ int main() {
 
   // Initial screen
   fb.clearScreen();
+  fb.infoScreen();
   fb.clearZBuffer();
   draw(fb, groups);
   fb.render();
@@ -213,10 +214,16 @@ int main() {
 				}
 				case 'q':{
 					// Rotate left
+          for (uint i=0;i<groups.size();i++){
+            //groups[i].rotate(-10, fb.getCX(), fb.getCY());
+          }
           break;
 				}
 				case 'e':{
 					// Rotate right
+          for (uint i=0;i<groups.size();i++){
+            //groups[i].rotate(10, fb.getCX(), fb.getCY());
+          }
           break;
         }
 				case ' ':{
@@ -276,6 +283,7 @@ int main() {
       fb.clearScreen();
       fb.clearZBuffer();
       draw(fb, groups);
+      fb.infoScreen();
       fb.render();
 
       usleep(10000);

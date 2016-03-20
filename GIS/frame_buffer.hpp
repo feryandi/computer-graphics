@@ -49,6 +49,7 @@ class FrameBuffer {
 		//Copy to framebuffer
 		int getLocation(int x, int y);
 		void clearScreen();
+		void infoScreen();
 		void clearZBuffer();
 		void render();
 
