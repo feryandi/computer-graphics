@@ -58,10 +58,41 @@ int main() {
   groups.push_back(Group());
   groups[9].addList(a.read("layers/texts/nama_jalan.txt"));
   groups[9].setMultiplication(1);
+
   groups.push_back(Group());
-  groups[10].addList(a.read("layers/texts/nama_gedung.txt"));
+  groups[10].addList(a.read("layers/texts/depan.txt"));
   groups[10].setMultiplication(1);
   groups[10].hide();
+  
+  groups.push_back(Group());
+  groups[11].addList(a.read("layers/texts/barat.txt"));
+  groups[11].setMultiplication(1);
+  groups[11].hide();
+  
+  groups.push_back(Group());
+  groups[12].addList(a.read("layers/texts/timur.txt"));
+  groups[12].setMultiplication(1);
+  groups[12].hide();
+  
+  groups.push_back(Group());
+  groups[13].addList(a.read("layers/texts/labtek_kembar.txt"));
+  groups[13].setMultiplication(1);
+  groups[13].hide();
+  
+  groups.push_back(Group());
+  groups[14].addList(a.read("layers/texts/gedung_kembar.txt"));
+  groups[14].setMultiplication(1);
+  groups[14].hide();
+  
+  groups.push_back(Group());
+  groups[15].addList(a.read("layers/texts/sunken.txt"));
+  groups[15].setMultiplication(1);
+  groups[15].hide();
+  
+  groups.push_back(Group());
+  groups[16].addList(a.read("layers/texts/luar.txt"));
+  groups[16].setMultiplication(1);
+  groups[16].hide();
 
   // Initialize input
   input.initTermios();
@@ -143,7 +174,9 @@ int main() {
           break;
         }
         case '9' : {
-          groups[10].toggle();
+          for (uint i=0;i<7;i++){
+            groups[10+i].toggle();
+          }
           break;
         }
         case '0' : {
