@@ -1,0 +1,5 @@
+{
+	p 800 100
+	t INFORMASI_ITB
+	u 5
+}

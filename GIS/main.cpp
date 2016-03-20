@@ -98,6 +98,41 @@ int main() {
   infos.push_back(Group());
   infos[0].addList(a.read("layers/texts/info_intro.txt"));
   infos[0].setMultiplication(1);
+  
+  infos.push_back(Group());
+  infos[1].addList(a.read("layers/texts/info_depan.txt"));
+  infos[1].setMultiplication(1);
+  infos[1].hide();
+  
+  infos.push_back(Group());
+  infos[2].addList(a.read("layers/texts/info_barat.txt"));
+  infos[2].setMultiplication(1);
+  infos[2].hide();
+  
+  infos.push_back(Group());
+  infos[3].addList(a.read("layers/texts/info_timur.txt"));
+  infos[3].setMultiplication(1);
+  infos[3].hide();
+  
+  infos.push_back(Group());
+  infos[4].addList(a.read("layers/texts/info_labtek_kembar.txt"));
+  infos[4].setMultiplication(1);
+  infos[4].hide();
+  
+  infos.push_back(Group());
+  infos[5].addList(a.read("layers/texts/info_gedung_kembar.txt"));
+  infos[5].setMultiplication(1);
+  infos[5].hide();
+  
+  infos.push_back(Group());
+  infos[6].addList(a.read("layers/texts/info_sunken.txt"));
+  infos[6].setMultiplication(1);
+  infos[6].hide();
+  
+  infos.push_back(Group());
+  infos[7].addList(a.read("layers/texts/info_luar.txt"));
+  infos[7].setMultiplication(1);
+  infos[7].hide();
 
   // Initialize input
   input.initTermios();
@@ -279,8 +314,12 @@ int main() {
       }*/
 
       for (uint i=2;i<=8;i++) {
+        infos[0].hide();
         if ( (int)i != selectedgroup ) {
           groups[i].setRGB(237, 232, 223);
+          infos[i-1].hide();
+        } else {
+          infos[i-1].show();
         }
       }
 
