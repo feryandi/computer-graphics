@@ -27,17 +27,35 @@ int main() {
   // Read File
   // std::cout << fb.getCX() << "," << fb.getCY() << std::endl;
   groups.push_back(Group());
-  groups[0].addList(a.read("jalan_angka.txt"));
+  groups[0].addList(a.read("layers/models/jalan_angka.txt"));
   groups[0].setMultiplication(1);
   groups.push_back(Group());
-  groups[1].addList(a.read("jalan_huruf.txt"));
+  groups[1].addList(a.read("layers/models/jalan_huruf.txt"));
   groups[1].setMultiplication(1);
   groups.push_back(Group());
-  groups[2].addList(a.read("31-45.txt"));
+  groups[2].addList(a.read("layers/models/barat.txt"));
   groups[2].setMultiplication(1);
   groups.push_back(Group());
-  groups[3].addList(a.read("nama_jalan.txt"));
+  groups[3].addList(a.read("layers/models/gedung_kembar.txt"));
   groups[3].setMultiplication(1);
+  groups.push_back(Group());
+  groups[4].addList(a.read("layers/models/labtek_kembar.txt"));
+  groups[4].setMultiplication(1);
+  groups.push_back(Group());
+  groups[5].addList(a.read("layers/models/sunken.txt"));
+  groups[5].setMultiplication(1);
+  groups.push_back(Group());
+  groups[6].addList(a.read("layers/models/timur.txt"));
+  groups[6].setMultiplication(1);
+  groups.push_back(Group());
+  groups[7].addList(a.read("layers/models/depan.txt"));
+  groups[7].setMultiplication(1);
+  groups.push_back(Group());
+  groups[8].addList(a.read("layers/models/luar.txt"));
+  groups[8].setMultiplication(1);
+  groups.push_back(Group());
+  groups[9].addList(a.read("layers/texts/nama_jalan.txt"));
+  groups[9].setMultiplication(1);
 
   // Initialize input
   input.initTermios();
@@ -55,19 +73,24 @@ int main() {
       c = input.getch();
       switch (c){
         case '1' : {
-          groups[2].toggle();
-          break;
-        }
-        case '2' : {
           groups[1].toggle();
           groups[0].toggle();
           break;
         }
+        case '2' : {
+          groups[3].toggle();
+          break;
+        }
         case '3' : {
+          groups[4].toggle();
+          break;
+        }
+        case '4' : {
+          groups[5].toggle();
           break;
         }
         case '0' : {
-          groups[3].toggle();
+          groups[2].toggle();
           break;
         }
         case 'w':{
