@@ -58,6 +58,10 @@ int main() {
   groups.push_back(Group());
   groups[9].addList(a.read("layers/texts/nama_jalan.txt"));
   groups[9].setMultiplication(1);
+  groups.push_back(Group());
+  groups[10].addList(a.read("layers/texts/nama_gedung.txt"));
+  groups[10].setMultiplication(1);
+  groups[10].hide();
 
   // Initialize input
   input.initTermios();
@@ -91,19 +95,39 @@ int main() {
           break;
         }
         case '2' : {
-          groups[3].toggle();
+          groups[2].toggle();
           break;
         }
         case '3' : {
-          groups[4].toggle();
+          groups[3].toggle();
           break;
         }
         case '4' : {
+          groups[4].toggle();
+          break;
+        }
+        case '5' : {
           groups[5].toggle();
           break;
         }
+        case '6' : {
+          groups[6].toggle();
+          break;
+        }
+        case '7' : {
+          groups[7].toggle();
+          break;
+        }
+        case '8' : {
+          groups[8].toggle();
+          break;
+        }
+        case '9' : {
+          groups[10].toggle();
+          break;
+        }
         case '0' : {
-          groups[2].toggle();
+          groups[9].toggle();
           break;
         }
         case 'w':{
