@@ -160,6 +160,7 @@ void Shape::draw(FrameBuffer &fb) {
 	for (uint i = 0; i < curves.size(); ++i)
 	{
 		curves[i].drawWM(fb, k, centrePoint->getX(), centrePoint->getY());
+		//curves[i].draw(fb);
 	}
 
 	for (uint i = 0; i < lines.size(); ++i)

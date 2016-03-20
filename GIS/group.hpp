@@ -33,6 +33,7 @@ public:
 
   void hide();
   void show();
+  void toggle();
 
   void add(const Shape &s);
   void addList(const std::vector<Shape> &s);

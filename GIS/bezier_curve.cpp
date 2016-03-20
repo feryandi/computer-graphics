@@ -174,8 +174,8 @@ void BezierCurve::drawWM(FrameBuffer &fb, double k, int cx, int cy) {
 
     // Polynom sum
     for (int i=0;i<=order;i++){
-      float tempX = ((points.at(i).getX()-cx)*k)+cx * polynom.at(i);
-      float tempY = ((points.at(i).getY()-cy)*k)+cy * polynom.at(i);
+      float tempX = (((points.at(i).getX() * polynom.at(i))-cx)*k)+cx;
+      float tempY = (((points.at(i).getY() * polynom.at(i))-cy)*k)+cy;
 
       for (int k=0;k<order-i;k++){
         tempX = tempX * a;

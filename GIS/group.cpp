@@ -96,6 +96,14 @@ void Group::show() {
 	visible = 1;
 }
 
+void Group::toggle() {
+	if ( visible == 1 ) {
+		visible = 0;
+	} else {
+		visible = 1;
+	}
+}
+
 void Group::add(const Shape &s) {
 	shapes.push_back(s);
 }
