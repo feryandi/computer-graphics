@@ -11,15 +11,15 @@ class Input{
 
 public:
   /* restore new terminal i/o settings */
-  static void resetTermios();
+  void resetTermios();
 
   /* initialize new terminal i/o settings */
-  static void initTermios();
+  void initTermios();
 
   /* detect keyboard press */
-  static int kbhit();
+  int kbhit();
 
   /* read 1 character */
-  static char getch();
+  char getch();
 
 };

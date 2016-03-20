@@ -1,4 +1,5 @@
 #include "point.hpp"
+#include <iostream>
 
 Point::Point(){
   x = 0;

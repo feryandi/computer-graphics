@@ -1,6 +1,6 @@
 #include "input.hpp"
 
-static struct termios old_termios, new_termios;
+struct termios old_termios, new_termios;
 
 void Input::resetTermios() {
   tcsetattr(0,TCSANOW,&old_termios);

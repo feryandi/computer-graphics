@@ -187,6 +187,7 @@ void Shape::moveCurveZ(int i, int movement){
 }
 
 void Shape::moveX(int movement){
+	firePoint->moveX(movement);
   for (uint i = 0; i < lines.size(); ++i)
   {
     lines.at(i).moveX(movement);
@@ -196,9 +197,11 @@ void Shape::moveX(int movement){
   {
     curves.at(i).moveX(movement);
   }
+
 }
 
 void Shape::moveY(int movement){
+	firePoint->moveY(movement);
   for (uint i = 0; i < lines.size(); ++i)
   {
     lines.at(i).moveY(movement);
@@ -211,6 +214,7 @@ void Shape::moveY(int movement){
 }
 
 void Shape::moveZ(int movement){
+	firePoint->moveZ(movement);
   for (uint i = 0; i < lines.size(); ++i)
   {
     lines.at(i).moveZ(movement);
@@ -223,6 +227,7 @@ void Shape::moveZ(int movement){
 }
 
 void Shape::rotate(int degree, int cx, int cy){
+	firePoint->rotate(degree,cx,cy);
 	for (uint i=0;i<lines.size();i++){
 		lines[i].rotate(degree,cx,cy);
 	}
@@ -236,31 +241,50 @@ void Shape::rotate(int degree, int cx, int cy){
 
 void Shape::fill(FrameBuffer &fb){
 	std::queue <Point> qpoints;
+
+	if (firePoint->getX() < 0){
+		firePoint->setX(0);
+	}
+	if (firePoint->getY() < 0){
+		firePoint->setY(0);
+	}
+	if (firePoint->getX() > 1365){
+		firePoint->setX(1365);
+	}
+	if (firePoint->getY() > 767){
+		firePoint->setY(767);
+	}
+if ((fb.zbuffer[firePoint->getY()][firePoint->getX()] == 0) &&
+ 	 (firePoint->getX() > 0 && firePoint->getX() < 1365) &&
+	 (firePoint->getY() > 0 && firePoint->getY() < 767)){
 	qpoints.push(*firePoint);
+}
+
 	while (qpoints.size() > 0){
 		Point current = qpoints.front();
 		fb.plot(current.getX(), current.getY(),r,g,b);
 		qpoints.pop();
 
-		// TO-DO
-		//std::cout << current.getY() << " " << current.getX() << std::endl;
-
-		if (fb.zbuffer[current.getY()][current.getX()+1] == 0){
-			qpoints.push(Point(current.getX()+1, current.getY()));
-			fb.zbuffer[current.getY()][current.getX()+1] = 1;
-		}
-		if (fb.zbuffer[current.getY()+1][current.getX()] == 0){
-			qpoints.push(Point(current.getX(), current.getY()+1));
-			fb.zbuffer[current.getY()+1][current.getX()] = 1;
-		}
-		if (fb.zbuffer[current.getY()-1][current.getX()] == 0){
-			qpoints.push(Point(current.getX(), current.getY()-1));
-			fb.zbuffer[current.getY()-1][current.getX()] = 1;
-		}
-		if (fb.zbuffer[current.getY()][current.getX()-1] == 0){
-			qpoints.push(Point(current.getX()-1, current.getY()));
-			fb.zbuffer[current.getY()][current.getX()-1] = 1;
-		}
+		 if (fb.zbuffer[current.getY()][current.getX()+1] == 0 &&
+	 			current.getX()+1 < 1365){
+			 qpoints.push(Point(current.getX()+1, current.getY()));
+			 fb.zbuffer[current.getY()][current.getX()+1] = 1;
+		 }
+		 if (fb.zbuffer[current.getY()+1][current.getX()] == 0 &&
+	 			current.getY()+1 < 767){
+			 qpoints.push(Point(current.getX(), current.getY()+1));
+			 fb.zbuffer[current.getY()+1][current.getX()] = 1;
+		 }
+		 if (fb.zbuffer[current.getY()-1][current.getX()] == 0 &&
+	 			current.getY()-1 > 0){
+			 qpoints.push(Point(current.getX(), current.getY()-1));
+			 fb.zbuffer[current.getY()-1][current.getX()] = 1;
+		 }
+		 if (fb.zbuffer[current.getY()][current.getX()-1] == 0 &&
+	 			current.getX()-1 > 0){
+			 qpoints.push(Point(current.getX()-1, current.getY()));
+			 fb.zbuffer[current.getY()][current.getX()-1] = 1;
+		 }
 
 	}
 }
