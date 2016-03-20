@@ -12,7 +12,7 @@ public:
 
   //getter & setter
   std::string getText() const;
-  void setText(std::string &_text);
+  void setText(std::string _text);
   double getX() const;
   double getY() const;
   double getZ() const;
@@ -27,8 +27,12 @@ public:
   void draw(FrameBuffer& buffer);
 
 private:
+  void plotter(FrameBuffer& buffer, int start, int end, int sx, int sy);
   double x,y,z;
+  int size;
   std::string text;
+
+  char alphabet[650];
 };
 
 #endif

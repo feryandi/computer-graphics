@@ -151,7 +151,7 @@ Shape& Reader::createShape(std::vector<Line> lines, std::vector<BezierCurve> cur
 /*  printf("X nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getX());
   printf("Y nya adalah = %d\n", s->getLines().at(0).getPoints().at(0).getY());*/
 
-  printf("Firepoint = %d, %d\n", s->getFirePoint().getX(), s->getFirePoint().getY());
+  //printf("Firepoint = %d, %d\n", s->getFirePoint().getX(), s->getFirePoint().getY());
 
   // Color Filling
   s->setR(fill_r);

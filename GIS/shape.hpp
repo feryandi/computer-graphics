@@ -68,6 +68,8 @@ public:
   void fill(FrameBuffer &fb);
 
 private:
+  int isPointValid(FrameBuffer &fb, int x, int y);
+
   std::vector<BezierCurve> curves;
   std::vector<Line> lines;
   Point *firePoint;

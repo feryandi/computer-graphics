@@ -53,6 +53,7 @@ class FrameBuffer {
 		void render();
 
 		void plot(unsigned int x, unsigned int y, int red, int green, int blue);
+		void plotWS(unsigned int x, unsigned int y, int red, int green, int blue, int size);
 	};
 
 #endif

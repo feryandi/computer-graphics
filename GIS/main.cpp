@@ -5,7 +5,8 @@ int main() {
   // Initialization
   FrameBuffer fb;
   Reader a;
-  Group sabuga;
+  Group itb;
+  Text test;
 
   BezierCurve::generateLookupTable();
   fb.clearScreen();
@@ -17,8 +18,13 @@ int main() {
   c.draw(fb);
   c.fill(fb);*/
 
-  sabuga.addList(a.read("31-45.txt"));
-  sabuga.draw(fb);
+  itb.addList(a.read("31-45.txt"));
+  //itb.rotate(45, fb.getCX(), fb.getCY());
+  itb.draw(fb);
+
+  std::string g = "TEST";
+  test.setText(g);
+  test.draw(fb);
 
   fb.render();
 

@@ -2,6 +2,7 @@
 
 Group::Group(){
 	visible = 1;
+	positionPoint = new Point(0,0);
 }
 
 Group::~Group(){}
@@ -36,6 +37,14 @@ void Group::setZ(double _z){
 		shapes[i].setZ(_z);
 	}
 }*/
+
+void Group::rotate(float degree, int cx, int cy) {
+	for (uint i=0;i<shapes.size();i++){
+		shapes[i].rotate(degree,cx,cy);
+	}
+
+	positionPoint->rotate(degree,cx,cy);
+}
 
 void Group::moveX(int movement){
   x += movement;
