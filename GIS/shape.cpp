@@ -251,7 +251,6 @@ void Shape::moveZ(int movement){
 }
 
 void Shape::rotate(int degree, int cx, int cy){
-	firePoint->rotate(degree,cx,cy,0,0);
 	for (uint i=0;i<lines.size();i++){
 		lines[i].rotate(degree,cx,cy, positionPoint->getX(), positionPoint->getY());
 	}
@@ -260,8 +259,8 @@ void Shape::rotate(int degree, int cx, int cy){
 		curves[i].rotate(degree,cx,cy, positionPoint->getX(), positionPoint->getY());
 	}
 
-	firePoint->rotate(degree,cx,cy, 0, 0);
-	centrePoint->rotate(degree,cx,cy, 0, 0);
+	firePoint->rotate(degree, cx, cy, positionPoint->getX(), positionPoint->getY());
+	//centrePoint->rotate(degree, cx, cy, 0, 0);
 	positionPoint->rotate(degree,cx,cy, 0, 0);
 }
 
