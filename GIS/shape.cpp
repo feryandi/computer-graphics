@@ -40,6 +40,7 @@ Shape& Shape::operator=(const Shape &shape) {
 	positionPoint = new Point(shape.getPositionPoint().getX(), shape.getPositionPoint().getY());
 	curves = shape.curves;
 	lines = shape.lines;
+	text = shape.text;
 
 	r = shape.r;
 	g = shape.g;
@@ -56,6 +57,7 @@ Shape::Shape(const Shape &shape){
 	positionPoint = new Point(shape.getPositionPoint().getX(), shape.getPositionPoint().getY());
 	curves = shape.curves;
 	lines = shape.lines;
+	text = shape.text;
 
 	r = shape.r;
 	g = shape.g;
@@ -150,6 +152,10 @@ void Shape::addLine(Line l) {
 	lines.push_back(l);
 }
 
+void Shape::addText(Text t) {
+	text = t;
+}
+
 void Shape::draw(FrameBuffer &fb) {
 	for (uint i = 0; i < curves.size(); ++i)
 	{
@@ -159,6 +165,12 @@ void Shape::draw(FrameBuffer &fb) {
 	for (uint i = 0; i < lines.size(); ++i)
 	{
 		lines[i].draw(fb);
+	}
+	
+	fill(fb);
+
+	if (text.isTextSet()) { 
+		text.draw(fb); 
 	}
 }
 

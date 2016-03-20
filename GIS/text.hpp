@@ -9,6 +9,9 @@ public:
   // ctor & dtor
   Text();
   ~Text();
+  Text(const Text &text);
+
+  Text& operator=(const Text &text);
 
   //getter & setter
   std::string getText() const;
@@ -16,9 +19,11 @@ public:
   double getX() const;
   double getY() const;
   double getZ() const;
+  void setSize(int _s);
   void setX(double _x);
   void setY(double _y);
   void setZ(double _z);
+  int isTextSet();
 
   // methods
   void moveX(int movement);
@@ -32,7 +37,8 @@ private:
   int size;
   std::string text;
 
-  char alphabet[650];
+  static char alphabet[650];
+  static int textCount;
 };
 
 #endif

@@ -3,6 +3,7 @@
 
 #include "bezier_curve.hpp"
 #include "line.hpp"
+#include "text.hpp"
 #include "frame_buffer.hpp"
 
 
@@ -50,6 +51,7 @@ public:
   // Method
   void addCurve(BezierCurve bc);
   void addLine(Line l);
+  void addText(Text t);
   void draw (FrameBuffer &fb);
 
   void moveLineX(int i, int movement);
@@ -72,6 +74,7 @@ private:
 
   std::vector<BezierCurve> curves;
   std::vector<Line> lines;
+  Text text;
   Point *firePoint;
   Point *centrePoint;
   Point *positionPoint;

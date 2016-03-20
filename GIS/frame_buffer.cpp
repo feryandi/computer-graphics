@@ -156,7 +156,7 @@ void FrameBuffer::plotWS(unsigned int x, unsigned int y, int red, int green, int
 void FrameBuffer::clearScreen(){
   for (unsigned int j = 0; j < vinfo.yres; j++) {
       for (unsigned int i = 0; i < vinfo.xres; i++) {
-        plot(i,j,186,255,185);
+        plot(i,j,212,188,138);
       }
   }
 }

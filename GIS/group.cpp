@@ -72,7 +72,6 @@ void Group::draw(FrameBuffer &fb){
 	  for (uint i = 0; i < shapes.size(); ++i)
 		{
 			shapes[i].draw(fb);
-	  		shapes[i].fill(fb);
 		}
 	}
 }

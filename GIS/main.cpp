@@ -6,7 +6,7 @@ int main() {
   FrameBuffer fb;
   Reader a;
   Group itb;
-  Text test;
+  Group text;
 
   BezierCurve::generateLookupTable();
   fb.clearScreen();
@@ -22,10 +22,16 @@ int main() {
   //itb.rotate(45, fb.getCX(), fb.getCY());
   itb.draw(fb);
 
-  std::string g = "TEST";
-  test.setText(g);
-  test.draw(fb);
+  text.addList(a.read("text.txt"));
+  text.draw(fb);
 
+/*
+  test.setText("TEST");
+  test.setSize(2);
+  test.setX(10);
+  test.setY(10);
+  test.draw(fb);
+*/
   fb.render();
 
 }
