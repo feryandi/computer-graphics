@@ -28,13 +28,16 @@ int main() {
   // std::cout << fb.getCX() << "," << fb.getCY() << std::endl;
   groups.push_back(Group());
   groups[0].addList(a.read("jalan_angka.txt"));
-  groups[0].setMultiplication(1.5);
+  groups[0].setMultiplication(1);
   groups.push_back(Group());
   groups[1].addList(a.read("jalan_huruf.txt"));
-  groups[1].setMultiplication(1.5);
+  groups[1].setMultiplication(1);
   groups.push_back(Group());
   groups[2].addList(a.read("31-45.txt"));
-  groups[2].setMultiplication(1.5);
+  groups[2].setMultiplication(1);
+  groups.push_back(Group());
+  groups[3].addList(a.read("nama_jalan.txt"));
+  groups[3].setMultiplication(1);
 
   // Initialize input
   input.initTermios();
@@ -61,6 +64,10 @@ int main() {
         }
         case '3' : {
           groups[0].toggle();
+          break;
+        }
+        case '0' : {
+          groups[3].toggle();
           break;
         }
         case 'w':{

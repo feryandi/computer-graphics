@@ -211,6 +211,9 @@ void Shape::moveX(int movement){
     curves.at(i).moveX(movement);
   }
 
+	if (text.isTextSet()) {
+		text.moveX(movement);
+	}
 }
 
 void Shape::moveY(int movement){
@@ -224,6 +227,10 @@ void Shape::moveY(int movement){
   {
     curves.at(i).moveY(movement);
   }
+
+	if (text.isTextSet()) {
+		text.moveY(movement);
+	}
 }
 
 void Shape::moveZ(int movement){
@@ -237,6 +244,10 @@ void Shape::moveZ(int movement){
   {
     curves.at(i).moveZ(movement);
   }
+  
+	if (text.isTextSet()) {
+		text.moveZ(movement);
+	}
 }
 
 void Shape::rotate(int degree, int cx, int cy){
