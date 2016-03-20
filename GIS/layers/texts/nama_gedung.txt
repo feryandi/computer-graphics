@@ -4,7 +4,7 @@
 }
 
 {
-	p 278 696
+	p 270 696
 	t FSRD
 }
 
@@ -29,156 +29,241 @@
 }
 
 {
-	p 
-	t 
+	p 55 588
+	t BSC_A
 }
 
 {
-	p 
-	t 
+	p 364 637
+	t SENI_RUPA
 }
 
 {
-	p 
-	t 
+	p 307 629
+	t 9009
 }
 
 {
-	p 
-	t 
+	p 351 589
+	t PLANO
 }
 
 {
-	p 
-	t 
+	p 376 559
+	t T_LINGK
 }
 
 {
-	p 
-	t 
+	p 400 591
+	t GEODESI
 }
 
 {
-	p 
-	t 
+	p 400 619
+	t ARSITEKTUR
 }
 
 {
-	p 
-	t 
+	p 222 562
+	t CC_BARAT
 }
 
 {
-	p 
-	t 
+	p 292 562
+	t CC_TIMUR
 }
 
 {
-	p 
-	t 
+	p 222 593
+	t LAP_BAS
 }
 
 {
-	p 
-	t 
+	p 283 593
+	t LAP_CIN
 }
 
 {
-	p 
-	t 
+	p 201 510
+	t LABTEK_V
 }
 
 {
-	p 
-	t 
+	p 203 475
+	t LABTEK_VI
 }
 
 {
-	p 
-	t 
+	p 308 475
+	t LABTEK_VII
 }
 
 {
-	p 
-	t 
+	p 308 509
+	t LABTEK_VIII
 }
 
 {
-	p 
-	t 
+	p 60 500
+	t LAB_RADAR
 }
 
 {
-	p 
-	t 
+	p 119 523
+	t LAB_KE
 }
 
 {
-	p 
-	t 
+	p 100 484
+	t GKU_BARAT
 }
 
 {
-	p 
-	t 
+	p 407 482
+	t GKU_TIMUR
 }
 
 {
-	p 
-	t 
+	p 392 516
+	t LAB_DOPING
 }
 
 {
-	p 
-	t 
+	p 437 508
+	t FSRD_SENMUR
 }
 
 {
-	p 
-	t 
+	p 414 424
+	t FSRD_RIL
 }
 
 {
-	p 
-	t 
+	p 412 395
+	t KIMIA
 }
 
 {
-	p 
-	t 
+	p 445 363
+	t BSC_B
 }
 
 {
-	p 
-	t 
+	p 422 312
+	t TAMBANG
 }
 
 {
-	p 
-	t 
+	p 394 272
+	t GEOLOGI
 }
 
 {
-	p 
-	t 
+	p 252 303
+	t SUNKEN
 }
 
 {
-	p 
-	t 
+	p 216 305
+	t PAU
 }
 
 {
-	p 
-	t 
+	p 291 298
+	t PERPUSTAKAAN
 }
 
 {
-	p 
-	t 
+	p 341 311
+	t CAS
 }
 
 {
-	p 
-	t 
+	p 180 308
+	t CADL
+}
+
+{
+	p 223 365
+	t OKTAGON
+}
+
+{
+	p 221 409
+	t TVST
+}
+
+{
+	p 287 405
+	t PLN
+}
+
+{
+	p 286 370
+	t COMLABS
+}
+
+{
+	p 329 380
+	t MEKTAN
+}
+
+{
+	p 329 431
+	t LAB_STRUKTUR
+}
+
+{
+	p 68 414
+	t GD_FTMD
+}
+
+{
+	p 148 404
+	t LABTEK_BIRU
+}
+
+{
+	p 148 365
+	t GD_METALURGI
+}
+
+{
+	p 91 319
+	t GD_MATEMATIKA
+}
+
+{
+	p 103 283
+	t SBM
+}
+
+{
+	p 204 109
+	t SARAGA
+}
+
+{
+	p 62 112
+	t SABUGA
+}
+
+{
+	p 335 811
+	t MASJID_SALMAN
+}
+
+{
+	p 96 816
+	t IRO
+}
+
+{
+	p 127 779
+	t LPIK
+}
+
+{
+	p 113 796
+	t SBM S21
 }
