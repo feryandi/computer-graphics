@@ -30,6 +30,7 @@ public:
   void moveY(int movement);
   void moveZ(int movement);
   void draw(FrameBuffer& buffer);
+  void drawWM(FrameBuffer &fb, double k, int cx, int cy);
 
 private:
   void plotter(FrameBuffer& buffer, int start, int end, int sx, int sy);

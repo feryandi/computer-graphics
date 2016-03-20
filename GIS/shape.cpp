@@ -159,18 +159,18 @@ void Shape::addText(Text t) {
 void Shape::draw(FrameBuffer &fb) {
 	for (uint i = 0; i < curves.size(); ++i)
 	{
-		curves[i].draw(fb);
+		curves[i].drawWM(fb, k, centrePoint->getX(), centrePoint->getY());
 	}
 
 	for (uint i = 0; i < lines.size(); ++i)
 	{
-		lines[i].draw(fb);
+		lines[i].drawWM(fb, k, centrePoint->getX(), centrePoint->getY());
 	}
 	
 	fill(fb);
 
 	if (text.isTextSet()) { 
-		text.draw(fb); 
+		text.drawWM(fb, k, centrePoint->getX(), centrePoint->getY()); 
 	}
 }
 
@@ -261,10 +261,15 @@ int Shape::isPointValid(FrameBuffer &fb, int x, int y) {
 
 void Shape::fill(FrameBuffer &fb){
 	std::queue <Point> qpoints;
-	qpoints.push(*firePoint);
+
+	Point newFP;
+	newFP.setX((firePoint->getX()-centrePoint->getX())*k+centrePoint->getX());
+	newFP.setY((firePoint->getY()-centrePoint->getX())*k+centrePoint->getX());
+
+	qpoints.push(newFP);
 	while (qpoints.size() > 0){
 		Point current = qpoints.front();
-		fb.plot(current.getX(), current.getY(),r,g,b);
+		fb.plot(current.getX(), current.getY(), r,g,b);
 		qpoints.pop();
 
 		// TO-DO !!

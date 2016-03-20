@@ -43,6 +43,7 @@ public:
   
   void draw(FrameBuffer &fb);
   void drawControlPoint(unsigned int selected);
+  void drawWM(FrameBuffer &fb, double k, int cx, int cy);
 
   // static method
   static std::vector<std::vector<int> > getPolynomLookupTable();

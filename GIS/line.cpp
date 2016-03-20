@@ -97,6 +97,14 @@
     bresenham(fb, points[0].getX(), points[0].getY(), points[1].getX(), points[1].getY(),r,g,b,1);
   }
 
+  void Line::drawWM(FrameBuffer &fb, double k, int cx, int cy) {
+    bresenham(fb, (int)((points[0].getX()-cx)*k)+cx, 
+                  (int)((points[0].getY()-cy)*k)+cy, 
+                  (int)((points[1].getX()-cx)*k)+cx, 
+                  (int)((points[1].getY()-cy)*k)+cy,r,g,b,1);
+  }
+
+
   void Line::rotate(int degree, int cx, int cy){
     for (int i=0;i < (int)points.size();i++){
       points[i].rotate(degree,cx,cy);

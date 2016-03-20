@@ -118,6 +118,16 @@ void Text::draw(FrameBuffer& buffer){
   }
 }
 
+void Text::drawWM(FrameBuffer& buffer, double k, int cx, int cy) {
+  const char* str = text.c_str();
+
+  for (int i = 0; i < (int)strlen(str); i++) {
+    int sc = ((int)str[i] - 65) * 25;
+    plotter(buffer, sc, sc + 24, ((x + (i*(5*size)) + (i*(size))) - cx)*k+cx, (y-cy)*k+cy);
+  }
+}
+
+
 void Text::plotter(FrameBuffer& buffer, int start, int end, int sx, int sy) {
   int m = 0;
   int n = 0;

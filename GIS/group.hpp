@@ -20,6 +20,9 @@ public:
   void setY(double _y);
   void setZ(double _z);
 
+  float getMultiplication();
+  void setMultiplication(float _k);
+
   // methods
   void moveX(int movement);
   void moveY(int movement);
@@ -39,6 +42,7 @@ private:
     double x,y,z;
     Point *positionPoint;
     int visible;
+    float k;
 };
 
 #endif

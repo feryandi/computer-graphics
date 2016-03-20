@@ -16,6 +16,18 @@ double Group::getY(){
 double Group::getZ(){
   return z;
 }
+
+float Group::getMultiplication() {
+	return k;
+}
+
+void Group::setMultiplication(float _k) {
+	k = _k;
+	for (uint i=0;i<shapes.size();i++){
+		shapes[i].setMultiplication(k);
+	}
+}
+
 /*void Group::setX(double _x){
   x = _x;
   for (uint i = 0; i < shapes.size(); ++i)

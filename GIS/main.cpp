@@ -20,9 +20,11 @@ int main() {
 
   itb.addList(a.read("31-45.txt"));
   //itb.rotate(45, fb.getCX(), fb.getCY());
+  itb.setMultiplication(1.2);
   itb.draw(fb);
 
   text.addList(a.read("text.txt"));
+  text.setMultiplication(1.2);
   text.draw(fb);
 
 /*
