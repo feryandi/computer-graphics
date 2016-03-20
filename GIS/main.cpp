@@ -75,6 +75,7 @@ int main() {
           for (uint i=0;i<groups.size();i++){
             groups[i].moveY(5);
           }
+          break;
         }
 				case 'a':{
 					// Move left
