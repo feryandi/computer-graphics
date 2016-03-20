@@ -96,44 +96,59 @@ int main() {
       }
       switch (c){
         case '1' : {
-          groups[1].toggle();
-          groups[0].toggle();
+          selectedgroup = 1;
+          // groups[1].toggle();
+          // groups[0].toggle();
           break;
         }
         case '2' : {
-          groups[2].toggle();
+          selectedgroup = 2;
+          // groups[2].toggle();
           break;
         }
         case '3' : {
-          groups[3].toggle();
+          selectedgroup = 3;
+          // groups[3].toggle();
           break;
         }
         case '4' : {
-          groups[4].toggle();
+          selectedgroup = 4;
+          // groups[4].toggle();
           break;
         }
         case '5' : {
-          groups[5].toggle();
+          selectedgroup = 5;
+          // groups[5].toggle();
           break;
         }
         case '6' : {
-          groups[6].toggle();
+          selectedgroup = 6;
+          // groups[6].toggle();
           break;
         }
         case '7' : {
-          groups[7].toggle();
+          selectedgroup = 7;
+          // groups[7].toggle();
           break;
         }
         case '8' : {
-          groups[8].toggle();
+          selectedgroup = 8;
+          // groups[8].toggle();
           break;
         }
         case '9' : {
-          groups[10].toggle();
+          selectedgroup = 9;
+          // groups[10].toggle();
           break;
         }
         case '0' : {
-          groups[9].toggle();
+          selectedgroup = 0;
+          // groups[9].toggle();
+          break;
+        }
+        case '-' : {
+          selectedgroup = 10;
+          // groups[10].toggle();
           break;
         }
         case 'w':{
