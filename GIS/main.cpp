@@ -60,10 +60,10 @@ int main() {
         }
         case '2' : {
           groups[1].toggle();
+          groups[0].toggle();
           break;
         }
         case '3' : {
-          groups[0].toggle();
           break;
         }
         case '0' : {
@@ -82,6 +82,7 @@ int main() {
           for (uint i=0;i<groups.size();i++){
             groups[i].moveY(5);
           }
+          break;
         }
 				case 'a':{
 					// Move left
@@ -135,7 +136,10 @@ int main() {
       fb.clearZBuffer();
       draw(fb, groups);
       fb.render();
+
+      usleep(10000);
     }
+      usleep(5000);
   }
 
   // Reset input
