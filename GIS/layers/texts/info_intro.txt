@@ -8,3 +8,20 @@
 	t ITB
 	u 5
 }
+
+
+{
+	p 800 250
+	t TOMBOL_LAPISAN
+	u 3
+}
+{
+	p 800 275
+	t 1__JALAN
+	u 3
+}
+{
+	p 800 300
+	t 2__AREA_DEPAN_ITB
+	u 3
+}

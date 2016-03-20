@@ -4,7 +4,7 @@
 #include <sstream>
 
 int Text::textCount = 0;
-char Text::alphabet[650] = {0};
+char Text::alphabet[925] = {0};
 
 Text::Text(){
 
@@ -29,6 +29,23 @@ Text::Text(){
         ++line;
       }
     }
+    for (int i = 0; i < 11; i++) {
+      char filename[11] = { 'f', 'o', 'n', 't', '/', (char)(i + 48), '.', 't', 'x', 't', '\0'};
+
+      std::fstream inputFile;
+      inputFile.open(filename);
+
+      int line = 0;
+      while (!inputFile.eof()){
+        inputFile >> alphabet[650 + (i * 25) + (line * 5) + 0]
+                  >> alphabet[650 + (i * 25) + (line * 5) + 1]
+                  >> alphabet[650 + (i * 25) + (line * 5) + 2]
+                  >> alphabet[650 + (i * 25) + (line * 5) + 3]
+                  >> alphabet[650 + (i * 25) + (line * 5) + 4];
+        ++line;
+      }
+    }
+
   }
 
   ++textCount;
@@ -122,8 +139,13 @@ void Text::drawWM(FrameBuffer& buffer, double k, int cx, int cy) {
   const char* str = text.c_str();
 
   for (int i = 0; i < (int)strlen(str); i++) {
-    int sc = ((int)str[i] - 65) * 25;
-    plotter(buffer, sc, sc + 24, ((x + (i*(5*size)) + (i*(size))) - cx)*k+cx, (y-cy)*k+cy);
+    if (65 <= str[i] && str[i] <= 90) {
+      int sc = ((int)str[i] - 65) * 25;
+      plotter(buffer, sc, sc + 24, ((x + (i*(5*size)) + (i*(size))) - cx)*k+cx, (y-cy)*k+cy);
+    } else {
+      int sc = 650 + ((int)str[i] - 48) * 25;
+      plotter(buffer, sc, sc + 24, ((x + (i*(5*size)) + (i*(size))) - cx)*k+cx, (y-cy)*k+cy);
+    }
   }
 }
 

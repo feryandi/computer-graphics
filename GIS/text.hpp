@@ -38,7 +38,7 @@ private:
   int size;
   std::string text;
 
-  static char alphabet[650];
+  static char alphabet[925];
   static int textCount;
 };
 
