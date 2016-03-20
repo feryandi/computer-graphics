@@ -160,3 +160,11 @@ void FrameBuffer::clearScreen(){
       }
   }
 }
+
+void FrameBuffer::infoScreen(){
+  for (unsigned int j = 0; j < vinfo.yres; j++) {
+      for (unsigned int i = 700; i < vinfo.xres; i++) {
+        plot(i,j,220,225,225);
+      }
+  }
+}
