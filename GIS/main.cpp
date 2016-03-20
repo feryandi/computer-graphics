@@ -21,7 +21,7 @@ int main() {
   std::vector<Group> groups; // Group of map objects
 
   // Selection
-  int selectedgroup=0,selectedshape=0, r=0,g=0,b=255;
+  int selectedgroup=0, r=0,g=0,b=255;
 
   BezierCurve::generateLookupTable();
 
@@ -67,12 +67,16 @@ int main() {
   input.initTermios();
 
   // Initialize Selection
-  r = groups[selectedgroup].getShapes()->at(selectedshape).getR();
-  g = groups[selectedgroup].getShapes()->at(selectedshape).getG();
-  b = groups[selectedgroup].getShapes()->at(selectedshape).getB();
-  groups[selectedgroup].getShapes()->at(selectedshape).setR(0);
-  groups[selectedgroup].getShapes()->at(selectedshape).setG(0);
-  groups[selectedgroup].getShapes()->at(selectedshape).setB(255);
+  r = groups[selectedgroup].getShapes()->at(0).getR();
+  g = groups[selectedgroup].getShapes()->at(0).getG();
+  b = groups[selectedgroup].getShapes()->at(0).getB();
+
+  for (uint i=0;i<groups[selectedgroup].getShapes()->size();i++){
+    groups[selectedgroup].getShapes()->at(i).setR(0);
+    groups[selectedgroup].getShapes()->at(i).setG(0);
+    groups[selectedgroup].getShapes()->at(i).setB(255);
+  }
+
 
   // Initial screen
   fb.clearScreen();
@@ -85,9 +89,11 @@ int main() {
   while (1){
     if (input.kbhit()){
       c = input.getch();
-      groups[selectedgroup].getShapes()->at(selectedshape).setR(r);
-      groups[selectedgroup].getShapes()->at(selectedshape).setG(g);
-      groups[selectedgroup].getShapes()->at(selectedshape).setB(b);
+      for (uint i=0;i<groups[selectedgroup].getShapes()->size();i++){
+        groups[selectedgroup].getShapes()->at(i).setR(r);
+        groups[selectedgroup].getShapes()->at(i).setG(g);
+        groups[selectedgroup].getShapes()->at(i).setB(b);
+      }
       switch (c){
         case '1' : {
           groups[1].toggle();
@@ -186,29 +192,15 @@ int main() {
           }
 					break;
 				}
+
         case '.':{
-					// Select next in a group
-
-          selectedshape = (selectedshape + 1) % groups[selectedgroup].getShapes()->size();
-
-
-					break;
+					// Select next group
+          selectedgroup = (selectedgroup + 1) % groups.size();
+          break;
 				}
         case ',':{
-					// Select prev in a group
-          selectedshape = (selectedshape - 1) % groups[selectedgroup].getShapes()->size();
-					break;
-				}
-        case 'p':{
-					// Select next group
-        selectedgroup = (selectedgroup + 1) % groups.size();
-        selectedshape = 0;
-					break;
-				}
-        case 'o':{
 					// Select prev group
           selectedgroup = (selectedgroup - 1) % groups.size();
-          selectedshape = 0;
 					break;
 				}
 				default:{
@@ -217,12 +209,14 @@ int main() {
       }
 
       // Change Color
-      r = groups[selectedgroup].getShapes()->at(selectedshape).getR();
-      g = groups[selectedgroup].getShapes()->at(selectedshape).getG();
-      b = groups[selectedgroup].getShapes()->at(selectedshape).getB();
-      groups[selectedgroup].getShapes()->at(selectedshape).setR(0);
-      groups[selectedgroup].getShapes()->at(selectedshape).setG(0);
-      groups[selectedgroup].getShapes()->at(selectedshape).setB(255);
+      r = groups[selectedgroup].getShapes()->at(0).getR();
+      g = groups[selectedgroup].getShapes()->at(0).getG();
+      b = groups[selectedgroup].getShapes()->at(0).getB();
+      for (uint i=0;i<groups[selectedgroup].getShapes()->size();i++){
+        groups[selectedgroup].getShapes()->at(i).setR(0);
+        groups[selectedgroup].getShapes()->at(i).setG(0);
+        groups[selectedgroup].getShapes()->at(i).setB(255);
+      }
 
       // Draw to FrameBuffer
       fb.clearZBuffer();
