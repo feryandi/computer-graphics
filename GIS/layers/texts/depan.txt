@@ -1,0 +1,69 @@
+{
+	p 255 697
+	t FTSL
+}
+
+{
+	p 278 696
+	t FSRD
+}
+
+{
+	p 191 664
+	t AULA_BARAT
+}
+
+{
+	p 310 663
+	t AULA_TIMUR
+}
+
+{
+	p 222 562
+	t CC_BARAT
+}
+
+{
+	p 292 562
+	t CC_TIMUR
+}
+
+{
+	p 119 567
+	t GED_FISIKA
+}
+
+{
+	p 141 621
+	t GED_SIPIL
+}
+
+{
+	p 364 637
+	t SENI_RUPA
+}
+
+{
+	p 307 629
+	t LFM
+}
+
+{
+	p 351 589
+	t PLANALOGI
+}
+
+{
+	p 376 559
+	t TEKNIK_LINGKUNGAN
+}
+
+{
+	p 400 591
+	t GEODESI
+}
+
+{
+	p 400 619
+	t ARSITEKTUR
+}

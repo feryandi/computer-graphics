@@ -1,0 +1,19 @@
+{
+	p 201 510
+	t LABTEK_V
+}
+
+{
+	p 203 475
+	t LABTEK_VI
+}
+
+{
+	p 308 475
+	t LABTEK_VII
+}
+
+{
+	p 308 510
+	t LABTEK_VIII
+}

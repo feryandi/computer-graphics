@@ -1,0 +1,29 @@
+{
+	p 223 365
+	t OKTAGON
+}
+
+{
+	p 221 409
+	t TVST
+}
+
+{
+	p 287 405
+	t PLN
+}
+
+{
+	p 286 370
+	t COMLABS
+}
+
+{
+	p 329 380
+	t MEKANIKA_TANAH
+}
+
+{
+	p 329 431
+	t LAB_STRUKTUR
+}

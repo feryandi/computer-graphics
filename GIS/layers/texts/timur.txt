@@ -1,0 +1,39 @@
+{
+	p 407 482
+	t GKU_TIMUR
+}
+
+{
+	p 414 424
+	t FTSL_PSDA
+}
+
+{
+	p 392 516
+	t LAB_DOPING
+}
+
+{
+	p 437 508
+	t SENI_MURNI
+}
+
+{
+	p 412 395
+	t GED_KIMIA
+}
+
+{
+	p 445 363
+	t BSC_B
+}
+
+{
+	p 422 312
+	t TAMBANG
+}
+
+{
+	p 394 272
+	t GEOLOGI
+}
