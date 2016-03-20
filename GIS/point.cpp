@@ -45,7 +45,7 @@ void Point::moveZ(int _z){
   z += _z;
 }
 
-void Point::rotate(float degree, int center_x, int center_y, int posX, int posY ){
+void Point::rotate(float degree, int center_x, int center_y, int posX, int posY){
       double val = PI/180.0;
       int absX = x + posX;
       int absY = y + posY;

@@ -250,19 +250,19 @@ void Shape::moveZ(int movement){
 	}
 }
 
-void Shape::rotate(int degree, int cx, int cy){
-	firePoint->rotate(degree,cx,cy);
+void Shape::rotate(int degree, int cx, int cy, int posX, int posY){
+	firePoint->rotate(degree,cx,cy,0,0);
 	for (uint i=0;i<lines.size();i++){
-		lines[i].rotate(degree,cx,cy);
+		lines[i].rotate(degree,cx,cy, posX, posY);
 	}
 
 	for (uint i=0;i<curves.size();i++){
-		curves[i].rotate(degree,cx,cy);
+		curves[i].rotate(degree,cx,cy, posX, posY);
 	}
 
-	firePoint->rotate(degree,cx,cy);
-	centrePoint->rotate(degree,cx,cy);
-	positionPoint->rotate(degree,cx,cy);
+	firePoint->rotate(degree,cx,cy, 0, 0);
+	centrePoint->rotate(degree,cx,cy, 0, 0);
+	positionPoint->rotate(degree,cx,cy, 0, 0);
 }
 
 int Shape::isPointValid(FrameBuffer &fb, int x, int y) {
