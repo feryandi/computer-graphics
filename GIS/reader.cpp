@@ -61,21 +61,21 @@ Shape& Reader::read(const char* filename) {
 
   Shape *s = new Shape();
 
-  for (int i=0;i<curves.size();i++){
+  for (uint i=0;i<curves.size();i++){
     curves[i].setR(r);
     curves[i].setG(g);
     curves[i].setB(b);
   }
 
-  for (int i=0;i<lines.size();i++){
+  for (uint i=0;i<lines.size();i++){
     lines[i].setR(r);
     lines[i].setG(g);
     lines[i].setB(b);
   }
   Point min(10000,10000);
   Point max(-1,-1);
-  for (int i=0;i<lines.size();i++){
-        for (int j=0;j<lines.at(i).getPoints().size();j++){
+  for (uint i=0;i<lines.size();i++){
+        for (uint j=0;j<lines.at(i).getPoints().size();j++){
           if (lines.at(i).getPoints().at(j).getX()<min.getX()){
             min.setX(lines.at(i).getPoints().at(j).getX());
           }
@@ -85,8 +85,8 @@ Shape& Reader::read(const char* filename) {
         }
       }
 
-      for (int i=0;i<curves.size();i++){
-        for (int j=0;j<curves.at(i).getPoints().size();j++){
+      for (uint i=0;i<curves.size();i++){
+        for (uint j=0;j<curves.at(i).getPoints().size();j++){
           if (curves.at(i).getPoints().at(j).getX()<min.getX()){
             min.setX(curves.at(i).getPoints().at(j).getX());
           }
