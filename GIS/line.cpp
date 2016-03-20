@@ -75,19 +75,23 @@
     points.at(i).moveZ(movement);
   }
   void Line::moveX(int movement){
+
     for (uint i = 0; i < points.size(); ++i)
     {
       points.at(i).moveX(movement);
     }
   }
   void Line::moveY(int movement){
+
     for (uint i = 0; i < points.size(); ++i)
     {
       points.at(i).moveY(movement);
     }
   }
   void Line::moveZ(int movement){
+
     for (uint i = 0; i < points.size(); ++i)
+
     {
       points.at(i).moveZ(movement);
     }
@@ -98,7 +102,9 @@
   }
 
   void Line::rotate(int degree, int cx, int cy){
+
     for (uint i=0;i<points.size();i++){
+
       points[i].rotate(degree,cx,cy);
     }
   }
@@ -166,7 +172,7 @@
 
     int D = 2 * db - da;
 
-    std::cout << this->r << "," << this->g << "," << this->b << std::endl;
+    //std::cout << this->r << "," << this->g << "," << this->b << std::endl;
     fb.plot(x1, y1, red, green, blue);
 
     int x = x1;

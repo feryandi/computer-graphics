@@ -23,10 +23,16 @@ public:
   void moveZ(int movement);
   void draw(FrameBuffer &fb);
 
+  void hide();
+  void show();
+
+  void add(const Shape &s);
+  void addList(const std::vector<Shape> &s);
 
 private:
     std::vector<Shape> shapes;
     double x,y,z;
+    int visible;
 };
 
 #endif
