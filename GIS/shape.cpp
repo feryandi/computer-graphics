@@ -250,14 +250,14 @@ void Shape::moveZ(int movement){
 	}
 }
 
-void Shape::rotate(int degree, int cx, int cy, int posX, int posY){
+void Shape::rotate(int degree, int cx, int cy){
 	firePoint->rotate(degree,cx,cy,0,0);
 	for (uint i=0;i<lines.size();i++){
-		lines[i].rotate(degree,cx,cy, posX, posY);
+		lines[i].rotate(degree,cx,cy, positionPoint->getX(), positionPoint->getY());
 	}
 
 	for (uint i=0;i<curves.size();i++){
-		curves[i].rotate(degree,cx,cy, posX, posY);
+		curves[i].rotate(degree,cx,cy, positionPoint->getX(), positionPoint->getY());
 	}
 
 	firePoint->rotate(degree,cx,cy, 0, 0);

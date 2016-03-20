@@ -66,7 +66,7 @@ public:
   void moveY(int movement);
   void moveZ(int movement);
 
-  void rotate(int degree, int cx, int cy, int posX, int posY);
+  void rotate(int degree, int cx, int cy);
   void fill(FrameBuffer &fb);
 
 private:

@@ -61,9 +61,9 @@ void Group::setZ(double _z){
 	}
 }*/
 
-void Group::rotate(float degree, int cx, int cy, int posX, int posY) {
+void Group::rotate(float degree, int cx, int cy) {
 	for (uint i=0;i<shapes.size();i++){
-		shapes[i].rotate(degree,cx,cy, posX, posY);
+		shapes[i].rotate(degree,cx,cy);
 	}
 
 	positionPoint->rotate(degree,cx,cy, 0, 0);

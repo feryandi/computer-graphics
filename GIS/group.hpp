@@ -25,7 +25,7 @@ public:
   void moveX(int movement);
   void moveY(int movement);
   void moveZ(int movement);
-  void rotate(float degree, int cx, int cy, int posX, int posY);
+  void rotate(float degree, int cx, int cy);
   void setRGB(int r, int g, int b);
   
   void draw(FrameBuffer &fb);

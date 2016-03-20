@@ -1,0 +1,10 @@
+{
+	p 800 100
+	t GEO_INFO_SYSTEM
+	u 5
+}
+{
+	p 975 150
+	t ITB
+	u 5
+}

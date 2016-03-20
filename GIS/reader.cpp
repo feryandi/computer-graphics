@@ -44,11 +44,11 @@ std::vector<Shape>& Reader::read(const char* filename) {
         fill_b = 223;
 
         text.setText("");
+        text.setSize(1);
       } else if (command == 'c') {
 
         BezierCurve s = parseBezierCurve(data_stream);
         curves.push_back(s);
-
 
       } else if (command == 'l') {
 
@@ -77,6 +77,12 @@ std::vector<Shape>& Reader::read(const char* filename) {
         std::string stemp;
         data_stream >> stemp;
         text.setText(stemp);
+
+      } else if (command == 'u') {
+
+        int size;
+        data_stream >> size;
+        text.setSize(size);
 
       } else if (command == '}') {
 
@@ -173,7 +179,6 @@ Shape& Reader::createShape(std::vector<Line> lines, std::vector<BezierCurve> cur
 
   text.setX(px);
   text.setY(py);
-  text.setSize(1); // TO-DO: with multiplication
   s->addText(text);
   return *s;
 }

@@ -19,6 +19,7 @@ int main() {
   Input input; // Input
   Reader a; // File Reader
   std::vector<Group> groups; // Group of map objects
+  std::vector<Group> infos; // Group of map objects
 
   // Selection
   int selectedgroup=0, r=0,g=0,b=255;
@@ -93,6 +94,10 @@ int main() {
   groups[16].addList(a.read("layers/texts/luar.txt"));
   groups[16].setMultiplication(1);
   groups[16].hide();
+  
+  infos.push_back(Group());
+  infos[0].addList(a.read("layers/texts/info_intro.txt"));
+  infos[0].setMultiplication(1);
 
   // Initialize input
   input.initTermios();
@@ -114,6 +119,7 @@ int main() {
   fb.infoScreen();
   fb.clearZBuffer();
   draw(fb, groups);
+  draw(fb, infos);
   fb.render();
 
   // Main loop
@@ -215,14 +221,14 @@ int main() {
 				case 'q':{
 					// Rotate left
           for (uint i=0;i<groups.size();i++){
-            //groups[i].rotate(-10, fb.getCX(), fb.getCY());
+            groups[i].rotate(-10, fb.getCX(), fb.getCY());
           }
           break;
 				}
 				case 'e':{
 					// Rotate right
           for (uint i=0;i<groups.size();i++){
-            //groups[i].rotate(10, fb.getCX(), fb.getCY());
+            groups[i].rotate(10, fb.getCX(), fb.getCY());
           }
           break;
         }
@@ -284,6 +290,7 @@ int main() {
       fb.clearZBuffer();
       draw(fb, groups);
       fb.infoScreen();
+      draw(fb, infos);
       fb.render();
 
       usleep(10000);
